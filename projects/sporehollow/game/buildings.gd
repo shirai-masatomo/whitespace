@@ -1,6 +1,7 @@
 extends RefCounted
 ## Shared topology, two construction layers and transactional onsite upgrades.
-const NAMES = {"bed":"ベッド","cooking_bench":"調理台","carpentry_bench":"木工作業台","sewing_bench":"裁縫台","wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}
+const Cost=preload("res://game/build_cost.gd")
+const NAMES = {"mushroom_bed":"キノコ栽培床","bed":"ベッド","cooking_bench":"調理台","carpentry_bench":"木工作業台","sewing_bench":"裁縫台","wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}
 const WALLS = ["wall", "wood_wall", "stone_wall"]
 const BENCHES = ["cooking_bench","carpentry_bench","sewing_bench"]
 static func cells(kind: String,p: Vector2i) -> Array:
@@ -88,7 +89,9 @@ static func cell_reason(w, kind: String, p: Vector2i, check_cost: bool = true,jo
 		var compatible = (kind in WALLS and old.kind in WALLS) or data.get("layer") == "floor"
 		if not compatible or data.get("tier",-1) <= w.BUILD.get(old.kind,{}).get("tier",0): return "上位の素材を選んでください"
 	elif old.get("status") == "building": return "工事中です"
-	if check_cost and w.resource_amount(data.get("resource","soil")) < data.cost: return "素材が足りません"
+	if check_cost:
+		for material in Cost.materials(w,kind):
+			if w.resource_amount(material)<Cost.materials(w,kind)[material]:return "素材が足りません"
 	if encloses_outdoor_animal(w,kind,p):return "先に犬を外へ誘導"
 	return ""
 
@@ -121,7 +124,7 @@ static func begin(w,j):
 	j.started = true
 	j.state = "working"
 	if j.old.get("status") != "ready":
-		store[j.pos] = {"id":w.next_structure_id,"kind":j.kind,"status":"building","hp":0,"max_hp":d.hp,"cost":j.get("required",j.reserved),"resource":j.resource,"open":false,"armor":0,"remaining":j.remaining,"total_ticks":j.remaining}
+		store[j.pos] = {"id":w.next_structure_id,"kind":j.kind,"status":"building","hp":0,"max_hp":d.hp,"cost":d.cost,"materials":Cost.materials(w,j.kind,j),"resource":j.resource,"open":false,"armor":0,"remaining":j.remaining,"total_ticks":j.remaining}
 		w.next_structure_id += 1
 	j.site_id=store.get(j.pos,{}).get("id",-1)
 	w.invalidate_navigation()
@@ -145,7 +148,7 @@ static func advance(w,j,work_factor: float=1.0):
 	if j.remaining > 0: return
 	var d = w.BUILD[j.kind]
 	var ratio = float(site.hp)/site.max_hp if site.get("status") == "ready" else 1.0
-	store[j.pos] = {"id":site.get("id",w.next_structure_id),"kind":j.kind,"status":"ready","hp":maxi(1,floori(d.hp*ratio)),"max_hp":d.hp,"cost":j.get("required",j.reserved),"resource":j.resource,"open":false,"armor":0,"lock_hp":d.get("lock_hp",0),"max_lock_hp":d.get("lock_hp",0)}
+	store[j.pos] = {"id":site.get("id",w.next_structure_id),"kind":j.kind,"status":"ready","hp":maxi(1,floori(d.hp*ratio)),"max_hp":d.hp,"cost":d.cost,"materials":Cost.materials(w,j.kind,j),"resource":j.resource,"open":false,"armor":0,"lock_hp":d.get("lock_hp",0),"max_lock_hp":d.get("lock_hp",0)}
 	j.reserved = 0
 	w.metrics.built += 1
 	w.refresh_indoor()

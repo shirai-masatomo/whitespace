@@ -1,0 +1,234 @@
+{
+  "checks": [
+    {
+      "check": "Three valid candidates share one7-unit budget",
+      "passed": true
+    },
+    {
+      "check": "Committed ghosts share same funding state",
+      "passed": true
+    },
+    {
+      "check": "Unchanged committed display reuses cached rows",
+      "passed": true
+    },
+    {
+      "check": "Onsite3 + available2 covers remaining quantity once",
+      "passed": true
+    },
+    {
+      "check": "Deferred cancellation still displays real onsite quantity",
+      "passed": true
+    },
+    {
+      "check": "Restock removes material-wait display",
+      "passed": true
+    },
+    {
+      "check": "Forbidden supply updates waiting ghost immediately",
+      "passed": true
+    },
+    {
+      "check": "New draft respects earlier commitments",
+      "passed": true
+    },
+    {
+      "check": "Invalid placement remains distinct from reservable shortage",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_wall / before",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_wall / normal",
+      "passed": true
+    },
+    {
+      "check": "Stronger red shortage tint: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_wall / wait",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_wall / invalid",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid door / before",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid door / normal",
+      "passed": true
+    },
+    {
+      "check": "Stronger red shortage tint: door",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid door / wait",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid door / invalid",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_tile / before",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_tile / normal",
+      "passed": true
+    },
+    {
+      "check": "Stronger red shortage tint: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_tile / wait",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid wood_tile / invalid",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid cooking_bench / before",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid cooking_bench / normal",
+      "passed": true
+    },
+    {
+      "check": "Stronger red shortage tint: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid cooking_bench / wait",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid cooking_bench / invalid",
+      "passed": true
+    },
+    {
+      "check": "Official bed anchor and texture before",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid bed / before",
+      "passed": true
+    },
+    {
+      "check": "Official bed anchor and texture normal",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid bed / normal",
+      "passed": true
+    },
+    {
+      "check": "Stronger red shortage tint: bed",
+      "passed": true
+    },
+    {
+      "check": "Official bed anchor and texture wait",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid bed / wait",
+      "passed": true
+    },
+    {
+      "check": "Official bed anchor and texture invalid",
+      "passed": true
+    },
+    {
+      "check": "Prohibition only for invalid bed / invalid",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: wallsoil_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: wallwood_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: wallstone_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: wood_wallsoil_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: wood_wallwood_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: wood_wallstone_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: stone_wallsoil_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: stone_wallwood_tile",
+      "passed": true
+    },
+    {
+      "check": "Only8px contacts or bounded48px doorway: stone_wallstone_tile",
+      "passed": true
+    },
+    {
+      "check": "Side contact follows wall status ready",
+      "passed": true
+    },
+    {
+      "check": "Side contact follows wall status building",
+      "passed": true
+    },
+    {
+      "check": "Side contact follows wall status destroyed",
+      "passed": true
+    }
+  ],
+  "dx": [
+    0.0,
+    8.0,
+    40.0,
+    48.0
+  ],
+  "dy": [
+    0.0,
+    2.0,
+    8.0,
+    36.0,
+    44.0,
+    68.0
+  ],
+  "failed": 0,
+  "sx": [
+    0.0,
+    18.0,
+    30.0,
+    48.0
+  ],
+  "sy": [
+    0.0,
+    2.0,
+    16.0,
+    28.0,
+    44.0,
+    68.0
+  ],
+  "evidence_note": "Unchanged wall/floor draw-call arrays omitted as duplicate regenerable output; all 50 assertions and geometry constants retained. This is headless test data, not a screenshot."
+}

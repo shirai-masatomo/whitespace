@@ -10,7 +10,7 @@ static func job(w,id: int) -> Dictionary:
 	return {}
 
 static func needed(w,j) -> int:
-	return maxi(0,j.get("required",w.BUILD[j.kind].cost)-w.Stock.delivered(w,j))
+	return w.Buildings.Cost.total(w.Buildings.Cost.missing(w,j))
 
 static func plans(w,a) -> Array:
 	var rows=w.jobs.filter(func(j):return w.BUILD.has(j.kind) and not j.get("cancel_requested",false) and needed(w,j)>0 and j.get("delivery_owner","")=="" and w.tick>=j.get("delivery_retry",0))
@@ -20,7 +20,8 @@ static func plans(w,a) -> Array:
 	return rows
 
 static func sources(w,j,a) -> Array:
-	var rows=w.field_items.filter(func(r):return Reservations.usable(w,r,j)>0 and w.Access.can_take(w,r,a))
+	var missing=w.Buildings.Cost.missing(w,j)
+	var rows=w.field_items.filter(func(r):return missing.get(r.kind,0)>0 and Reservations.usable(w,r,j)>0 and w.Access.can_take(w,r,a))
 	rows.sort_custom(func(x,y):return Reservations.held(x,j)>Reservations.held(y,j) if (Reservations.held(x,j)>0)!=(Reservations.held(y,j)>0) else w.distance(a.pos,x.pos)<w.distance(a.pos,y.pos) if w.distance(a.pos,x.pos)!=w.distance(a.pos,y.pos) else x.stock_id<y.stock_id)
 	return rows
 
@@ -34,8 +35,9 @@ static func proposal(w,key: String) -> Dictionary:
 		# first: otherwise J unfunded plans cause H*J pointless route searches.
 		var candidates=sources(w,j,a)
 		if candidates.is_empty():
+			var remaining=w.Buildings.Cost.missing(w,j)
 			j.material_wait=true
-			j.block_reason="資材待ち：備蓄を利用できる担当者が必要です" if w.field_items.any(func(r):return Reservations.usable(w,r,j)>0) else "資材待ち：備蓄に使える資材がありません"
+			j.block_reason="資材待ち：備蓄を利用できる担当者が必要です" if w.field_items.any(func(r):return remaining.get(r.kind,0)>0 and Reservations.usable(w,r,j)>0) else "資材待ち：備蓄に使える資材がありません"
 			continue
 		var destination=w.Jobs.path_to(w,a.pos,w.Buildings.job_goals(w,j))
 		if destination.is_empty():j.block_reason="材料を搬入する通路がありません";continue
@@ -63,11 +65,13 @@ static func start(w,key: String,proposal: Dictionary) -> Dictionary:
 		if not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id)
 			if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):continue
-		var left=mini(capacity,needed(w,j));var claims=[];var token="construction:%s:%d"%[key,j.id]
+		var missing=w.Buildings.Cost.missing(w,j);var left=mini(capacity,needed(w,j));var claims=[];var token="construction:%s:%d"%[key,j.id]
 		for row in sources(w,j,a):
 			if left<=0:break
 			if w.Jobs.path_to(w,a.pos,w.neighbors(row.pos)).is_empty():continue
-			var n=mini(left,Reservations.usable(w,row,j));Reservations.transfer(w,row,j,token,n);claims.append({"stock_id":row.stock_id,"amount":n});left-=n;capacity-=n
+			var n=mini(mini(left,missing.get(row.kind,0)),Reservations.usable(w,row,j))
+			if n<=0:continue
+			missing[row.kind]-=n;Reservations.transfer(w,row,j,token,n);claims.append({"stock_id":row.stock_id,"amount":n});left-=n;capacity-=n
 		if claims.is_empty():continue
 		task.allocations.append({"job_id":j.id,"token":token,"claims":claims});j.delivery_owner=key;j.material_wait=false;j.block_reason=""
 	if task.allocations.is_empty():return {}
@@ -188,7 +192,7 @@ static func refresh_groups(w):
 	for id in pending:
 		var members=pending[id];var missing=[];var missing_ids={};var filled=0
 		for j in members:
-			if j.get("required",w.BUILD[j.kind].cost)>totals.get(str(j.id)+":"+j.resource,0):missing.append(j);missing_ids[j.id]=true
+			if w.Buildings.Cost.materials(w,j.kind,j).keys().any(func(kind):return w.Buildings.Cost.materials(w,j.kind,j)[kind]>totals.get(str(j.id)+":"+kind,0)):missing.append(j);missing_ids[j.id]=true
 			else:filled+=1
 		var ready=missing.is_empty() or members.any(func(j):return can_build(j))
 		if not ready and filled>0:
@@ -197,7 +201,10 @@ static func refresh_groups(w):
 			var possible=missing.any(func(j):return j.get("delivery_owner","")!="" and w.build_deliveries.has(j.delivery_owner))
 			if not possible:
 				for j in missing:
-					if feasible(w,j,stock.get(j.resource,[]),evaluators):possible=true;break
+					var material_rows=[]
+					for kind in w.Buildings.Cost.missing(w,j):
+						if w.Buildings.Cost.missing(w,j)[kind]>0:material_rows.append_array(stock.get(kind,[]))
+					if feasible(w,j,material_rows,evaluators):possible=true;break
 			ready=not possible
 		if ready:
 			for j in members:

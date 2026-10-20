@@ -69,7 +69,7 @@ static func job(w,j):
 	j.state="working";j.started=true;j.progress=j.get("progress",0.0)+w.DT*w.Life.factor(w)
 	if j.progress<2.0:return
 	if j.kind=="milk":
-		cow.milked_day=w.campaign.day;w.add_item("milk",1)
+		cow.milked_day=w.campaign.day;w.Stock.add(w,"milk",1,cow.pos).stocked=false
 		for owned in w.campaign.animals:
 			if owned.id==cow.id:owned.milked_day=cow.milked_day
 	else:

@@ -1,7 +1,7 @@
 extends RefCounted
 # Read-only adapters. View categories never become scheduling priorities or job fields.
 const CATEGORIES=["すべて","建築","採集","回収","動物","その他","運搬"]
-const ARCHITECT={"壁と扉":["wall","wood_wall","stone_wall","door","locked_door"],"床":["soil_tile","wood_tile","stone_tile"],"設置":["bed","kennel","coop","place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","place_kokeshi","place_fossil"],"ゾーン":[]}
+const ARCHITECT={"壁と扉":["wall","wood_wall","stone_wall","door","locked_door"],"床":["soil_tile","wood_tile","stone_tile"],"設置":["mushroom_bed","bed","kennel","coop","place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","place_kokeshi","place_fossil"],"ゾーン":[]}
 
 static func job_category(w,j: Dictionary) -> String:
 	return w.Work.Policy.LABELS[w.Work.category(w,j)]

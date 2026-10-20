@@ -160,8 +160,7 @@ static func release_job(w,j):
 
 static func delivered(w,j) -> int:
 	var n=0
-	for row in w.field_items:
-		if row.get("location")=="site" and row.job_id==j.id and row.kind==j.resource and not row.get("forbidden",false):n+=row.amount
+	for kind in w.Buildings.Cost.materials(w,j.kind,j):n+=mini(w.Buildings.Cost.materials(w,j.kind,j)[kind],w.Buildings.Cost.onsite(w,j,kind))
 	return n
 
 static func prepare_build(w,j,_a) -> bool:
@@ -173,13 +172,13 @@ static func prepare_build(w,j,_a) -> bool:
 
 static func finish_build(w,j,success: bool):
 	w.Stock.release_token(w,preload("res://game/build_reservations.gd").token(j))
-	var remaining=int(j.get("required",w.BUILD[j.kind].cost))
+	var remaining=w.Buildings.Cost.materials(w,j.kind,j)
 	for row in w.field_items.duplicate():
 		if row.get("location")!="site" or row.job_id!=j.id:continue
 		if row.get("forbidden",false):row.location="ground";row.owner="";row.job_id=-1;row.stocked=false;row.erase("forbidden_reconciled")
 		elif success:
-			var used=mini(remaining,row.amount) if row.kind==j.resource else 0
-			remaining-=used;row.amount-=used;w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+used
+			var used=mini(int(remaining.get(row.kind,0)),row.amount)
+			remaining[row.kind]=remaining.get(row.kind,0)-used;row.amount-=used;w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+used
 			if row.amount==0:w.field_items.erase(row)
 			else:row.location="ground";row.owner="";row.job_id=-1;row.stocked=false
 		else:

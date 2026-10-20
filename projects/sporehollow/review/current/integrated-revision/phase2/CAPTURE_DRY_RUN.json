@@ -1,0 +1,82 @@
+{
+  "elapsed_ms": 10275,
+  "failed": false,
+  "fps_limit": 30,
+  "method": "Headless scene/control fixture preflight only; no rendered PNG, no GPU or private desktop launch",
+  "renderer": "",
+  "screens": [
+    {
+      "conditions": "Fresh production map paused at start; no fixture changes",
+      "dry_run": true,
+      "file": "01-day-overview.png"
+    },
+    {
+      "conditions": "Local empty placement fixture near base; existing architect selects 1x1 cultivation bed, mixed wood8/soil4 cost and real ghost; other terrain retained",
+      "dry_run": true,
+      "file": "02-architect-mushroom.png"
+    },
+    {
+      "conditions": "Explicit partial-delivery fixture: active mixed-cost bed plan, onsite wood3 of wood8+soil4; stored wood forbidden to show real material-wait ghost. No simulation progress claim",
+      "dry_run": true,
+      "file": "03-mushroom-pending.png"
+    },
+    {
+      "conditions": "Ready bed is a fixture; seed taken from initial physical stock and inoculated by real HumanWork/Craft executor. Paused immediately after seeding, 48h wait. No full-day simulation",
+      "dry_run": true,
+      "file": "04-mushroom-growing.png"
+    },
+    {
+      "conditions": "Same inoculated crop; fixture clock advanced exactly to maturity; real harvest executor created mushroom3 at worker feet; auto-collect OFF only for visibility. Full-frame real game, not natural 48h play",
+      "dry_run": true,
+      "file": "05-mushroom-harvest.png"
+    },
+    {
+      "conditions": "Completed cooking bench fixture; real seed-stock mushroom2 reservation, transport and cooking executor paused at >=1.5s work; five-portion batch uses established satiety20 per portion",
+      "dry_run": true,
+      "file": "06-cooking-workbench.png"
+    },
+    {
+      "conditions": "Existing initial stockpile fixture renamed food store; food-only category filter and access displayed together; original physical goods retained even if filter excludes them",
+      "dry_run": true,
+      "file": "07-stockpile-food.png"
+    },
+    {
+      "conditions": "Same paused capture fixture; actual keeper HP/satiety/stamina/mood panel, no idealized values or screenshot retouching",
+      "dry_run": true,
+      "file": "08a-resident-status.png"
+    },
+    {
+      "conditions": "Same keeper; life food-priority matrix, default resident-specific ranks, underlying real Controls",
+      "dry_run": true,
+      "file": "08b-resident-food.png"
+    },
+    {
+      "conditions": "Actual role priority panel; default actor priorities; paused state from declared work fixtures",
+      "dry_run": true,
+      "file": "09a-resident-work.png"
+    },
+    {
+      "conditions": "Keeper work tab showing actual auto-collect checkbox (OFF for harvest screenshot fixture), current job and links",
+      "dry_run": true,
+      "file": "09b-auto-collect.png"
+    },
+    {
+      "conditions": "Night/raid presentation fixture: calendar22:00, defend phase, one real enemy instance positioned near keeper, paused before attacks; not natural survival reach",
+      "dry_run": true,
+      "file": "10-night-overview.png"
+    },
+    {
+      "conditions": "Explicit completed5x5 house/wood floor/door/bed/residential fixture; Homes assigned keeper. Night, keeper positioned at assigned bed and sleep presentation set; no claim of player-built progression",
+      "dry_run": true,
+      "file": "11-house-sleep.png"
+    },
+    {
+      "conditions": "Same declared production/house/night fixture; viewport resized1600x1000, cultivation architect open. Actual full-frame UI",
+      "dry_run": true,
+      "file": "12-wide-overview-1600.png"
+    }
+  ],
+  "source_commit": "",
+  "source_exe_sha256": "",
+  "not_a_screenshot": true
+}

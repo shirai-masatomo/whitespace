@@ -1,3 +1,9 @@
+# 工程2：食料・栽培／工程1〜2のUIレビュー（2026-10-20）
+
+[報告・既知の制限](integrated-revision/phase2/REPORT.md) / [実画面PNG一覧](integrated-revision/phase2/UI_REVIEW_INDEX.md) / [撮影条件](integrated-revision/phase2/SCREENSHOT_MANIFEST.json) / [検証結果](integrated-revision/phase2/RESULTS.json)。機能実装済み・UIレビュー待ち。全条件の需給比較は未完。工程3は未着手。以下は過去記録。
+
+---
+
 # 工程1：統合・安定化（2026-10-19）
 
 資材待ちの経路探索、描画キャッシュのWorld残留、履歴蓄積を修正。3seed翌朝・1seed3夜・物流/生活/救出/UI・有限CPUと参照寿命をheadlessで確認。通常画面・GPU・長期安定性は未検証。工程2は未着手。[報告と検証・配布](integrated-revision/phase1/REPORT.md) / [比較・工程2ベースライン](integrated-revision/phase1/RESULTS.json)。

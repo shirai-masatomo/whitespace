@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "check": "work indoor shortage reservation",
+      "passed": true
+    },
+    {
+      "check": "work production ticks: shortage does not block explicit haul",
+      "passed": true
+    },
+    {
+      "check": "work cancellation allows next actual work",
+      "passed": true
+    },
+    {
+      "check": "work timetable data unchanged",
+      "passed": true
+    },
+    {
+      "check": "work auto collects multiple stacks, including second 20-capacity trip",
+      "passed": true
+    },
+    {
+      "check": "work personal work uses no public slots and conserves items",
+      "passed": true
+    },
+    {
+      "check": "free indoor shortage reservation",
+      "passed": true
+    },
+    {
+      "check": "free production ticks: shortage does not block explicit haul",
+      "passed": true
+    },
+    {
+      "check": "free cancellation allows next actual work",
+      "passed": true
+    },
+    {
+      "check": "free timetable data unchanged",
+      "passed": true
+    },
+    {
+      "check": "free auto collects multiple stacks, including second 20-capacity trip",
+      "passed": true
+    },
+    {
+      "check": "free personal work uses no public slots and conserves items",
+      "passed": true
+    },
+    {
+      "check": "OFF never collects without designation",
+      "passed": true
+    },
+    {
+      "check": "OFF preserves explicit haul",
+      "passed": true
+    },
+    {
+      "check": "Forbidden/site/claimed materials stay untouched",
+      "passed": true
+    },
+    {
+      "check": "Allow change re-evaluates auto collection",
+      "passed": true
+    },
+    {
+      "check": "Auto recovery supplies an unfunded build, then construction resumes",
+      "passed": true
+    },
+    {
+      "check": "Auto recovery/build consumes exactly five",
+      "passed": true
+    },
+    {
+      "check": "Personal fetch begins",
+      "passed": true
+    },
+    {
+      "check": "New explicit feasible job preempts unladen auto fetch",
+      "passed": true
+    },
+    {
+      "check": "Two workers collect without claims colliding",
+      "passed": true
+    },
+    {
+      "check": "Shared reservation capacity40 and total conserved",
+      "passed": true
+    },
+    {
+      "check": "Idle has bounded local movement",
+      "passed": true
+    },
+    {
+      "check": "Idle does not drift far",
+      "passed": true
+    },
+    {
+      "check": "Explicit stop is never forcibly released",
+      "passed": true
+    },
+    {
+      "check": "Sleep remains higher priority",
+      "passed": true
+    },
+    {
+      "check": "Draft blocks auto collect and idle",
+      "passed": true
+    }
+  ],
+  "count": 27,
+  "failed": 0
+}

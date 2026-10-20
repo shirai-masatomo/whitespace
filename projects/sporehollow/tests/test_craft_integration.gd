@@ -27,6 +27,7 @@ func run():
 		if w.jobs.is_empty():break
 	check(w.jobs.is_empty() and benches.values().all(func(pos):return w.structures.get(pos,{}).get("status")=="ready"),"Three benches built by real delivery/construction AI")
 	for recipe in w.Craft.Data.RECIPES:
+		if recipe=="grow_mushroom":continue
 		check(w.Craft.enqueue(w,benches[w.Craft.Data.RECIPES[recipe].bench],recipe,"count",1),"Recipe bill: "+recipe)
 	var initial=w.Stock.totals(w);var start_used=w.stock_used.duplicate();var seen_owners={};var max_cargo=0;var conservation=true;var resumed=false
 	for n in range(1500):
@@ -49,7 +50,8 @@ func run():
 	check(w.jobs.is_empty(),"All seven bills finish through production World.step")
 	check(seen_owners.size()==2,"Two residents both participate without duplicate bench ownership")
 	check(max_cargo<=20 and conservation and resumed,"Carry cap and material conservation through interruption/reload")
-	for recipe in w.Craft.Data.RECIPES:check(w.Stock.totals(w).get(recipe,0)==1,"Physical finished output: "+recipe)
+	for recipe in w.Craft.Data.RECIPES:
+		if recipe!="grow_mushroom":check(w.Stock.totals(w).get(recipe,0)==w.Craft.Data.RECIPES[recipe].count,"Physical finished output: "+recipe)
 	# A low-stamina worker keeps the same accepted job while resting.
 	w.Craft.enqueue(w,benches.sewing_bench,"fiber_clothes","count",1)
 	var bill=w.jobs.back();w.Work.claim(w,"keeper",bill);w.keeper.needs_rest=true;w.keeper.stamina=10;w.Work.step(w)

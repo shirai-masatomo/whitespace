@@ -54,7 +54,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 			if not lookup.get("quiet",false):Reservations.reject(w,kind,why)
 			return false
 		resource=w.BUILD[kind].get("resource","soil")
-		cost=w.BUILD[kind].cost
+		cost=w.Buildings.Cost.total(w.Buildings.Cost.materials(w,kind))
 	elif kind=="move":
 		if not w.walkable(p): return false
 	elif kind=="collect":
@@ -84,8 +84,9 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 			j.kind="haul";j.stock_id=row.stock_id;j.explicit_designation=true
 	j.physical=w.BUILD.has(kind)
 	if j.physical:
+		j.materials=w.Buildings.Cost.materials(w,kind)
 		j.plan_claimed=false # Partial delivery owns claims, not the designation.
-		lookup.materials[resource]=maxi(0,int(lookup.materials.get(resource,0))-cost)
+		for material in j.materials:lookup.materials[material]=maxi(0,int(lookup.materials.get(material,0))-j.materials[material])
 		j.construction_group=lookup.get("construction_group",j.id)
 		j.construction_ready=not lookup.has("construction_group")
 	j.work_category=w.Work.category(w,j)

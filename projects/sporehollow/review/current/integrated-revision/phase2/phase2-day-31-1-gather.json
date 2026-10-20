@@ -1,0 +1,619 @@
+{
+  "checks": [
+    {
+      "check": "Physical IDs/claims/capacity/time budget: ",
+      "passed": true
+    },
+    {
+      "check": "Five nights advanced or normal defeat explained",
+      "passed": true
+    },
+    {
+      "check": "No prayer/debug supplies used",
+      "passed": true
+    }
+  ],
+  "cpu_step_ms": {
+    "max": 197.801,
+    "mean": 5.41128301886793,
+    "p99": 68.346
+  },
+  "economy_fixture": false,
+  "failures": 0,
+  "humans": 1,
+  "initial": {
+    "beds_ready": 0,
+    "built": 0,
+    "cooked": 0,
+    "day": 1,
+    "food_energy": 315.0,
+    "gathered": 0,
+    "grown": 0,
+    "idol_hp": 180,
+    "living_enemies": 0,
+    "loss": "",
+    "nutrition_down_or_dead": 0,
+    "people": {
+      "keeper": {
+        "dead": false,
+        "hp": 30,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 0,
+        "satiety": 100.0,
+        "state": "free",
+        "status": "仕事を探しています"
+      }
+    },
+    "reason": "",
+    "stock": {
+      "dog_food": 2,
+      "mushroom": 7,
+      "soil": 100,
+      "wood": 8
+    },
+    "stored_food": [
+      {
+        "kind": "stew",
+        "stored": 0
+      },
+      {
+        "kind": "egg_meal",
+        "stored": 0
+      },
+      {
+        "kind": "roast_meat",
+        "stored": 0
+      },
+      {
+        "kind": "roast_mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "mushroom",
+        "stored": 7
+      },
+      {
+        "kind": "egg",
+        "stored": 0
+      },
+      {
+        "kind": "meat",
+        "stored": 0
+      },
+      {
+        "kind": "milk",
+        "stored": 0
+      }
+    ],
+    "tick": 0,
+    "used": {},
+    "work_ticks": {}
+  },
+  "night3": {
+    "beds_ready": 0,
+    "built": 0,
+    "cooked": 0,
+    "day": 4,
+    "food_energy": 540.0,
+    "gathered": 5,
+    "grown": 0,
+    "idol_hp": 143,
+    "living_enemies": 1,
+    "loss": "",
+    "nutrition_down_or_dead": 0,
+    "people": {
+      "keeper": {
+        "dead": false,
+        "hp": 8,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 4,
+        "satiety": 20.8000000000113,
+        "state": "free",
+        "status": "空腹 · 食べ物へ移動中"
+      }
+    },
+    "reason": "",
+    "stock": {
+      "dog_food": 2,
+      "mushroom": 12,
+      "soil": 100,
+      "wood": 24
+    },
+    "stored_food": [
+      {
+        "kind": "stew",
+        "stored": 0
+      },
+      {
+        "kind": "egg_meal",
+        "stored": 0
+      },
+      {
+        "kind": "roast_meat",
+        "stored": 0
+      },
+      {
+        "kind": "roast_mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "mushroom",
+        "stored": 9
+      },
+      {
+        "kind": "egg",
+        "stored": 0
+      },
+      {
+        "kind": "meat",
+        "stored": 0
+      },
+      {
+        "kind": "milk",
+        "stored": 0
+      }
+    ],
+    "tick": 5184,
+    "used": {
+      "mushroom": 6
+    },
+    "work_ticks": {
+      "collect": 220,
+      "food": 444,
+      "sleep": 609,
+      "ひと休み · 回復後に同じ仕事を再開": 63,
+      "仕事の指定待ち": 1163,
+      "仕事を完了・次を探す": 5,
+      "周囲を見回しています": 35,
+      "居住ゾーン未指定：現在地で休息": 38,
+      "自動収集 · 備蓄へ運搬中": 920,
+      "自動収集 · 物資を取りに移動": 1164,
+      "被弾から回復中": 81,
+      "負傷・療養中": 239,
+      "近くの敵に対応中": 142,
+      "近くを散歩中": 57,
+      "食事を終え、仕事を選び直す": 4
+    }
+  },
+  "night5": {
+    "beds_ready": 0,
+    "built": 0,
+    "cooked": 0,
+    "day": 6,
+    "food_energy": 405.0,
+    "gathered": 5,
+    "grown": 0,
+    "idol_hp": 0,
+    "living_enemies": 8,
+    "loss": "loss",
+    "nutrition_down_or_dead": 0,
+    "people": {
+      "keeper": {
+        "dead": false,
+        "hp": 0,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 8,
+        "satiety": 38.6500000000197,
+        "state": "captured",
+        "status": "連れ去り・拘束中"
+      }
+    },
+    "reason": "idol_destroyed",
+    "stock": {
+      "dog_food": 1,
+      "mushroom": 9,
+      "soil": 100,
+      "wood": 40
+    },
+    "stored_food": [
+      {
+        "kind": "stew",
+        "stored": 0
+      },
+      {
+        "kind": "egg_meal",
+        "stored": 0
+      },
+      {
+        "kind": "roast_meat",
+        "stored": 0
+      },
+      {
+        "kind": "roast_mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "egg",
+        "stored": 0
+      },
+      {
+        "kind": "meat",
+        "stored": 0
+      },
+      {
+        "kind": "milk",
+        "stored": 0
+      }
+    ],
+    "tick": 8427,
+    "used": {
+      "dog_food": 1,
+      "mushroom": 15
+    },
+    "work_ticks": {
+      "collect": 220,
+      "food": 543,
+      "sleep": 609,
+      "ひと休み · 回復後に同じ仕事を再開": 63,
+      "仕事の指定待ち": 3938,
+      "仕事を完了・次を探す": 5,
+      "周囲を見回しています": 35,
+      "居住ゾーン未指定：現在地で休息": 38,
+      "自動収集 · 備蓄へ運搬中": 920,
+      "自動収集 · 物資を取りに移動": 1164,
+      "被弾から回復中": 95,
+      "負傷・療養中": 265,
+      "近くの敵に対応中": 263,
+      "近くを散歩中": 57,
+      "連れ去り・拘束中": 204,
+      "食事を終え、仕事を選び直す": 8
+    }
+  },
+  "policy": "gather",
+  "samples": [
+    {
+      "beds_ready": 0,
+      "built": 0,
+      "cooked": 0,
+      "day": 2,
+      "food_energy": 540.0,
+      "gathered": 5,
+      "grown": 0,
+      "idol_hp": 180,
+      "living_enemies": 0,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 0,
+          "satiety": 13.6000000000036,
+          "state": "free",
+          "status": "空腹 · 食べ物へ移動中"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "dog_food": 2,
+        "mushroom": 12,
+        "soil": 100,
+        "wood": 8
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "mushroom",
+          "stored": 12
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 1728,
+      "used": {},
+      "work_ticks": {
+        "collect": 220,
+        "food": 1,
+        "sleep": 341,
+        "ひと休み · 回復後に同じ仕事を再開": 31,
+        "仕事の指定待ち": 387,
+        "仕事を完了・次を探す": 5,
+        "周囲を見回しています": 16,
+        "居住ゾーン未指定：現在地で休息": 19,
+        "自動収集 · 備蓄へ運搬中": 371,
+        "自動収集 · 物資を取りに移動": 249,
+        "被弾から回復中": 13,
+        "近くの敵に対応中": 50,
+        "近くを散歩中": 25
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 0,
+      "cooked": 0,
+      "day": 3,
+      "food_energy": 495.0,
+      "gathered": 5,
+      "grown": 0,
+      "idol_hp": 180,
+      "living_enemies": 0,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 3,
+          "satiety": 62.2000000000075,
+          "state": "free",
+          "status": "居住ゾーン未指定：現在地で休息"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "dog_food": 2,
+        "mushroom": 11,
+        "soil": 100,
+        "wood": 16
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "mushroom",
+          "stored": 11
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 3456,
+      "used": {
+        "mushroom": 4
+      },
+      "work_ticks": {
+        "collect": 220,
+        "food": 188,
+        "sleep": 538,
+        "ひと休み · 回復後に同じ仕事を再開": 62,
+        "仕事の指定待ち": 970,
+        "仕事を完了・次を探す": 5,
+        "周囲を見回しています": 32,
+        "居住ゾーン未指定：現在地で休息": 38,
+        "自動収集 · 備蓄へ運搬中": 582,
+        "自動収集 · 物資を取りに移動": 617,
+        "被弾から回復中": 26,
+        "近くの敵に対応中": 123,
+        "近くを散歩中": 52,
+        "食事を終え、仕事を選び直す": 3
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 0,
+      "cooked": 0,
+      "day": 4,
+      "food_energy": 540.0,
+      "gathered": 5,
+      "grown": 0,
+      "idol_hp": 143,
+      "living_enemies": 1,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 8,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 4,
+          "satiety": 20.8000000000113,
+          "state": "free",
+          "status": "空腹 · 食べ物へ移動中"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "dog_food": 2,
+        "mushroom": 12,
+        "soil": 100,
+        "wood": 24
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "mushroom",
+          "stored": 9
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 5184,
+      "used": {
+        "mushroom": 6
+      },
+      "work_ticks": {
+        "collect": 220,
+        "food": 444,
+        "sleep": 609,
+        "ひと休み · 回復後に同じ仕事を再開": 63,
+        "仕事の指定待ち": 1163,
+        "仕事を完了・次を探す": 5,
+        "周囲を見回しています": 35,
+        "居住ゾーン未指定：現在地で休息": 38,
+        "自動収集 · 備蓄へ運搬中": 920,
+        "自動収集 · 物資を取りに移動": 1164,
+        "被弾から回復中": 81,
+        "負傷・療養中": 239,
+        "近くの敵に対応中": 142,
+        "近くを散歩中": 57,
+        "食事を終え、仕事を選び直す": 4
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 0,
+      "cooked": 0,
+      "day": 5,
+      "food_energy": 495.0,
+      "gathered": 5,
+      "grown": 0,
+      "idol_hp": 143,
+      "living_enemies": 3,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 5,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 7,
+          "satiety": 69.4000000000156,
+          "state": "free",
+          "status": "仕事の指定待ち"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "dog_food": 1,
+        "mushroom": 11,
+        "soil": 100,
+        "wood": 32
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "mushroom",
+          "stored": 5
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 6912,
+      "used": {
+        "dog_food": 1,
+        "mushroom": 10
+      },
+      "work_ticks": {
+        "collect": 220,
+        "food": 527,
+        "sleep": 609,
+        "ひと休み · 回復後に同じ仕事を再開": 63,
+        "仕事の指定待ち": 2759,
+        "仕事を完了・次を探す": 5,
+        "周囲を見回しています": 35,
+        "居住ゾーン未指定：現在地で休息": 38,
+        "自動収集 · 備蓄へ運搬中": 920,
+        "自動収集 · 物資を取りに移動": 1164,
+        "被弾から回復中": 88,
+        "負傷・療養中": 239,
+        "近くの敵に対応中": 181,
+        "近くを散歩中": 57,
+        "食事を終え、仕事を選び直す": 7
+      }
+    }
+  ],
+  "scope": "Production generated map and World.step; extra residents are explicit fixtures, no free materials or prayer. Economy fixture suppresses scheduled raids only.",
+  "seed": 31,
+  "wall_seconds": 45.655
+}

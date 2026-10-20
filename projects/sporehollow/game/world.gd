@@ -635,7 +635,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				var target_layer="floor" if kind=="remove_floor" else "structure"
 				var store=building_store(target_layer)
 				if store.get(p,{}).get("status")!="ready" or (target_layer=="floor" and live_structure(p)): return false
-				Stock.add(self,store[p].get("resource","soil"),dismantle_quote(p,target_layer),p)
+				for material in dismantle_materials(p,target_layer):Stock.add(self,material,dismantle_materials(p,target_layer)[material],p)
 				if target_layer=="floor": store.erase(p)
 				else: store[p].status="removed"; store[p].hp=0
 				refresh_indoor()
@@ -1088,6 +1088,13 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 
 func building_store(target_layer: String) -> Dictionary:
 	return floors if target_layer=="floor" else structures
+
+func dismantle_materials(p:Vector2i,target_layer:String="structure") -> Dictionary:
+	var b=building_store(target_layer).get(p,{})
+	if b.get("status")!="ready":return {}
+	var amounts=b.get("materials",{b.get("resource","soil"):b.cost}).duplicate()
+	for kind in amounts:amounts[kind]=floori(amounts[kind]*clampf(float(b.hp)/b.max_hp,0,1)*Rules.DISMANTLE_REFUND)
+	return amounts
 
 func dismantle_quote(p: Vector2i, target_layer: String="structure") -> int:
 	if building_store(target_layer).get(p,{}).get("status")!="ready": return 0

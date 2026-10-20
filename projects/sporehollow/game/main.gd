@@ -58,10 +58,10 @@ const HumanVisual=preload("res://game/human_visual.gd")
 const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"bed":"ベッド","place_wood_crate":"木箱を置く","place_wood_shelf":"木製棚を置く","cooking_bench":"調理台 木12","carpentry_bench":"木工台 木14","sewing_bench":"裁縫台 木10","kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"mushroom_bed":"キノコ栽培床","bed":"ベッド","place_wood_crate":"木箱を置く","place_wood_shelf":"木製棚を置く","cooking_bench":"調理台 木12","carpentry_bench":"木工台 木14","sewing_bench":"裁縫台 木10","kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
-const GROUP_TOOLS = [["bed","place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
+const GROUP_TOOLS = [["mushroom_bed","bed","place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const RockView=preload("res://game/rock_view.gd")
 const MountainView=preload("res://game/mountain_view.gd")
 const WorkMotion=preload("res://game/work_motion.gd")
@@ -592,6 +592,7 @@ func refresh_measured():
 			buttons[id].tooltip_text = "%s\n%s ×%d · 施工 %s秒\n%s"%[TOOLS[id],world.Work.Policy.LABELS.get(definition.get("resource","soil"),{"soil":"土","wood":"木材","stone":"石"}.get(definition.get("resource","soil"),"材料")),definition.get("cost",0),str(definition.get("seconds",1)),"備蓄から搬入後に施工" if not definition.is_empty() else "必要な現物と空き場所を指定"]
 			if not definition.is_empty():
 				var available=world.Jobs.Reservations.available(world,definition.get("resource","soil"))
+				if definition.has("materials"):buttons[id].tooltip_text="キノコ栽培床\n建築：木材8・土4 / 1×1 / 施工4秒\n植菌キノコ1 → 48時間後に3個収穫\n建築後に選択し、栽培から指示を追加"
 				buttons[id].tooltip_text+="\n利用可能 %d / 必要 %d"%[available,definition.get("cost",0)]+("\n資材待ちで予約できます。備蓄への回収後、自動で搬入します。" if available<definition.get("cost",0) else "")
 				buttons[id].text=TOOLS[id].split(" ")[0]
 			if Farm.Shop.FOOD.has(id):
@@ -747,7 +748,7 @@ func build_context_actions():
 			rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"選んだ回収予定を取り消す"])
 	else:
 		if selected_structures.size()==1 and world.Craft.Data.BENCHES.has(selected_store()[selected_structures[0]].kind) and selected_store()[selected_structures[0]].status=="ready":
-			rows.append(["craft_open","製作","hammer",crafting_panel.show.bind(self,selected_structures[0]),false,"この設備で製作する物と数量を指定"] )
+			rows.append(["craft_open","栽培" if selected_store()[selected_structures[0]].kind=="mushroom_bed" else "製作","hammer",crafting_panel.show.bind(self,selected_structures[0]),false,"この設備で製作する物と数量を指定"] )
 		var damaged = selected_structures.filter(func(p): return selected_store().get(p,{}).get("status")=="ready" and selected_store()[p].status == "ready" and (selected_store()[p].hp < selected_store()[p].max_hp or selected_store()[p].get("lock_hp",0)<selected_store()[p].get("max_lock_hp",0)))
 		if not damaged.is_empty():
 			var can_repair = damaged.any(func(p): return not job_reserved("repair_floor" if selection_layer=="floor" else "repair", p) and world.repair_quote(p,selection_layer).hp > 0)
@@ -755,7 +756,8 @@ func build_context_actions():
 			for p in damaged: costs[selected_store()[p].get("resource","soil")] += world.repair_quote(p,selection_layer).cost
 			rows.append(["repair", "修理", "hammer", facility_action.bind("repair"), not can_repair, resource_text(costs)])
 		var returns = {"soil":0,"wood":0,"stone":0}
-		for p in selected_structures: returns[selected_store()[p].get("resource","soil")] += world.dismantle_quote(p,selection_layer)
+		for p in selected_structures:
+			for material in world.dismantle_materials(p,selection_layer):returns[material]=returns.get(material,0)+world.dismantle_materials(p,selection_layer)[material]
 		rows.append(["remove", "解体", "cross", facility_action.bind("remove"), (selection_layer=="floor" and selected_structures.all(func(p):return world.live_structure(p))) or selected_structures.all(func(p):return job_reserved("remove_floor" if selection_layer=="floor" else "remove",p)), "先に上の建物を解体してください" if selection_layer=="floor" and selected_structures.any(func(p):return world.live_structure(p)) else "返却 " + resource_text(returns)])
 		if selected_structures.size() == 1 and selected_store()[selected_structures[0]].kind in Farm.Buildings.DOORS:
 			rows.append(["gate", "開閉", "next", facility_action.bind("gate"), job_reserved("gate",selected_structures[0]), "牧場主が現地で開閉する"])
@@ -2012,7 +2014,14 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 	if b.status == "building":return # Shared ghost + delivery/scaffold overlay in draw_work_plans.
 	if b.kind=="bed":BuildingArt.bed(self,p,b.get("tint",Color.WHITE));return
 	if world.Craft.Data.BENCHES.has(b.kind):
-		BuildingArt.bench(self,p,b.kind,b.get("tint",Color.WHITE));return
+		BuildingArt.bench(self,p,b.kind,b.get("tint",Color.WHITE))
+		if b.kind=="mushroom_bed" and b.has("culture"):
+			var crop=b.culture;var ripe=world.tick>=crop.ready_tick
+			var growth=clampf(float(world.tick-crop.seeded_tick)/maxi(1,crop.ready_tick-crop.seeded_tick),0,1)
+			draw_rect(Rect2(p+Vector2(-18,15),Vector2(36,3)),Color("37432f"))
+			draw_rect(Rect2(p+Vector2(-18,15),Vector2(36*growth,3)),Color("ecc879") if ripe else Color("94b47d"))
+			if ripe:label_on(self,p+Vector2(-16,-23),"収穫",11,Color("ffe4a2"))
+		return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in Farm.Buildings.WALLS:
 		BuildingArt.wall(self,p,b,preview)
@@ -2401,10 +2410,14 @@ func draw_hud():
 	elif selected.get("kind") in ["structure","floor"] and selected_store().has(selected.pos) and selected_structures.size()>1:
 		var b = selected_store()[selected.pos]
 		var quote = world.repair_quote(selected.pos,selection_layer)
-		details = "%s Lv1   耐久 %d/%d\n解体返却 %s" % [Farm.Buildings.NAMES.get(b.kind,"建物"), b.hp, b.max_hp, resource_text({b.get("resource", "soil"): world.dismantle_quote(selected.pos,selection_layer)})]
+		details = "%s Lv1   耐久 %d/%d\n解体返却 %s" % [Farm.Buildings.NAMES.get(b.kind,"建物"), b.hp, b.max_hp, resource_text(world.dismantle_materials(selected.pos,selection_layer))]
+		if b.kind=="mushroom_bed":
+			var bill=world.jobs.filter(func(j):return j.kind=="craft" and j.bench_id==b.id)
+			details+="\n"+(world.Craft.summary(world,bill[0]) if not bill.is_empty() else ("生育中／栽培から指示を再登録すると収穫できます" if b.has("culture") else "未植菌 · 栽培から指示を追加"))
 		if selected_structures.size() > 1:
 			var refund = {"soil": 0, "wood": 0, "stone": 0}
-			for cell in selected_structures: refund[selected_store()[cell].get("resource", "soil")] += world.dismantle_quote(cell,selection_layer)
+			for cell in selected_structures:
+				for material in world.dismantle_materials(cell,selection_layer):refund[material]=refund.get(material,0)+world.dismantle_materials(cell,selection_layer)[material]
 			details = "まとめて %dか所\n解体返却 %s" % [selected_structures.size(), resource_text(refund)]
 	if details != "":
 		var lines=details.split("\n")

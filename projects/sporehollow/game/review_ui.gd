@@ -8,6 +8,7 @@ static func button(g,parent,id,title,rect,callback):
 	g.add_button(parent,id,title,rect,callback);Panels.compact_button(g,g.buttons[id],14);g.buttons[id].size=rect.size
 static func icon(kind):
 	var id=kind.trim_prefix("place_")
+	if id=="mushroom_bed":return preload("res://game/board_art.gd").icon("mushroom")
 	if Art.FURNITURE_UI.has(id):return Art.FURNITURE_UI[id]
 	if kind.ends_with("_tile"):return Art.TEXTURES.get(Art.floor_path(kind)+("wood_00.png" if kind=="wood_tile" else "base.png"))
 	if kind in ["wall","wood_wall","stone_wall"]:return Art.TEXTURES.get(("wall/normal/wood_mask_00.png" if kind=="wood_wall" else Art.material(kind)+"/wall/normal/mask_00.png"))
@@ -21,6 +22,8 @@ static func architect_details(g):
 	if not d.is_empty():
 		var resource=d.get("resource","soil");var available=g.world.Jobs.Reservations.available(g.world,resource)
 		hint="%s\n\n必要素材：%s ×%d\n利用可能：%d%s\n\n施工時間：%s秒\n\n資材搬入 → 施工"%["壁で囲み、床と扉を整えると家屋になります。" if g.tool in g.world.Buildings.WALLS else "完成予想図を確認して配置します。",{"soil":"土","wood":"木材","stone":"石材"}.get(resource,resource),d.get("cost",0),available,"（資材待ちで予約可能）" if available<d.get("cost",0) else "",str(d.get("seconds",1))]
+		if d.has("materials"):
+			hint="キノコを育てる1×1の設備\n\n建築：木材8・土4\n利用可能：木材%d・土%d\n\n施工4秒 / 植菌キノコ1\n48時間後にキノコ3個を収穫\n\n建築後に選択 → 栽培"%[g.world.Jobs.Reservations.available(g.world,"wood"),g.world.Jobs.Reservations.available(g.world,"soil")]
 	elif g.tool.begins_with("place_"):hint="所持する完成品を設置します。\n\n利用可能：%d\n\n空き場所を指定してください。"%g.world.item_count(g.tool.trim_prefix("place_"))
 	text(p,"BuildDescription",hint,Rect2(594,60,282,226),14)
 static func resident_tab(g,value):g.resident_tab=value;g.refresh()

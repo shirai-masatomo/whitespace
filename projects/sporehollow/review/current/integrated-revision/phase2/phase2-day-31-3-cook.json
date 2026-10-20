@@ -1,0 +1,1000 @@
+{
+  "checks": [
+    {
+      "check": "Physical IDs/claims/capacity/time budget: ",
+      "passed": true
+    },
+    {
+      "check": "One-day chunk advanced or normal defeat explained",
+      "passed": true
+    },
+    {
+      "check": "No prayer/debug supplies used",
+      "passed": true
+    }
+  ],
+  "chunk": 5,
+  "chunk_seconds": 4.621,
+  "cpu_step_ms": {
+    "max": 327.996,
+    "mean": 12.8189827546296,
+    "p99": 152.077
+  },
+  "economy_fixture": false,
+  "failures": 0,
+  "humans": 3,
+  "initial": {
+    "beds_ready": 0,
+    "built": 0,
+    "cooked": 0,
+    "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+    "day": 1,
+    "food_energy": 315.0,
+    "gathered": 0,
+    "grown": 0,
+    "idol_hp": 180,
+    "living_enemies": 0,
+    "loss": "",
+    "nutrition_down_or_dead": 0,
+    "pending_jobs": [],
+    "people": {
+      "keeper": {
+        "dead": false,
+        "hp": 30,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 0,
+        "satiety": 100.0,
+        "state": "free",
+        "status": "仕事を探しています"
+      }
+    },
+    "reason": "",
+    "stock": {
+      "dog_food": 2,
+      "mushroom": 7,
+      "soil": 100,
+      "wood": 8
+    },
+    "stored_food": [
+      {
+        "kind": "stew",
+        "stored": 0
+      },
+      {
+        "kind": "egg_meal",
+        "stored": 0
+      },
+      {
+        "kind": "roast_meat",
+        "stored": 0
+      },
+      {
+        "kind": "roast_mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "mushroom",
+        "stored": 7
+      },
+      {
+        "kind": "egg",
+        "stored": 0
+      },
+      {
+        "kind": "meat",
+        "stored": 0
+      },
+      {
+        "kind": "milk",
+        "stored": 0
+      }
+    ],
+    "tick": 0,
+    "used": {},
+    "work_ticks": {}
+  },
+  "night3": {
+    "beds_ready": 0,
+    "built": 1,
+    "cooked": 35,
+    "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+    "day": 4,
+    "food_energy": 415.0,
+    "gathered": 4,
+    "grown": 0,
+    "idol_hp": 180,
+    "living_enemies": 0,
+    "loss": "",
+    "nutrition_down_or_dead": 0,
+    "pending_jobs": [
+      {
+        "kind": "craft",
+        "reason": "資材待ち：備蓄にキノコがありません",
+        "recipe": "roast_mushroom",
+        "state": "blocked"
+      }
+    ],
+    "people": {
+      "keeper": {
+        "dead": false,
+        "hp": 30,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 9,
+        "satiety": 20.8000000000086,
+        "state": "free",
+        "status": "居住ゾーン未指定：現在地で休息"
+      },
+      "resident1": {
+        "dead": false,
+        "hp": 0,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 8,
+        "satiety": 0.80000000000898,
+        "state": "unconscious",
+        "status": "負傷・療養中"
+      },
+      "resident2": {
+        "dead": false,
+        "hp": 0,
+        "hunger_ticks": 1584,
+        "malnutrition": 45.8333333333334,
+        "meals": 4,
+        "satiety": 0.0,
+        "state": "unconscious",
+        "status": "負傷・療養中"
+      }
+    },
+    "reason": "",
+    "stock": {
+      "mushroom": 3,
+      "roast_mushroom": 14,
+      "soil": 100,
+      "wood": 20
+    },
+    "stored_food": [
+      {
+        "kind": "stew",
+        "stored": 0
+      },
+      {
+        "kind": "egg_meal",
+        "stored": 0
+      },
+      {
+        "kind": "roast_meat",
+        "stored": 0
+      },
+      {
+        "kind": "roast_mushroom",
+        "stored": 14
+      },
+      {
+        "kind": "mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "egg",
+        "stored": 0
+      },
+      {
+        "kind": "meat",
+        "stored": 0
+      },
+      {
+        "kind": "milk",
+        "stored": 0
+      }
+    ],
+    "tick": 5184,
+    "used": {
+      "dog_food": 2,
+      "mushroom": 14,
+      "roast_mushroom": 21,
+      "wood": 12
+    },
+    "work_ticks": {
+      "clear_tree": 57,
+      "collect": 306,
+      "construction_delivery": 170,
+      "cooking_bench": 53,
+      "craft": 401,
+      "food": 984,
+      "sleep": 1855,
+      "その他 · 対象へ移動中": 7,
+      "その場でうたた寝": 38,
+      "仕事を完了・次を探す": 6,
+      "周囲を見回しています": 160,
+      "居住ゾーン未指定：現在地で休息": 114,
+      "建築現場へ材料を搬入": 2,
+      "担当可能な仕事を待つ": 266,
+      "自動収集 · 備蓄へ運搬中": 778,
+      "自動収集 · 物資を取りに移動": 1905,
+      "被弾から回復中": 95,
+      "負傷で作業中断": 2,
+      "負傷・療養中": 2805,
+      "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 4665,
+      "資材待ち：備蓄にキノコがありません": 205,
+      "近くの敵に対応中": 426,
+      "近くを散歩中": 231,
+      "食事を終え、仕事を選び直す": 21
+    }
+  },
+  "night5": {
+    "beds_ready": 0,
+    "built": 1,
+    "cooked": 35,
+    "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+    "day": 6,
+    "food_energy": 415.0,
+    "gathered": 4,
+    "grown": 0,
+    "idol_hp": 9,
+    "living_enemies": 4,
+    "loss": "",
+    "nutrition_down_or_dead": 2,
+    "pending_jobs": [
+      {
+        "kind": "craft",
+        "reason": "資材待ち：備蓄にキノコがありません",
+        "recipe": "roast_mushroom",
+        "state": "blocked"
+      }
+    ],
+    "people": {
+      "keeper": {
+        "dead": false,
+        "hp": 1,
+        "hunger_ticks": 0,
+        "malnutrition": 0.0,
+        "meals": 18,
+        "satiety": 28.0000000000155,
+        "state": "hidden_rest",
+        "status": "負傷・療養中"
+      },
+      "resident1": {
+        "dead": false,
+        "hp": 0,
+        "hunger_ticks": 3440,
+        "malnutrition": 99.5370370370424,
+        "meals": 8,
+        "satiety": 0.0,
+        "state": "unconscious",
+        "status": "栄養失調・行動不能"
+      },
+      "resident2": {
+        "dead": true,
+        "hp": 0,
+        "hunger_ticks": 5040,
+        "malnutrition": 100.0,
+        "meals": 4,
+        "satiety": 0.0,
+        "state": "dead",
+        "status": "離脱"
+      }
+    },
+    "reason": "",
+    "stock": {
+      "mushroom": 7,
+      "roast_mushroom": 5,
+      "soil": 100,
+      "wood": 36
+    },
+    "stored_food": [
+      {
+        "kind": "stew",
+        "stored": 0
+      },
+      {
+        "kind": "egg_meal",
+        "stored": 0
+      },
+      {
+        "kind": "roast_meat",
+        "stored": 0
+      },
+      {
+        "kind": "roast_mushroom",
+        "stored": 5
+      },
+      {
+        "kind": "mushroom",
+        "stored": 0
+      },
+      {
+        "kind": "egg",
+        "stored": 0
+      },
+      {
+        "kind": "meat",
+        "stored": 0
+      },
+      {
+        "kind": "milk",
+        "stored": 0
+      }
+    ],
+    "tick": 8640,
+    "used": {
+      "dog_food": 2,
+      "mushroom": 16,
+      "roast_mushroom": 30,
+      "wood": 12
+    },
+    "work_ticks": {
+      "clear_tree": 57,
+      "collect": 306,
+      "construction_delivery": 170,
+      "cooking_bench": 53,
+      "craft": 401,
+      "food": 1304,
+      "sleep": 1926,
+      "その他 · 対象へ移動中": 7,
+      "その場でうたた寝": 38,
+      "ひと休み · 回復後に同じ仕事を再開": 41,
+      "仕事を完了・次を探す": 6,
+      "周囲を見回しています": 163,
+      "居住ゾーン未指定：現在地で休息": 114,
+      "建築現場へ材料を搬入": 2,
+      "担当可能な仕事を待つ": 266,
+      "栄養失調・行動不能": 1713,
+      "自動収集 · 備蓄へ運搬中": 951,
+      "自動収集 · 物資を取りに移動": 2288,
+      "被弾から回復中": 163,
+      "負傷で作業中断": 2,
+      "負傷・療養中": 6748,
+      "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 4665,
+      "資材待ち：備蓄にキノコがありません": 2071,
+      "近くの敵に対応中": 615,
+      "近くを散歩中": 235,
+      "離脱": 1585,
+      "食事を終え、仕事を選び直す": 30
+    }
+  },
+  "policy": "cook",
+  "samples": [
+    {
+      "beds_ready": 0,
+      "built": 1,
+      "cooked": 25,
+      "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+      "day": 2,
+      "food_energy": 545.0,
+      "gathered": 4,
+      "grown": 0,
+      "idol_hp": 180,
+      "living_enemies": 0,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "pending_jobs": [
+        {
+          "kind": "craft",
+          "reason": "資材待ち：キノコが不足、または備蓄へ通じる通路がありません",
+          "recipe": "roast_mushroom",
+          "state": "blocked"
+        }
+      ],
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 28,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 0,
+          "satiety": 13.6000000000036,
+          "state": "free",
+          "status": "空腹 · 食べ物へ移動中"
+        },
+        "resident1": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 0,
+          "satiety": 13.6000000000036,
+          "state": "free",
+          "status": "空腹 · 食べ物へ移動中"
+        },
+        "resident2": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 0,
+          "satiety": 13.6000000000036,
+          "state": "free",
+          "status": "空腹 · 食べ物へ移動中"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "dog_food": 2,
+        "mushroom": 1,
+        "roast_mushroom": 25,
+        "soil": 100,
+        "wood": 4
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 25
+        },
+        {
+          "kind": "mushroom",
+          "stored": 1
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 1728,
+      "used": {
+        "mushroom": 10,
+        "wood": 12
+      },
+      "work_ticks": {
+        "clear_tree": 57,
+        "collect": 306,
+        "construction_delivery": 170,
+        "cooking_bench": 53,
+        "craft": 282,
+        "food": 3,
+        "sleep": 1023,
+        "その他 · 対象へ移動中": 5,
+        "仕事を完了・次を探す": 6,
+        "周囲を見回しています": 74,
+        "居住ゾーン未指定：現在地で休息": 57,
+        "建築現場へ材料を搬入": 2,
+        "担当可能な仕事を待つ": 256,
+        "自動収集 · 備蓄へ運搬中": 433,
+        "自動収集 · 物資を取りに移動": 409,
+        "被弾から回復中": 25,
+        "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 1833,
+        "近くの敵に対応中": 78,
+        "近くを散歩中": 112
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 1,
+      "cooked": 25,
+      "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+      "day": 3,
+      "food_energy": 400.0,
+      "gathered": 4,
+      "grown": 0,
+      "idol_hp": 180,
+      "living_enemies": 0,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "pending_jobs": [
+        {
+          "kind": "craft",
+          "reason": "資材待ち：キノコが不足、または備蓄へ通じる通路がありません",
+          "recipe": "roast_mushroom",
+          "state": "blocked"
+        }
+      ],
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 5,
+          "satiety": 27.2000000000066,
+          "state": "free",
+          "status": "居住ゾーン未指定：現在地で休息"
+        },
+        "resident1": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 5,
+          "satiety": 27.2000000000073,
+          "state": "free",
+          "status": "居住ゾーン未指定：現在地で休息"
+        },
+        "resident2": {
+          "dead": false,
+          "hp": 0,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 4,
+          "satiety": 7.20000000000582,
+          "state": "unconscious",
+          "status": "負傷・療養中"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "dog_food": 1,
+        "mushroom": 4,
+        "roast_mushroom": 11,
+        "soil": 100,
+        "wood": 12
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 11
+        },
+        {
+          "kind": "mushroom",
+          "stored": 1
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 3456,
+      "used": {
+        "dog_food": 1,
+        "mushroom": 10,
+        "roast_mushroom": 14,
+        "wood": 12
+      },
+      "work_ticks": {
+        "clear_tree": 57,
+        "collect": 306,
+        "construction_delivery": 170,
+        "cooking_bench": 53,
+        "craft": 282,
+        "food": 490,
+        "sleep": 1289,
+        "その他 · 対象へ移動中": 5,
+        "仕事を完了・次を探す": 6,
+        "周囲を見回しています": 145,
+        "居住ゾーン未指定：現在地で休息": 95,
+        "建築現場へ材料を搬入": 2,
+        "担当可能な仕事を待つ": 256,
+        "自動収集 · 備蓄へ運搬中": 614,
+        "自動収集 · 物資を取りに移動": 1144,
+        "被弾から回復中": 55,
+        "負傷で作業中断": 1,
+        "負傷・療養中": 534,
+        "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 4354,
+        "近くの敵に対応中": 289,
+        "近くを散歩中": 207,
+        "食事を終え、仕事を選び直す": 14
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 1,
+      "cooked": 35,
+      "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+      "day": 4,
+      "food_energy": 415.0,
+      "gathered": 4,
+      "grown": 0,
+      "idol_hp": 180,
+      "living_enemies": 0,
+      "loss": "",
+      "nutrition_down_or_dead": 0,
+      "pending_jobs": [
+        {
+          "kind": "craft",
+          "reason": "資材待ち：備蓄にキノコがありません",
+          "recipe": "roast_mushroom",
+          "state": "blocked"
+        }
+      ],
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 30,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 9,
+          "satiety": 20.8000000000086,
+          "state": "free",
+          "status": "居住ゾーン未指定：現在地で休息"
+        },
+        "resident1": {
+          "dead": false,
+          "hp": 0,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 8,
+          "satiety": 0.80000000000898,
+          "state": "unconscious",
+          "status": "負傷・療養中"
+        },
+        "resident2": {
+          "dead": false,
+          "hp": 0,
+          "hunger_ticks": 1584,
+          "malnutrition": 45.8333333333334,
+          "meals": 4,
+          "satiety": 0.0,
+          "state": "unconscious",
+          "status": "負傷・療養中"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "mushroom": 3,
+        "roast_mushroom": 14,
+        "soil": 100,
+        "wood": 20
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 14
+        },
+        {
+          "kind": "mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 5184,
+      "used": {
+        "dog_food": 2,
+        "mushroom": 14,
+        "roast_mushroom": 21,
+        "wood": 12
+      },
+      "work_ticks": {
+        "clear_tree": 57,
+        "collect": 306,
+        "construction_delivery": 170,
+        "cooking_bench": 53,
+        "craft": 401,
+        "food": 984,
+        "sleep": 1855,
+        "その他 · 対象へ移動中": 7,
+        "その場でうたた寝": 38,
+        "仕事を完了・次を探す": 6,
+        "周囲を見回しています": 160,
+        "居住ゾーン未指定：現在地で休息": 114,
+        "建築現場へ材料を搬入": 2,
+        "担当可能な仕事を待つ": 266,
+        "自動収集 · 備蓄へ運搬中": 778,
+        "自動収集 · 物資を取りに移動": 1905,
+        "被弾から回復中": 95,
+        "負傷で作業中断": 2,
+        "負傷・療養中": 2805,
+        "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 4665,
+        "資材待ち：備蓄にキノコがありません": 205,
+        "近くの敵に対応中": 426,
+        "近くを散歩中": 231,
+        "食事を終え、仕事を選び直す": 21
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 1,
+      "cooked": 35,
+      "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+      "day": 5,
+      "food_energy": 405.0,
+      "gathered": 4,
+      "grown": 0,
+      "idol_hp": 180,
+      "living_enemies": 2,
+      "loss": "",
+      "nutrition_down_or_dead": 1,
+      "pending_jobs": [
+        {
+          "kind": "craft",
+          "reason": "資材待ち：備蓄にキノコがありません",
+          "recipe": "roast_mushroom",
+          "state": "blocked"
+        }
+      ],
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 18,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 14,
+          "satiety": 34.4000000000116,
+          "state": "free",
+          "status": "資材待ち：備蓄にキノコがありません"
+        },
+        "resident1": {
+          "dead": false,
+          "hp": 0,
+          "hunger_ticks": 1712,
+          "malnutrition": 49.5370370370368,
+          "meals": 8,
+          "satiety": 0.0,
+          "state": "unconscious",
+          "status": "負傷・療養中"
+        },
+        "resident2": {
+          "dead": false,
+          "hp": 0,
+          "hunger_ticks": 3312,
+          "malnutrition": 95.833333333338,
+          "meals": 4,
+          "satiety": 0.0,
+          "state": "unconscious",
+          "status": "栄養失調・行動不能"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "mushroom": 5,
+        "roast_mushroom": 9,
+        "soil": 100,
+        "wood": 28
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 9
+        },
+        {
+          "kind": "mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 6912,
+      "used": {
+        "dog_food": 2,
+        "mushroom": 15,
+        "roast_mushroom": 26,
+        "wood": 12
+      },
+      "work_ticks": {
+        "clear_tree": 57,
+        "collect": 306,
+        "construction_delivery": 170,
+        "cooking_bench": 53,
+        "craft": 401,
+        "food": 1272,
+        "sleep": 1926,
+        "その他 · 対象へ移動中": 7,
+        "その場でうたた寝": 38,
+        "ひと休み · 回復後に同じ仕事を再開": 41,
+        "仕事を完了・次を探す": 6,
+        "周囲を見回しています": 163,
+        "居住ゾーン未指定：現在地で休息": 114,
+        "建築現場へ材料を搬入": 2,
+        "担当可能な仕事を待つ": 266,
+        "栄養失調・行動不能": 721,
+        "自動収集 · 備蓄へ運搬中": 951,
+        "自動収集 · 物資を取りに移動": 2288,
+        "被弾から回復中": 120,
+        "負傷で作業中断": 2,
+        "負傷・療養中": 5540,
+        "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 4665,
+        "資材待ち：備蓄にキノコがありません": 885,
+        "近くの敵に対応中": 481,
+        "近くを散歩中": 235,
+        "食事を終え、仕事を選び直す": 26
+      }
+    },
+    {
+      "beds_ready": 0,
+      "built": 1,
+      "cooked": 35,
+      "cultivation_policy": "two beds per person, count12 per bed; cooking target10 portions/person",
+      "day": 6,
+      "food_energy": 415.0,
+      "gathered": 4,
+      "grown": 0,
+      "idol_hp": 9,
+      "living_enemies": 4,
+      "loss": "",
+      "nutrition_down_or_dead": 2,
+      "pending_jobs": [
+        {
+          "kind": "craft",
+          "reason": "資材待ち：備蓄にキノコがありません",
+          "recipe": "roast_mushroom",
+          "state": "blocked"
+        }
+      ],
+      "people": {
+        "keeper": {
+          "dead": false,
+          "hp": 1,
+          "hunger_ticks": 0,
+          "malnutrition": 0.0,
+          "meals": 18,
+          "satiety": 28.0000000000155,
+          "state": "hidden_rest",
+          "status": "負傷・療養中"
+        },
+        "resident1": {
+          "dead": false,
+          "hp": 0,
+          "hunger_ticks": 3440,
+          "malnutrition": 99.5370370370424,
+          "meals": 8,
+          "satiety": 0.0,
+          "state": "unconscious",
+          "status": "栄養失調・行動不能"
+        },
+        "resident2": {
+          "dead": true,
+          "hp": 0,
+          "hunger_ticks": 5040,
+          "malnutrition": 100.0,
+          "meals": 4,
+          "satiety": 0.0,
+          "state": "dead",
+          "status": "離脱"
+        }
+      },
+      "reason": "",
+      "stock": {
+        "mushroom": 7,
+        "roast_mushroom": 5,
+        "soil": 100,
+        "wood": 36
+      },
+      "stored_food": [
+        {
+          "kind": "stew",
+          "stored": 0
+        },
+        {
+          "kind": "egg_meal",
+          "stored": 0
+        },
+        {
+          "kind": "roast_meat",
+          "stored": 0
+        },
+        {
+          "kind": "roast_mushroom",
+          "stored": 5
+        },
+        {
+          "kind": "mushroom",
+          "stored": 0
+        },
+        {
+          "kind": "egg",
+          "stored": 0
+        },
+        {
+          "kind": "meat",
+          "stored": 0
+        },
+        {
+          "kind": "milk",
+          "stored": 0
+        }
+      ],
+      "tick": 8640,
+      "used": {
+        "dog_food": 2,
+        "mushroom": 16,
+        "roast_mushroom": 30,
+        "wood": 12
+      },
+      "work_ticks": {
+        "clear_tree": 57,
+        "collect": 306,
+        "construction_delivery": 170,
+        "cooking_bench": 53,
+        "craft": 401,
+        "food": 1304,
+        "sleep": 1926,
+        "その他 · 対象へ移動中": 7,
+        "その場でうたた寝": 38,
+        "ひと休み · 回復後に同じ仕事を再開": 41,
+        "仕事を完了・次を探す": 6,
+        "周囲を見回しています": 163,
+        "居住ゾーン未指定：現在地で休息": 114,
+        "建築現場へ材料を搬入": 2,
+        "担当可能な仕事を待つ": 266,
+        "栄養失調・行動不能": 1713,
+        "自動収集 · 備蓄へ運搬中": 951,
+        "自動収集 · 物資を取りに移動": 2288,
+        "被弾から回復中": 163,
+        "負傷で作業中断": 2,
+        "負傷・療養中": 6748,
+        "資材待ち：キノコが不足、または備蓄へ通じる通路がありません": 4665,
+        "資材待ち：備蓄にキノコがありません": 2071,
+        "近くの敵に対応中": 615,
+        "近くを散歩中": 235,
+        "離脱": 1585,
+        "食事を終え、仕事を選び直す": 30
+      }
+    }
+  ],
+  "scope": "Production generated map and World.step; extra residents are explicit fixtures, no free materials or prayer. Economy fixture suppresses scheduled raids only.",
+  "seed": 31,
+  "wall_seconds": 116.12
+}

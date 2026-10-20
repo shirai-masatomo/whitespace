@@ -298,6 +298,14 @@ static func door_layer(game,p: Vector2,b: Dictionary,layer: String):
 
 
 static func bench(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
+	if kind=="mushroom_bed":
+		# Explicit provisional soil box + adopted mushroom art, one 48x42 cell.
+		game.draw_rect(Rect2(p+Vector2(-22,-12),Vector2(44,30)),Color("785a3e")*tint)
+		game.draw_rect(Rect2(p+Vector2(-18,-9),Vector2(36,21)),Color("4c4833")*tint)
+		game.draw_rect(Rect2(p+Vector2(-22,-12),Vector2(44,30)),Color("bd9a65")*tint,false,3)
+		var texture=preload("res://game/board_art.gd").icon("mushroom")
+		if texture!=null:game.draw_texture_rect(texture,Rect2(p+Vector2(-10,-13),Vector2(20,20)),false,tint)
+		return
 	# 48x48 original, anchor(24,44), foot at cell center+(0,21).
 	if kind in ["cooking_bench","carpentry_bench","sewing_bench"]:
 		game.draw_texture_rect(FURNITURE_WORLD[kind],Rect2((p+Vector2(-24,-25)).round(),Vector2(96,88)),false,tint)

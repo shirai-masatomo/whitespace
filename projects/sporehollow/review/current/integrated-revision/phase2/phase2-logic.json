@@ -1,0 +1,619 @@
+{
+  "checks": [
+    {
+      "check": "Mixed ingredient bed designation",
+      "passed": true
+    },
+    {
+      "check": "Exact 8 wood/4 soil costs in one reservation",
+      "passed": true
+    },
+    {
+      "check": "Partial mixed delivery 11/12",
+      "passed": true
+    },
+    {
+      "check": "No construction with missing soil; no early consumption",
+      "passed": true
+    },
+    {
+      "check": "Mixed delivery resumes to finished bed",
+      "passed": true
+    },
+    {
+      "check": "Both ingredients consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bed is 1x1",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Duplicate bed bill rejected",
+      "passed": true
+    },
+    {
+      "check": "Actual AI fetches seed and inoculates",
+      "passed": true
+    },
+    {
+      "check": "One seed consumed, full 48h clock",
+      "passed": true
+    },
+    {
+      "check": "Growing releases worker and bench claim",
+      "passed": true
+    },
+    {
+      "check": "Worker performs other work during growth",
+      "passed": true
+    },
+    {
+      "check": "No harvest one tick before 48h",
+      "passed": true
+    },
+    {
+      "check": "Mature crop requires a present worker; rest cannot auto-produce",
+      "passed": true
+    },
+    {
+      "check": "Harvest progress retained on interruption",
+      "passed": true
+    },
+    {
+      "check": "Exactly three physical mushrooms harvested after resumption",
+      "passed": true
+    },
+    {
+      "check": "Seed/output conservation (2 initial +3 output)",
+      "passed": true
+    },
+    {
+      "check": "No repeated harvest after completion",
+      "passed": true
+    },
+    {
+      "check": "Harvest is onsite physical output, not shared stock",
+      "passed": true
+    },
+    {
+      "check": "Full storage never deletes or teleports harvest",
+      "passed": true
+    },
+    {
+      "check": "Expanded storage receives auto-collected harvest",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Seed physically in transfer",
+      "passed": true
+    },
+    {
+      "check": "Cancel before seed use returns same physical seed",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Seeded cancellation fixture",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "New bill harvests retained crop without another seed",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Forbidden seed reports reason",
+      "passed": true
+    },
+    {
+      "check": "Seed withdrawal permission reports reason",
+      "passed": true
+    },
+    {
+      "check": "Permission restored resumes same bill",
+      "passed": true
+    },
+    {
+      "check": "Mixed construction in-flight",
+      "passed": true
+    },
+    {
+      "check": "Cancellation releases both material types without claims",
+      "passed": true
+    },
+    {
+      "check": "Mixed ingredient bed designation",
+      "passed": true
+    },
+    {
+      "check": "Exact 8 wood/4 soil costs in one reservation",
+      "passed": true
+    },
+    {
+      "check": "Partial mixed delivery 11/12",
+      "passed": true
+    },
+    {
+      "check": "No construction with missing soil; no early consumption",
+      "passed": true
+    },
+    {
+      "check": "Mixed delivery resumes to finished bed",
+      "passed": true
+    },
+    {
+      "check": "Both ingredients consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bed is 1x1",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Duplicate bed bill rejected",
+      "passed": true
+    },
+    {
+      "check": "Actual AI fetches seed and inoculates",
+      "passed": true
+    },
+    {
+      "check": "One seed consumed, full 48h clock",
+      "passed": true
+    },
+    {
+      "check": "Growing releases worker and bench claim",
+      "passed": true
+    },
+    {
+      "check": "Worker performs other work during growth",
+      "passed": true
+    },
+    {
+      "check": "No harvest one tick before 48h",
+      "passed": true
+    },
+    {
+      "check": "Mature crop requires a present worker; rest cannot auto-produce",
+      "passed": true
+    },
+    {
+      "check": "Harvest progress retained on interruption",
+      "passed": true
+    },
+    {
+      "check": "Exactly three physical mushrooms harvested after resumption",
+      "passed": true
+    },
+    {
+      "check": "Seed/output conservation (2 initial +3 output)",
+      "passed": true
+    },
+    {
+      "check": "No repeated harvest after completion",
+      "passed": true
+    },
+    {
+      "check": "Harvest is onsite physical output, not shared stock",
+      "passed": true
+    },
+    {
+      "check": "Full storage never deletes or teleports harvest",
+      "passed": true
+    },
+    {
+      "check": "Expanded storage receives auto-collected harvest",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Seed physically in transfer",
+      "passed": true
+    },
+    {
+      "check": "Cancel before seed use returns same physical seed",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Seeded cancellation fixture",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "New bill harvests retained crop without another seed",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Forbidden seed reports reason",
+      "passed": true
+    },
+    {
+      "check": "Seed withdrawal permission reports reason",
+      "passed": true
+    },
+    {
+      "check": "Permission restored resumes same bill",
+      "passed": true
+    },
+    {
+      "check": "Mixed construction in-flight",
+      "passed": true
+    },
+    {
+      "check": "Cancellation releases both material types without claims",
+      "passed": true
+    },
+    {
+      "check": "Mixed ingredient bed designation",
+      "passed": true
+    },
+    {
+      "check": "Exact 8 wood/4 soil costs in one reservation",
+      "passed": true
+    },
+    {
+      "check": "Partial mixed delivery 11/12",
+      "passed": true
+    },
+    {
+      "check": "No construction with missing soil; no early consumption",
+      "passed": true
+    },
+    {
+      "check": "Mixed delivery resumes to finished bed",
+      "passed": true
+    },
+    {
+      "check": "Both ingredients consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bed is 1x1",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Duplicate bed bill rejected",
+      "passed": true
+    },
+    {
+      "check": "Actual AI fetches seed and inoculates",
+      "passed": true
+    },
+    {
+      "check": "One seed consumed, full 48h clock",
+      "passed": true
+    },
+    {
+      "check": "Growing releases worker and bench claim",
+      "passed": true
+    },
+    {
+      "check": "Worker performs other work during growth",
+      "passed": true
+    },
+    {
+      "check": "No harvest one tick before 48h",
+      "passed": true
+    },
+    {
+      "check": "Mature crop requires a present worker; rest cannot auto-produce",
+      "passed": true
+    },
+    {
+      "check": "Harvest progress retained on interruption",
+      "passed": true
+    },
+    {
+      "check": "Exactly three physical mushrooms harvested after resumption",
+      "passed": true
+    },
+    {
+      "check": "Seed/output conservation (2 initial +3 output)",
+      "passed": true
+    },
+    {
+      "check": "No repeated harvest after completion",
+      "passed": true
+    },
+    {
+      "check": "Harvest is onsite physical output, not shared stock",
+      "passed": true
+    },
+    {
+      "check": "Full storage never deletes or teleports harvest",
+      "passed": true
+    },
+    {
+      "check": "Expanded storage receives auto-collected harvest",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Seed physically in transfer",
+      "passed": true
+    },
+    {
+      "check": "Cancel before seed use returns same physical seed",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Seeded cancellation fixture",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "New bill harvests retained crop without another seed",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Forbidden seed reports reason",
+      "passed": true
+    },
+    {
+      "check": "Seed withdrawal permission reports reason",
+      "passed": true
+    },
+    {
+      "check": "Permission restored resumes same bill",
+      "passed": true
+    },
+    {
+      "check": "Mixed construction in-flight",
+      "passed": true
+    },
+    {
+      "check": "Cancellation releases both material types without claims",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Two residents inoculate two beds without claim competition",
+      "passed": true
+    },
+    {
+      "check": "Two beds consume two seeds, never the same physical unit",
+      "passed": true
+    },
+    {
+      "check": "Two-worker harvest produces exactly six",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Hungry worker consumes physical food before planting",
+      "passed": true
+    },
+    {
+      "check": "Eaten mushroom cannot also become a seed",
+      "passed": true
+    },
+    {
+      "check": "Normal stock replenishment resumes inoculation after meal",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Stock target satisfied: no needless seed/work",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Food chain inoculated through actual AI",
+      "passed": true
+    },
+    {
+      "check": "Harvest auto-collected into real food stockpile",
+      "passed": true
+    },
+    {
+      "check": "Harvested food becomes five cooked portions through ingredient transport/work",
+      "passed": true
+    },
+    {
+      "check": "Seed1 plus cooking2: no double raw consumption",
+      "passed": true
+    },
+    {
+      "check": "Cooked output automatically physically stored",
+      "passed": true
+    },
+    {
+      "check": "Meal preference consumes a cooked portion from storage",
+      "passed": true
+    },
+    {
+      "check": "Established satiety20 applied once, four portions retained",
+      "passed": true
+    },
+    {
+      "check": "Hen dawn guard creates exactly one physical egg/day",
+      "passed": true
+    },
+    {
+      "check": "Cow milk work designated",
+      "passed": true
+    },
+    {
+      "check": "Existing worker performs daily milking",
+      "passed": true
+    },
+    {
+      "check": "Milk is local physical produce, not teleported to entrance/shared stock",
+      "passed": true
+    },
+    {
+      "check": "Same cow/day cannot be milked twice",
+      "passed": true
+    },
+    {
+      "check": "Egg and milk auto-collected into food storage",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Full adjacent cells retain mature crop without overcapacity",
+      "passed": true
+    },
+    {
+      "check": "Freed capacity resumes harvest and stays at40",
+      "passed": true
+    },
+    {
+      "check": "After expanding storage, all harvest is collected without loss",
+      "passed": true
+    },
+    {
+      "check": "Mixed preview shares wood and soil budget across three cells",
+      "passed": true
+    },
+    {
+      "check": "Committed mixed plans match draft material budget",
+      "passed": true
+    },
+    {
+      "check": "Supplied two beds build when third has no remaining materials",
+      "passed": true
+    },
+    {
+      "check": "One remaining public job; exact two-bed material consumption",
+      "passed": true
+    },
+    {
+      "check": "Group resumes last bed after new supply without relocking completed sites",
+      "passed": true
+    },
+    {
+      "check": "Three-bed mixed group balances all materials and ownership",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "Sufficient seed behind closed access reports path, not shortage",
+      "passed": true
+    },
+    {
+      "check": "Opening route resumes same inoculation job",
+      "passed": true
+    },
+    {
+      "check": "One of two ingredients reports real shortage, not path failure",
+      "passed": true
+    },
+    {
+      "check": "Cooking adds finite nutritional value: roast_mushroom",
+      "passed": true
+    },
+    {
+      "check": "Cooking adds finite nutritional value: egg_meal",
+      "passed": true
+    },
+    {
+      "check": "Cooking adds finite nutritional value: roast_meat",
+      "passed": true
+    },
+    {
+      "check": "Cooking adds finite nutritional value: stew",
+      "passed": true
+    },
+    {
+      "check": "Cultivation bill registered",
+      "passed": true
+    },
+    {
+      "check": "100 bills allowed, 101 rejected",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "rows": [
+    {
+      "checks": 35,
+      "seed": 31
+    },
+    {
+      "checks": 70,
+      "seed": 731
+    },
+    {
+      "checks": 105,
+      "seed": 20261019
+    }
+  ]
+}

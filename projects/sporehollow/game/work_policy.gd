@@ -21,7 +21,7 @@ const STARTING_FOOD = 4
 # One classification for scheduling, saved jobs and the designation list.
 static func category(w,j) -> String:
 	if w.BUILD.has(j.kind) or j.kind in ["repair","repair_floor","remove","remove_floor","gate"] or j.kind.begins_with("place_"):return "build"
-	if j.kind in ["mine","clear_tree"]:return "gather"
+	if j.kind in ["mine","clear_tree"] or (j.kind=="craft" and j.get("recipe")=="grow_mushroom"):return "gather"
 	if j.kind=="haul":return "haul"
 	if j.kind=="collect":return "gather" if w.natural.has(j.pos) else "collect"
 	if j.kind in ["animal_order","milk","equip","slaughter","train"]:return "animal"

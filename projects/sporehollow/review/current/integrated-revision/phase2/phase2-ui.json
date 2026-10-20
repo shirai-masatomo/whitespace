@@ -1,0 +1,1145 @@
+{
+  "checks": [
+    {
+      "check": "Loading real game UI",
+      "passed": true
+    },
+    {
+      "check": "Existing architect exposes bed with adopted icon",
+      "passed": true
+    },
+    {
+      "check": "UI shows both construction materials",
+      "passed": true
+    },
+    {
+      "check": "Full building button clickable rectangle",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: cultivation-architect",
+      "passed": true
+    },
+    {
+      "check": "Reused compact production panel",
+      "passed": true
+    },
+    {
+      "check": "Live crop time visible in production bill",
+      "passed": true
+    },
+    {
+      "check": "Original recipe control reused",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: cultivation-growing",
+      "passed": true
+    },
+    {
+      "check": "Existing architect exposes bed with adopted icon",
+      "passed": true
+    },
+    {
+      "check": "UI shows both construction materials",
+      "passed": true
+    },
+    {
+      "check": "Full building button clickable rectangle",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: cultivation-architect",
+      "passed": true
+    },
+    {
+      "check": "Reused compact production panel",
+      "passed": true
+    },
+    {
+      "check": "Live crop time visible in production bill",
+      "passed": true
+    },
+    {
+      "check": "Original recipe control reused",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: cultivation-growing",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "layouts": [
+    {
+      "name": "cultivation-architect",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@316",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "キノコ栽培床",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            282.0,
+            231.0
+          ],
+          "text": "キノコを育てる1×1の設備\n\n建築：木材8・土4\n利用可能：木材0・土0\n\n施工4秒 / 植菌キノコ1\n48時間後にキノコ3個を収穫\n\n建築後に選択 → 栽培",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@293",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@294",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@295",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@296",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@310",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            200.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@311",
+          "rect": [
+            136.0,
+            450.0,
+            104.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "キノコ栽培床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@312",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            16.0,
+            4.0,
+            47.0,
+            60.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/bed_assets_v1/bed_ui.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "ベッド",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@313",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/cooking_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "調理台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@314",
+          "rect": [
+            460.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            476.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/carpentry_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            463.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木工台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@315",
+          "rect": [
+            136.0,
+            550.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            7.0,
+            30.0,
+            24.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            559.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/sewing_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            618.0,
+            96.0,
+            24.0
+          ],
+          "text": "裁縫台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@317",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "cultivation-growing",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@554",
+          "rect": [
+            16.0,
+            110.0,
+            520.0,
+            440.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "@Label@555",
+          "rect": [
+            28.0,
+            120.0,
+            209.0,
+            29.0
+          ],
+          "text": "キノコ栽培床 · 栽培指示",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@556",
+          "rect": [
+            438.0,
+            118.0,
+            84.0,
+            44.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "Recipe",
+          "rect": [
+            28.0,
+            161.0,
+            230.0,
+            44.0
+          ],
+          "text": "キノコ栽培",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@OptionButton@577",
+          "rect": [
+            266.0,
+            161.0,
+            145.0,
+            44.0
+          ],
+          "text": "収穫数を指定",
+          "type": "OptionButton"
+        },
+        {
+          "name": "@SpinBox@580",
+          "rect": [
+            420.0,
+            161.0,
+            100.0,
+            32.0
+          ],
+          "type": "SpinBox"
+        },
+        {
+          "font": 13,
+          "name": "@Label@581",
+          "rect": [
+            28.0,
+            201.0,
+            490.0,
+            43.0
+          ],
+          "text": "キノコ1を植菌 → 48時間生育 → 3個収穫\n植菌・収穫 各4秒 · 採集担当 · 自動収集ONで備蓄へ",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@582",
+          "rect": [
+            28.0,
+            246.0,
+            220.0,
+            44.0
+          ],
+          "text": "栽培指示を追加",
+          "type": "Button"
+        },
+        {
+          "name": "@ScrollContainer@585",
+          "rect": [
+            28.0,
+            292.0,
+            492.0,
+            244.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@586",
+          "rect": [
+            28.0,
+            292.0,
+            484.0,
+            66.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "name": "@HBoxContainer@587",
+          "rect": [
+            28.0,
+            292.0,
+            484.0,
+            66.0
+          ],
+          "type": "HBoxContainer"
+        },
+        {
+          "font": 13,
+          "name": "@Label@588",
+          "rect": [
+            28.0,
+            292.0,
+            370.0,
+            66.0
+          ],
+          "text": "キノコ · 植菌1 → 収穫3 · 完成0\n生育中：あと 48.0時間\n種菌は消費済み。生育中は作業者不要",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@589",
+          "rect": [
+            402.0,
+            292.0,
+            52.0,
+            66.0
+          ],
+          "text": "取消",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@553",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "cultivation-architect",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@623",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "キノコ栽培床",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            282.0,
+            231.0
+          ],
+          "text": "キノコを育てる1×1の設備\n\n建築：木材8・土4\n利用可能：木材0・土0\n\n施工4秒 / 植菌キノコ1\n48時間後にキノコ3個を収穫\n\n建築後に選択 → 栽培",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@600",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@601",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@602",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@603",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@617",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            200.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@618",
+          "rect": [
+            136.0,
+            450.0,
+            104.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "キノコ栽培床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@619",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            16.0,
+            4.0,
+            47.0,
+            60.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/bed_assets_v1/bed_ui.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "ベッド",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@620",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/cooking_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "調理台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@621",
+          "rect": [
+            460.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            476.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/carpentry_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            463.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木工台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@622",
+          "rect": [
+            136.0,
+            550.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            7.0,
+            30.0,
+            24.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            559.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/sewing_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            618.0,
+            96.0,
+            24.0
+          ],
+          "text": "裁縫台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@624",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "cultivation-growing",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@627",
+          "rect": [
+            16.0,
+            110.0,
+            520.0,
+            440.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "@Label@628",
+          "rect": [
+            28.0,
+            120.0,
+            209.0,
+            29.0
+          ],
+          "text": "キノコ栽培床 · 栽培指示",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@629",
+          "rect": [
+            438.0,
+            118.0,
+            84.0,
+            44.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "Recipe",
+          "rect": [
+            28.0,
+            161.0,
+            230.0,
+            44.0
+          ],
+          "text": "キノコ栽培",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@OptionButton@650",
+          "rect": [
+            266.0,
+            161.0,
+            145.0,
+            44.0
+          ],
+          "text": "収穫数を指定",
+          "type": "OptionButton"
+        },
+        {
+          "name": "@SpinBox@653",
+          "rect": [
+            420.0,
+            161.0,
+            100.0,
+            32.0
+          ],
+          "type": "SpinBox"
+        },
+        {
+          "font": 13,
+          "name": "@Label@654",
+          "rect": [
+            28.0,
+            201.0,
+            490.0,
+            43.0
+          ],
+          "text": "キノコ1を植菌 → 48時間生育 → 3個収穫\n植菌・収穫 各4秒 · 採集担当 · 自動収集ONで備蓄へ",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@655",
+          "rect": [
+            28.0,
+            246.0,
+            220.0,
+            44.0
+          ],
+          "text": "栽培指示を追加",
+          "type": "Button"
+        },
+        {
+          "name": "@ScrollContainer@658",
+          "rect": [
+            28.0,
+            292.0,
+            492.0,
+            244.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@659",
+          "rect": [
+            28.0,
+            292.0,
+            484.0,
+            66.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "name": "@HBoxContainer@660",
+          "rect": [
+            28.0,
+            292.0,
+            484.0,
+            66.0
+          ],
+          "type": "HBoxContainer"
+        },
+        {
+          "font": 13,
+          "name": "@Label@661",
+          "rect": [
+            28.0,
+            292.0,
+            370.0,
+            66.0
+          ],
+          "text": "キノコ · 植菌1 → 収穫3 · 完成0\n生育中：あと 48.0時間\n種菌は消費済み。生育中は作業者不要",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@662",
+          "rect": [
+            402.0,
+            292.0,
+            52.0,
+            66.0
+          ],
+          "text": "取消",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@626",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    }
+  ]
+}

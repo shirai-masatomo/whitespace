@@ -48,9 +48,12 @@ func plan(w,force: bool=false) -> Dictionary:
 	for i in range(cached_rows.size(),cells.size()):
 		var p=cells[i];var why=w.Jobs.build_reason(w,kind,p,cached_accepted,cached_cost,lookup)
 		var resource=w.BUILD[kind].get("resource","soil");var cost=int(w.BUILD[kind].cost)
-		var free=int(cached_budget.get(resource,0));var waiting=why=="" and free<cost
-		cached_rows.append({"pos":p,"valid":why=="","reason":why,"waiting_material":waiting,"unfunded":maxi(0,cost-free)})
-		if why=="":cached_budget[resource]=maxi(0,free-cost)
+		var unfunded=0
+		for material in w.Buildings.Cost.materials(w,kind):
+			var amount=w.Buildings.Cost.materials(w,kind)[material];var free=int(cached_budget.get(material,0))
+			unfunded+=maxi(0,amount-free)
+			if why=="":cached_budget[material]=maxi(0,free-amount)
+		cached_rows.append({"pos":p,"valid":why=="","reason":why,"waiting_material":why=="" and unfunded>0,"unfunded":unfunded})
 		if why=="":
 			cached_accepted+=1
 			cached_cost+=int(w.BUILD[kind].cost)

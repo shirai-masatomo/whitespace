@@ -12,6 +12,7 @@ const KIDNAPPER = {"max_hp": 50, "attack_power": 5, "object_attack_power": 2,
 	"counter_seconds": 1.0, "counter_duration": 4.0, "counter_cooldown": 2.0}
 # Gate cost/HP/time, repair coefficient, interruption refund and animal HP are PROVISIONAL.
 const BUILD = {
+	"mushroom_bed":{"cost":8,"materials":{"wood":8,"soil":4},"resource":"wood","hp":16,"seconds":4,"layer":"structure","tier":0},
  "bed":{"cost":8,"resource":"wood","hp":16,"seconds":4.0,"layer":"structure"},
  "cooking_bench":{"cost":12,"resource":"wood","hp":16,"seconds":4.0,"layer":"structure"},
  "carpentry_bench":{"cost":14,"resource":"wood","hp":16,"seconds":4.0,"layer":"structure"},
