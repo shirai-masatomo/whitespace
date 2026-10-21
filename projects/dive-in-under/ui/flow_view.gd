@@ -245,7 +245,6 @@ func build_rewards() -> void:
 			if receipt.get("received_uid","") in s.inventory:Grid.cell(row,game,self,Rect2(0,0,48,48),"inventory",receipt.received_uid)
 			else:UISkin.picture(row,preload("res://ui/equipment_art.gd").texture(receipt.id,game.cfg.items[receipt.id].slot),Rect2(0,0,48,48))
 			label_at(row,game.cfg.items[receipt.id].name+(" ×%d"%receipt.quantity if receipt.quantity>1 else ""),Rect2(62,6,376,37),20,true)
-		label_at(center,"左の［E］で次へ。取得品のアイコンで詳細を確認できます。",Rect2(30,318,658,36),16,true)
 	else:
 		label_at(center,"未受領 %d 点  /  クリックで比較・詳細"%s.pending_rewards.size(),Rect2(30,100,654,30),18,true)
 		if E.Journey.reward_index(s,game.reward_selected)<0: game.reward_selected=s.pending_rewards[0].token
@@ -258,7 +257,7 @@ func build_rewards() -> void:
 			Grid.cell(card,game,self,Rect2(67,0,72,72),"pending",reward.token,"",game.flow_selection.get("uid")==reward.token)
 			var name_label:=label_at(card,item.name+("［保証］" if reward.get("guaranteed",false) else ""),Rect2(0,74,205,40),16,true); name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 			var swap:=nav(card,"所持品と入れ替える…",Rect2(0,116,205,32),func():begin_replacement(reward.token),"replace-reward-"+reward.token); swap.add_theme_font_size_override("font_size",14); swap.disabled=s.inventory.is_empty();swap.visible=s.get("loot_attempted",false) and not E.Adventure.fits(s,s.pending_rewards)
-	label_at(center,"受領済みの装備は所持品から交換できます。" if s.pending_rewards.is_empty() else "品物を選ぶと右下で詳細・比較を確認できます。",Rect2(30,318,658,36),16,true)
+	label_at(center,"左の［E］で次へ / 取得品のアイコンで詳細を確認" if s.pending_rewards.is_empty() else "品物を選ぶと右下で詳細・比較を確認できます。",Rect2(30,318,658,36),16,true)
 	for i in E.SLOTS.size():
 		var slot: String=E.SLOTS[i]
 		Grid.cell(center,game,self,Rect2(30+i*60,364,56,56),"equipment",s.equipment[slot],slot,game.flow_selection.get("slot")==slot)

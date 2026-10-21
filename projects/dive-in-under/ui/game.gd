@@ -938,8 +938,9 @@ func attach_services() -> void:
 
 func show_descent(previous: int) -> void:
 	ui_block_until=maxi(ui_block_until,Time.get_ticks_msec()+180)
-	var badge:=preload("res://ui/ui_skin.gd").panel(screen,Rect2(508,98,264,76),"",true);badge.z_index=1900;badge.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	var overlay:=Control.new();overlay.mouse_filter=Control.MOUSE_FILTER_IGNORE;overlay.z_index=1900;screen.add_child(overlay)
+	var badge:=preload("res://ui/ui_skin.gd").panel(overlay,Rect2(508,98,264,76),"",true);badge.mouse_filter=Control.MOUSE_FILTER_IGNORE;badge.set_meta("descent_badge",true)
 	preload("res://ui/ui_skin.gd").label(badge,"↓  %dF → %dF"%[previous,campaign.floor],Rect2(18,17,228,40),26,Color("30291e"))
-	var tween:=create_tween();tween.tween_property(badge,"position:y",116.0,.18);tween.tween_callback(badge.queue_free)
+	var tween:=create_tween();tween.tween_property(badge,"position:y",116.0,.18);tween.tween_callback(overlay.queue_free)
 	for node in find_children("*","Control",true,false):
 		if node.get_script()==preload("res://ui/route_map.gd"):node.animate_descent(previous)

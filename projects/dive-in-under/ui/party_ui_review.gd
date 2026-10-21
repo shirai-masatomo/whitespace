@@ -91,7 +91,10 @@ static func run(game: Control) -> void:
 	await reset(game,s);await shot(game,"14-chest-before");await F.key(game,KEY_E)
 	if not check(game,game.campaign.pending_rewards.is_empty() and game.campaign.inventory.size()==1 and game.campaign.floor==2,"one acquire opens and receives without skipping floor"):return
 	await shot(game,"15-chest-acquired")
-	await F.wait(game,.4);await F.key_event(game,KEY_E,true);await F.wait(game,.04);await game.capture("16-descent.png");await F.key_event(game,KEY_E,false);await shot(game,"16-exploration")
+	await F.wait(game,.4);await F.key_event(game,KEY_E,true);await F.wait(game,.04)
+	var badges: Array=game.find_children("*","Control",true,false).filter(func(node):return node.has_meta("descent_badge"))
+	if not check(game,badges.size()==1 and badges[0].size==Vector2(264,76) and badges[0].global_position.x>500,"descent badge stays compact and leaves game layout visible"):return
+	await game.capture("16-descent.png");await F.key_event(game,KEY_E,false);await shot(game,"16-exploration")
 	s=E.fresh(game.cfg,44);s.phase="reward";s.floor=2;s.highest_floor=2;s.node={"kind":"enemy","resolved":true,"started":true};s.reward_origin="戦利品"
 	for i in 15:E.add_item(s,"I10")
 	E.Adventure.reward(s,"A01");await reset(game,s);await shot(game,"17-loot-full-before")

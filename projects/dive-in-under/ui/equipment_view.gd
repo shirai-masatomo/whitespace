@@ -38,12 +38,12 @@ func build() -> void:
 		var item: Dictionary=game.cfg.items[s.items[selected]];var candidate: bool=selected in s[game.gear_source]
 		UISkin.picture(right,preload("res://ui/equipment_art.gd").texture(s.items[selected],item.slot),Rect2(22,55,80,80))
 		UISkin.label(right,item.name,Rect2(115,57,230,74),22,UISkin.DARK,true)
-		UISkin.label(right,game.cfg.slots.get(item.slot,"道具")+" / "+preload("res://ui/item_presenter.gd").performance(s,game.cfg,selected)+"\n"+game.condition_text(selected),Rect2(24,143,322,96),17,UISkin.DARK,true)
+		UISkin.label(right,game.cfg.slots.get(item.slot,"道具")+" / "+preload("res://ui/item_presenter.gd").performance(s,game.cfg,selected)+"\n"+game.condition_text(selected),Rect2(24,143,322,80),17,UISkin.DARK,true)
 		if candidate and item.slot!="":
 			var preview: Dictionary=s.duplicate(true);Gear.apply(preview,{"actor":id,"uid":selected,"source":game.gear_source},game.cfg)
 			var rows: Array=preload("res://ui/item_presenter.gd").comparison(Party.actor(s,game.cfg,id),Party.actor(preview,game.cfg,id))
 			for i in rows.size():
-				var row: Dictionary=rows[i];UISkin.label(right,"%s  %d → %d (%+d)"%[row.name,row.before,row.after,row.delta],Rect2(24,243+i*24,322,23),16,UISkin.DARK)
+				var row: Dictionary=rows[i];UISkin.label(right,"%s  %d → %d (%+d)"%[row.name,row.before,row.after,row.delta],Rect2(24,235+i*21,322,22),16,UISkin.DARK)
 		var args: Dictionary={"actor":id,"uid":selected,"slot":game.equipment_focus,"source":game.gear_source,"destination":game.gear_source}
 		if candidate:args.slot=item.slot
 		var reason: String=Gear.reason(s,args,game.cfg,not candidate)

@@ -38,7 +38,7 @@
       "supply": true,
       "seal_slots": 0,
       "art": "A01",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "description": "支給品。倉庫へ保管できる。対価・換金には使えない。手元に同じ品がある間は再支給されない。",
       "kind_family": "basic"
     },
     "A02": {
@@ -50,7 +50,7 @@
       "supply": true,
       "seal_slots": 1,
       "art": "A02",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "description": "支給品。倉庫へ保管できる。対価・換金には使えない。手元に同じ品がある間は再支給されない。",
       "kind_family": "basic"
     },
     "A03": {
@@ -62,7 +62,7 @@
       "supply": true,
       "seal_slots": 0,
       "art": "A03",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "description": "支給品。倉庫へ保管できる。対価・換金には使えない。手元に同じ品がある間は再支給されない。",
       "kind_family": "basic"
     },
     "A04": {
@@ -75,7 +75,7 @@
       "supply": true,
       "seal_slots": 0,
       "art": "A04",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "description": "支給品。倉庫へ保管できる。対価・換金には使えない。手元に同じ品がある間は再支給されない。",
       "kind_family": "basic"
     },
     "A05": {
@@ -192,7 +192,7 @@
       "category": "material",
       "stack_max": 99,
       "art": "coin",
-      "description": "1枚1G。1枠99枚まで。支払元は明示して選ぶ。"
+      "description": "1枚1G。1枠999枚まで。支払元は明示して選ぶ。"
     },
     "RB": {
       "name": "目守りの薬",
@@ -234,7 +234,7 @@
       "supply": true,
       "seal_slots": 0,
       "art": "shield",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "description": "支給品。倉庫へ保管できる。対価・換金には使えない。手元に同じ品がある間は再支給されない。",
       "kind_family": "basic"
     }
   },
