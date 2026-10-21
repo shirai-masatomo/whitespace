@@ -84,7 +84,7 @@ func build_left() -> void:
 	var rect:=Rect2(14,54,196,49)
 	if not battle.is_empty():
 		main_button=nav(p,"戦闘を再開［Space］" if not game.auto_play else "戦闘を停止［Space］",rect,game.toggle_auto_battle,"pause-battle")
-	elif s.phase=="treasure": main_button=action(p,"宝箱を開ける［E］",rect,"open_chest",{},true)
+	elif s.phase=="treasure": main_button=action(p,"入手する［E］",rect,"loot_acquire",{},true)
 	elif s.phase=="event":
 		var event: Dictionary=game.cfg.journey.events[s.event]
 		if Choices.simple(event):
@@ -94,12 +94,11 @@ func build_left() -> void:
 		else:
 			main_button=nav(p,"選択を決定［E］",rect,func():choose_event(game.event_choice,true),"event-confirm",true)
 			main_button.disabled=game.event_choice==""
-	elif s.phase=="portal": main_button=action(p,"居座る［E］",rect,"portal_stay",{},true)
+	elif s.phase=="portal": main_button=nav(p,"帰還か居座るか選ぶ",rect,func():pass);main_button.disabled=true
 	elif s.phase=="portal_done": main_button=action(p,"突破して帰還［E］" if s.floor==10 and s.node.kind=="boss" else "次の階へ［E］",rect,"portal_continue",{},true)
 	elif s.phase in ["reward","event_result"] and not s.pending_rewards.is_empty():
-		main_button=action(p,"受け取る［E］" if s.floor%5==0 else "受け取って進む［E］",rect,"claim_all_advance",{},true)
-		main_button.disabled=not E.Adventure.fits(s,s.pending_rewards) if E.Adventure.active(s) else s.inventory.size()+s.pending_rewards.size()>15
-		main_button.tooltip_text="容量不足：獲得品の「所持品と入れ替える…」から手放す品を選べます。" if main_button.disabled else "すべて受領し、次の探索を1回進めます。"
+		main_button=action(p,"入手する［E］",rect,"loot_acquire",{},true)
+		main_button.tooltip_text="入る場合はそのまま取得。満杯の場合だけ入替を選びます。"
 	else: main_button=action(p,"帰還／続行へ［E］" if s.floor%5==0 and s.floor>0 else "さらに潜る［E］",rect,"advance_ready",{},true)
 	main_button.add_theme_font_size_override("font_size",16)
 	var gear:=nav(p,"所持品・装備［I］",Rect2(14,112,196,32),game.open_field_equipment,"field-equipment"); gear.disabled=not battle.is_empty(); gear.tooltip_text="戦闘中は装備を変更できません。" if gear.disabled else "比較・ダブルクリック・ドラッグで装備交換"
@@ -149,8 +148,8 @@ func chest_texture(opened: bool=false) -> Texture2D:
 	var atlas:=AtlasTexture.new(); atlas.atlas=preload("res://assets/journey/v1/treasure-chest-states.png"); atlas.region=Rect2(887 if opened else 0,0,887,887); atlas.filter_clip=true; return atlas
 func build_chest() -> void:
 	UISkin.picture(center,chest_texture(),Rect2(224,73,270,270))
-	label_at(center,"誰かが残した品が入っている。\n左の「宝箱を開ける［E］」で中身を確かめる。",Rect2(70,350,578,86),23,true)
-	var skip:=action(center,"見送って進む［X／右クリック］",Rect2(135,492,448,52),"skip_chest")
+	label_at(center,"誰かが残した品が入っている。\n左の「入手する［E］」で開けて取り出す。",Rect2(70,350,578,86),23,true)
+	var skip:=action(center,"見送って進む［X］",Rect2(135,492,448,52),"skip_chest")
 	game.set_secondary(skip)
 	label_at(center,"未開封で見送ります。この階では帰還／続行を選べます。" if int(game.campaign.floor)%5==0 else "未開封のまま見送り、次の探索を1回進めます。",Rect2(80,555,558,36),17,true)
 func build_event() -> void:
@@ -165,7 +164,7 @@ func build_event() -> void:
 			var benefit: Dictionary=event.choices.filter(func(c):return not c.ops.is_empty() if c.has("ops") else c.effect!="none")[0]
 			var skip_choice: Dictionary=event.choices.filter(func(c):return c.ops.is_empty() if c.has("ops") else c.effect=="none")[0]
 			label_at(center,benefit.label+"："+Choices.summary(benefit,game.cfg)+"\n左の［E］ですぐに実行できます。",Rect2(58,358,602,80),21,true)
-			var skip:=action(center,skip_choice.label+"［X／右クリック］",Rect2(135,492,448,52),"journey_event",{"choice":skip_choice.id}); game.set_secondary(skip)
+			var skip:=action(center,skip_choice.label+"［X］",Rect2(135,492,448,52),"journey_event",{"choice":skip_choice.id}); game.set_secondary(skip)
 		else:
 			for i in event.choices.size():
 				var choice: Dictionary=event.choices[i]
@@ -196,15 +195,16 @@ func choose_event(id: String, decide: bool=false) -> void:
 	if decide and reason=="": game.perform("journey_event",event_args(id),int(game.campaign.revision))
 func build_portal() -> void:
 	var s: Dictionary=game.campaign
-	UISkin.picture(center,preload("res://ui/status_symbols.gd").texture("exp"),Rect2(285,78,148,148))
-	label_at(center,"地下 %d F  /  帰還地点"%s.floor,Rect2(58,235,602,45),28,true)
-	label_at(center,("まだ、この階の出来事は始まっていません。\n「居座る」で先へ。「町へ帰還」で成果を持ち帰れます。" if s.phase=="portal" else ("5Fで居座った後は帰還できません。\n出来事は解決済みです。左の［E］で6Fへ。" if s.floor==5 else "この階の出来事は解決済みです。\n未受領品を確認して地上へ帰還できます。")),Rect2(58,299,602,119),23,true)
-	var portal_note: String="次の帰還地点：10F。5Fから再開する機能ではありません。"
-	if s.floor==10:
-		portal_note="10Fで居座ると石像のボス戦へ。帰還だけでは討伐になりません。" if s.phase=="portal" else ("討伐と受領は完了。［E］で突破帰還します。再戦は地上から新しい遠征で。" if s.node.kind=="boss" else "指定した出来事は解決済みです。ボス討伐にはなりません。")
-	label_at(center,portal_note,Rect2(58,430,602,68),18,true)
-	nav(center,"支度を確認 / 状態対策の薬",Rect2(140,530,438,48),func():game.open_services("prepare"),"portal-services")
-	if game.debug_run: nav(center,"デバッグ専用操作",Rect2(390,65,290,36),func():game.open_services("debug"),"debug-services")
+	UISkin.picture(center,preload("res://ui/status_symbols.gd").texture("exp"),Rect2(295,62,128,128))
+	label_at(center,"地下 %dF  /  地上へ戻るポータル"%s.floor,Rect2(40,207,638,45),27,true)
+	if s.phase=="portal":
+		var back:=action(center,"地上へ帰還する",Rect2(48,295,622,72),"return_ready");back.set_meta("nav","portal-return")
+		var stay:=action(center,"ここに居座る［E］",Rect2(48,389,622,72),"portal_stay",{},true);game.set_primary(stay);stay.set_meta("nav","portal-stay")
+		label_at(center,"居座ると、出来事の後も5Fでは帰還できません。次の帰還は10F。" if s.floor==5 else "居座ると10Fのボス戦です。帰還だけでは討伐になりません。",Rect2(48,478,622,70),20,true)
+	else:
+		label_at(center,"出来事は解決済みです。左の［E］で次へ。
+5Fで居座った後は、この階から帰還できません。" if s.floor==5 else "出来事は解決済みです。受領を終えて帰還できます。",Rect2(48,295,622,136),23,true)
+	nav(center,"対策品の購入・自動使用設定",Rect2(168,560,382,36),func():game.open_services("prepare"),"portal-services").add_theme_font_size_override("font_size",15)
 func build_modern_event(event: Dictionary) -> void:
 	var s: Dictionary=game.campaign
 	if game.event_choice_key!=view_context+"/"+s.event: game.event_choice=""; game.event_choice_key=view_context+"/"+s.event
@@ -235,8 +235,9 @@ func build_rewards() -> void:
 	if earned.get("gold",0)!=0: gains.append("Gold +%d"%earned.gold)
 	label_at(center," / ".join(gains),Rect2(30,57,600,32),19,true)
 	if s.pending_rewards.is_empty():
-		label_at(center,"受け取り完了",Rect2(50,159,618,58),27,true)
-		label_at(center,"左の［E］で次へ、または「町へ帰還」を選べます。",Rect2(50,230,618,65),20,true)
+		UISkin.picture(center,chest_texture(true),Rect2(265,84,188,160))
+		label_at(center,"受け取り完了",Rect2(50,249,618,48),27,true)
+		label_at(center,"左の［E］で次へ、または「町へ帰還」を選べます。",Rect2(50,300,618,58),20,true)
 	else:
 		label_at(center,"未受領 %d 点  /  クリックで比較・詳細"%s.pending_rewards.size(),Rect2(30,100,654,30),18,true)
 		if E.Journey.reward_index(s,game.reward_selected)<0: game.reward_selected=s.pending_rewards[0].token
@@ -248,14 +249,14 @@ func build_rewards() -> void:
 			var card:=Control.new(); card.custom_minimum_size=Vector2(205,151); grid.add_child(card)
 			Grid.cell(card,game,self,Rect2(67,0,72,72),"pending",reward.token,"",game.flow_selection.get("uid")==reward.token)
 			var name_label:=label_at(card,item.name+("［保証］" if reward.get("guaranteed",false) else ""),Rect2(0,74,205,40),16,true); name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-			var swap:=nav(card,"所持品と入れ替える…",Rect2(0,116,205,32),func():begin_replacement(reward.token),"replace-reward-"+reward.token); swap.add_theme_font_size_override("font_size",14); swap.disabled=s.inventory.is_empty()
-	label_at(center,"装備 / 所持品をダブルクリック、または部位へドラッグで交換",Rect2(30,318,658,36),16,true)
+			var swap:=nav(card,"所持品と入れ替える…",Rect2(0,116,205,32),func():begin_replacement(reward.token),"replace-reward-"+reward.token); swap.add_theme_font_size_override("font_size",14); swap.disabled=s.inventory.is_empty();swap.visible=s.get("loot_attempted",false) and not E.Adventure.fits(s,s.pending_rewards)
+	label_at(center,"受領済みの装備は所持品から交換できます。" if s.pending_rewards.is_empty() else "品物を選ぶと右下で詳細・比較を確認できます。",Rect2(30,318,658,36),16,true)
 	for i in E.SLOTS.size():
 		var slot: String=E.SLOTS[i]
 		Grid.cell(center,game,self,Rect2(30+i*60,364,56,56),"equipment",s.equipment[slot],slot,game.flow_selection.get("slot")==slot)
 	var fits: bool=E.Adventure.fits(s,s.pending_rewards) if E.Adventure.active(s) else s.inventory.size()+s.pending_rewards.size()<=15
-	if not fits: label_at(center,"バッグが満杯です。\n①獲得品の「所持品と入れ替える…」\n②手放す品を選ぶ → ③失う品と得る品を確認",Rect2(30,454,658,91),18,true)
-	elif not s.pending_rewards.is_empty(): label_at(center,("左の［E］で受領後、帰還／続行を選びます。" if s.floor%5==0 else "左の［E］で全品を受け取り、次へ進めます。")+"\n個別受領・直接装備は、選択した品の右下詳細から。",Rect2(30,463,658,76),20,true)
+	if not fits and s.get("loot_attempted",false): label_at(center,"バッグが満杯です。\n①獲得品の「所持品と入れ替える…」\n②手放す品を選ぶ → ③失う品と得る品を確認",Rect2(30,454,658,91),18,true)
+	elif not s.pending_rewards.is_empty(): label_at(center,"左の「入手する［E］」で取得します。\n収納できない場合だけ、入れ替える品を選べます。",Rect2(30,463,658,76),20,true)
 	if not s.pending_rewards.is_empty():
 		var abandon:=nav(center,"未受領品を諦める…",Rect2(430,573,258,31),func():open_confirmation("abandon"),"confirm-abandon")
 		abandon.disabled=s.pending_rewards.any(func(r):return r.get("guaranteed",false)); abandon.tooltip_text="初突破の保証装備は、整理・装備・入替で受け取ってください。" if abandon.disabled else "失う品を確認してから放棄します。"
@@ -407,7 +408,7 @@ func begin_replacement(token: String) -> void:
 	var index: int=E.Journey.reward_index(game.campaign,token)
 	label_at(panel,"得る品："+game.cfg.items[game.campaign.pending_rewards[index].id].name+"\n手放す所持品をクリックすると、両方の確認へ進みます。",Rect2(30,58,640,60),19,true)
 	Grid.bag(panel,game,self,Vector2(89,140),5,96)
-	var cancel:=nav(panel,"取消［Esc／X／右クリック］",Rect2(140,462,420,44),cancel_modal,"cancel-reward"); cancel.add_theme_font_size_override("font_size",16); cancel.grab_focus()
+	var cancel:=nav(panel,"取消［Esc／X］",Rect2(140,462,420,44),cancel_modal,"cancel-reward"); cancel.add_theme_font_size_override("font_size",16); cancel.grab_focus()
 func open_confirmation(kind: String) -> void:
 	game.reward_confirmation=kind; confirmation()
 func confirmation() -> void:
@@ -424,7 +425,7 @@ func confirmation() -> void:
 		prompt="失う品："+game.cfg.items[game.campaign.items[uid]].name+("（"+game.condition_text(uid)+"）" if game.cfg.items[game.campaign.items[uid]].slot!="" else "")+"\n得る品："+game.cfg.items[game.campaign.pending_rewards[index].id].name+"\n手放した個体は元に戻せません。"
 	label_at(panel,prompt,Rect2(30,63,680,171),20,true)
 	action(panel,"手放して受け取る" if exchange else "未受領品を諦める",Rect2(30,264,328,55),"exchange_reward" if exchange else "abandon_rewards",{"confirmed":true,"replace_uid":game.replace_selected,"token":game.reward_selected})
-	var cancel:=nav(panel,"取消［Esc／X／右クリック］",Rect2(382,264,328,55),cancel_modal,"cancel-reward"); cancel.add_theme_font_size_override("font_size",16); cancel.grab_focus()
+	var cancel:=nav(panel,"取消［Esc／X］",Rect2(382,264,328,55),cancel_modal,"cancel-reward"); cancel.add_theme_font_size_override("font_size",16); cancel.grab_focus()
 func cancel_modal() -> void:
 	game.reward_confirmation=""; game.modal_owner=null; game.ui_block_until=Time.get_ticks_msec()+360
 	if is_instance_valid(modal_root): remove_child(modal_root); modal_root.queue_free()

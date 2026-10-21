@@ -10,14 +10,15 @@ const STAT_TEXT={
 "def":"受ける通常攻撃のダメージを抑える。装備とその耐久を反映した現在の値。防御態勢の効果は別に確認できる。",
 "spd":"戦闘の行動順を決める。同じ素早さのときは戦闘の乱数で順番が決まる。装備による補正も含まれる。"}
 const EFFECT_NAMES={"poison":"毒","blind":"暗闇","paralysis":"麻痺","defense":"防御態勢"}
-static func actor(s: Dictionary, cfg: Dictionary, data: Dictionary) -> Dictionary:
-	return E.battle_state(s,data).hero if s.phase=="battle" else E.hero(s,cfg)
-static func equipment(s: Dictionary, cfg: Dictionary, slot: String) -> Dictionary:
-	var uid: String=s.equipment[slot]
+static func actor(s: Dictionary, cfg: Dictionary, data: Dictionary, id: String="hero") -> Dictionary:
+	return preload("res://core/party_ui.gd").actor(s,cfg,id,E.battle_state(s,data) if s.phase=="battle" else {})
+static func equipment(s: Dictionary, cfg: Dictionary, slot: String, id: String="hero") -> Dictionary:
+	var uid: String=preload("res://core/party_ui.gd").gear(s,id)[slot]
 	if uid=="": return {"empty":true,"slot":slot,"name":"装備なし"}
 	var item: Dictionary=cfg.items[s.items[uid]]
 	return {"empty":false,"slot":slot,"uid":uid,"template_id":s.items[uid],"name":Items.name_of(item),"description":item.get("description",Items.DESCRIPTIONS.get(s.items[uid],"")),"condition":s.item_condition[uid].duplicate(true),"item":item.duplicate(true)}
-static func base_value(s: Dictionary, cfg: Dictionary, key: String) -> int:
+static func base_value(s: Dictionary, cfg: Dictionary, key: String, id: String="hero") -> int:
+	if id!="hero":return int(s.companions[id].base.get(key,0))
 	return int(cfg.initial[key])+(int(E.level_info(s,cfg).level)-1)*int(cfg.growth[key])
 static func effects(unit: Dictionary, rules: Dictionary) -> Array:
 	var rows: Array=[]

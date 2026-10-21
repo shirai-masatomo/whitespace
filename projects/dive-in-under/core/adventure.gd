@@ -83,6 +83,7 @@ static func choose_node(s: Dictionary, cfg: Dictionary) -> void:
 	definition.kind=kind; definition.resolved=false; definition.started=false; definition.encounter_id="%d/%d"%[s.trips,s.floor]
 	s.node=definition
 static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
+	s.loot_attempted=false;s.loot_received=[]
 	s.floor+=1; s.highest_floor=maxi(s.highest_floor,s.floor); s.event=""; s.event_result={}; s.last_reward={}; choose_node(s,cfg)
 	if int(s.floor)%5==0:
 		s.phase="portal"; note(s,"地下%dF：地上に戻れるポータルを発見。居座るか帰還を選べる。"%s.floor)
@@ -228,6 +229,14 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 			else: error="5Fは居座る前だけ帰還可能です。居座った後は10F到着時まで帰還できません。戦闘中・未受領品がある間も帰還できません。"
 		"round":
 			if s.phase=="battle": round_step(s,data,cfg); changed=true
+		"loot_acquire":
+			if s.phase in ["treasure","reward"] and not s.pending_rewards.is_empty():
+				s.phase="reward";s.node.resolved=true;s.loot_attempted=true
+				if fits(s,s.pending_rewards):
+					s.loot_received=s.pending_rewards.duplicate(true)
+					for r in s.pending_rewards:receive(s,r)
+					s.pending_rewards=[]
+				changed=true
 		"open_chest":
 			if s.phase=="treasure": s.phase="reward"; s.node.resolved=true; changed=true
 		"skip_chest":
@@ -331,7 +340,12 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 			error=e.Storage.transfer(s,move_args,cfg);changed=error==""
 		"organize","organize_bag":
 			if s.phase!="battle":
-				for source in (["inventory"] if action=="organize_bag" else ["inventory","cloth","warehouse"]): s[source].sort_custom(func(a,b):return e.Storage.sort_key(s,a,cfg,args.get("mode","category"))<e.Storage.sort_key(s,b,cfg,args.get("mode","category")))
+				var sources: Array=["inventory"] if action=="organize_bag" else [args.get("source","warehouse")]
+				for source in sources:
+					if source not in ["inventory","cloth","warehouse"] or (source=="warehouse" and s.phase!="town"):continue
+					s[source].sort_custom(func(a,b):return e.Storage.sort_key(s,a,cfg,args.get("mode","category"))<e.Storage.sort_key(s,b,cfg,args.get("mode","category")))
+					if source=="warehouse":
+						for i in s.warehouse.size():s.warehouse_positions[s.warehouse[i]]=i
 				changed=s!=previous
 		"equip","unequip":
 			error=Gear.apply(s,args,cfg,action=="unequip");changed=error==""

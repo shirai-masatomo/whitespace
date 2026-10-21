@@ -7,9 +7,11 @@ static func reason(game: Control, payload: Variant, destination: String, target_
 	if int(payload.get("revision",-1))!=int(s.revision): return "表示が更新されました。もう一度選んでください。"
 	if s.phase not in ["town","explore","reward","event","event_result","treasure","portal","portal_done"]: return "戦闘中は装備を変更できません。"
 	var source: String=payload.source; var uid: String=payload.uid
-	if destination=="inventory":
-		if source!="equipment" or s.equipment.get(payload.slot,"")!=uid: return "装備枠からバックパックへ移してください。"
-		return "バックパックに空きがありません" if s.inventory.size()>=15 else ""
+	if destination in ["inventory","warehouse"] and source=="equipment":
+		if preload("res://core/party_ui.gd").gear(s,payload.get("actor","hero")).get(payload.slot,"")!=uid:return "装備が変更されました。"
+		return preload("res://core/gear_transfer.gd").reason(s,{"actor":payload.get("actor","hero"),"slot":payload.slot,"source":"inventory","destination":destination},game.cfg,true)
+	if source in ["inventory","warehouse"] and destination=="equipment":
+		return preload("res://core/gear_transfer.gd").reason(s,{"actor":payload.get("actor","hero"),"uid":uid,"source":source,"destination":source,"slot":target_slot},game.cfg)
 	if destination!="equipment": return "装備枠またはバックパックへ移してください。"
 	var template: String=""
 	if source=="inventory" and uid in s.inventory: template=s.items[uid]
@@ -24,11 +26,12 @@ static func reason(game: Control, payload: Variant, destination: String, target_
 static func apply(game: Control, payload: Dictionary, destination: String, slot: String="") -> void:
 	var error: String=reason(game,payload,destination,slot)
 	if error!="": game.notice=error; game.show_campaign(); return
-	if destination=="inventory": game.perform("unequip",{"slot":payload.slot},int(payload.revision))
-	elif payload.source=="pending": game.perform("equip_reward",{"token":payload.uid,"slot":slot} if slot!="" else {"token":payload.uid},int(payload.revision))
-	else: game.perform("equip",{"uid":payload.uid,"slot":slot} if slot!="" else {"uid":payload.uid},int(payload.revision))
-static func payload(game: Control, source: String, uid: String, slot: String="") -> Dictionary:
-	return {"kind":"equipment-item","source":source,"uid":uid,"slot":slot,"revision":int(game.campaign.revision)}
+	var args: Dictionary={"actor":payload.get("actor","hero"),"source":payload.source,"uid":payload.uid,"slot":slot}
+	if payload.source=="equipment":args.slot=payload.slot;args.source="inventory";args.destination=destination;game.perform("unequip",args,int(payload.revision))
+	elif payload.source=="pending":game.perform("equip_reward",{"token":payload.uid,"slot":slot} if slot!="" else {"token":payload.uid},int(payload.revision))
+	else:game.perform("equip",args,int(payload.revision))
+static func payload(game: Control, source: String, uid: String, slot: String="", actor: String="hero") -> Dictionary:
+	return {"actor":actor,"kind":"equipment-item","source":source,"uid":uid,"slot":slot,"revision":int(game.campaign.revision)}
 
 static func compared_hero(game: Control, source: String, uid: String) -> Dictionary:
 	var preview: Dictionary=game.campaign.duplicate(true)

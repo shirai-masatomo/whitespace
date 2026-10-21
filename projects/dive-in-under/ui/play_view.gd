@@ -87,7 +87,7 @@ func build_hub() -> void:
 	header("冒険の準備")
 	session_notice()
 	var menu:=UISkin.panel(self,Rect2(72,131,466,548),"次の旅の支度"); menu.self_modulate.a=0.28
-	var entries: Array=[["ステータス","status"],["倉庫・所持品","warehouse"],["装備","equipment"]]
+	var entries: Array=[["ステータス","status"],["アイテム","warehouse"],["装備","equipment"]]
 	for i in entries.size():
 		var page: String=entries[i][1]
 		var b:=nav(menu,entries[i][0],Rect2(27,75+i*83,412,66),func():game.open_status() if page=="status" else game.open_town_page(page),page)
@@ -190,62 +190,11 @@ func build_result() -> void:
 	if E.Journey.active(s): UISkin.label(paper,"今回の獲得  EXP +%d / Gold +%d / 品物 %d点"%[s.trip_exp,s.trip_gold,s.trip_items],Rect2(30,327,570,30),17,UISkin.DARK)
 	var loss: Dictionary=s.result.loss
 	UISkin.label(paper,"今回の損失   Gold %d / EXP %d / 携行品 %d"%[loss.gold,loss.exp,loss.items],Rect2(30,359,570,48),17,UISkin.DARK,true)
-	command(paper,"冒険準備へ戻る",Rect2(31,432,566,58),"town",{},true)
+	command(paper,"戻る",Rect2(31,432,566,58),"town",{},true)
 	var journal:=UISkin.panel(self,Rect2(752,128,438,516),"最後の記録")
 	UISkin.label(journal,"\n".join(s.journal.slice(-8)),Rect2(25,67,390,410),19,UISkin.INK,true)
 func build_equipment() -> void:
-	header("装備")
-	var bag:=UISkin.panel(self,Rect2(16,92,300,532),"所持品  %d / 15"%game.campaign.inventory.size())
-	preload("res://ui/item_grid.gd").bag(bag,game,self,Vector2(25,66),3,80)
-	var center:=UISkin.panel(self,Rect2(328,92,554,532),"装備 / 11部位")
-	UISkin.picture(center,Art.texture("cavern"),Rect2(94,53,366,449),true).modulate=Color(.57,.67,.68)
-	UISkin.picture(center,Art.actor_texture("hero"),Rect2(100,142,354,350))
-	for c in 2:
-		var slots: Array=[["head","body","right_hand","legs","feet"],["neck","ears","eyes","left_hand","wrist","finger"]][c]
-		for i in slots.size():
-			var slot: String=slots[i]
-			preload("res://ui/item_grid.gd").cell(center,game,self,Rect2(472 if c==1 else 14,65+i*68,68,64),"equipment",game.campaign.equipment[slot],slot,game.equipment_focus==slot)
-	var instructions:=ColorRect.new(); instructions.position=Vector2(94,56); instructions.size=Vector2(366,76); instructions.color=Color(.015,.04,.055,.94); instructions.mouse_filter=Control.MOUSE_FILTER_IGNORE; center.add_child(instructions)
-	UISkin.label(center,"ダブルクリックで交換 / 部位へドラッグ\n装備をバックパックへドラッグで解除",Rect2(107,66,340,56),15,UISkin.INK,true)
-	var details:=UISkin.panel(self,Rect2(894,92,370,532),"装備の詳細",true)
-	var equipped: String=game.campaign.equipment[game.equipment_focus]
-	var selected: String=game.equipment_candidate if game.equipment_candidate in game.campaign.inventory else equipped
-	if selected!="":
-		var item: Dictionary=game.cfg.items[game.campaign.items[selected]]
-		UISkin.picture(details,Items.texture(game.campaign.items[selected],item.slot),Rect2(26,64,85,85))
-		UISkin.label(details,item.name,Rect2(125,73,217,74),22,UISkin.DARK,true)
-		UISkin.label(details,preload("res://ui/item_presenter.gd").performance(game.campaign,game.cfg,selected)+"\n"+game.condition_text(selected),Rect2(26,180,320,88),18,UISkin.DARK,true)
-		if game.equipment_candidate=="":
-			UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,54) if game.equipment_candidate=="" else Rect2(26,360,320,0),18,UISkin.DARK,true)
-
-		var candidate: bool=selected!=equipped and item.slot!=""
-		if candidate: UISkin.label(details,"現在："+(game.cfg.items[game.campaign.items[equipped]].name if equipped!="" else "未装備"),Rect2(26,149,320,28),15,UISkin.DARK)
-		if candidate:
-			var preview: Dictionary=E.act(game.campaign,"equip",int(game.campaign.revision),{"uid":selected},game.data,game.cfg)
-			var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=E.hero(preview,game.cfg)
-			UISkin.label(details,"現在 → 交換後   /   増減",Rect2(24,270,322,24),15,UISkin.DARK)
-			var rows: Array=preload("res://ui/item_presenter.gd").comparison(before,after)
-			for i in rows.size():
-				var row: Dictionary=rows[i]
-				UISkin.label(details,"%s   %d → %d   (%+d)"%[row.name,row.before,row.after,row.delta],Rect2(26,296+i*18,320,20),15,UISkin.DARK)
-
-		var remove:=command(details,"この装備へ交換" if candidate else "装備を外す",Rect2(22,398,326,50),"equip" if candidate else "unequip",{"uid":selected} if candidate else {"slot":game.equipment_focus})
-		remove.disabled=item.slot=="" or (not candidate and game.campaign.inventory.size()>=15)
-		if remove.disabled and item.slot!="":
-			remove.tooltip_text="バックパックに空きがありません"
-			UISkin.label(details,"バックパックに空きがありません",Rect2(22,363,326,28),15,UISkin.DARK)
-		if not candidate and E.Condition.cost(game.campaign,selected,game.cfg)>0:
-			UISkin.label(details,preload("res://ui/item_presenter.gd").repair_delta(game.campaign,game.cfg,selected),Rect2(26,338,320,48),14,UISkin.DARK,true)
-		var cost:=E.Condition.cost(game.campaign,selected,game.cfg)
-		var reason: String=preload("res://ui/item_presenter.gd").repair_reason(game.campaign,game.cfg,selected)
-		var repair:=command(details,reason if reason!="" else "修理  %d G"%cost,Rect2(22,461,326,50),"repair",{"uid":selected}); repair.disabled=reason!=""
-		repair.tooltip_text=(reason+"\n" if reason!="" else "")+preload("res://ui/item_presenter.gd").repair_delta(game.campaign,game.cfg,selected)
-	else: UISkin.label(details,"この部位には何も装備していません。",Rect2(28,184,314,100),23,UISkin.DARK,true)
-	nav(self,"冒険準備へ戻る" if game.campaign.phase=="town" else "探索へ戻る",Rect2(16,643,300,60),func():game.open_town_page("hub") if game.campaign.phase=="town" else game.close_equipment(),"back")
-	nav(self,"個体・印・自動対策",Rect2(328,590,554,32),func():game.open_services("prepare",selected),"equipment-services").add_theme_font_size_override("font_size",15)
-	var backing:=ColorRect.new(); backing.position=Vector2(328,643); backing.size=Vector2(936,60); backing.color=Color(.015,.04,.055,.94); backing.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(backing)
-	var effective: Dictionary=E.hero(game.campaign,game.cfg)
-	UISkin.label(self,"現在の能力  攻撃 %d / 防御 %d / 素早さ %d / HP %d/%d / SP %d/%d"%[effective.atk,effective.def,effective.spd,effective.hp,effective.max_hp,effective.sp,effective.max_sp],Rect2(339,654,920,37),17)
+	var view:=Control.new();view.set_script(preload("res://ui/equipment_view.gd"));view.game=game;add_child(view)
 func refresh_vitals() -> void:
 	if game.display_battle().is_empty(): return
 	for child in get_children():
@@ -297,4 +246,4 @@ func build_adventure_result() -> void:
 		var scroll:=ScrollContainer.new();scroll.position=Vector2(28+i*584,171);scroll.size=Vector2(550,285);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.theme=UISkin.scroll_theme();p.add_child(scroll)
 		var lines: Array=s.result.get("lost" if i==0 else "kept",[])
 		var label:=Label.new();label.text="\n".join(lines) if not lines.is_empty() else "なし";label.language="ja";label.autowrap_mode=TextServer.AUTOWRAP_WORD;label.size_flags_horizontal=Control.SIZE_EXPAND_FILL;label.add_theme_font_size_override("font_size",19);label.add_theme_color_override("font_color",UISkin.DARK);scroll.add_child(label)
-	command(self,"冒険準備へ戻る［E］",Rect2(36,633,1208,66),"town",{},true)
+	command(self,"戻る［E］",Rect2(36,633,1208,66),"town",{},true)

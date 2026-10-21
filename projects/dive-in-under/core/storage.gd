@@ -77,11 +77,14 @@ static func transfer(s: Dictionary, args: Dictionary, cfg: Dictionary) -> String
 	if source==destination:
 		return reorder(s,uid,cell) if source=="warehouse" else "別の収納へ移してください。"
 	var error: String=reason(s,uid,source,destination,cfg)
+	if s.phase=="town" and source in SOURCES and destination in SOURCES and source!=destination and uid in s[source] and s.items[uid]=="C01" and args.has("quantity"):
+		var n: int=int(args.quantity)
+		error="" if n>=1 and n<=int(s.quantities[uid]) and preload("res://core/currency.gd").room(s,destination)>=n else "指定数量が入りません。"
 	if error!="":return error
 	if destination=="warehouse" and cell>=0 and uid_at(s,cell)!="":return "その倉庫マスは使用中です。"
 	ensure_positions(s)
 	var before: Array=s[destination].duplicate()
-	if not move(s,uid,source,destination,cfg):return "移動できません。収納の空きを確認してください。"
+	if not (preload("res://core/currency.gd").move(s,uid,source,destination,int(args.quantity)) if args.has("quantity") and s.items[uid]=="C01" else move(s,uid,source,destination,cfg)):return "移動できません。収納の空きを確認してください。"
 	ensure_positions(s)
 	if destination=="warehouse" and cell>=0:
 		var added: Array=s.warehouse.filter(func(id):return id not in before)

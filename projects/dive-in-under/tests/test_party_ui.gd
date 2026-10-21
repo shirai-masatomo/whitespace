@@ -29,6 +29,12 @@ func _init() -> void:
 	check(Gear.apply(s,{"uid":uid,"source":"warehouse"},cfg)!="" and s==before,"dungeon has no remote warehouse access")
 	s.phase="town"
 	check(E.validate(s,data,cfg)=="","all owners storage and individual data validate")
+	var coins: Dictionary=E.fresh(cfg,3);preload("res://core/currency.gd").credit(coins,5)
+	var coin: String=coins.inventory[0]
+	check(Storage.transfer(coins,{"uid":coin,"source":"inventory","destination":"warehouse","quantity":2,"cell":11},cfg)=="" and coins.quantities[coin]==3,"odd half floors 5 to 2 and leaves 3")
+	check(preload("res://core/currency.gd").amount(coins,"warehouse")==2,"partial move conserves all coins")
+	coins=E.fresh(cfg,4);preload("res://core/currency.gd").credit(coins,1);coin=coins.inventory[0]
+	check(Storage.transfer(coins,{"uid":coin,"source":"inventory","destination":"warehouse","quantity":1},cfg)=="" and coins.inventory.is_empty(),"single coin half moves one")
 	DirAccess.make_dir_recursive_absolute("res://artifacts/party-ui")
 	var f:=FileAccess.open("res://artifacts/party-ui/core.json",FileAccess.WRITE);f.store_string(JSON.stringify({"complete":true,"checks":checks},"  "));f.close()
 	print("PARTY_CORE_OK "+str(checks.size()));quit()

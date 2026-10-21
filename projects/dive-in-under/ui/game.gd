@@ -7,6 +7,11 @@ var session_departed:=false
 var preparation_music: Node
 var route_map_open:=false
 var play_view: Control
+var tactics_page: String="overview"
+var selected_actor: String="hero"
+var gear_source: String="inventory"
+var gear_storage: Dictionary={}
+var screen_history: Array=[]
 var equipment_focus: String="head"
 var cfg: Dictionary
 var campaign: Dictionary = {}
@@ -170,6 +175,7 @@ func request_new() -> void:
 	else: start_new()
 
 func start_new() -> void:
+	selected_actor="hero";screen_history=[];gear_storage={};gear_source="inventory"
 	if not legacy_persistence_mode:
 		flow_memory={}; cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
 		Expedition.Journey.enable(campaign)
@@ -207,6 +213,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 	if action=="claim_reward" and Expedition.Adventure.active(campaign):
 		var index: int=Expedition.Journey.reward_index(campaign,args.get("token",""))
 		if index>=0:claimed_template=campaign.pending_rewards[index].id
+	var old_floor: int=int(campaign.floor)
 	var old_item_count: int=campaign.items.size()
 	var old_journal: Array=campaign.get("journal",[]).duplicate()
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
@@ -247,11 +254,13 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
 	if action=="supply": notice="不足部位へ最低装備を%d点支給しました。既存の装備と風呂敷は変更しません。"%(campaign.items.size()-old_item_count)
 	if action in ["organize","organize_bag"]: notice="選択した順序に整理しました。"
-	if action=="open_chest": preload("res://ui/journey_sound.gd").play(self,330)
+	if action in ["open_chest","loot_acquire"]: preload("res://ui/journey_sound.gd").play(self,330)
 	if action=="transfer": notice="%sへ移しました。数量・個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
 	if action in ["claim_reward","exchange_reward","abandon_rewards","equip_reward"]: reward_confirmation=""
+	if action=="loot_acquire" and not campaign.pending_rewards.is_empty():reward_selected=campaign.pending_rewards[0].token;reward_confirmation="choose_replace"
 	if action in ["equip","unequip"]: equipment_candidate=""
 	show_campaign()
+	if int(campaign.floor)>old_floor:show_descent(old_floor)
 
 func command(label: String, action: String, args: Dictionary = {}) -> Button:
 	var revision:=int(campaign.revision)
@@ -489,8 +498,37 @@ func repair_button(uid: String) -> Button:
 func item_effects(item: Dictionary, uid: String="") -> String:
 	return preload("res://ui/item_presenter.gd").current(campaign,cfg,uid) if uid!="" else preload("res://ui/item_presenter.gd").text(item.stats)
 
+func remember_screen() -> void:
+	var state: Dictionary={"page":town_page,"equipment":field_equipment,"status":field_status,"context":"%d/%d/%s"%[campaign.get("trips",0),campaign.get("floor",0),campaign.get("phase","")]}
+	if screen_history.is_empty() or screen_history[-1]!=state:screen_history.append(state)
 func open_town_page(page: String) -> void:
-	town_page=page; show_campaign()
+	if town_page!=page:remember_screen()
+	town_page=page;show_campaign()
+func select_party_actor(id: String) -> void:
+	if not preload("res://core/party_ui.gd").exists(campaign,id) or get_viewport().gui_is_dragging():return
+	selected_actor=id;equipment_candidate="";show_campaign()
+func open_equipment_from_status() -> void:
+	remember_screen();field_status=false
+	if campaign.phase=="town":town_page="equipment"
+	else:field_equipment=true
+	show_campaign()
+func go_back() -> void:
+	if is_instance_valid(modal_owner):modal_owner.call_deferred("cancel_modal");return
+	if route_map_open:
+		for child in play_view.get_children():
+			if child.has_method("close_routes"):child.call_deferred("close_routes")
+		return
+	var context: String="%d/%d/%s"%[campaign.get("trips",0),campaign.get("floor",0),campaign.get("phase","")]
+	while not screen_history.is_empty():
+		var previous: Dictionary=screen_history.pop_back()
+		if previous.context==context:
+			town_page=previous.page;field_equipment=previous.equipment;field_status=previous.status;show_campaign();return
+	if field_status:field_status=false;show_campaign()
+	elif field_equipment:field_equipment=false;show_campaign()
+	elif campaign.get("phase")=="town" and town_page!="hub":town_page="hub";show_campaign()
+	elif campaign.get("phase")=="town":show_title()
+	# A right click never resolves an encounter or chooses a portal outcome.
+
 
 func open_status() -> void:
 	if is_instance_valid(modal_owner): return
@@ -500,10 +538,9 @@ func open_status() -> void:
 		open_town_page("status")
 	else:
 		if field_status: return
-		field_status=true; play_timer.stop(); cancel_presentation(); show_campaign()
+		remember_screen(); field_status=true; play_timer.stop(); cancel_presentation(); show_campaign()
 func close_status() -> void:
-	if field_status: field_status=false; show_campaign()
-	else: open_town_page(status_return_page if status_return_page in ["hub","equipment","warehouse"] else "hub")
+	go_back()
 func remember_flow() -> void:
 	if not is_instance_valid(play_view) or not play_view.is_inside_tree(): return
 	for child in play_view.get_children():
@@ -716,6 +753,12 @@ func item_at(node: Node, point: Vector2) -> String:
 		var found: String=item_at(child,point)
 		if found!="": return found
 	return ""
+func cell_at(node: Node, point: Vector2) -> Control:
+	if node is Button and node.is_visible_in_tree() and node.has_meta("item_source") and node.get_global_rect().has_point(point):return node
+	for child in node.get_children():
+		var found: Control=cell_at(child,point)
+		if is_instance_valid(found):return found
+	return null
 func _input(event: InputEvent) -> void:
 	if legacy_persistence_mode: return
 	var viewport:=get_viewport()
@@ -757,10 +800,14 @@ func _input(event: InputEvent) -> void:
 			if route_map_open:
 				for child in play_view.get_children():
 					if child.has_method("close_routes"): child.call_deferred("close_routes")
-			elif now-last_x_down>=500 and is_instance_valid(secondary_button):
-				last_x_down=now; secondary_button.emit_signal("pressed")
+			elif event.shift_pressed:
+				var cell: Control=cell_at(screen,event.position)
+				if is_instance_valid(cell) and cell.uid!="" and cell.source in ["inventory","warehouse"] and cell.host.has_method("quick_transfer"):cell.host.call_deferred("quick_transfer",cell.source,cell.uid)
+			else:call_deferred("go_back")
 			return
 	if event is InputEventKey:
+		if code==KEY_ESCAPE and event.pressed and not event.echo:
+			viewport.set_input_as_handled();call_deferred("go_back");return
 		if code in [KEY_E,KEY_X]:
 			viewport.set_input_as_handled()
 			if not event.pressed: return
@@ -806,9 +853,9 @@ func transfer_item(uid: String, source: String, destination: String, revision: i
 func open_field_equipment() -> void:
 	if is_instance_valid(modal_owner): return
 	if campaign.get("phase") not in ["explore","reward","treasure","event","event_result","portal","portal_done"] or presenting: return
-	field_equipment=true; play_timer.stop(); show_campaign()
+	remember_screen(); field_equipment=true; play_timer.stop(); show_campaign()
 func close_equipment() -> void:
-	field_equipment=false; show_campaign()
+	go_back()
 func display_battle() -> Dictionary:
 	return presentation_battle if presenting else Expedition.battle_state(campaign,data)
 func cancel_presentation() -> void:
@@ -877,3 +924,11 @@ func open_services(mode: String="prepare", uid: String="", source: String="inven
 	else: attach_services()
 func attach_services() -> void:
 	var overlay:=Control.new();overlay.set_script(preload("res://ui/tactics_view.gd") if service_mode=="tactics" else preload("res://ui/adventure_services.gd"));overlay.game=self;overlay.mode=service_mode;overlay.uid=service_uid;overlay.source=service_source;screen.add_child(overlay)
+
+func show_descent(previous: int) -> void:
+	ui_block_until=maxi(ui_block_until,Time.get_ticks_msec()+180)
+	var badge:=preload("res://ui/ui_skin.gd").panel(screen,Rect2(508,98,264,76),"",true);badge.z_index=1900;badge.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	preload("res://ui/ui_skin.gd").label(badge,"↓  %dF → %dF"%[previous,campaign.floor],Rect2(18,17,228,40),26,Color("30291e"))
+	var tween:=create_tween();tween.tween_property(badge,"position:y",116.0,.18);tween.tween_callback(badge.queue_free)
+	for node in find_children("*","Control",true,false):
+		if node.get_script()==preload("res://ui/route_map.gd"):node.animate_descent(previous)

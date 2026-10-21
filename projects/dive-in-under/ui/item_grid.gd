@@ -6,7 +6,8 @@ const Silhouette=preload("res://ui/slot_silhouette.gd")
 static func cell(parent: Control, game: Control, host: Control, rect: Rect2, source: String, uid: String, slot: String="", selected: bool=false) -> Button:
 	var b:=Button.new(); b.set_script(Cell); b.game=game; b.host=host; b.source=source; b.uid=uid; b.slot=slot; b.position=rect.position; b.size=rect.size
 	UISkin.quiet_button(b,selected); b.set_meta("item_source",source); b.set_meta("item_uid",uid); b.set_meta("equip_slot",slot)
-	parent.add_child(b); b.pressed.connect(func():host.select_item(source,uid,slot))
+	b.actor_id=host.get_actor() if host.has_method("get_actor") else "hero"
+	parent.add_child(b); b.pressed.connect(func():if not Input.is_key_pressed(KEY_SHIFT):host.call_deferred("select_item",source,uid,slot))
 	var template: String=""
 	if source=="pending":
 		var i: int=preload("res://core/journey.gd").reward_index(game.campaign,uid)
@@ -26,8 +27,8 @@ static func cell(parent: Control, game: Control, host: Control, rect: Rect2, sou
 			var value:=UISkin.label(b,"耐%d"%int(condition.current),Rect2(3,rect.size.y-18,rect.size.x-6,16),11); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 			b.tooltip_text+=" / 耐久 %d/%d"%[condition.current,condition.maximum]
 	elif slot!="":
-		var silhouette:=Control.new(); silhouette.set_script(Silhouette); silhouette.slot=slot; silhouette.position=Vector2.ONE*10; silhouette.size=rect.size-Vector2.ONE*20; b.add_child(silhouette); b.tooltip_text=game.cfg.slots[slot]+" / 未装備"
-	else: b.tooltip_text="バックパック / 空き枠"
+		var silhouette:=Control.new(); silhouette.set_script(Silhouette); silhouette.mouse_filter=Control.MOUSE_FILTER_IGNORE; silhouette.slot=slot; silhouette.position=Vector2.ONE*10; silhouette.size=rect.size-Vector2.ONE*20; b.add_child(silhouette); b.tooltip_text=game.cfg.slots[slot]+" / 未装備"
+	else: b.tooltip_text="空きマス"
 	return b
 static func bag(parent: Control, game: Control, host: Control, origin: Vector2, columns: int=4, edge: int=44) -> void:
 	for i in 15:

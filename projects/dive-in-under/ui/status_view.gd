@@ -39,7 +39,7 @@ var input_locked:=true
 var return_page: String="hub"
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	unit=game.display_battle().hero if game.campaign.phase=="battle" else Model.actor(game.campaign,game.cfg,game.data)
+	unit=Model.actor(game.campaign,game.cfg,game.data,game.selected_actor)
 	build()
 	modulate.a=0.0
 	var entry:=create_tween(); entry.tween_property(self,"modulate:a",1.0,0.20)
@@ -66,7 +66,7 @@ func paper_at(parent: Control, r: Rect2) -> void:
 func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"",true)
 	label_at(header,"ステータス",Rect2(28,10,540,40),27)
-	label_at(header,"主人公  /  能力・装備の確認",Rect2(780,14,250,34),18,MUTED)
+	label_at(header,unit.name+" / 能力・装備の確認",Rect2(780,14,250,34),18,MUTED)
 	label_at(header,"G  %d"%E.money(game.campaign),Rect2(1080,11,145,40),23,GOLD)
 	left_panel=panel(Rect2(16,92,296,510),unit.name,true)
 	build_left()
@@ -83,7 +83,7 @@ func build() -> void:
 	build_party()
 	back_button=button_at(self,"戻る",Rect2(1060,616,204,88),request_close)
 	var border:=Control.new(); border.set_script(Frame); border.ornament_only=true; back_button.add_child(border); border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	back_button.add_theme_font_size_override("font_size",24); back_button.tooltip_text="冒険準備へ / Esc"
+	back_button.add_theme_font_size_override("font_size",24); back_button.tooltip_text="前の画面へ / Esc・右クリック"
 	build_content()
 	wire_tabs()
 func build_left() -> void:
@@ -95,12 +95,12 @@ func build_left() -> void:
 	UISkin.rule(left_panel,Rect2(24,201,248,1),Color("ad946b"))
 	make_gauge("hp","HP",int(unit.hp),int(unit.max_hp),225,Color("a83d32"))
 	make_gauge("sp","SP",int(unit.sp),int(unit.max_sp),270,Color("267c9c"))
-	var level: Dictionary=E.level_info(game.campaign,game.cfg)
+	var level: Dictionary=E.level_info(game.campaign,game.cfg) if game.selected_actor=="hero" else {"progress":0,"next":0}
 	make_gauge("exp","EXP",int(level.progress),int(level.next),315,Color("b78229"))
 	if unit.level>=int(game.cfg.growth.level_cap): left_values.exp.text="MAX"; bars.exp.value=bars.exp.max_value
 	UISkin.rule(left_panel,Rect2(24,365,248,1),Color("ad946b"))
 	label_at(left_panel,"探索記録",Rect2(24,376,248,27),17,Color("675135"))
-	var rows: Array=[["到達記録","%d F"%game.campaign.highest_floor],["探索回数","%d 回"%E.normal_trips(game.campaign)],["装備中","%d / 11"%game.campaign.equipment.values().filter(func(uid):return uid!="").size()]]
+	var rows: Array=[["到達記録","%d F"%game.campaign.highest_floor],["探索回数","%d 回"%E.normal_trips(game.campaign)],["装備中","%d / 11"%preload("res://core/party_ui.gd").gear(game.campaign,game.selected_actor).values().filter(func(uid):return uid!="").size()]]
 	for i in rows.size():
 		label_at(left_panel,rows[i][0],Rect2(24,411+i*28,118,25),15,Color("675135"))
 		label_at(left_panel,rows[i][1],Rect2(153,411+i*28,119,25),18,DARK)
@@ -113,7 +113,7 @@ func make_gauge(key: String, title: String, current: int, maximum: int, y: int, 
 	gauges[key]={"current":current,"maximum":maximum}
 func refresh_character() -> void:
 	# Called only when the owning screen receives an actual data refresh.
-	unit=Model.actor(game.campaign,game.cfg,game.data)
+	unit=Model.actor(game.campaign,game.cfg,game.data,game.selected_actor)
 	if is_instance_valid(gauge_tween): gauge_tween.kill()
 	gauge_tween=create_tween().set_parallel(true)
 	for key in ["hp","sp"]:
@@ -121,23 +121,9 @@ func refresh_character() -> void:
 		left_values[key].text="%d / %d"%[current,maximum]; bars[key].max_value=maxi(1,maximum); gauge_tween.tween_property(bars[key],"value",float(current),0.15); gauges[key]={"current":current,"maximum":maximum}
 	build_content()
 func build_party() -> void:
-	var p:=panel(Rect2(16,616,756,88),"",false,true)
-	label_at(p,"パーティ",Rect2(15,1,150,23),15,GOLD)
-	for pair in 3:
-		for member in 2:
-			var actual: bool=pair==0 and member==0
-			var x:=12+pair*244+member*116
-			var text: String="主人公  Lv.%d"%unit.level if actual else ("人間 / 未加入" if member==0 else "配下 / 未解放")
-			var b:=button_at(p,text,Rect2(x,28,112,47),func(): if not closing: refresh_character(),actual); b.add_theme_font_size_override("font_size",12); b.disabled=not actual
-			b.tooltip_text="主人公を確認" if actual else ("人間1名につき配下1体 / 工程5以降"); party_buttons.append(b)
-			if actual:
-				image_at(b,face(),Rect2(4,4,31,36)); b.text=""; label_at(b,"主人公",Rect2(39,4,70,22),13); label_at(b,"Lv.%d"%unit.level,Rect2(39,24,70,19),12,MUTED)
-	for info in [["inventory","所持品","bag",15,784],["cloth","父親の風呂敷","cloth",3,922]]:
-		var card:=panel(Rect2(info[4],616,126,88),"")
-		label_at(card,info[1],Rect2(10,9,108,28),15,GOLD)
-		image_at(card,Symbols.texture("bag") if info[0]=="inventory" else preload("res://ui/interface_symbols.gd").texture("cloth"),Rect2(8,47,36,33))
-		container_counts[info[0]]=label_at(card,"%d / %d"%[game.campaign[info[0]].size(),info[3]],Rect2(47,46,72,34),18)
-		card.tooltip_text="内容の移動は準備画面の倉庫で行います。"
+	preload("res://ui/party_picker.gd").build(self,game,Rect2(16,626,650,60))
+	button_at(self,"装備",Rect2(684,626,168,60),func():game.call_deferred("open_equipment_from_status")).set_meta("nav","status-equipment")
+	button_at(self,"作戦",Rect2(868,626,168,60),func():game.call_deferred("open_services","tactics")).set_meta("nav","status-tactics")
 func clear_children(parent: Node) -> void:
 	for child in parent.get_children(): parent.remove_child(child); child.queue_free()
 func choose_tab(key: String) -> void:
@@ -176,7 +162,7 @@ func build_equipment() -> void:
 	for c in 2:
 		var slots: Array=[["head","body","right_hand","legs","feet"],["neck","ears","eyes","left_hand","wrist","finger"]][c]
 		for i in slots.size():
-			var slot: String=slots[i]; var item:=Model.equipment(game.campaign,game.cfg,slot)
+			var slot: String=slots[i]; var item:=Model.equipment(game.campaign,game.cfg,slot,game.selected_actor)
 			var b:=item_button(slot,"",Rect2(472 if c==1 else 12,8+i*68,68,64))
 			if not item.empty: image_at(b,EquipmentArt.texture(item.template_id,slot),Rect2(7,5,54,54))
 			else:
@@ -186,18 +172,19 @@ func build_equipment() -> void:
 func build_abilities() -> void:
 	label_at(central,"基本能力",Rect2(9,6,220,34),25,GOLD)
 	var current_header:=label_at(central,"現在値",Rect2(205,10,118,28),15,MUTED); current_header.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-	var parts_header:=label_at(central,"基礎 ＋ 装備",Rect2(342,10,177,28),15,MUTED); parts_header.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	var parts_header:=label_at(central,"基礎 ＋ 装備・状態",Rect2(342,10,177,28),15,MUTED); parts_header.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	var i:=0
-	for key in Model.STAT_NAMES:
-		var base:=Model.base_value(game.campaign,game.cfg,key); var total: int=unit[key]
+	for key in ["atk","def","spd"]:
+		var base:=Model.base_value(game.campaign,game.cfg,key,game.selected_actor); var total: float=E.Combat.effective_def(unit,game.data.rules) if key=="def" else float(unit[key])
 		var b:=item_button(key,"",Rect2(8,54+i*58,536,50))
 		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,9,32,32))
 		label_at(b,Model.STAT_NAMES[key],Rect2(48,10,160,30),18)
-		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else str(total)
+		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else str(snappedf(total,0.1))
 		var value:=label_at(b,current,Rect2(205,10,118,30),18,GOLD); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-		var correction:=label_at(b,"%d ＋ %d"%[base,total-base],Rect2(342,10,177,30),18,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		var correction:=label_at(b,"%d ＋ %s"%[base,str(snappedf(total-base,0.1))],Rect2(342,10,177,30),18,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 		i+=1
-	label_at(central,"装備と耐久を反映した、現在の能力です。",Rect2(12,365,525,31),16,MUTED)
+	label_at(central,"HP・SPは左のゲージに表示
+器用さ・魔攻・魔防・運・精神・魅力・信仰：計算未実装",Rect2(12,264,525,84),16,MUTED)
 func build_conditions() -> void:
 	var effects:=Model.effects(unit,game.data.rules)
 	label_at(central,"現在の状態",Rect2(8,2,525,32),24,GOLD)
@@ -218,7 +205,7 @@ func build_conditions() -> void:
 		var b:=button_at(central,"%s   未設定"%names[i],Rect2(8+(i%2)*270,303+(i/2)*29,266,26),func(): pass)
 		b.disabled=true; b.add_theme_font_size_override("font_size",15); b.tooltip_text="8属性は導入予定 / 現在は倍率未設定"
 func build_profile() -> void:
-	label_at(central,"主人公の記録",Rect2(8,3,530,36),25,GOLD)
+	label_at(central,unit.name+"の記録",Rect2(8,3,530,36),25,GOLD)
 	var facts:=Model.profile()
 	item_button("species","種族    "+facts.get("species","未設定"),Rect2(8,55,292,42))
 	item_button("journey","旅の記録    %d F / %d 回の探索"%[game.campaign.highest_floor,E.normal_trips(game.campaign)],Rect2(8,109,292,42))
@@ -249,7 +236,7 @@ func update_details() -> void:
 	clear_children(details)
 	var id: String=selection[active_tab]
 	if active_tab=="equipment":
-		var item:=Model.equipment(game.campaign,game.cfg,id)
+		var item:=Model.equipment(game.campaign,game.cfg,id,game.selected_actor)
 		if item.empty:
 			detail_heading(game.cfg.slots[id],Icons.texture(id),"未装備")
 		else:
@@ -265,12 +252,12 @@ func update_details() -> void:
 				details.add_child(HSeparator.new()); detail_text(item.description,17)
 	elif active_tab=="abilities":
 		detail_heading(Model.STAT_NAMES[id],Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(id,id)))
-		var total: int=unit[id]; var base:=Model.base_value(game.campaign,game.cfg,id)
+		var total: float=E.Combat.effective_def(unit,game.data.rules) if id=="def" else float(unit[id]); var base:=Model.base_value(game.campaign,game.cfg,id,game.selected_actor)
 		detail_row("現在値",str(total),GOLD)
 		detail_text(Model.STAT_TEXT[id],18)
 		var impacts: Dictionary={"max_hp":"・受け止められるダメージ量","max_sp":"・自動スキルで使えるSPの上限","atk":"・通常攻撃の威力","def":"・受ける攻撃のダメージ軽減","spd":"・戦闘での行動順"}
 		section("主な影響",impacts[id])
-		detail_row("基礎値",str(base)); detail_row("装備補正","%+d"%(total-base))
+		detail_row("基礎値",str(base)); detail_row("装備・状態補正","%+.1f"%(total-base))
 	elif active_tab=="conditions":
 		var found:=false
 		for effect in Model.effects(unit,game.data.rules):
@@ -291,7 +278,7 @@ func update_details() -> void:
 		section("属性耐性","火・水・雷・土・風・光・闇・無。属性ごとの耐性は未設定です。")
 	else:
 		if id=="species":
-			detail_heading("主人公",face(),Model.profile().get("species","未設定"))
+			detail_heading(unit.name,face(),Model.profile().get("species","未設定"))
 			detail_text("年齢・出身・職業・人物紹介は未設定です。",18)
 		else:
 			detail_heading("旅の記録",Symbols.texture("normal"))

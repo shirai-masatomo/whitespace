@@ -26,7 +26,7 @@ func option(parent: Control, names: Array, chosen: int, rect: Rect2, callback: C
 	b.select(maxi(0,chosen)); b.get_popup().add_theme_font_size_override("font_size",14); b.item_selected.connect(func(index):callback.call_deferred(index)); return b
 func _ready() -> void:
 	size=Vector2(1280,720); z_index=1400; game.modal_owner=self; game.primary_button=null; game.secondary_button=null
-	draft=T.active(game.campaign.tactics);actor=str(draft.order[0]); rebuild()
+	draft=T.active(game.campaign.tactics);actor=game.selected_actor if draft.characters.has(game.selected_actor) else str(draft.order[0]); rebuild()
 func compact(control: Control) -> void:
 	for state in ["normal","hover","pressed","focus","disabled"]:
 		var box:=StyleBoxFlat.new();box.bg_color=Color("d2bc8b");box.border_color=Color("88714b");box.set_border_width_all(1);box.set_content_margin_all(4)
@@ -40,27 +40,34 @@ func rebuild() -> void:
 	var panel: Control=UISkin.panel(contents,Rect2(24,24,1232,672),"部隊の作戦",true)
 	var book: Dictionary=game.campaign.tactics; var active: Dictionary=T.active(book)
 	text(panel,"適用中："+active.name+" / 切替：次の未実行行動から・消費なし",Rect2(24,48,1184,27),19)
-	text(panel,"8作戦・1人8行・AND条件2つ / 起動中だけ保存。終了するとリセット。",Rect2(24,79,1184,26),15)
+	text(panel,"8作戦・1人8行・条件2つまで / 起動中だけ保存",Rect2(740,79,440,26),13)
+	var pages: Array=["overview","edit","saved","battle"]
+	for i in pages.size():
+		var key: String=pages[i];var b: Button=button(panel,["部隊全体","個人の行動設定","作戦の保存・選択","戦闘中の切替"][i],Rect2(22+i*177,79,170,29),func():game.tactics_page=key;call_deferred("rebuild"),"tactics-page-"+key);UISkin.quiet_button(b,game.tactics_page==key)
+	if game.tactics_page!="edit":
+		build_overview(panel,active);return
 	for i in book.sets.size():
 		var value: Dictionary=book.sets[i]
 		button(panel,("★ " if value.favorite else "☆ ")+value.name,Rect2(22,120+i*46,217,39),func():draft=value.duplicate(true);actor=str(draft.order[0]);message="編集中。保存して適用するまで現在の作戦を維持。";call_deferred("rebuild"),"tactics-edit-"+value.id)
-	button(panel,"複製して新規",Rect2(22,499,217,36),func():
+	button(panel,"複製して新規",Rect2(22,528,217,36),func():
 		if book.sets.size()>=8: message="8個まで保存できます。";call_deferred("rebuild");return
 		draft=draft.duplicate(true);draft.id="session-"+str(game.campaign.revision);draft.name+="の写し";message="未保存の新しい作戦";call_deferred("rebuild"),"tactics-new")
 	var name_edit:=LineEdit.new();name_edit.text=draft.name;name_edit.max_length=32;name_edit.position=Vector2(260,117);name_edit.size=Vector2(560,36);name_edit.add_theme_font_size_override("font_size",16);compact(name_edit);panel.add_child(name_edit);name_edit.text_changed.connect(func(v):draft.name=v)
 	var favorite:=CheckButton.new();favorite.text="お気に入り";favorite.button_pressed=draft.favorite;favorite.position=Vector2(844,118);panel.add_child(favorite);favorite.toggled.connect(func(v):draft.favorite=v)
 	var roster: Array=draft.order; var names: Array=[]
-	for id in roster: names.append("主人公" if id=="hero" else id)
+	for id in roster: names.append(actor_name(id))
 	option(panel,names,roster.find(actor),Rect2(260,164,230,34),func(i):actor=roster[i];call_deferred("rebuild"))
 	button(panel,"順序 ↑",Rect2(505,164,110,34),func():move_actor(-1))
 	button(panel,"順序 ↓",Rect2(625,164,110,34),func():move_actor(1))
 	option(panel,["前衛","後衛"],0 if draft.characters[actor].rank=="front" else 1,Rect2(750,164,150,34),func(i):draft.characters[actor].rank="front" if i==0 else "back")
-	text(panel,"行動順："+" → ".join(names),Rect2(260,203,920,25),15)
+	UISkin.picture(panel,preload("res://ui/visual_assets.gd").actor_texture("hero"),Rect2(940,114,64,102))
+	text(panel,"編集中："+actor_name(actor)+"  /  行動順："+" → ".join(names),Rect2(260,203,920,25),15)
 	for heading in [["技能",260],["条件1・割合",420],["条件2・割合",630],["対象",842],["優先順",1005]]: text(panel,heading[0],Rect2(heading[1],235,180,25),15)
 	var rows: Array=draft.characters[actor].rows
-	var unit: Dictionary=game.campaign.battle.get("current",{}).get("units",{}).get(actor,E.hero(game.campaign,game.cfg))
+	var unit: Dictionary=actor_unit(actor)
 	for i in rows.size():
 		var row: Dictionary=rows[i]; var y: int=267+i*36
+		UISkin.picture(panel,preload("res://ui/status_symbols.gd").texture("def" if row.skill=="S105" else "atk"),Rect2(223,y,28,28))
 		var labels: Array=[]
 		for id in SKILLS: labels.append(("通常攻撃" if id=="attack" else game.data.rules.skills[id].name)+("・未習得" if id!="attack" and id not in unit.skills else ""))
 		option(panel,labels,SKILLS.find(row.skill),Rect2(260,y,150,31),func(n):row.skill=SKILLS[n];row.target="self" if row.skill=="S105" else "enemy_front";call_deferred("rebuild"))
@@ -76,7 +83,7 @@ func rebuild() -> void:
 	var add: Button=button(panel,"行を追加",Rect2(260,563,160,34),func():rows.append({"skill":"attack","conditions":[{"kind":"always","value":50}],"target":"enemy_front"});call_deferred("rebuild"));add.disabled=rows.size()>=8
 	button(panel,"保存",Rect2(430,563,160,34),func():commit(false),"tactics-save")
 	button(panel,"保存して適用",Rect2(600,563,210,34),func():commit(true),"tactics-apply")
-	button(panel,"閉じる［Esc］",Rect2(900,563,267,34),cancel_modal,"tactics-close")
+	button(panel,"戻る［Esc］",Rect2(900,563,267,34),cancel_modal,"tactics-close")
 	text(panel,message if message!="" else ("設定順に実行可能な行を判定。全行不成立なら通常攻撃、対象不在なら待機。"),Rect2(22,606,1188,25),14)
 	var decision: String=T.reasons_text(unit)
 	text(panel,decision,Rect2(22,638,1188,29),12)
@@ -98,3 +105,38 @@ func allows_native_key(code: int) -> bool:
 	if code==KEY_ESCAPE: return false
 	if code==KEY_X: return get_viewport().gui_get_focus_owner() is LineEdit
 	return code not in [KEY_C,KEY_I,KEY_E] or get_viewport().gui_get_focus_owner() is LineEdit
+
+func actor_name(id: String) -> String:
+	return preload("res://core/party_ui.gd").name_of(game.campaign,id) if preload("res://core/party_ui.gd").exists(game.campaign,id) else id
+func actor_unit(id: String) -> Dictionary:
+	return game.campaign.battle.get("current",{}).get("units",{}).get(id,preload("res://core/party_ui.gd").actor(game.campaign,game.cfg,id))
+func build_overview(panel: Control, active: Dictionary) -> void:
+	var book: Dictionary=game.campaign.tactics;var is_battle: bool=game.tactics_page=="battle"
+	for i in book.sets.size():
+		var value: Dictionary=book.sets[i]
+		var b: Button=button(panel,("★ " if value.favorite else "☆ ")+value.name,Rect2(22,125+i*44,241,38),func():draft=value.duplicate(true);actor=game.selected_actor if draft.characters.has(game.selected_actor) else str(draft.order[0]);call_deferred("rebuild"),"tactics-edit-"+value.id);UISkin.quiet_button(b,draft.id==value.id)
+	text(panel,"全員の設定＋行動順を一つの作戦に保存",Rect2(287,122,895,31),20)
+	var order_names: Array=[]
+	for id in draft.order:order_names.append(actor_name(id))
+	text(panel,"指定行動順："+" → ".join(order_names),Rect2(287,158,895,29),18)
+	for i in mini(draft.order.size(),6):
+		var id: String=draft.order[i];var x: int=287+(i%3)*300;var y: int=202+int(i/3)*159
+		var card: Control=UISkin.panel(panel,Rect2(x,y,286,150),"",true)
+		UISkin.picture(card,preload("res://ui/visual_assets.gd").actor_texture("hero"),Rect2(12,12,70,100))
+		text(card,"%d  %s"%[i+1,actor_name(id)],Rect2(87,12,187,29),18)
+		text(card,("前衛" if draft.characters[id].rank=="front" else "後衛")+" / %d行"%draft.characters[id].rows.size(),Rect2(87,43,187,27),15)
+		var rows: Array=draft.characters[id].rows
+		if not rows.is_empty():
+			UISkin.picture(card,preload("res://ui/status_symbols.gd").texture("def" if rows[0].skill=="S105" else "atk"),Rect2(87,76,27,27));text(card,"1. "+("通常攻撃" if rows[0].skill=="attack" else game.data.rules.skills[rows[0].skill].name),Rect2(118,76,156,29),15)
+		button(card,"行動設定を編集",Rect2(14,111,258,29),func():actor=id;game.selected_actor=id;game.tactics_page="edit";call_deferred("rebuild"),"tactics-character-"+id)
+	var name_edit:=LineEdit.new();name_edit.text=draft.name;name_edit.max_length=32;name_edit.position=Vector2(287,532);name_edit.size=Vector2(370,34);compact(name_edit);panel.add_child(name_edit);name_edit.text_changed.connect(func(v):draft.name=v)
+	var star:=CheckButton.new();star.text="お気に入り";star.button_pressed=draft.favorite;star.position=Vector2(675,530);panel.add_child(star);star.toggled.connect(func(v):draft.favorite=v)
+	button(panel,"複製して新規",Rect2(22,527,241,37),func():
+		if book.sets.size()>=8:message="保存は8個までです。";call_deferred("rebuild");return
+		draft=draft.duplicate(true);draft.id="session-"+str(game.campaign.revision);draft.name+="の写し";game.tactics_page="edit";call_deferred("rebuild"),"tactics-new")
+	button(panel,"保存",Rect2(287,582,140,39),func():commit(false),"tactics-save")
+	button(panel,"保存して適用",Rect2(439,582,210,39),func():commit(true),"tactics-apply")
+	button(panel,"戻る［Esc］",Rect2(985,582,200,39),cancel_modal,"tactics-close")
+	text(panel,message if message!="" else ("切替は次の未行動者から。行動済み・ラウンドは維持します。" if is_battle else "個人の優先順と、味方全体の指定行動順は別々に設定します。"),Rect2(22,631,1165,30),15)
+	if is_battle:
+		var unit: Dictionary=actor_unit(actor);text(panel,T.reasons_text(unit),Rect2(22,480,1165,37),14)
