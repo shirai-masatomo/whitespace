@@ -1,0 +1,73 @@
+{
+  "version": "0.11.0",
+  "source_commit": "855085cf2509cb54f340eadc001995b7db1fe9b4",
+  "distribution": "通常入口反映済み",
+  "tactics_mock_approval": "2026-10-21ユーザー承認済み",
+  "items": [
+    {
+      "number": 1,
+      "description": "キャラ別装備・倉庫装備・手動配置・フィルタ",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "P02–P05、coreのUID・耐久・満杯・不適合",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 2,
+      "description": "アイテム・支給品保管・Shift移動・半分・実風呂敷・整理",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "P11–P13、core数量保存",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 3,
+      "description": "右クリック優先順位・戻る・文言",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "実入力の画面戻り、ドラッグ取消、モーダル取消、ポータル無選択",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 4,
+      "description": "ステータス・能力監査・画面引継ぎ・素材棚卸し",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "P06–P07、IMPLEMENTATION",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 5,
+      "description": "承認後の作戦4状態",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "P08–P10、P22、保存・戦闘行動済み保持",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 6,
+      "description": "降下・取得・戦利品・ポータル",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "P14–P21、降下帯264×76実寸、取得一回・取消保持",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 7,
+      "description": "画像と空白レビュー欄",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "REVIEW.md・実画面22枚",
+      "user_evaluation": "未評価"
+    },
+    {
+      "number": 8,
+      "description": "確認・配布・履歴",
+      "implementation": "実装済み",
+      "verification": "対象を限定して確認済み",
+      "evidence": "ci.json・core.json・after完了JSON・local-release.json",
+      "user_evaluation": "未評価"
+    }
+  ],
+  "unverified": "全GUI組合せ・全10F・長時間・音声聴感。READMEの詳細参照"
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": 39596167114,
+  "conclusion": "success",
+  "head_sha": "855085cf2509cb54f340eadc001995b7db1fe9b4",
+  "verification_scope": "party-ui-0.11.0",
+  "build_artifact_id": 12343713353,
+  "evidence_artifact_id": 12343133761,
+  "build_archive_sha256": "0aacb2a42e376b8f82b4cb566b44295b841c654e819e9e58e4b56bc4061d566b",
+  "evidence_archive_sha256": "66b8e9966c33ece317f41adf80cdb319979935c53c6a8dfe30935e12a859d7d1",
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39596167114",
+  "local_game_executed": false,
+  "user_evaluation": "not_reviewed"
+}

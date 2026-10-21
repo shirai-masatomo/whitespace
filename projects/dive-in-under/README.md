@@ -1,3 +1,7 @@
+# 通常0.11.0 — 仲間UI・装備／アイテム操作
+
+[通常入口](review/current/README.md)／[実画面とユーザー記入欄](review/ui-feedback/party-ui-0.11.0/REVIEW.md)／[確認・未確認](review/ui-feedback/party-ui-0.11.0/README.md)。実行855085c、CI39596167114成功。コア18件・隔離EXE47.4秒終了0・22画面。通常入口へ反映済み。見た目・操作感のユーザー評価は別。以下の版名・現在という呼称は履歴。
+
 # 通常0.10.0 — 作戦・0.9.0差分
 
 [通常入口と操作](review/current/README.md)／[今回の実画面](review/ui-feedback/tactics-0.10.0/index.html)／[実装・確認・保留](review/ui-feedback/tactics-0.10.0/README.md)。いつもの「入口 / 01 ゲームを起動」から確認版0.10.0。作戦も冒険も終了でリセット。旧保存・旧0.9.0リリースとZIPは保全。以下は以前の版の履歴。

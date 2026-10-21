@@ -1,0 +1,31 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (939.0, 90.0), S: (302.0, 30.0)]",
+			"text": "アイテムの詳細"
+		},
+		{
+			"rect": "[P: (936.0, 178.0), S: (308.0, 60.0)]",
+			"text": "品物を選んでください"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1052.0, 630.0), S: (212.0, 48.0)]",
+			"text": "戻る"
+		}
+	],
+	"run_id": "762be7f71b444a9d8aead071b124da3f",
+	"screenshot": "11-items.png",
+	"stages": [
+		{
+			"filter": "all",
+			"kind": "items",
+			"selected": "",
+			"warehouse_cells": {
+				"item-7": 0
+			}
+		}
+	]
+}

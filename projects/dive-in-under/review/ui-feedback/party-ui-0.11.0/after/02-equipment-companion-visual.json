@@ -1,0 +1,52 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (874.0, 14.0), S: (160.0, 23.0)]",
+			"text": "検証仲間B"
+		},
+		{
+			"rect": "[P: (874.0, 36.0), S: (160.0, 20.0)]",
+			"text": "検証用"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1046.0, 12.0), S: (210.0, 50.0)]",
+			"text": ""
+		},
+		{
+			"rect": "[P: (1092.0, 14.0), S: (160.0, 23.0)]",
+			"text": "検証仲間C"
+		},
+		{
+			"rect": "[P: (1092.0, 36.0), S: (160.0, 20.0)]",
+			"text": "検証用"
+		},
+		{
+			"rect": "[P: (917.0, 90.0), S: (324.0, 30.0)]",
+			"text": "装備の詳細"
+		},
+		{
+			"rect": "[P: (918.0, 228.0), S: (322.0, 60.0)]",
+			"text": "頭 / 未装備"
+		}
+	],
+	"run_id": "762be7f71b444a9d8aead071b124da3f",
+	"screenshot": "02-equipment-companion.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "equipment",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"actor": "B",
+			"kind": "equipment",
+			"slots": 11,
+			"source": "inventory"
+		}
+	]
+}

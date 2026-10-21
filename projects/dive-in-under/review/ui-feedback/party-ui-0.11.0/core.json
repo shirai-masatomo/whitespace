@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "supply gear can enter exact warehouse cell",
+    "warehouse keeps UID and durability",
+    "warehouse equips selected companion only",
+    "hero unchanged companion stats use gear",
+    "full bag removal atomic",
+    "full bag can remove to warehouse",
+    "manual warehouse cell preserves identity",
+    "occupied warehouse reorder swaps cells",
+    "cloak and shield follow existing slots",
+    "shield not misclassified as weapon",
+    "dungeon has no remote warehouse access",
+    "all owners storage and individual data validate",
+    "prepare companion one-to-one swap",
+    "full bag one-to-one companion exchange keeps both individuals",
+    "incompatible slot retains all ownership and stats",
+    "odd half floors 5 to 2 and leaves 3",
+    "partial move conserves all coins",
+    "single coin half moves one"
+  ],
+  "complete": true
+}
