@@ -7,16 +7,21 @@ var uid: String
 var slot: String
 var cell_index: int=-1
 var actor_id: String="hero"
+var quick_armed: bool=false
+var drag_half: bool=false
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
-		if event.shift_pressed and host.has_method("quick_item"):
-			accept_event();host.call_deferred("quick_item",source,uid,slot);return
-		if event.double_click:
-			accept_event();host.call_deferred("activate_item",source,uid,slot)
+	if not event is InputEventMouseButton or event.button_index!=MOUSE_BUTTON_LEFT:return
+	if event.pressed:
+		drag_half=event.shift_pressed;quick_armed=event.shift_pressed and host.has_method("quick_item")
+		if event.double_click and not event.shift_pressed:accept_event();host.call_deferred("activate_item",source,uid,slot)
+	elif quick_armed:
+		quick_armed=false;accept_event()
+		if get_global_rect().has_point(event.global_position):host.call_deferred("quick_item",source,uid,slot)
 func _get_drag_data(_at: Vector2) -> Variant:
 	if uid=="" or is_instance_valid(game.modal_owner):return null
+	quick_armed=false
 	var payload: Dictionary={"kind":"equipment-item","source":source,"uid":uid,"slot":slot,"actor":actor_id,"revision":int(game.campaign.revision)}
-	if Input.is_key_pressed(KEY_SHIFT) and source in ["inventory","warehouse","cloth"] and game.campaign.items.get(uid)=="C01":payload.quantity=maxi(1,int(game.campaign.quantities[uid])/2)
+	if (drag_half or Input.is_key_pressed(KEY_SHIFT)) and source in ["inventory","warehouse","cloth"] and game.campaign.items.get(uid)=="C01":payload.quantity=maxi(1,int(game.campaign.quantities[uid])/2)
 	var preview:=Label.new();preview.text=tooltip_text+(" / 移動 %d枚"%payload.quantity if payload.has("quantity") else "");preview.add_theme_font_size_override("font_size",16)
 	set_drag_preview(preview);game.gear_drag=payload;return payload
 func _can_drop_data(_at: Vector2, value: Variant) -> bool:
