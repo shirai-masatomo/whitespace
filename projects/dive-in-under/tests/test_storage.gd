@@ -41,7 +41,8 @@ func _initialize() -> void:
 	check(act(outside,"deposit",{"uid":cloth_uid})==outside and act(outside,"organize",{"mode":"name"})==outside,"town-only operations")
 	var supply_cfg:=cfg.duplicate(true); supply_cfg.items.I10.supply=true
 	var supply: String=s.inventory.filter(func(key):return s.items[key]=="I10")[0]
-	check(E.act(s,"deposit",int(s.revision),{"uid":supply},data,supply_cfg)==s,"supply items cannot enter warehouse")
+	var stored: Dictionary=E.act(s,"deposit",int(s.revision),{"uid":supply},data,supply_cfg)
+	check(supply in stored.warehouse and supply not in stored.inventory,"supply items may enter warehouse under 2026-10-21 instruction")
 	var bad:=s.duplicate(true); bad.warehouse.append(s.inventory[0])
 	check(E.validate(bad,data,cfg)!="","duplicate ownership rejected")
 	bad=s.duplicate(true); bad.cloth.append_array(s.inventory.slice(0,3))

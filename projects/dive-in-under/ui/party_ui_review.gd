@@ -26,7 +26,7 @@ static func cell_index(node: Node, index: int) -> Button:
 		if found:return found
 	return null
 static func motion(game: Control, point: Vector2, held: bool=false) -> void:
-	var event:=InputEventMouseMotion.new();event.position=point;event.global_position=point;event.button_mask=MOUSE_BUTTON_MASK_LEFT if held else 0
+	var event:=InputEventMouseMotion.new();event.relative=point-game.get_viewport().get_mouse_position();event.position=point;event.global_position=point;event.button_mask=MOUSE_BUTTON_MASK_LEFT if held else 0
 	game.get_viewport().push_input(event,true);await game.get_tree().process_frame
 static func drag(game: Control, b: Button, target: Button, half: bool=false) -> void:
 	await F.wait(game,.4)

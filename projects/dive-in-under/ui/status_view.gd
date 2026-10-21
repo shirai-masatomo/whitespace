@@ -180,10 +180,12 @@ func build_abilities() -> void:
 		var b:=item_button(key,"",Rect2(8,54+i*58,536,50))
 		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,9,32,32))
 		label_at(b,Model.STAT_NAMES[key],Rect2(48,10,160,30),18)
-		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else str(snappedf(total,0.1))
+		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else (str(int(total)) if is_equal_approx(total,roundf(total)) else str(snappedf(total,0.1)))
 		var value:=label_at(b,current,Rect2(205,10,118,30),18,GOLD); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 		var correction:=label_at(b,"%d ＋ %s"%[base,str(snappedf(total-base,0.1))],Rect2(342,10,177,30),18,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 		i+=1
+	var hit: float=clampf(float(game.data.rules.hit_chance)-float(unit.get("statuses",{}).get("blind",{}).get("potency",0.0)),0.0,1.0)
+	label_at(central,"命中 %d%% / 会心 %d%%（共通判定）"%[roundi(hit*100),roundi(float(game.data.rules.critical_chance)*100)],Rect2(12,222,525,28),16,MUTED)
 	label_at(central,"HP・SPは左のゲージに表示
 器用さ・魔攻・魔防・運・精神・魅力・信仰：計算未実装",Rect2(12,264,525,84),16,MUTED)
 func build_conditions() -> void:

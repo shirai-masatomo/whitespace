@@ -8,6 +8,7 @@ static func build(parent: Control, game: Control, rect: Rect2) -> void:
 		var id: String=ids[i]
 		var b:=UISkin.button(parent,"",Rect2(rect.position+Vector2(i*(width+8),0),Vector2(width,rect.size.y)),func():game.call_deferred("select_party_actor",id))
 		UISkin.quiet_button(b,game.selected_actor==id);b.set_meta("party_actor",id)
-		UISkin.picture(b,Art.actor_texture("hero"),Rect2(4,3,38,rect.size.y-6))
+		var face:=AtlasTexture.new();face.atlas=Art.texture("hero");face.region=Rect2(410,210,390,370)
+		UISkin.picture(b,face,Rect2(4,3,38,rect.size.y-6))
 		UISkin.label(b,Party.name_of(game.campaign,id),Rect2(46,2,width-50,23),16)
 		UISkin.label(b,"検証用" if game.campaign.get("companions",{}).get(id,{}).get("verification_dummy",false) else "選択中" if game.selected_actor==id else "確認する",Rect2(46,24,width-50,20),12,UISkin.MUTED)
