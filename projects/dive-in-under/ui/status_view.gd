@@ -40,10 +40,11 @@ var return_page: String="hub"
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	unit=Model.actor(game.campaign,game.cfg,game.data,game.selected_actor)
+	active_tab=game.status_memory.get("tab","equipment");selection=game.status_memory.get("selection",selection).duplicate(true)
 	build()
 	modulate.a=0.0
 	var entry:=create_tween(); entry.tween_property(self,"modulate:a",1.0,0.20)
-	entry.finished.connect(func(): input_locked=false; tab_buttons.equipment.grab_focus())
+	entry.finished.connect(func(): input_locked=false; tab_buttons[active_tab].grab_focus())
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
 	var l:=Label.new(); l.language="ja"; l.vertical_alignment=VERTICAL_ALIGNMENT_CENTER; l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
 	l.set_meta("normal_color",color)
@@ -128,14 +129,14 @@ func clear_children(parent: Node) -> void:
 	for child in parent.get_children(): parent.remove_child(child); child.queue_free()
 func choose_tab(key: String) -> void:
 	if closing or input_locked or not TABS.has(key) or key==active_tab: return
-	active_tab=key
+	active_tab=key;game.status_memory.tab=key
 	for tab in tab_buttons: skin(tab_buttons[tab],tab==key)
 	build_content()
 	if is_instance_valid(tab_tween): tab_tween.kill()
 	central.modulate.a=0.25; tab_tween=create_tween(); tab_tween.tween_property(central,"modulate:a",1.0,0.10)
 func select_item(id: String) -> void:
 	if closing or input_locked: return
-	selection[active_tab]=id
+	selection[active_tab]=id;game.status_memory.selection=selection.duplicate(true)
 	for key in item_buttons: skin(item_buttons[key],key==id)
 	update_details()
 func item_button(id: String, title: String, r: Rect2) -> Button:
@@ -308,4 +309,4 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func visual_audit() -> Dictionary:
 	var rects: Dictionary={}
 	for slot in item_buttons: rects[slot]=str(item_buttons[slot].get_global_rect())
-	return {"kind":"status","tab":active_tab,"selected":selection[active_tab],"hero":unit.name,"equipment_slots":E.SLOTS.size(),"item_rects":rects,"party_active":1,"party_reserved":5,"gauge_values":gauges,"read_only":true,"detail_scroll_max":detail_scroll.get_v_scroll_bar().max_value}
+	return {"kind":"status","tab":active_tab,"selected":selection[active_tab],"hero":unit.name,"equipment_slots":E.SLOTS.size(),"item_rects":rects,"party_active":preload("res://core/party_ui.gd").ids(game.campaign).size(),"selected_actor":game.selected_actor,"gauge_values":gauges,"read_only":true,"detail_scroll_max":detail_scroll.get_v_scroll_bar().max_value}

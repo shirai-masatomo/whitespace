@@ -1,3 +1,6 @@
+## 2026-10-21 表示更新
+「倉庫・所持品」は「アイテム」へ改称。戻る表記を統一。装備・ステータス・作戦は選択キャラを引き継ぐ。通常加入の追加はない。[操作正本](PARTY_UI.md)。
+
 # 起動と冒険準備（0.9.0）
 
 [現行入口](../review/current/README.md) / [全体仕様](../SPEC.md) / [装備・通貨](ITEMS.md) / [旧文書全文](history/pre-adventure-0.9.0/STARTUP_PREPARATION_UI.md)

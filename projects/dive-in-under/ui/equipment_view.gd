@@ -73,7 +73,9 @@ func cell_reason(value: Variant, destination: String, slot: String, cell: int) -
 	if destination=="equipment":return Actions.reason(game,value,destination,slot)
 	if value.source=="equipment":return Gear.reason(game.campaign,{"actor":value.actor,"slot":value.slot,"source":"inventory","destination":destination,"cell":cell},game.cfg,true)
 	if value.source=="warehouse" and destination=="warehouse":return "" if cell>=0 else "マスを選んでください。"
-	return E.Storage.reason(game.campaign,value.uid,value.source,destination,game.cfg)
+	var copy: Dictionary=game.campaign.duplicate(true);var args: Dictionary={"uid":value.uid,"source":value.source,"destination":destination,"cell":cell}
+	if value.has("quantity"):args.quantity=value.quantity
+	return E.Storage.transfer(copy,args,game.cfg)
 func drop_cell(value: Dictionary, destination: String, slot: String, cell: int) -> void:
 	var error: String=cell_reason(value,destination,slot,cell)
 	if error!="":game.notice=error;game.show_campaign();return

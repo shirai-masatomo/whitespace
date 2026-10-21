@@ -29,6 +29,11 @@ func _init() -> void:
 	check(Gear.apply(s,{"uid":uid,"source":"warehouse"},cfg)!="" and s==before,"dungeon has no remote warehouse access")
 	s.phase="town"
 	check(E.validate(s,data,cfg)=="","all owners storage and individual data validate")
+	check(Gear.apply(s,{"actor":"B","uid":uid,"source":"warehouse"},cfg)=="","prepare companion one-to-one swap")
+	preload("res://core/item_instances.gd").erase(s,s.inventory[0]);var replacement: String=E.add_item(s,"A02");var amount: int=s.items.size()
+	check(Gear.apply(s,{"actor":"B","uid":replacement,"source":"inventory"},cfg)=="" and s.inventory.size()==15 and uid in s.inventory and s.companions.B.equipment.head==replacement and s.items.size()==amount,"full bag one-to-one companion exchange keeps both individuals")
+	before=s.duplicate(true)
+	check(Gear.apply(s,{"actor":"B","uid":uid,"source":"inventory","slot":"left_hand"},cfg)!="" and s==before,"incompatible slot retains all ownership and stats")
 	var coins: Dictionary=E.fresh(cfg,3);preload("res://core/currency.gd").credit(coins,5)
 	var coin: String=coins.inventory[0]
 	check(Storage.transfer(coins,{"uid":coin,"source":"inventory","destination":"warehouse","quantity":2,"cell":11},cfg)=="" and coins.quantities[coin]==3,"odd half floors 5 to 2 and leaves 3")

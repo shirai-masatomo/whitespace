@@ -53,11 +53,11 @@ func details(p: Control) -> void:
 		var l:=Label.new();l.text=str(line);l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;l.add_theme_font_size_override("font_size",17);l.add_theme_color_override("font_color",UISkin.DARK);box.add_child(l)
 	var destination: String="inventory" if source in ["warehouse","cloth"] else "warehouse"
 	var error: String=Storage.reason(game.campaign,uid,source,destination,game.cfg)
-	var move:=UISkin.button(p,"取り出す → 所持品" if destination=="inventory" else "預ける → 倉庫",Rect2(20,385,308,36),func():game.transfer_item(uid,source,destination,int(game.campaign.revision)));move.disabled=error!="";move.tooltip_text=error
+	var move:=UISkin.button(p,"取り出す → 所持品" if destination=="inventory" else "預ける → 倉庫",Rect2(20,385,308,36),func():game.call_deferred("transfer_item",uid,source,destination,int(game.campaign.revision)));move.disabled=error!="";move.tooltip_text=error
 	if source!="cloth":
 		var cloth_error: String=Storage.reason(game.campaign,uid,source,"cloth",game.cfg)
-		var cloth:=UISkin.button(p,"風呂敷へ移す" if cloth_error=="" else "風呂敷に空きがありません",Rect2(20,428,308,36),func():game.transfer_item(uid,source,"cloth",int(game.campaign.revision)));cloth.disabled=cloth_error!="";cloth.tooltip_text=cloth_error
-	if game.campaign.items[uid]=="C01":UISkin.button(p,"コインの数量指定・分割・結合",Rect2(20,471,308,36),func():game.open_services("coin",uid,source))
+		var cloth:=UISkin.button(p,"風呂敷へ移す" if cloth_error=="" else "風呂敷に空きがありません",Rect2(20,428,308,36),func():game.call_deferred("transfer_item",uid,source,"cloth",int(game.campaign.revision)));cloth.disabled=cloth_error!="";cloth.tooltip_text=cloth_error
+	if game.campaign.items[uid]=="C01":UISkin.button(p,"コインの数量指定・分割・結合",Rect2(20,471,308,36),func():game.call_deferred("open_services","coin",uid,source))
 func select_item(source: String, uid: String, _slot: String="") -> void:
 	if uid=="":return
 	game.warehouse_state.source=source;game.warehouse_state.uid=uid;game.flow_selection={"kind":source,"uid":uid};game.show_campaign()
