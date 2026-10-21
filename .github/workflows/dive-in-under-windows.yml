@@ -146,6 +146,13 @@ jobs:
         if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != '' && hashFiles('projects/dive-in-under/tools/party-ui-stage.txt') == ''
         timeout-minutes: 4
         run: ./tools/tactics_review.ps1
+      - name: Export approved party UI candidate
+        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/party-ui-ready.txt') != ''
+        run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
+      - name: Party ownership, gestures and screenshots in one isolated EXE
+        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/party-ui-ready.txt') != ''
+        timeout-minutes: 4
+        run: ./tools/party_ui_review.ps1
       - name: Functional tests, 8-seed smoke and export
         if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./dev.ps1 -Task verify -Trials 8 -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
@@ -326,6 +333,9 @@ jobs:
           path: |
             projects/dive-in-under/artifacts/adventure-*.log
             projects/dive-in-under/artifacts/adventure/**/*.json
+            projects/dive-in-under/artifacts/party-ui/**/*.json
+            projects/dive-in-under/artifacts/party-ui/**/*.png
+            projects/dive-in-under/artifacts/party-ui/**/*.log
             projects/dive-in-under/artifacts/tactics/**/*.json
             projects/dive-in-under/artifacts/tactics/**/*.png
             projects/dive-in-under/artifacts/tactics/**/*.log
@@ -342,5 +352,11 @@ jobs:
         if: success() && steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != '' && hashFiles('projects/dive-in-under/tools/party-ui-stage.txt') == ''
         with:
           name: DiveInUnder-tactics-windows-x64
+          path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: success() && steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/party-ui-ready.txt') != ''
+        with:
+          name: DiveInUnder-party-ui-windows-x64
           path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
           if-no-files-found: error
