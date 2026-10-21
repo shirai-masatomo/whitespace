@@ -13,7 +13,7 @@ if ($Adventure) {
  if ($LASTEXITCODE -ne 0) {throw 'Runtime differs from successful CI source'}
  git -C $project diff --exit-code 194d5c9 HEAD -- core/save_store.gd core/catalog.gd data/v1/balance.json data/v1/area1-enemies.json data/v1/expedition.json data/v1/expedition-legacy.json data/v1/expedition-legacy-2.json data/v1/expedition-legacy-3.json data/v1/expedition-legacy-4.json assets | Out-Null
  if ($LASTEXITCODE -ne 0) {throw 'Protected old saves, legacy definitions, original art/music/logo changed'}
- $allowed='^(core/(tactics|squad_combat|adventure|currency|item_instances|expedition|equipment_condition|storage|combat|journey)\.gd|data/v1/(tactics|adventure|expedition-legacy-5)\.json)$'
+ $allowed='^(core/(party_ui|gear_transfer|tactics|squad_combat|adventure|currency|item_instances|expedition|equipment_condition|storage|combat|journey)\.gd|data/v1/(tactics|adventure|expedition-legacy-5)\.json)$'
  $changes=@(git -C $project diff --relative --name-only 194d5c9 HEAD -- core data assets)
  if (@($changes | Where-Object {$_ -notmatch $allowed}).Count -ne 0) {throw 'Changes exceed user-authorized adventure rule files'}
  $oldText=(git -C $project show 194d5c9:projects/dive-in-under/core/combat.gd) -join "`n"

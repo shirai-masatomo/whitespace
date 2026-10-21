@@ -2,6 +2,8 @@ extends RefCounted
 ## Session rules v0.9.0. Old saves/rules never enter this dispatcher.
 const Money=preload("res://core/currency.gd")
 const Instances=preload("res://core/item_instances.gd")
+const Party=preload("res://core/party_ui.gd")
+const Gear=preload("res://core/gear_transfer.gd")
 const Tactics=preload("res://core/tactics.gd")
 const Squad=preload("res://core/squad_combat.gd")
 const Combat=preload("res://core/combat.gd")
@@ -15,7 +17,7 @@ static func configure(cfg: Dictionary) -> Dictionary:
 	for id in rules.events: cfg.events[id]={"name":rules.events[id].name}
 	return cfg
 static func initialize(s: Dictionary, cfg: Dictionary) -> void:
-	s.tactics=Tactics.initial(); s.coin_stack_max=int(cfg.progression.coin_stack_max)
+	s.companions={}; s.warehouse_positions={}; s.tactics=Tactics.initial(); s.coin_stack_max=int(cfg.progression.coin_stack_max)
 	s.ruleset="adventure-0.9.0"; s.erase("gold"); s.item_rules=cfg.items.duplicate(true); s.affix_rules=cfg.progression.affixes.duplicate(true); s.rng.instance=0
 	s.item_details={}; s.quantities={}; s.auto_remedy={"blind":true,"poison":true,"paralysis":true}; s.payment_source="inventory"
 	s.records={"boss_kills":0,"first_reward_issued":false,"first_reward_claimed":false}; s.debug=false; s.debug_next=""; s.node={}; s.event_counts={}; s.event_target=""
@@ -57,9 +59,7 @@ static func can_return(s: Dictionary) -> bool:
 static func finish(s: Dictionary, kind: String, reason: String) -> void:
 	var lost: Array=[]; var kept: Array=[]; var coin_loss: int=Money.amount(s)
 	if kind=="death":
-		var doomed: Array=s.inventory.duplicate()
-		for uid in s.equipment.values():
-			if uid!="": doomed.append(uid)
+		var doomed: Array=s.inventory.duplicate()+Party.all_equipped(s)
 		for uid in doomed: lost.append(label(s,uid)); Instances.erase(s,uid)
 		s.deaths+=1; s.hp=0
 	if kind!="death":
@@ -325,31 +325,18 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 		"coin_move": changed=Money.move(s,args.get("uid",""),args.get("source","inventory"),args.get("destination","warehouse"),int(args.get("quantity",-1)))
 		"coin_combine": changed=Money.combine(s,args.get("source","inventory"))
 		"transfer","deposit","withdraw","to_cloth":
-			var source: String=args.get("source","warehouse" if action=="withdraw" else "inventory")
-			var destination: String=args.get("destination",{"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}.get(action,"warehouse"))
-			var uid: String=args.get("uid","")
-			if s.phase!="town": error="収納移動は町で行います。"
-			elif uid not in s.get(source,[]): error="移動する品を選んでください。"
-			elif s.items[uid]=="C01": changed=Money.move(s,uid,source,destination)
-			else:
-				error=e.Storage.reason(s,uid,source,destination,cfg)
-				if error=="": s[source].erase(uid); s[destination].append(uid); changed=true
+			var move_args: Dictionary=args.duplicate()
+			move_args.source=args.get("source","warehouse" if action=="withdraw" else "inventory")
+			move_args.destination=args.get("destination",{"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}.get(action,"warehouse"))
+			error=e.Storage.transfer(s,move_args,cfg);changed=error==""
 		"organize","organize_bag":
 			if s.phase!="battle":
 				for source in (["inventory"] if action=="organize_bag" else ["inventory","cloth","warehouse"]): s[source].sort_custom(func(a,b):return e.Storage.sort_key(s,a,cfg,args.get("mode","category"))<e.Storage.sort_key(s,b,cfg,args.get("mode","category")))
 				changed=s!=previous
 		"equip","unequip":
-			if s.phase not in ["battle","result"]:
-				if action=="equip":
-					var uid: String=args.get("uid","")
-					if uid in s.inventory:
-						var slot: String=cfg.items[s.items[uid]].slot
-						if slot!="" and args.get("slot",slot)==slot:
-							if s.equipment[slot]!="": s.inventory.append(s.equipment[slot])
-							s.inventory.erase(uid); s.equipment[slot]=uid; changed=true
-				else:
-					var slot: String=args.get("slot","")
-					if s.equipment.has(slot) and s.equipment[slot]!="" and s.inventory.size()<15: s.inventory.append(s.equipment[slot]); s.equipment[slot]=""; changed=true
+			error=Gear.apply(s,args,cfg,action=="unequip");changed=error==""
+		"warehouse_reorder":
+			error=e.Storage.reorder(s,args.get("uid",""),int(args.get("cell",-1)));changed=error==""
 		"debug_next":
 			if s.debug and args.get("kind","") in ["enemy","treasure","event"]: s.debug_next=args.kind; changed=true
 		"debug_return":
@@ -359,6 +346,7 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 		var h: Dictionary=e.hero(s,cfg); s.hp=h.max_hp; s.sp=h.max_sp
 	elif s.phase!="battle" and s.phase!="result":
 		var h: Dictionary=e.hero(s,cfg); s.hp=mini(s.hp,h.max_hp); s.sp=mini(s.sp,h.max_sp)
+	e.Storage.ensure_positions(s)
 	s.revision+=1
 	var problem: String=validate(s,data,cfg)
 	return {"state":s,"error":""} if problem=="" else {"state":previous,"error":"操作を取り消しました："+problem}
@@ -371,6 +359,12 @@ static func validate(s: Dictionary, _data: Dictionary, cfg: Dictionary) -> Strin
 		if uid!="":
 			if not s.items.has(uid) or cfg.items[s.items[uid]].slot!=slot: return "装備部位不正"
 			owned.append(uid)
+	for id in s.get("companions",{}):
+		for slot in Party.gear(s,id):
+			var uid: String=Party.gear(s,id)[slot]
+			if uid!="":
+				if not s.items.has(uid) or cfg.items[s.items[uid]].slot!=slot:return "仲間の装備部位不正"
+				owned.append(uid)
 	var seen: Dictionary={}
 	for uid in owned:
 		if seen.has(uid) or not s.items.has(uid) or not s.item_details.has(uid) or not s.quantities.has(uid) or not s.item_condition.has(uid): return "個体の重複／欠落"

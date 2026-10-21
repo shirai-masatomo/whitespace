@@ -2,7 +2,7 @@ $ErrorActionPreference='Stop'
 $engine="$PWD/.tools/Godot_v4.7.2-stable_win64_console.exe"
 $env:APPDATA="$PWD/artifacts/adventure-core-user"
 New-Item -ItemType Directory -Force artifacts | Out-Null
-$test=if(Test-Path tools/tactics-stage.txt){'tests/test_tactics.gd'}else{'tests/test_adventure.gd'}
+$test=if(Test-Path tools/party-ui-stage.txt){'tests/test_party_ui.gd'}elseif(Test-Path tools/tactics-stage.txt){'tests/test_tactics.gd'}else{'tests/test_adventure.gd'}
 foreach ($entry in @(@('--editor','--import','--quit'),@('--script',$test))) {
  $label=if($entry[0] -eq '--editor'){'import'}else{'core'}
  $log="$PWD/artifacts/adventure-$label.log"

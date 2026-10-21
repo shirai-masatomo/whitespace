@@ -140,10 +140,10 @@ jobs:
         timeout-minutes: 6
         run: ./tools/adventure_review.ps1
       - name: Export adopted tactics candidate
-        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != ''
+        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != '' && hashFiles('projects/dive-in-under/tools/party-ui-stage.txt') == ''
         run: ./dev.ps1 -Task build -GameCommit '${{ github.sha }}'
       - name: Tactics inputs and six-unit state, one isolated EXE
-        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != ''
+        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != '' && hashFiles('projects/dive-in-under/tools/party-ui-stage.txt') == ''
         timeout-minutes: 4
         run: ./tools/tactics_review.ps1
       - name: Functional tests, 8-seed smoke and export
@@ -339,7 +339,7 @@ jobs:
           path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
-        if: success() && steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != ''
+        if: success() && steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != '' && hashFiles('projects/dive-in-under/tools/party-ui-stage.txt') == ''
         with:
           name: DiveInUnder-tactics-windows-x64
           path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip

@@ -23,6 +23,10 @@ static func erase(s: Dictionary, uid: String) -> void:
 	for source in ["inventory","cloth","warehouse"]: s[source].erase(uid)
 	for slot in s.equipment:
 		if s.equipment[slot]==uid: s.equipment[slot]=""
+	for member in s.get("companions",{}).values():
+		for slot in member.equipment:
+			if member.equipment[slot]==uid:member.equipment[slot]=""
+	if s.has("warehouse_positions"):s.warehouse_positions.erase(uid)
 	for key in ["items","item_condition","item_details","quantities"]: s[key].erase(uid)
 static func base(s: Dictionary, uid: String) -> Dictionary:
 	var value: Dictionary=s.item_details[uid].base_roll.duplicate(true)

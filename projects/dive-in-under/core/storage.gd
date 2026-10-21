@@ -16,7 +16,6 @@ static func reason(s: Dictionary, uid: String, source: String, destination: Stri
 		return "" if preload("res://core/currency.gd").room(s,destination)>=int(s.quantities[uid]) else "コインが入りきりません。分割して移せます。"
 	if destination=="inventory" and s.inventory.size()>=BACKPACK_CAPACITY: return "バックパックに空きがありません"
 	if destination=="cloth" and s.cloth.size()>=CLOTH_CAPACITY: return "風呂敷に空きがありません"
-	if destination=="warehouse" and cfg.items[s.items[uid]].get("supply",false): return "支給品は倉庫へ預けられません"
 	return ""
 static func move(s: Dictionary, uid: String, source: String, destination: String, cfg: Dictionary) -> bool:
 	if reason(s,uid,source,destination,cfg)!="": return false
@@ -36,3 +35,56 @@ static func organize(s: Dictionary, cfg: Dictionary, mode: String) -> bool:
 		s[source].sort_custom(func(a,b): return sort_key(s,a,cfg,mode)<sort_key(s,b,cfg,mode))
 		changed=changed or before!=s[source]
 	return changed
+
+static func ensure_positions(s: Dictionary) -> void:
+	if not s.has("warehouse_positions"):s.warehouse_positions={}
+	for uid in s.warehouse_positions.keys():
+		if uid not in s.warehouse:s.warehouse_positions.erase(uid)
+	var used: Array=[]
+	for uid in s.warehouse:
+		var index: int=int(s.warehouse_positions.get(uid,-1))
+		if index>=0 and index not in used:used.append(index)
+		else:s.warehouse_positions.erase(uid)
+	for uid in s.warehouse:
+		if s.warehouse_positions.has(uid):continue
+		var index: int=0
+		while index in used:index+=1
+		s.warehouse_positions[uid]=index;used.append(index)
+static func position(s: Dictionary, uid: String) -> int:
+	return int(s.get("warehouse_positions",{}).get(uid,s.warehouse.find(uid)))
+static func uid_at(s: Dictionary, cell: int) -> String:
+	for uid in s.warehouse:
+		if position(s,uid)==cell:return uid
+	return ""
+static func reorder(s: Dictionary, uid: String, cell: int) -> String:
+	if s.phase!="town" or uid not in s.warehouse or cell<0:return "倉庫の移動先を選んでください。"
+	ensure_positions(s);var old: int=position(s,uid);var other: String=uid_at(s,cell)
+	if old==cell:return "同じマスです。"
+	s.warehouse_positions[uid]=cell
+	if other!="":s.warehouse_positions[other]=old
+	return ""
+static func classification(item: Dictionary) -> String:
+	var slot: String=item.get("slot","")
+	if slot=="right_hand":return "weapon"
+	if slot in ["head","body","legs","feet","left_hand"]:return "armor"
+	if slot in ["neck","ears","eyes","finger","wrist"]:return "accessory"
+	return "other"
+static func matches(item: Dictionary, category_filter: String="all", slot_filter: String="") -> bool:
+	return (category_filter=="all" or classification(item)==category_filter) and (slot_filter=="" or item.slot==slot_filter)
+
+static func transfer(s: Dictionary, args: Dictionary, cfg: Dictionary) -> String:
+	var uid: String=args.get("uid","");var source: String=args.get("source","inventory");var destination: String=args.get("destination","warehouse");var cell: int=int(args.get("cell",-1))
+	if source==destination:
+		return reorder(s,uid,cell) if source=="warehouse" else "別の収納へ移してください。"
+	var error: String=reason(s,uid,source,destination,cfg)
+	if error!="":return error
+	if destination=="warehouse" and cell>=0 and uid_at(s,cell)!="":return "その倉庫マスは使用中です。"
+	ensure_positions(s)
+	var before: Array=s[destination].duplicate()
+	if not move(s,uid,source,destination,cfg):return "移動できません。収納の空きを確認してください。"
+	ensure_positions(s)
+	if destination=="warehouse" and cell>=0:
+		var added: Array=s.warehouse.filter(func(id):return id not in before)
+		# A coin may merge into an existing stack; no fake second item is created.
+		if added.size()==1:s.warehouse_positions[added[0]]=cell
+	return ""
