@@ -60,7 +60,8 @@ func rebuild() -> void:
 	button(panel,"順序 ↑",Rect2(505,164,110,34),func():move_actor(-1))
 	button(panel,"順序 ↓",Rect2(625,164,110,34),func():move_actor(1))
 	option(panel,["前衛","後衛"],0 if draft.characters[actor].rank=="front" else 1,Rect2(750,164,150,34),func(i):draft.characters[actor].rank="front" if i==0 else "back")
-	UISkin.picture(panel,preload("res://ui/visual_assets.gd").actor_texture("hero"),Rect2(940,114,64,102))
+	var face:=AtlasTexture.new();face.atlas=preload("res://ui/visual_assets.gd").texture("hero");face.region=Rect2(410,210,390,370)
+	UISkin.picture(panel,face,Rect2(1115,114,64,76))
 	text(panel,"編集中："+actor_name(actor)+"  /  行動順："+" → ".join(names),Rect2(260,203,920,25),15)
 	for heading in [["技能",260],["条件1・割合",420],["条件2・割合",630],["対象",842],["優先順",1005]]: text(panel,heading[0],Rect2(heading[1],235,180,25),15)
 	var rows: Array=draft.characters[actor].rows

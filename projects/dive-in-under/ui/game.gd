@@ -214,6 +214,8 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		var index: int=Expedition.Journey.reward_index(campaign,args.get("token",""))
 		if index>=0:claimed_template=campaign.pending_rewards[index].id
 	var old_floor: int=int(campaign.floor)
+	var moved_template: String=campaign.items.get(args.get("uid",""),"")
+	var removed_uid: String=preload("res://core/party_ui.gd").gear(campaign,args.get("actor","hero")).get(args.get("slot",""),"") if action=="unequip" else ""
 	var old_item_count: int=campaign.items.size()
 	var old_journal: Array=campaign.get("journal",[]).duplicate()
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
@@ -236,7 +238,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		if campaign.items.has(equipped_uid):
 			equipment_focus=cfg.items[campaign.items[equipped_uid]].slot
 			flow_selection={"kind":"equipment","uid":equipped_uid,"slot":equipment_focus}
-	elif action=="unequip" and not campaign.inventory.is_empty(): flow_selection={"kind":"inventory","uid":campaign.inventory[-1],"slot":""}
+	elif action=="unequip": flow_selection={"kind":args.get("destination","inventory"),"uid":removed_uid,"slot":""}
 	elif action=="claim_reward":
 		var matches: Array=campaign.inventory.filter(func(uid):return campaign.items[uid]==claimed_template) if claimed_template!="" else []
 		flow_selection={"kind":"inventory","uid":matches[-1] if not matches.is_empty() else "item-%d"%(int(campaign.next_item)-1),"slot":""}
@@ -255,10 +257,17 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 	if action=="supply": notice="不足部位へ最低装備を%d点支給しました。既存の装備と風呂敷は変更しません。"%(campaign.items.size()-old_item_count)
 	if action in ["organize","organize_bag"]: notice="選択した順序に整理しました。"
 	if action in ["open_chest","loot_acquire"]: preload("res://ui/journey_sound.gd").play(self,330)
-	if action=="transfer": notice="%sへ移しました。数量・個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
+	if action=="transfer":
+		var target_uid: String=args.uid
+		if target_uid not in campaign[args.destination]:
+			var matching: Array=campaign[args.destination].filter(func(k):return campaign.items[k]==moved_template)
+			target_uid=matching[0] if not matching.is_empty() else ""
+		warehouse_state.source=args.destination;warehouse_state.uid=target_uid;flow_selection={"kind":args.destination,"uid":target_uid}
+		notice="%sへ移しました。数量・個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
 	if action in ["claim_reward","exchange_reward","abandon_rewards","equip_reward"]: reward_confirmation=""
 	if action=="loot_acquire" and not campaign.pending_rewards.is_empty():reward_selected=campaign.pending_rewards[0].token;reward_confirmation="choose_replace"
-	if action in ["equip","unequip"]: equipment_candidate=""
+	if action=="equip":equipment_candidate=""
+	elif action=="unequip":equipment_candidate=removed_uid
 	show_campaign()
 	if int(campaign.floor)>old_floor:show_descent(old_floor)
 

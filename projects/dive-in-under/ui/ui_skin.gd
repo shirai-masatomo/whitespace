@@ -74,3 +74,6 @@ static func quiet_button(b: Button, selected: bool=false) -> void:
 	b.add_theme_color_override("font_disabled_color",MUTED)
 static func rule(parent: Control, r: Rect2, ink: Color=Color("455153")) -> void:
 	var line:=ColorRect.new(); line.position=r.position; line.size=r.size; line.color=ink; line.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(line)
+
+static func readable_strip(parent: Node, r: Rect2) -> void:
+	var strip:=ColorRect.new();strip.position=r.position;strip.size=r.size;strip.color=Color(.015,.04,.055,.91);strip.mouse_filter=Control.MOUSE_FILTER_IGNORE;parent.add_child(strip)

@@ -10,6 +10,7 @@ func refresh_storage() -> void:game.show_campaign()
 func build() -> void:
 	var s: Dictionary=game.campaign;var state: Dictionary=game.warehouse_state
 	UISkin.picture(self,preload("res://assets/interface/v2/surface-warehouse.png"),Rect2(0,0,1280,720),true)
+	UISkin.readable_strip(self,Rect2(16,8,1248,56))
 	UISkin.label(self,"アイテム",Rect2(28,14,510,45),28)
 	UISkin.label(self,"Shift＋右クリック：所持品⇔倉庫 / Shift＋ドラッグ：半分（1枚は1枚）",Rect2(440,20,805,30),16)
 	var left:=UISkin.panel(self,Rect2(16,78,296,347),"所持品  %d / 15"%s.inventory.size())
@@ -34,6 +35,7 @@ func build() -> void:
 	var modes: Array=["category","name","condition"];order.select(maxi(0,modes.find(state.get("sort","category"))));order.item_selected.connect(func(i):state.sort=modes[i])
 	UISkin.button(self,"整理",Rect2(620,630,150,40),func():game.call_deferred("perform","organize",{"source":state.get("sort_source","warehouse"),"mode":state.get("sort","category")},int(s.revision))).set_meta("nav","organize")
 	UISkin.button(self,"戻る",Rect2(1052,630,212,48),func():game.call_deferred("go_back")).set_meta("nav","back")
+	UISkin.readable_strip(self,Rect2(16,678,1248,34))
 	UISkin.label(self,game.notice if game.notice!="" else "ドラッグ：指定マスへ / フィルタ中もマス番号を保持 / 整理は選んだ収納だけ / コイン結合は詳細から",Rect2(24,684,1230,26),15,UISkin.INK)
 func details(p: Control) -> void:
 	var source: String=game.warehouse_state.get("source","inventory");var uid: String=game.warehouse_state.get("uid","")

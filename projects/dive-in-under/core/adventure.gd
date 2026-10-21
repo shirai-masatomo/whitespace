@@ -234,7 +234,10 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 				s.phase="reward";s.node.resolved=true;s.loot_attempted=true
 				if fits(s,s.pending_rewards):
 					s.loot_received=s.pending_rewards.duplicate(true)
-					for r in s.pending_rewards:receive(s,r)
+					for r in s.loot_received:
+						var owned: Array=s.inventory.duplicate();receive(s,r)
+						var added: Array=s.inventory.filter(func(id):return id not in owned)
+						r.received_uid=added[0] if not added.is_empty() else ""
 					s.pending_rewards=[]
 				changed=true
 		"open_chest":

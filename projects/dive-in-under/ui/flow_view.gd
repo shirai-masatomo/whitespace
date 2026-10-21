@@ -235,9 +235,17 @@ func build_rewards() -> void:
 	if earned.get("gold",0)!=0: gains.append("Gold +%d"%earned.gold)
 	label_at(center," / ".join(gains),Rect2(30,57,600,32),19,true)
 	if s.pending_rewards.is_empty():
-		UISkin.picture(center,chest_texture(true),Rect2(265,84,188,160))
-		label_at(center,"受け取り完了",Rect2(50,249,618,48),27,true)
-		label_at(center,"左の［E］で次へ、または「町へ帰還」を選べます。",Rect2(50,300,618,58),20,true)
+		UISkin.picture(center,chest_texture(true),Rect2(30,80,170,170))
+		label_at(center,"受け取り完了",Rect2(220,76,468,46),27,true)
+		var received: Array=s.get("loot_received",[])
+		var sc:=ScrollContainer.new();sc.position=Vector2(220,132);sc.size=Vector2(468,171);sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;sc.theme=UISkin.scroll_theme();center.add_child(sc)
+		var box:=VBoxContainer.new();box.size_flags_horizontal=Control.SIZE_EXPAND_FILL;box.add_theme_constant_override("separation",5);sc.add_child(box)
+		for receipt in received:
+			var row:=Control.new();row.custom_minimum_size=Vector2(450,51);box.add_child(row)
+			if receipt.get("received_uid","") in s.inventory:Grid.cell(row,game,self,Rect2(0,0,48,48),"inventory",receipt.received_uid)
+			else:UISkin.picture(row,preload("res://ui/equipment_art.gd").texture(receipt.id,game.cfg.items[receipt.id].slot),Rect2(0,0,48,48))
+			label_at(row,game.cfg.items[receipt.id].name+(" ×%d"%receipt.quantity if receipt.quantity>1 else ""),Rect2(62,6,376,37),20,true)
+		label_at(center,"左の［E］で次へ。取得品のアイコンで詳細を確認できます。",Rect2(30,318,658,36),16,true)
 	else:
 		label_at(center,"未受領 %d 点  /  クリックで比較・詳細"%s.pending_rewards.size(),Rect2(30,100,654,30),18,true)
 		if E.Journey.reward_index(s,game.reward_selected)<0: game.reward_selected=s.pending_rewards[0].token

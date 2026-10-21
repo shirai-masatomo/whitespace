@@ -13,6 +13,7 @@ func _ready() -> void:
 func refresh_storage() -> void:game.show_campaign()
 func build() -> void:
 	var s: Dictionary=game.campaign;var id: String=get_actor();var equipment: Dictionary=Party.gear(s,id)
+	UISkin.readable_strip(self,Rect2(16,8,1248,56))
 	UISkin.label(self,"装備  /  編集中："+Party.name_of(s,id),Rect2(28,18,540,40),27)
 	preload("res://ui/party_picker.gd").build(self,game,Rect2(610,12,650,50))
 	if s.phase!="town":game.gear_source="inventory"
@@ -53,6 +54,7 @@ func build() -> void:
 	else:UISkin.label(right,game.cfg.slots[game.equipment_focus]+" / 未装備",Rect2(24,150,322,60),22,UISkin.DARK,true)
 	UISkin.button(self,"戻る",Rect2(16,643,300,60),func():game.call_deferred("go_back")).set_meta("nav","back")
 	var h: Dictionary=Party.actor(s,game.cfg,id)
+	UISkin.readable_strip(self,Rect2(328,643,936,60))
 	UISkin.label(self,game.notice if game.notice!="" else "攻撃 %d / 防御 %d / 素早さ %d   |   光る枠へドラッグ / 右クリック：戻る"%[h.atk,h.def,h.spd],Rect2(338,646,918,50),17,UISkin.INK,true)
 func select_item(source: String, uid: String, slot: String="") -> void:
 	game.flow_selection={"kind":source,"uid":uid,"slot":slot};game.equipment_candidate=uid if source in ["inventory","warehouse"] else ""

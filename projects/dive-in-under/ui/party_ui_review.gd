@@ -70,6 +70,12 @@ static func run(game: Control) -> void:
 	if not check(game,game.modal_owner.actor=="B","status tactics link retains character"):return
 	await F.nav(game,"tactics-page-saved");await shot(game,"10-tactics-save-select");await F.nav(game,"tactics-apply");await F.key(game,KEY_ESCAPE)
 	game.open_town_page("warehouse");await F.wait(game);await shot(game,"11-items")
+	var frozen: Dictionary=game.campaign.duplicate(true)
+	var cancel_cell: Button=F.cell(game.screen,"inventory",game.campaign.inventory[0]);var origin: Vector2=cancel_cell.get_global_rect().get_center()
+	await F.wait(game,.4);await motion(game,origin);await mouse(game,origin,MOUSE_BUTTON_LEFT,true);await motion(game,origin+Vector2(20,0),true)
+	if not check(game,game.get_viewport().gui_is_dragging(),"cancel fixture uses native drag"):return
+	await mouse(game,origin+Vector2(20,0),MOUSE_BUTTON_RIGHT,true);await mouse(game,origin+Vector2(20,0),MOUSE_BUTTON_RIGHT,false);await mouse(game,origin+Vector2(20,0),MOUSE_BUTTON_LEFT,false);await F.wait(game,.4)
+	if not check(game,not game.get_viewport().gui_is_dragging() and game.campaign==frozen and game.town_page=="warehouse","right click cancels drag only with no item changes"):return
 	var coins: String=game.campaign.inventory.filter(func(k):return game.campaign.items[k]=="C01")[0]
 	await drag(game,F.cell(game.screen,"inventory",coins),cell_index(game.screen,8),true)
 	if not check(game,preload("res://core/currency.gd").amount(game.campaign)==3 and preload("res://core/currency.gd").amount(game.campaign,"warehouse")==2,"Shift drag floors odd stack and preserves total"):return
@@ -91,8 +97,8 @@ static func run(game: Control) -> void:
 	E.Adventure.reward(s,"A01");await reset(game,s);await shot(game,"17-loot-full-before")
 	await F.key(game,KEY_E);await shot(game,"18-loot-replace")
 	if not check(game,is_instance_valid(game.modal_owner) and game.campaign.pending_rewards.size()==1,"only full acquisition opens replacement UI"):return
-	await F.key(game,KEY_ESCAPE)
-	if not check(game,game.campaign.pending_rewards.size()==1 and game.campaign.inventory.size()==15,"cancel preserves unreceived reward and bag"):return
+	await mouse(game,Vector2(600,300),MOUSE_BUTTON_RIGHT,true);await mouse(game,Vector2(600,300),MOUSE_BUTTON_RIGHT,false);await F.wait(game,.4)
+	if not check(game,not is_instance_valid(game.modal_owner) and game.campaign.pending_rewards.size()==1 and game.campaign.inventory.size()==15,"cancel preserves unreceived reward and bag"):return
 	await shot(game,"19-loot-cancelled")
 	s=E.fresh(game.cfg,55);s=E.act(s,"depart",int(s.revision),{},game.data,game.cfg);s.floor=4;s.phase="explore";s=E.act(s,"descend",int(s.revision),{},game.data,game.cfg)
 	await reset(game,s);await shot(game,"20-portal-five")
@@ -106,4 +112,4 @@ static func run(game: Control) -> void:
 	await F.key(game,KEY_ESCAPE)
 	game.show_title();await F.wait(game)
 	UI.write(game,{"complete":true,"rendered":true,"version":ProjectSettings.get_setting("application/config/version"),"run_id":game.smoke_run_id,"no_save_store":game.save_store==null,"checks":checks,"exit_button_pressed":true,"fixtures_labelled":true,"user_evaluation":"not_reviewed"},"party-ui-review.json")
-	await F.nav(game,"exit")
+	await F.nav(game,"quit")

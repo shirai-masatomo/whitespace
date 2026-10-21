@@ -7,7 +7,7 @@ static func cell(parent: Control, game: Control, host: Control, rect: Rect2, sou
 	var b:=Button.new(); b.set_script(Cell); b.game=game; b.host=host; b.source=source; b.uid=uid; b.slot=slot; b.position=rect.position; b.size=rect.size
 	UISkin.quiet_button(b,selected); b.set_meta("item_source",source); b.set_meta("item_uid",uid); b.set_meta("equip_slot",slot)
 	b.actor_id=host.get_actor() if host.has_method("get_actor") else "hero"
-	parent.add_child(b); b.pressed.connect(func():if not b.quick_armed and not Input.is_key_pressed(KEY_SHIFT):host.call_deferred("select_item",source,uid,slot))
+	parent.add_child(b); b.pressed.connect(func():if not b.drag_half and not Input.is_key_pressed(KEY_SHIFT):host.call_deferred("select_item",source,uid,slot))
 	var template: String=""
 	if source=="pending":
 		var i: int=preload("res://core/journey.gd").reward_index(game.campaign,uid)
