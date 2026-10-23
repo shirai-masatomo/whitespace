@@ -1,0 +1,12 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>0959ea48a3b054cfba33</title><style>body{max-width:1080px;margin:30px auto;padding:20px;font:16px/1.85 "Meiryo",sans-serif;color:#24374a}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf2f6;padding:16px}table{border-collapse:collapse}td,th{border:1px solid #cbd5de;padding:9px}img{max-width:100%}.table{overflow:auto}a{color:#215b8e}code{overflow-wrap:anywhere}</style><body><nav><a href="../index.html">資料の入口へ</a></nav><p>---</p><p>language:</p><p>- en</p><p>license: openrail++</p><p>tags:</p><p>- stable-diffusion</p><p>- stable-diffusion-diffusers</p><p>- stable-diffusion-xl</p><p>- stable-diffusion-xl-turbo</p><p>- text-to-image</p><p>- art</p><p>- artistic</p><p>- diffusers</p><p>- anime</p><p>- dreamshaper</p><p>- turbo</p><p>- lcm</p><p>duplicated_from: lykon/dreamshaper-xl-v2-turbo</p><p>---</p><h1>Dreamshaper XL v2 Turbo</h1><p><code>lykon/dreamshaper-xl-v2-turbo</code> is a Stable Diffusion model that has been fine-tuned on <a href="https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0">stabilityai/stable-diffusion-xl-base-1.0</a>.</p><p>Please consider supporting me: </p><p>- on <a href="https://www.patreon.com/Lykon275">Patreon</a></p><p>- or <a href="https://snipfeed.co/lykon">buy me a coffee</a></p><h2>Diffusers</h2><p>For more general information on how to run text-to-image models with 🧨 Diffusers, see <a href="https://huggingface.co/docs/diffusers/using-diffusers/conditional_image_generation">the docs</a>.</p><p>1. Installation</p><pre><code>pip install diffusers transformers accelerate</code></pre><p>2. Run</p><pre><code>from diffusers import AutoPipelineForText2Image, DPMSolverMultistepScheduler
+import torch
+
+pipe = AutoPipelineForText2Image.from_pretrained(&#x27;lykon/dreamshaper-xl-v2-turbo&#x27;, torch_dtype=torch.float16, variant=&quot;fp16&quot;)
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+pipe = pipe.to(&quot;cuda&quot;)
+
+prompt = &quot;portrait photo of muscular bearded guy in a worn mech suit, light bokeh, intricate, steel metal, elegant, sharp focus, soft lighting, vibrant colors&quot;
+
+generator = torch.manual_seed(0)
+image = pipe(prompt, num_inference_steps=6, guidance_scale=2).images[0]  
+image.save(&quot;./image.png&quot;)</code></pre><aside id="not-included">実行環境・重み・作業用ファイルは非同梱です。</aside></body></html>

@@ -14,7 +14,7 @@
     "faceups/index.html",
     "tipsy-reference/index.html"
   ],
-  "files": 675,
+  "files": 1597,
   "media_files": 566,
   "media_bytes": 408650077,
   "absolute_local_paths_removed_from_text": true,
@@ -47,5 +47,15 @@
     "user_choice": "GitHubへの保存だけにする",
     "github_pages": "do not enable or publish",
     "repository_storage": "continue"
+  },
+  "library_hub_19": {
+    "date": "2026-10-23",
+    "gallery_count": 24,
+    "gallery_images_linked": 1291,
+    "supplemental_files_indexed": 588,
+    "unique_media_referenced_by_this_audit": 1031,
+    "manuals": 98,
+    "scope": "current deliverable galleries plus delivered characters, text effects, location images and selected completed sample folders; not all experiments/inputs on PC",
+    "local_html_readers": 222
   }
 }

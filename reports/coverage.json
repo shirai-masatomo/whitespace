@@ -1,0 +1,159 @@
+{
+  "date": "2026-10-23",
+  "gallery_count": 24,
+  "gallery_images_linked": 1291,
+  "supplemental_files_indexed": 588,
+  "unique_media_referenced_by_this_audit": 1031,
+  "manuals": 98,
+  "gallery_records": [
+    {
+      "title": "どきどき・重なる連続表示",
+      "index": "collections/01-dokidoki-overlap-20261023_15/README.md",
+      "html": "dokidoki/index.html",
+      "images": 13
+    },
+    {
+      "title": "絨毯からの接触・室内用",
+      "index": "collections/02-heroine-carpet-contact-20261022_11/README.md",
+      "html": "scenes/index.html",
+      "images": 27
+    },
+    {
+      "title": "ヒロイン・アップ表情4種類",
+      "index": "collections/03-heroine-closeups-20261023_16/README.md",
+      "html": "portraits/index.html",
+      "images": 8
+    },
+    {
+      "title": "接触ポーズと個別／ペア表示",
+      "index": "collections/04-heroine-contact-poses-20261022_06/README.md",
+      "html": "archives/04-heroine-contact-poses-20261022_06/index.html",
+      "images": 48
+    },
+    {
+      "title": "ヒロイン表情｜通常21・SD5",
+      "index": "collections/05-heroine-expression-library-20261022_04/README.md",
+      "html": "archives/05-heroine-expression-library-20261022_04/index.html",
+      "images": 103
+    },
+    {
+      "title": "表情の比較と採否 | ヒロイン素材",
+      "index": "collections/06-heroine-expression-motion-20261022_13/README.md",
+      "html": "expressions/index.html",
+      "images": 119
+    },
+    {
+      "title": "ヒロイン・表情追加と顔大アップ",
+      "index": "collections/07-heroine-expressions-faceup-20261023_17/README.md",
+      "html": "faceups/index.html",
+      "images": 19
+    },
+    {
+      "title": "視線と感情の向き",
+      "index": "collections/08-heroine-gaze-direction-20261022_07/README.md",
+      "html": "archives/08-heroine-gaze-direction-20261022_07/index.html",
+      "images": 9
+    },
+    {
+      "title": "感情SD10種とハート・震えエフェクト",
+      "index": "collections/09-heroine-sd-emotions-effects-20261022_05/README.md",
+      "html": "archives/09-heroine-sd-emotions-effects-20261022_05/index.html",
+      "images": 56
+    },
+    {
+      "title": "正面ソファー宅飲み｜AとB",
+      "index": "collections/10-heroine-sofa-party-20261022_01/README.md",
+      "html": "archives/10-heroine-sofa-party-20261022_01/index.html",
+      "images": 27
+    },
+    {
+      "title": "正面ソファー宅飲み｜人物別・引き戸・表情",
+      "index": "collections/11-heroine-sofa-party-20261022_02/README.md",
+      "html": "archives/11-heroine-sofa-party-20261022_02/index.html",
+      "images": 36
+    },
+    {
+      "title": "宅飲み改訂03｜仕草・同席者・体格と座位",
+      "index": "collections/12-heroine-sofa-party-20261022_03/README.md",
+      "html": "archives/12-heroine-sofa-party-20261022_03/index.html",
+      "images": 99
+    },
+    {
+      "title": "ヒロイン素材と組み合わせ一覧",
+      "index": "collections/13-heroine-text-effects-20261022_08/README.md",
+      "html": "materials/index.html",
+      "images": 499
+    },
+    {
+      "title": "未制作・代替・安全判定一覧",
+      "index": "collections/14-heroine-texture-lettering-20261022_09/README.md",
+      "html": "archives/14-heroine-texture-lettering-20261022_09/index.html",
+      "images": 0
+    },
+    {
+      "title": "座り酔い原本と追加参照の比較",
+      "index": "collections/15-heroine-tipsy-source-reference-20261023_18/README.md",
+      "html": "tipsy-reference/index.html",
+      "images": 7
+    },
+    {
+      "title": "参考シーン11場面と使用素材",
+      "index": "collections/16-scene-reference-review-20261023_14/README.md",
+      "html": "reference-scenes/index.html",
+      "images": 36
+    },
+    {
+      "title": "ふたりの距離が変わる12場面",
+      "index": "collections/17-LoRA_v1_恋愛シーン研究_20261022_02/README.md",
+      "html": "archives/17-LoRA_v1_恋愛シーン研究_20261022_02/index.html",
+      "images": 27
+    },
+    {
+      "title": "既存画像と比べる：感情・酔い・部屋着",
+      "index": "collections/18-LoRA_v1_感情部屋着比較_20261022_03/README.md",
+      "html": "archives/18-LoRA_v1_感情部屋着比較_20261022_03/index.html",
+      "images": 33
+    },
+    {
+      "title": "ヒロイン GIF試作3種類",
+      "index": "collections/19-lora-gif/README.md",
+      "html": "archives/19-lora-gif/index.html",
+      "images": 4
+    },
+    {
+      "title": "LoRA v1 衣装 ポーズ 恋愛の試作",
+      "index": "collections/20-LoRA_v1_衣装ポーズ恋愛_20261022_01/README.md",
+      "html": "archives/20-LoRA_v1_衣装ポーズ恋愛_20261022_01/index.html",
+      "images": 18
+    },
+    {
+      "title": "海・夜・宅飲みと表情比較",
+      "index": "collections/21-イベント立ち絵_海夜宅飲み_20261022_04/README.md",
+      "html": "archives/21-イベント立ち絵_海夜宅飲み_20261022_04/index.html",
+      "images": 59
+    },
+    {
+      "title": "宅飲み：サークル男子3人と座り酔い",
+      "index": "collections/22-宅飲み_サークル男子と座り酔い_20261022_06/README.md",
+      "html": "archives/22-宅飲み_サークル男子と座り酔い_20261022_06/index.html",
+      "images": 12
+    },
+    {
+      "title": "宅飲み後：眠りと体調不良",
+      "index": "collections/23-宅飲み後_眠りと体調不良_20261022_07/README.md",
+      "html": "archives/23-宅飲み後_眠りと体調不良_20261022_07/index.html",
+      "images": 10
+    },
+    {
+      "title": "トイレ前後・湯上がり・宅飲み",
+      "index": "collections/24-水回りと宅飲み_20261022_05/README.md",
+      "html": "archives/24-水回りと宅飲み_20261022_05/index.html",
+      "images": 22
+    }
+  ],
+  "excluded_reasons": {
+    "公開用に選択した成果物ではない作業ファイル": 266,
+    "参照原本・学習入力・中間・実行記録": 14
+  },
+  "scope": "current deliverable galleries plus delivered characters, text effects, location images and selected completed sample folders; not all experiments/inputs on PC"
+}

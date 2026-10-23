@@ -1,0 +1,13 @@
+基盤設定でテキストを以下に変えて出力してみてください
+1)女性1人、20歳の成人女性。女子大学生。柔らかい表情。長い黒髪。グラマラス。胸は大きい。ウエストは細め。正面寄り。立ち姿。ビキニ。背景は単純。全身像。フルカラーのフルカラーのアニメイラスト。品質タグ
+
+
+
+2. 実際のプロンプト例
+例えば、成人女性の立ち絵を、恋愛ゲームの夜のイベントCGに変更する場合です。
+日本語での制作指示：
+元画像の28歳の女性の顔立ち、金髪、青い瞳、体型、画風を維持する。衣装を上品なサテンのナイトウェアへ変更し、暖かな照明の寝室でベッドの端に腰掛けて微笑んでいる。日本の恋愛ADVのイベントCG風。
+
+Animagine XL 4.0 Opt用の英語プロンプト例：
+Positive Prompt
+1girl, solo, adult woman, 28 years old, long blonde hair, blue eyes, mature face, elegant satin nightdress, sitting on the edge of a bed, gentle smile, warm bedroom lighting, romantic atmosphere, Japanese visual novel CG style, detailed anime illustration, masterpiece, high score, great score

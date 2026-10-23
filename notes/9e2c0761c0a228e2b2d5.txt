@@ -1,0 +1,66 @@
+ヒロイン LoRA v1 — 学習前の準備記録（2026-10-22）
+
+【最新】v1の学習・39枚の検証・ComfyUIへの配置は完了。結果と使い方は同じフォルダーのRESULTS.txt。
+以下は学習開始前の準備記録として保管したもの。最新状態はstatus.jsonとRESULTS.txtを参照。
+
+現在：原本の保全・選別・キャプション・設定案まで。学習と検証画像生成は未実施。
+
+原画：sample/ヒロイン/neutral.png。指定パスの「ヒロイン　neutral.png」は存在しなかったため、実在する同フォルダーのneutral.pngを確認。
+audit/canonical-original.jsonに原本の場所・ハッシュを記録。audit/sources/N00.pngは原画の無加工コピー。
+
+画像の選別
+・候補27ファイル。基準B07は左右2カットなので分割すると28枚相当。
+・2人画像A08/A09/A13/A19は初回から除外。番号①～㉘と実ファイルの対応は未提示のため、ファイル名と内容で識別した。
+・A05は正面上半身の構図がA14に近いため今回は除外（画素の完全一致ではない）。
+・A06/A20は検証用に取り分け、学習フォルダーへ入れない。
+・残る21枚と原画N00の計22枚を学習用に準備。原画だけ2回、他は各1回。
+・原本27ファイルと原画のSHA256をコピー前後で照合。削除・上書きなし。
+・B07の中央4pxを除き左右へ分割。PNGの透過部分は学習用コピーのみ白に合成。
+・新規生成による増幅、反転、色変更、人物の描き直しは行っていない。
+
+キャプション
+識別文字列：wshrn26（新しい語彙や埋め込みの登録ではなく、学習時の共通文字列）。
+顔・前髪・長い金髪・青い目・体型・描き方をこの人物の特徴として学習させ、衣装、向き、画角、姿勢、手、表情、白背景を各画像の説明に記載。
+学習用22枚とキャプションはdataset、検証用2枚はvalidation/holdout。
+audit/selection.csvとselection.jsonに採否と理由、原本と学習コピーの対応を記録。
+目視では前髪・目の描き方・輪郭に程度差あり。同一性を保証したデータとは扱わず、原画を最優先して出力を比較する。
+
+環境と取得案
+GPU：RTX 4070 SUPER、12282 MiB。既存ComfyUI 0.42.1とPython環境は保全。
+既存Animagine XL 4.0 opt約6.94GBを再利用。基盤モデルの再取得なし。
+学習ツール：sd-scripts v0.12.2を専用runtime-private配下へ新規配置する案。
+既存Python 3.10から専用venvを作り、その中へPyTorch CUDA版と必要依存を導入する。ComfyUIへのpip導入や既存環境の更新は行わない。
+必要なトークナイザーも専用キャッシュへ配置。学習画像を外部へ送らない。課金・登録・クラウド学習は予定しない。
+追加容量15～25GB、GPUメモリー8～11GB、学習30分～2時間は事前の目安であり未測定。短い試験で実測してから本学習の見込みを更新する。
+VM隔離は確認できていない。ユーザー承認済みの通常Windows上でのComfyUI/GPU使用に続く作業であり、venvをVM隔離とは説明しない。
+リポジトリの事前承認規約に従い、新しい学習ツール・依存一式の取得は承認待ち。
+
+設定案（未実行）
+configs/dataset.toml：1024相当の縦横比bucket、batch1、反転・色変更なし。
+configs/train_v1.proposed.toml：UNetのみのLoRA、rank16/alpha8、bf16、AdamW、LR5e-5、1200step上限、400stepごと保存。
+gradient checkpointing、latentとtext encoder出力のディスクcache、SDPAを使う。キャプションshuffle/dropoutはcacheと両立しないため使用しない。
+構文は確認済み。導入する固定版の引数仕様・CUDA動作・メモリー・数値安定性は未検証。
+短い試験→400/800/1200stepの一部課題比較→過学習を含めて採用重みを選ぶ。1200stepが最良とは仮定しない。
+
+出力の検証案
+validation/plan.json：6課題×2seed×LoRAなし/あり＝24枚のAPI用JSON。まだ生成していない。
+基準衣装、別衣装、横顔、椅子座り、笑顔・照れ、髪を耳にかける仕草を比較。
+IPAdapter/OpenPose/inpaintを使わず、LoRAそのものの効果を同じプロンプトとseedで比較する。seed固定は人物固定の保証ではない。
+顔・髪・体型・画風、衣装指定、姿勢、手足、画面内の収まりを別々に目視評価する。
+LoRA完成後、outputへ学習重みとハッシュ・設定・ログを保存し、専用のComfyUIモデルパスから利用可能にする予定。
+
+実行と残存物
+実行済みは既存PythonによるCPUの一覧・画像準備・静的検査のみ。
+学習環境の取得、学習、ComfyUI検証サーバー起動、新規画像生成：未実施。
+変更はこの準備フォルダーと実験記録。システム設定・既存アプリ・ドライバー・他プロセスの停止は行っていない。
+
+一次資料
+https://github.com/kohya-ss/sd-scripts/tree/v0.12.2
+https://github.com/kohya-ss/sd-scripts/blob/v0.12.2/docs/sdxl_train_network.md
+https://github.com/kohya-ss/sd-scripts/blob/v0.12.2/docs/config_README-en.md
+https://huggingface.co/cagliostrolab/animagine-xl-4.0
+
+公開LoRAについて
+Hugging Face等で人物・画風などのLoRAが公開されている。対応する基盤モデルと各配布元の利用条件を確認して使う。
+今回の専用人物LoRAの検証へ他のLoRAを同時投入しない。公開LoRAの取得は行っていない。
+https://huggingface.co/docs/diffusers/main/en/using-diffusers/loading_adapters

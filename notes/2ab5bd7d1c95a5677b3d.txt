@@ -1,0 +1,79 @@
+ヒロイン専用LoRA v1 — 試作・検証完了（2026-10-22）
+
+制作全工程の手順書：［作業フォルダー］/projects/local-ai-image-lab/doc/HEROINE_LORA_WORKFLOW.md
+
+結果
+22枚で学習し、800step時点の重みをv1として選定した。ComfyUIへの配置・読込・画像生成まで確認済み。
+顔立ち、前髪、体格、描き方はLoRAなしより教材へ近づいた。別衣装、横顔、椅子座り、照れ笑い、髪へ手を添える姿を試した。
+完全な人物固定・服の細部固定は未達。識別語だけで容姿が必ず固定されるモデルではない。v1は試作用で、改善版v2を推奨する。
+
+すぐ使う
+・モデル：Animagine XL 4.0 opt（SDXL）。他の基盤モデルは未検証。
+・LoRA：heroine_wshrn26_animagine40_v1.safetensors
+・識別語：wshrn26
+・強度：model 0.75、clip 0.0（UNetのみ学習したため）。最適値の証明ではない。
+・プロンプトには blonde hair, long hair, blue eyes も明記する。
+・推論の開始条件：832×1216、CFG5、28step、Euler ancestral / normal。
+・画面用ワークフロー：validation/heroine-lora-v1.ui.json をComfyUIへ読み込む。
+・API用の検証グラフ：validation/executed。画面用とAPI形式は異なる。
+画面用JSONは既存のUI形式から作成して接続を静的確認。GUIの手動操作自体は未実施。対応するAPIグラフの実画像生成は確認した。
+
+配置先
+tools/local-ai-foundation/runtime/ComfyUI_windows_portable/ComfyUI/models/loras/heroine_wshrn26_animagine40_v1.safetensors
+（上記はcodex_testからの相対位置。絶対位置はvalidation/selected-checkpoint.jsonに記録。）
+重みの保存原本：output/selected/heroine_wshrn26_animagine40_v1.safetensors
+85,430,940byte、約85MB。SHA256：2f39815fd629b430cce9e910a800a272e8dc8d7559998c1cdaacd0bb2df68e9f
+
+比較画像
+・validation/checkpoint-screen.jpg：左からLoRAなし、400、800、1200step。
+・validation/baseline-v1-42006.jpg、baseline-v1-43000.jpg：各課題で左がLoRAなし、右がv1。
+・validation/probe-contact.jpg：容姿語を省く、閉じ目を明示、スカート丈を強める追加確認。
+新規生成は計39枚：LoRAなし12、チェックポイント比較9、採用v1の比較12、追加プロンプト確認6。
+元画像の切り出しや一覧画像は新規生成枚数へ数えていない。
+
+確認できたことと限界
+・緑のスポーツ上着、赤いブラウス、黄セーター＋ジーンズ、紫の上着へ変更でき、青いカーディガンへ一律固定はされなかった。
+・横顔、椅子座り、髪を耳にかける仕草で人物の傾向が近づいた。原画との厳密な一致は保証しない。
+・最初の表情テストは笑顔と赤面が出たが、閉じ目は2例とも未達。blue eyes / looking at viewer等を外し、closed eyes・laughingとnegativeのopen eyesを使った追加1例では閉じ目が出た。複数語を変えた比較なので単一語の原因は特定しない。
+・髪・目の語を省いたスポーツ服の追加1例では暗髪になった。識別語のみでの人物固定は不足がある。髪色・髪の長さ・目の色を併記する運用が必要。
+・通常の立ち姿2例のうち一方はロングスカート、一方はミニ丈になった。丈を強調した追加1例では長さは改善したが、紺指定がベージュへ変化した。
+・上着の開き、ネックレス、布の塗り・光沢、手の細部は差が残る。全身ポーズの厳密制御、背景の汎化、ハグ・キス、inpaint併用は今回未検証。
+これらは少数の選択的な比較であり、一般的な合格率へ換算しない。量産完成品の合格を認定する試験ではない。
+
+学習と選別
+候補27ファイルを28カット相当へ分割。2人画像4ファイルと近い構図1ファイルを除外し、2枚を検証用へ分けた。
+残る21カットと最優先原画neutral.pngの計22枚を使用。原画だけ2反復、他1反復。
+採否・元ファイルとの対応・全文キャプション：audit/selection.csv、selection.json。
+原本27ファイルと原画は無加工で保全。学習用コピーのみ白背景化・比較画像分割。生成による増幅は行っていない。
+sd-scripts v0.12.2（11d8cedd0c67b93a10f8b2d75f43554f6f12c794）、Python3.10.6、Torch2.8.0+cu128。
+UNetのみ、rank16/alpha8、AdamW、LR5e-5、bf16、1024相当bucket、batch1、1200stepまで学習。
+400/800/1200を3課題・同じseedで比較し、差が小さい800/1200のうち800を初回候補として選定。全般的な最適値とは扱わない。
+実行設定：configs/train.executed.toml、データ定義：configs/dataset.toml、依存固定一覧：logs/install-freeze.log。
+
+実測負荷
+本学習は約25分51秒（モデル読込込み）。前の20step試験は約81秒。
+本学習プロセスのPyTorch最大allocated約6.1GiB、reserved約7.0GiB。
+10秒間隔で観測したGPU全体の最大使用量8878MiB（約8.7GiB、他アプリを含む）。
+学習プロセスの最大Working Setは約20.0GiB。venv launcherの小さいRAM値とは区別して測定した。
+追加の専用領域は最終監査時約8.95GB（8.33GiB）。既存の基盤モデルを再取得していない。
+計測方法・全サンプル：run-train.json、logs/process-metrics-train.json、logs/cuda-peak-train.json、audit/final-audit.json。
+
+保全・実行範囲
+ユーザー承認を受けた通常Windows上で専用venv・プロファイル・キャッシュを使用。VM隔離ではなく、VM内テストは未実施。
+Windowsの長いパス制限は短い専用パスへ配置して回避。レジストリ・システム設定・ドライバー変更は行っていない。
+既存ComfyUIのPythonやpip依存は変更していない。既存ComfyUIへの追加はLoRA重み1ファイルだけ。
+監査では原本28ファイルと保護対象3ファイルのハッシュ一致、39枚の生成画像ハッシュ、LoRAコピーの一致を確認。
+起動した学習・検証プロセスのPIDはすべて不在を確認。失敗した最初のvenvは削除し、ログを保全。
+専用venv、キャッシュ、学習重み、検証画像は再利用できるよう残した。外部への画像送信・公開・課金・登録は行っていない。
+
+次に改善するなら
+1. 原画の顔・前髪・体格と候補群の差を再選別し、同一性を優先した教材を固定する。
+2. 識別語のみの別衣装テストを先に置き、髪・目の語を併記した運用と分けて評価する。
+3. 学習量・強度・識別語と容姿の学習方法を一条件ずつ比較する。TEの弱い学習等も候補だが、12GB GPUの実行可否とcache制約の再検証が必要。今回は未実施。
+4. 衣装の厳密さや手・姿勢は別の検証課題とし、必要に応じてOpenPose/inpaintを追加する。LoRA単独の改善と混同しない。
+初回v1の試作・検証まで完了し、自動的なv2追加学習は行っていない。
+
+公開LoRA
+Hugging Face等に公開LoRAがある。モデル系統（SDXL等）と配布元の利用条件を確認して使う。
+今回は既製LoRAの取得・併用は行わず、この人物専用のv1を作成した。
+https://huggingface.co/docs/diffusers/main/en/using-diffusers/loading_adapters

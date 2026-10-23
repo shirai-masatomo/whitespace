@@ -1,0 +1,7 @@
+Tool: built-in image_gen; transparent_background=true.
+Reference: original 05/effects/17_heart_particle.png.
+
+Edit the supplied single heart particle for an animated game UI overlay. Preserve the same cute slightly hand-drawn filled heart silhouette, slight tilt, and thin white/light-pink outline. Change the heart fill from light bright candy pink to saturated DARK HOT PINK / deep rose pink, approximately #D91868, so it is bold and clearly visible on both light and dark scenes. Solid rich pink center, minimal shading, a small subtle white highlight allowed. Remove the large neon outer glow and diffuse magenta halo, keep crisp clear edges. Exactly one isolated heart, no text, no additional hearts, no background, genuine transparent alpha. Keep the whole heart within frame with a modest transparent margin. This is a standalone nonsexual UI heart icon.
+
+Selected source: exec-e95a39ef-ebb1-48ce-9620-a2ef4c7690d3.png.
+Animation: build.py; static image edit 1, procedural animation formats 3; no AI video generation.
