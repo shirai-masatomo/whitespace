@@ -1,7 +1,7 @@
 {
   "date": "2026-10-23",
-  "catalog_files": 199,
-  "expression_candidates": 30,
+  "catalog_files": 203,
+  "expression_candidates": 34,
   "text_choices": 46,
   "entry_pages": [
     "materials/index.html",
@@ -9,17 +9,18 @@
     "guide/index.html",
     "scenes/index.html",
     "reference-scenes/index.html",
-    "dokidoki/index.html"
+    "dokidoki/index.html",
+    "portraits/index.html"
   ],
-  "files": 616,
-  "media_files": 527,
-  "media_bytes": 368625686,
+  "files": 632,
+  "media_files": 536,
+  "media_bytes": 377704443,
   "absolute_local_paths_removed_from_text": true,
   "original_images_binary_preserved": true,
   "runtime_models_not_included": true,
   "browser_runtime_tested": false,
   "decisions_sync": "manual JSON export/import",
-  "mock_dom_checks_passed": 17,
+  "mock_dom_checks_passed": 19,
   "reference_scene_count": 12,
   "home_scene_count": 8,
   "reference_scene_gifs": 7,
@@ -30,5 +31,7 @@
   "current_scene_animation_count": 7,
   "dokidoki_continuous_no_blank_frames": true,
   "dokidoki_scene_size_ratio": 0.78,
-  "dokidoki_overlap_ms": 640
+  "dokidoki_overlap_ms": 640,
+  "closeup_portraits": 4,
+  "latest_portrait_revision": "20261023-16"
 }
