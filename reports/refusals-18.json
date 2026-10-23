@@ -1,0 +1,52 @@
+{
+  "attempts": 7,
+  "generated": 3,
+  "refused": [
+    {
+      "id": "04_ref02_closed",
+      "reference": "ref-02.png",
+      "requested": "参照02・閉じ目と小口",
+      "status": "refused",
+      "stage": "output",
+      "category": "sexual",
+      "output_file": null,
+      "request_id": "94d60d21-72aa-4da8-b7ea-ce42a7ff5935"
+    },
+    {
+      "id": "05_ref04_open",
+      "reference": "ref-04.png",
+      "requested": "参照04・開いた目と開き口",
+      "status": "refused",
+      "stage": "output",
+      "category": "sexual",
+      "output_file": null,
+      "request_id": "ad702926-783a-4b52-adab-4b2b717303a0"
+    },
+    {
+      "id": "06_ref07_halflid",
+      "reference": "ref-07.png",
+      "requested": "参照07・半目と汗粒",
+      "status": "refused",
+      "stage": "output",
+      "category": "sexual",
+      "output_file": null,
+      "request_id": "447aaa6f-ce70-4119-8957-8a7752bc686b"
+    },
+    {
+      "id": "07_ref09_open",
+      "reference": "ref-09.png",
+      "requested": "参照09・半目と大きめの開き口",
+      "status": "refused",
+      "stage": "input",
+      "category": "other",
+      "output_file": null,
+      "request_id": "ef4bea27-bdde-4099-954a-344efa22d057"
+    }
+  ],
+  "not_attempted": [
+    "ref-03.png",
+    "ref-05.png",
+    "other screenshots and JPGs"
+  ],
+  "notes": "Previous 17 used ref-01,06,08; this batch attempted 02,04,07,09 once each. No blocked trial was retried."
+}
