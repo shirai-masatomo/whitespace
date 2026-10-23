@@ -1,0 +1,19 @@
+{
+  "label": "Animagine XL 4.0 Opt normal-settings test",
+  "generated_at": "2026-10-19T23:47:10+09:00",
+  "added_to_gallery_at": "2026-10-20",
+  "image": "images/animagine40_default_00001_.png",
+  "model_id": "animagine40",
+  "checkpoint": "animagine-xl-4.0-opt.safetensors",
+  "seed": 42006,
+  "width": 832,
+  "height": 1216,
+  "steps": 28,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "scheduler": "normal",
+  "elapsed_seconds": 10.37,
+  "sha256": "63a14399539918864968b550da8998562a62f0c2913749b87c0a769e3b558f35",
+  "workflow": "workflows/09-animagine40-normal.json",
+  "comparison_note": "Separate normal-settings example. Prompt differs from the controlled six-image comparison."
+}

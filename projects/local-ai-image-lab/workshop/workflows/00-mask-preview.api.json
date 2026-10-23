@@ -1,0 +1,35 @@
+{
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "workshop_image_a_work.png"
+    }
+  },
+  "10": {
+    "class_type": "MaskToImage",
+    "inputs": {
+      "mask": [
+        "4",
+        1
+      ]
+    }
+  },
+  "11": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "4",
+        0
+      ]
+    }
+  }
+}

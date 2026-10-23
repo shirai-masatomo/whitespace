@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-19",
+  "delivery": "Remote images embedded by URL; no image copies or model weights included.",
+  "sources": [
+    {
+      "model": "Animagine XL 4.0",
+      "publisher": "Cagliostro Lab",
+      "source_url": "https://huggingface.co/cagliostrolab/animagine-xl-4.0",
+      "image_url": "https://cdn-uploads.huggingface.co/production/uploads/6365c8dbf31ef76df4042821/bDdKraYxjiReKknlYJepR.png",
+      "context": "Official model card, Quality Tags, masterpiece / best quality example. Not specifically an Opt example.",
+      "visually_checked": true
+    },
+    {
+      "model": "Illustrious XL v0.1",
+      "publisher": "OnomaAI Research",
+      "source_url": "https://huggingface.co/OnomaAIResearch/Illustrious-xl-early-release-v0",
+      "image_url": "https://cdn-uploads.huggingface.co/production/uploads/65eea2d62cc24ebc6dbe16c0/dXvGxUKjcsqzt_gDWc9FU.png",
+      "context": "Official model card, first gallery image s00. Does not represent every Illustrious version or derivative.",
+      "visually_checked": true
+    },
+    {
+      "model": "Pony V7",
+      "publisher": "PurpleSmartAI",
+      "source_url": "https://purplesmart.ai/pony/content7x",
+      "image_url": "https://purplesmart.ai/images/pony7-gallery/daydream.avif",
+      "context": "Official developer gallery, daydream.avif. Not a Pony V6 example.",
+      "visually_checked": true
+    },
+    {
+      "model": "NoobAI-XL",
+      "publisher": "Laxhar Lab / L_A_X",
+      "source_url": "https://huggingface.co/Laxhar/noobai-XL-1.0",
+      "gallery_url": "https://civitai.com/models/833294/noobai-xl-nai-xl",
+      "image_url": null,
+      "context": "Link only. Browser safety policy blocked the image-delivery host, so no unverified thumbnail is embedded.",
+      "visually_checked": false
+    }
+  ]
+}

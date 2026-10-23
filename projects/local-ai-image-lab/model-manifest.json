@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-19",
+  "note": "Pinned official sources for historical comparisons. Installed status updated 2026-10-19; SDXL Base weight removed at user request.",
+  "models": [
+    {
+      "id": "sdxl",
+      "version": "462165984030d82259a11f4367a4eed129e94a7b",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/462165984030d82259a11f4367a4eed129e94a7b/sd_xl_base_1.0.safetensors",
+      "path": "models/checkpoints/sd_xl_base_1.0.safetensors",
+      "bytes": 6938078334,
+      "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+      "license": "CreativeML Open RAIL++-M",
+      "installed": false,
+      "role": "historical-only"
+    },
+    {
+      "id": "animagine31",
+      "version": "483f0c322568ed13697ed01dd0be07204746d12b",
+      "url": "https://huggingface.co/cagliostrolab/animagine-xl-3.1/resolve/483f0c322568ed13697ed01dd0be07204746d12b/animagine-xl-3.1.safetensors",
+      "path": "models/checkpoints/animagine-xl-3.1.safetensors",
+      "bytes": 6938325776,
+      "sha256": "e3c47aedb06418c6c331443cd89f2b3b3b34b7ed2102a3d4c4408a8d35aad6b0",
+      "license": "CreativeML Open RAIL++-M; see fixed official model card and underlying SDXL terms",
+      "enabled": true,
+      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested.",
+      "installed": true,
+      "role": "comparison"
+    },
+    {
+      "id": "animagine40",
+      "version": "2b7c1b397761bf5bd3cc42e5b39ec99314a75a96",
+      "url": "https://huggingface.co/cagliostrolab/animagine-xl-4.0/resolve/2b7c1b397761bf5bd3cc42e5b39ec99314a75a96/animagine-xl-4.0-opt.safetensors",
+      "path": "models/checkpoints/animagine-xl-4.0-opt.safetensors",
+      "bytes": 6938350040,
+      "sha256": "6327eca98bfb6538dd7a4edce22484a1bbc57a8cff6b11d075d40da1afb847ac",
+      "license": "CreativeML Open RAIL++-M; see fixed official model card and underlying SDXL terms",
+      "enabled": true,
+      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested.",
+      "installed": true,
+      "role": "primary"
+    }
+  ]
+}
