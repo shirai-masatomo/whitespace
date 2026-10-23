@@ -1,0 +1,42 @@
+[
+  {
+    "id": "01-first-image",
+    "ui": "9e860c48e3da844c.json",
+    "api": "［作業フォルダー］\\projects\\local-ai-image-lab\\workflows\\beginner\\01-first-image.api.json",
+    "positive": "1girl, solo, original adult woman age 28, mature face, long blonde hair, blue eyes, gentle smile, white high-neck blouse, navy cardigan, fully clothed, holding book, library, bookshelves, upper body, looking at viewer, eye level, soft daylight, full color anime illustration, masterpiece, high score, great score",
+    "negative": "text, watermark, logo, blurry, deformed hands, extra fingers, duplicate people",
+    "prefix": "general/20261022/first-run/image",
+    "note": "既存09の再現用。保存先と画面タイトルのみ変更。再実行は未実施。",
+    "new_generation_tested": false
+  },
+  {
+    "id": "02-clothing-color",
+    "ui": "417e95204b4c3cf9.json",
+    "api": "［作業フォルダー］\\projects\\local-ai-image-lab\\workflows\\beginner\\02-clothing-color.api.json",
+    "positive": "1girl, solo, original adult woman age 28, mature face, long blonde hair, blue eyes, gentle smile, white high-neck blouse, red cardigan, fully clothed, holding book, library, bookshelves, upper body, looking at viewer, eye level, soft daylight, full color anime illustration, masterpiece, high score, great score",
+    "negative": "text, watermark, logo, blurry, deformed hands, extra fingers, duplicate people",
+    "prefix": "general/20261022/clothing-color/image",
+    "note": "01からカーディガン色だけ変更。新規生成の品質は未検証。",
+    "new_generation_tested": false
+  },
+  {
+    "id": "03-composition-carpet",
+    "ui": "6ba01a1dc8f682d3.json",
+    "api": "［作業フォルダー］\\projects\\local-ai-image-lab\\workflows\\beginner\\03-composition-carpet.api.json",
+    "positive": "1girl, solo, adult woman age 24, long blonde hair, blue eyes, gentle smile, blue cardigan, white turtleneck, long navy skirt, fully clothed, full body, sitting sideways on a carpet, legs folded to one side, bare feet, looking to the left, living room, sofa in background, eye level, masterpiece, high score, great score",
+    "negative": "text, watermark, logo, blurry, deformed hands, extra fingers, duplicate people",
+    "prefix": "general/20261022/carpet-composition/image",
+    "note": "横長・床座り・室内の練習。題材も変えた複合条件。新規生成の品質は未検証。",
+    "new_generation_tested": false
+  },
+  {
+    "id": "04-heroine-lora",
+    "ui": "e919abc7fa549baf.json",
+    "api": "［作業フォルダー］\\projects\\local-ai-image-lab\\workflows\\beginner\\04-heroine-lora.api.json",
+    "positive": "wshrn26, 1girl, adult woman age 24, solo, blonde hair, long hair, blue eyes, full body, standing, three-quarter view, looking at viewer, gentle smile, hands clasped in front, blue cardigan, white turtleneck, gold necklace, navy blue ankle-length pleated skirt, bare feet, white background, masterpiece, best quality, very aesthetic",
+    "negative": "worst quality, low quality, lowres, bad anatomy, bad hands, extra digits, missing fingers, extra limbs, multiple people, text, watermark",
+    "prefix": "general/20261022/heroine-lora/image",
+    "note": "既存800step選択LoRAを使う。今回は室内向け素足へ変更したため新プロンプトの品質は未検証。",
+    "new_generation_tested": false
+  }
+]

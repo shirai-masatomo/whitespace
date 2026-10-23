@@ -1,0 +1,291 @@
+{
+  "R": "［作業フォルダー］",
+  "P": "［作業フォルダー］/projects/local-ai-image-lab",
+  "W": "［作業フォルダー］/output/heroine-text-effects-20261022_08",
+  "F": "［作業フォルダー］/projects/local-ai-image-lab/sample/ヒロイン/まとまり/宅飲み_正面ソファー_20261022/描き文字と熱気_08",
+  "jobs": [
+    {
+      "id": "01_muwa",
+      "label": "むわ～",
+      "kind": "text",
+      "prompt": "Use case: illustration-story. Create ONE original Japanese manga lettering overlay, exact text (verbatim): \"むわ～\". This represents humid summer heat lingering in the air, for an everyday warm room or post-exercise scene. Only these three glyphs: む, わ, ～. Hand-drawn rounded Japanese brush lettering, organic varying stroke width, gently sagging and wavy horizontal baseline, the long wave trailing to the right. Warm muted mauve-brown ink with a narrow creamy-white outline for legibility over illustrations. Large well-spaced readable characters, flat 2D drawn texture. Isolated typography only, centered with generous transparent margins. True transparent PNG, no paper, no frame, no gradient background, no fog, no steam, no characters, no hearts, no watermark. Do not reproduce any specific existing lettering asset."
+    },
+    {
+      "id": "02_doki",
+      "label": "どきっ",
+      "kind": "text",
+      "prompt": "Use case: illustration-story. Create ONE original Japanese manga lettering overlay, exact text (verbatim): \"どきっ\". It communicates a sudden shy heartbeat or pleasant romantic surprise in an all-ages story. Three glyphs: ど, き, small っ, with correct dakuten on ど. Original expressive hand-drawn Japanese lettering, lively thick-to-thin strokes, gently rising diagonal composition. Muted raspberry-pink ink, slim cream-white border, a tiny offset darker pink edge for readability, flat 2D ink look. Each glyph clearly legible. Typography only, centered with generous margins. True transparent PNG, no people, no hearts, no symbols, no paper, no rectangle, no scenery, no watermark. Do not copy any specific existing lettering design."
+    },
+    {
+      "id": "03_humid_haze",
+      "label": "薄い熱気",
+      "kind": "haze",
+      "prompt": "Use case: illustration-story. Create one subtle overlay of humid warm air for a 2D anime scene on a truly transparent background. A wide sparse veil of very faint warm ivory vapor, translucent wispy filaments and broad barely visible soft curls drifting upward, smoothly feathered into fully transparent empty space. Airy uneven diffuse mist, not opaque smoke and not solid cartoon cloud puffs. Most of the canvas remains empty and fully transparent; vapor opacity is low so a background illustration can remain visible through it. No objects, no people, no letters, no hearts, no frame, no solid background, no checkerboard pixels. A single independent atmosphere layer, all-ages everyday humidity effect."
+    },
+    {
+      "id": "02_doki_flat_v2",
+      "label": "どきっ（平面的な版）",
+      "kind": "text",
+      "parent": "02_doki",
+      "prompt": "Use case: precise-object-edit. Edit target: the attached Japanese lettering PNG. Keep the exact readable text \"どきっ\", correct three glyphs with small っ and dakuten, and the same lively hand-drawn diagonal character shapes. Remove the ENTIRE large pink halo and ALL gradients and highlights. All space around the strokes must be fully transparent. Use flat muted raspberry-pink ink inside the letters and a slim cream-white outline only. Matte flat 2D comic ink, no glow, no neon, no glossy bevel, no colored backdrop, no shadow or haze outside the thin outline. Retain generous transparent margins and deliver true transparent PNG."
+    },
+    {
+      "id": "02_doki_ink_v3",
+      "label": "どきっ（墨文字）",
+      "kind": "text",
+      "parent": "02_doki_flat_v2",
+      "prompt": "Create an isolated FLAT BLACK INK Japanese manga sound-effect asset. Exact text: どきっ . Readable ど with its two dakuten marks, then き, then small っ. Draw it like original Japanese comic hand lettering: lively thin-to-thick calligraphic lines, slightly tilted, casual irregular stroke edges, energetic but not blocky. Horizontal phrase. ONLY opaque solid black strokes and fully TRANSPARENT empty space. Single-color 2D ink stamp. No white edging, no colored edging, no shadows, no glow, no gradient, no blur, no aura, no ornament, no paper, no frame, no background. Center with generous empty transparent margins. This is a typographic asset for a wholesome romantic surprise, not a poster."
+    },
+    {
+      "id": "04_muwa_reference_style",
+      "label": "むわ～・手描き縦型",
+      "kind": "text",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: general graphic language ONLY, slender informal hand-lettering with changing character sizes and a loose vertical flow. Create ONE NEW lettering asset, exact Japanese text: むわ～ . This conveys humid warm air in an everyday summer room. It is not text copied from the reference. Three glyphs only: む, わ, ～. Loose slender hand-drawn strokes, tapered ends with irregular slight wobble, airy hiragana, not a heavy rounded font. Read top to bottom: む near the top, わ below and slightly right, then a long thin wavy trail ～ extending downward. The second glyph is smaller than the first. Light warm coral-pink ink, a very fine off-white edge only for legibility. Expressive drawing rather than typeset font. Minimal flat matte ink, no 3D, no highlights, no aura or glow. Only the single phrase on TRUE TRANSPARENT background, generous transparent margins; no paper, no tiles, no panel or decorations or people. Portrait composition."
+    },
+    {
+      "id": "05_doki_reference_style",
+      "label": "どきっ・手描き縦型",
+      "kind": "text",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference role: the provided sheet is a graphic-language reference for slender informal Japanese hand lettering and loose vertical layout only. Create one original standalone romantic surprise caption with the exact Japanese text \"どきっ\". It is an all-ages shy heartbeat. Correct glyphs: ど (including both dakuten marks), き, small っ. Read top to bottom, with a loose diagonal offset and progressively smaller letters; handwritten angular thin-to-thick strokes like quick comic pen lettering. Restrained pale lavender-purple ink. Do not make a thick sticker font. No large heavy outline: only a hairline pale edge if needed. No additional hearts or symbols. Matte flat drawn ink on true transparent background. No luminous halo, no glow, no bevel, no gradients, no paper or grid, no panel, no other text, no scenery or people. Portrait composition with generous transparent margins. Use the reference technique, not a tracing of any sample word."
+    },
+    {
+      "id": "06_clear_warm_air",
+      "label": "人いきれ・ほぼ透明の膜",
+      "kind": "haze",
+      "parent": "03_humid_haze",
+      "prompt": "Use case: illustration-story. Create ONE almost-invisible warm-air overlay for a fully clothed adult group sitting in a summer room. The effect expresses trapped body warmth and sweat humidity in the air, not odor, not smoke. NO people or body parts in this asset. A few exceptionally faint narrow, irregular vertical air-ripple contours and long soft transparent filaments, widely spaced, with large clear empty gaps. Neutral warm ivory only, extremely low opacity. It should suggest dense close warm air despite being almost clear. No solid clouds, no cartoon steam puffs, no colored fog, no yellow/green, no sparkles, no glow, no text. The edges of the canvas and most of its area must be truly transparent. A sparse 2D overlay whose fine translucent contours can be composited over existing artwork without hiding any face. True transparent PNG with generous empty margins."
+    },
+    {
+      "id": "07_micro_quiver",
+      "label": "小刻みな震え・短い線",
+      "kind": "motion",
+      "prompt": "Use case: illustration-story. Create one transparent 2D manga motion-line overlay: just TWO separate SHORT irregular scratch-like quiver strokes side by side, each gently horizontal with one or two tiny sharp nervous peaks and a few small kinks, like a quick fine pen flick indicating a tiny local tremor. Ivory-white thin hairline ink with a very thin neutral gray edge for readability. Hand-drawn imperfect strokes. Large empty fully transparent space between the two strokes. Horizontal wide-strip composition with generous transparent margins all around. The marks must be delicate, sparse and local: no long parallel sinusoidal waves, no large zigzag lightning, no shock burst, no earthquake symbols, no frame, no text, no people, no anatomy, no furniture, no opaque background, no glow. True transparent PNG. The source concept is a small trembling contour rather than a shaking scene."
+    },
+    {
+      "id": "09_gyu",
+      "label": "ぎゅー",
+      "kind": "text",
+      "intent": "ハグして離れたくない",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"ぎゅー\". It expresses ハグして離れたくない in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted light coral-pink ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D."
+    },
+    {
+      "id": "10_dokidoki",
+      "label": "どきどき",
+      "kind": "text",
+      "intent": "ときめきと緊張",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"どきどき\". It expresses ときめきと緊張 in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted lavender-purple ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D."
+    },
+    {
+      "id": "11_kyun",
+      "label": "きゅん",
+      "kind": "text",
+      "intent": "恋心が動く瞬間",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"きゅん\". It expresses 恋心が動く瞬間 in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted light coral-pink ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D."
+    },
+    {
+      "id": "12_moji",
+      "label": "もじ…",
+      "kind": "text",
+      "intent": "照れてためらう",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"もじ…\". It expresses 照れてためらう in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted lavender-purple ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D."
+    },
+    {
+      "id": "13_sowa",
+      "label": "そわ…",
+      "kind": "text",
+      "intent": "期待と不安で落ち着かない",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"そわ…\". It expresses 期待と不安で落ち着かない in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted lavender-purple ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D."
+    },
+    {
+      "id": "14_chucchu",
+      "label": "ちゅっちゅ",
+      "kind": "text",
+      "intent": "軽いキスを交わす",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"ちゅっちゅ\". It expresses 軽いキスを交わす in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted light coral-pink ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D."
+    },
+    {
+      "id": "15_duck_pout",
+      "label": "甘えるアヒル口",
+      "kind": "face",
+      "reference": "制作参照（共有版非同梱）",
+      "prompt": "Use case: precise-object-edit. Edit target: attached transparent square crop of our original 24-year-old adult blonde woman. Keep the exact adult identity, face outline, head tilt, feature positions, blue eyes, golden bangs and long hair, blue cardigan, opaque white turtleneck, necklace and hands. Change ONLY her expression into a cute slightly spoiled duck-lip pout when asking a trusted person for attention: small gently pursed forward lips, closed mouth, a subtle sideways 3-shaped upper-lip curve, not a literal duck beak. Slightly puffed lower lip rather than a wide kiss mouth. Soft raised inner brows, mild blush. Both blue irises look UP AND SCREEN LEFT toward her conversation partner, not at the viewer. This is an all-ages affectionate teasing expression. No change to body or costume, no additions, no hearts, no text or scenery. Same square crop and true transparent background."
+    }
+  ],
+  "assets": [
+    {
+      "id": "01_muwa",
+      "label": "むわ～",
+      "kind": "text",
+      "prompt": "Use case: illustration-story. Create ONE original Japanese manga lettering overlay, exact text (verbatim): \"むわ～\". This represents humid summer heat lingering in the air, for an everyday warm room or post-exercise scene. Only these three glyphs: む, わ, ～. Hand-drawn rounded Japanese brush lettering, organic varying stroke width, gently sagging and wavy horizontal baseline, the long wave trailing to the right. Warm muted mauve-brown ink with a narrow creamy-white outline for legibility over illustrations. Large well-spaced readable characters, flat 2D drawn texture. Isolated typography only, centered with generous transparent margins. True transparent PNG, no paper, no frame, no gradient background, no fog, no steam, no characters, no hearts, no watermark. Do not reproduce any specific existing lettering asset.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_doki",
+      "label": "どきっ",
+      "kind": "text",
+      "prompt": "Use case: illustration-story. Create ONE original Japanese manga lettering overlay, exact text (verbatim): \"どきっ\". It communicates a sudden shy heartbeat or pleasant romantic surprise in an all-ages story. Three glyphs: ど, き, small っ, with correct dakuten on ど. Original expressive hand-drawn Japanese lettering, lively thick-to-thin strokes, gently rising diagonal composition. Muted raspberry-pink ink, slim cream-white border, a tiny offset darker pink edge for readability, flat 2D ink look. Each glyph clearly legible. Typography only, centered with generous margins. True transparent PNG, no people, no hearts, no symbols, no paper, no rectangle, no scenery, no watermark. Do not copy any specific existing lettering design.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "03_humid_haze",
+      "label": "薄い熱気",
+      "kind": "haze",
+      "prompt": "Use case: illustration-story. Create one subtle overlay of humid warm air for a 2D anime scene on a truly transparent background. A wide sparse veil of very faint warm ivory vapor, translucent wispy filaments and broad barely visible soft curls drifting upward, smoothly feathered into fully transparent empty space. Airy uneven diffuse mist, not opaque smoke and not solid cartoon cloud puffs. Most of the canvas remains empty and fully transparent; vapor opacity is low so a background illustration can remain visible through it. No objects, no people, no letters, no hearts, no frame, no solid background, no checkerboard pixels. A single independent atmosphere layer, all-ages everyday humidity effect.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_doki_flat_v2",
+      "label": "どきっ（平面的な版）",
+      "kind": "text",
+      "parent": "02_doki",
+      "prompt": "Use case: precise-object-edit. Edit target: the attached Japanese lettering PNG. Keep the exact readable text \"どきっ\", correct three glyphs with small っ and dakuten, and the same lively hand-drawn diagonal character shapes. Remove the ENTIRE large pink halo and ALL gradients and highlights. All space around the strokes must be fully transparent. Use flat muted raspberry-pink ink inside the letters and a slim cream-white outline only. Matte flat 2D comic ink, no glow, no neon, no glossy bevel, no colored backdrop, no shadow or haze outside the thin outline. Retain generous transparent margins and deliver true transparent PNG.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_doki_ink_v3",
+      "label": "どきっ（墨文字）",
+      "kind": "text",
+      "parent": "02_doki_flat_v2",
+      "prompt": "Create an isolated FLAT BLACK INK Japanese manga sound-effect asset. Exact text: どきっ . Readable ど with its two dakuten marks, then き, then small っ. Draw it like original Japanese comic hand lettering: lively thin-to-thick calligraphic lines, slightly tilted, casual irregular stroke edges, energetic but not blocky. Horizontal phrase. ONLY opaque solid black strokes and fully TRANSPARENT empty space. Single-color 2D ink stamp. No white edging, no colored edging, no shadows, no glow, no gradient, no blur, no aura, no ornament, no paper, no frame, no background. Center with generous empty transparent margins. This is a typographic asset for a wholesome romantic surprise, not a poster.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "04_muwa_reference_style",
+      "label": "むわ～・手描き縦型",
+      "kind": "text",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: general graphic language ONLY, slender informal hand-lettering with changing character sizes and a loose vertical flow. Create ONE NEW lettering asset, exact Japanese text: むわ～ . This conveys humid warm air in an everyday summer room. It is not text copied from the reference. Three glyphs only: む, わ, ～. Loose slender hand-drawn strokes, tapered ends with irregular slight wobble, airy hiragana, not a heavy rounded font. Read top to bottom: む near the top, わ below and slightly right, then a long thin wavy trail ～ extending downward. The second glyph is smaller than the first. Light warm coral-pink ink, a very fine off-white edge only for legibility. Expressive drawing rather than typeset font. Minimal flat matte ink, no 3D, no highlights, no aura or glow. Only the single phrase on TRUE TRANSPARENT background, generous transparent margins; no paper, no tiles, no panel or decorations or people. Portrait composition.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "05_doki_reference_style",
+      "label": "どきっ・手描き縦型",
+      "kind": "text",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference role: the provided sheet is a graphic-language reference for slender informal Japanese hand lettering and loose vertical layout only. Create one original standalone romantic surprise caption with the exact Japanese text \"どきっ\". It is an all-ages shy heartbeat. Correct glyphs: ど (including both dakuten marks), き, small っ. Read top to bottom, with a loose diagonal offset and progressively smaller letters; handwritten angular thin-to-thick strokes like quick comic pen lettering. Restrained pale lavender-purple ink. Do not make a thick sticker font. No large heavy outline: only a hairline pale edge if needed. No additional hearts or symbols. Matte flat drawn ink on true transparent background. No luminous halo, no glow, no bevel, no gradients, no paper or grid, no panel, no other text, no scenery or people. Portrait composition with generous transparent margins. Use the reference technique, not a tracing of any sample word.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "06_clear_warm_air",
+      "label": "人いきれ・ほぼ透明の膜",
+      "kind": "haze",
+      "parent": "03_humid_haze",
+      "prompt": "Use case: illustration-story. Create ONE almost-invisible warm-air overlay for a fully clothed adult group sitting in a summer room. The effect expresses trapped body warmth and sweat humidity in the air, not odor, not smoke. NO people or body parts in this asset. A few exceptionally faint narrow, irregular vertical air-ripple contours and long soft transparent filaments, widely spaced, with large clear empty gaps. Neutral warm ivory only, extremely low opacity. It should suggest dense close warm air despite being almost clear. No solid clouds, no cartoon steam puffs, no colored fog, no yellow/green, no sparkles, no glow, no text. The edges of the canvas and most of its area must be truly transparent. A sparse 2D overlay whose fine translucent contours can be composited over existing artwork without hiding any face. True transparent PNG with generous empty margins.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "07_micro_quiver",
+      "label": "小刻みな震え・短い線",
+      "kind": "motion",
+      "prompt": "Use case: illustration-story. Create one transparent 2D manga motion-line overlay: just TWO separate SHORT irregular scratch-like quiver strokes side by side, each gently horizontal with one or two tiny sharp nervous peaks and a few small kinks, like a quick fine pen flick indicating a tiny local tremor. Ivory-white thin hairline ink with a very thin neutral gray edge for readability. Hand-drawn imperfect strokes. Large empty fully transparent space between the two strokes. Horizontal wide-strip composition with generous transparent margins all around. The marks must be delicate, sparse and local: no long parallel sinusoidal waves, no large zigzag lightning, no shock burst, no earthquake symbols, no frame, no text, no people, no anatomy, no furniture, no opaque background, no glow. True transparent PNG. The source concept is a small trembling contour rather than a shaking scene.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "09_gyu",
+      "label": "ぎゅー",
+      "kind": "text",
+      "intent": "ハグして離れたくない",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"ぎゅー\". It expresses ハグして離れたくない in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted light coral-pink ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "10_dokidoki",
+      "label": "どきどき",
+      "kind": "text",
+      "intent": "ときめきと緊張",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"どきどき\". It expresses ときめきと緊張 in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted lavender-purple ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "11_kyun",
+      "label": "きゅん",
+      "kind": "text",
+      "intent": "恋心が動く瞬間",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"きゅん\". It expresses 恋心が動く瞬間 in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted light coral-pink ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "12_moji",
+      "label": "もじ…",
+      "kind": "text",
+      "intent": "照れてためらう",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"もじ…\". It expresses 照れてためらう in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted lavender-purple ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "13_sowa",
+      "label": "そわ…",
+      "kind": "text",
+      "intent": "期待と不安で落ち着かない",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"そわ…\". It expresses 期待と不安で落ち着かない in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted lavender-purple ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "14_chucchu",
+      "label": "ちゅっちゅ",
+      "kind": "text",
+      "intent": "軽いキスを交わす",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique only, not a tracing or copy of a sample. Create ONE original standalone transparent manga lettering asset. Exact Japanese text: \"ちゅっちゅ\". It expresses 軽いキスを交わす in a wholesome all-ages romantic conversation. Typography only; no people or actions depicted. Slender informal comic pen strokes with small natural pressure changes, tapered ends, slightly irregular baseline. Loose vertical flow with diagonal offsets, character sizes gradually decreasing; keep all kana and any punctuation legible and correct. Use muted light coral-pink ink. A hairline pale edge only if needed for legibility. Flat 2D ink on genuinely transparent background, generous margins. No heavy rounded sticker font, no block letters, no paper, no sheet of multiple examples, no extra words, no background, no hearts or other symbols, no luminous halo, no glow, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "15_duck_pout",
+      "label": "甘えるアヒル口",
+      "kind": "face",
+      "reference": "制作参照（共有版非同梱）",
+      "prompt": "Use case: precise-object-edit. Edit target: attached transparent square crop of our original 24-year-old adult blonde woman. Keep the exact adult identity, face outline, head tilt, feature positions, blue eyes, golden bangs and long hair, blue cardigan, opaque white turtleneck, necklace and hands. Change ONLY her expression into a cute slightly spoiled duck-lip pout when asking a trusted person for attention: small gently pursed forward lips, closed mouth, a subtle sideways 3-shaped upper-lip curve, not a literal duck beak. Slightly puffed lower lip rather than a wide kiss mouth. Soft raised inner brows, mild blush. Both blue irises look UP AND SCREEN LEFT toward her conversation partner, not at the viewer. This is an all-ages affectionate teasing expression. No change to body or costume, no additions, no hearts, no text or scenery. Same square crop and true transparent background.",
+      "source": "生成元（PC内）"
+    }
+  ],
+  "failures": [],
+  "authoritative": true,
+  "selected_native": [
+    "04_muwa_reference_style",
+    "05_doki_reference_style",
+    "06_clear_warm_air",
+    "07_micro_quiver",
+    "09_gyu",
+    "10_dokidoki",
+    "11_kyun",
+    "12_moji",
+    "13_sowa",
+    "14_chucchu",
+    "15_duck_pout"
+  ],
+  "not_attempted": [
+    {
+      "item": "ちゅぱちゅぱ",
+      "status": "content_not_attempted",
+      "reason": "今回の性的行為を表す用途では制作しない。ツール拒否ではない。"
+    },
+    {
+      "item": "ばちゅばちゅ",
+      "status": "content_not_attempted",
+      "reason": "同上"
+    },
+    {
+      "item": "しゅこしゅこ",
+      "status": "content_not_attempted",
+      "reason": "同上"
+    },
+    {
+      "item": "ぎしぎし",
+      "status": "sexual_use_not_attempted",
+      "reason": "性的な動きを示す用途は制作しない。一般の家具の軋みという別用途は今回未着手。"
+    }
+  ]
+}

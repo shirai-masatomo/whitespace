@@ -1,0 +1,99 @@
+{
+  "checked_at": "2026-10-20",
+  "gpu": "RTX 4070 SUPER, 12 GB VRAM",
+  "runtime": "Isolated ComfyUI portable v0.42.1; localhost:8188",
+  "files": [
+    {
+      "id": "comfyui",
+      "version": "v0.42.1",
+      "url": "https://github.com/Comfy-Org/ComfyUI/releases/download/v0.42.1/ComfyUI_windows_portable_nvidia.7z",
+      "path": "downloads/ComfyUI_windows_portable_nvidia-v0.42.1.7z",
+      "bytes": 2018444114,
+      "sha256": "496afd18790ec685d99ebba2edf200d7371a29fbdd3a992bb0f4f52f244a6874",
+      "license": "GPL-3.0; bundled dependencies have separate licenses",
+      "enabled": true,
+      "note": "Primary isolated Python/CUDA runtime. Resume completed; legacy venv retained only for rollback."
+    },
+    {
+      "id": "ipadapter-sdxl",
+      "version": "018e402774aeeddd60609b4ecdb7e298259dc729",
+      "url": "https://huggingface.co/h94/IP-Adapter/resolve/018e402774aeeddd60609b4ecdb7e298259dc729/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors",
+      "path": "models/ipadapter/ip-adapter-plus_sdxl_vit-h.safetensors",
+      "bytes": 847517512,
+      "sha256": "3f5062b8400c94b7159665b21ba5c62acdcd7682262743d7f2aefedef00e6581",
+      "license": "Apache-2.0; underlying SDXL usage restrictions also apply"
+    },
+    {
+      "id": "clip-vision",
+      "version": "018e402774aeeddd60609b4ecdb7e298259dc729",
+      "url": "https://huggingface.co/h94/IP-Adapter/resolve/018e402774aeeddd60609b4ecdb7e298259dc729/models/image_encoder/model.safetensors",
+      "path": "models/clip_vision/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors",
+      "bytes": 2528373448,
+      "sha256": "6ca9667da1ca9e0b0f75e46bb030f7e011f44f86cbfb8d5a36590fcd7507b030",
+      "license": "Apache-2.0 distribution; OpenCLIP MIT provenance to be recorded"
+    },
+    {
+      "id": "controlnet-openpose",
+      "version": "23f966cd5cfdd3f7729c903e243d87152162d2b7",
+      "url": "https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/23f966cd5cfdd3f7729c903e243d87152162d2b7/diffusion_pytorch_model.safetensors",
+      "path": "models/controlnet/xinsir-openpose-sdxl-1.0.safetensors",
+      "bytes": 2502139104,
+      "sha256": "b8524e557a7df60d081f5d4a0eb109967d107df217943bf88c2d99b9ebcc06c5",
+      "license": "Apache-2.0 declared; SDXL derivative usage restrictions also apply"
+    },
+    {
+      "id": "ipadapter-nodes",
+      "version": "a0f451a5113cf9becb0847b92884cb10cbdec0ef",
+      "url": "https://codeload.github.com/cubiq/ComfyUI_IPAdapter_plus/zip/a0f451a5113cf9becb0847b92884cb10cbdec0ef",
+      "path": "downloads/ipadapter-nodes-a0f451a.zip",
+      "bytes": 306422,
+      "sha256": "c6c49c82aa65cb96b93bdf9f9b547f9c95310a2668a7a9aaa0285cccf4590347",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "comfyui-source",
+      "version": "v0.42.1",
+      "url": "https://codeload.github.com/Comfy-Org/ComfyUI/zip/refs/tags/v0.42.1",
+      "path": "downloads/ComfyUI-v0.42.1-source.zip",
+      "bytes": 13396418,
+      "sha256": "a3c608a0256b38b36e715f774eb78dbc14600be216ff15b7f40c8de7abd04056",
+      "license": "GPL-3.0",
+      "enabled": false,
+      "note": "Verified legacy venv / rollback files; not required by the primary portable setup."
+    },
+    {
+      "id": "animagine40",
+      "version": "2b7c1b397761bf5bd3cc42e5b39ec99314a75a96",
+      "url": "https://huggingface.co/cagliostrolab/animagine-xl-4.0/resolve/2b7c1b397761bf5bd3cc42e5b39ec99314a75a96/animagine-xl-4.0-opt.safetensors",
+      "path": "models/checkpoints/animagine-xl-4.0-opt.safetensors",
+      "bytes": 6938350040,
+      "sha256": "6327eca98bfb6538dd7a4edce22484a1bbc57a8cff6b11d075d40da1afb847ac",
+      "license": "CreativeML Open RAIL++-M; see fixed official model card and underlying SDXL terms",
+      "enabled": true,
+      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested."
+    }
+  ],
+  "optional_nodes": {
+    "FaceDetailer": false,
+    "UltralyticsDetectorProvider": false
+  },
+  "launcher_custom_node_policy": "disable-all-custom-nodes; whitelist ComfyUI_IPAdapter_plus only",
+  "image_a": {
+    "path": "../media/391bce7ae1487d69b2ad.png",
+    "sha256": "391bce7ae1487d69b2ad5c67201956a9bda2bab8edb13d38c7d140793492cd2a",
+    "size": [
+      1037,
+      1516
+    ],
+    "generator": "Built-in image_gen editing, not Animagine; exact model/seed not exposed",
+    "subject": "User-selected fictional adult woman, age 28 in source generation"
+  },
+  "working_image": {
+    "size": [
+      832,
+      1216
+    ],
+    "fit": "Pillow ImageOps.pad, Lanczos, white fill",
+    "sha256": "debda65ccc4d86e9a6125344c297c37fbf5fcde01016786ffb593e9d03a1e354"
+  }
+}

@@ -1,0 +1,1187 @@
+{
+  "canvas": [
+    1671,
+    941
+  ],
+  "heroine_location": "carpet",
+  "footwear_rule": {
+    "scope": "all indoor scenes",
+    "woman": "bare feet",
+    "men": "socks",
+    "outdoor_shoes": "off",
+    "reference_originals": "preserved"
+  },
+  "scenes": [
+    {
+      "id": "sofa_a-0-closed",
+      "case": "sofa_a",
+      "stage": 0,
+      "door": "closed",
+      "file": "../media/5ecebb0393e72186bd8d.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 30,
+          "y": 470,
+          "w": 317,
+          "h": 450,
+          "group": "男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.32281205164992827,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 375,
+          "y": 390,
+          "w": 276,
+          "h": 410,
+          "group": "ヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.2794819359236537,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接近前"
+    },
+    {
+      "id": "sofa_a-0-open",
+      "case": "sofa_a",
+      "stage": 0,
+      "door": "open",
+      "file": "../media/e344b802cce9d4cf0df9.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 30,
+          "y": 470,
+          "w": 317,
+          "h": 450,
+          "group": "男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.32281205164992827,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 375,
+          "y": 390,
+          "w": 276,
+          "h": 410,
+          "group": "ヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.2794819359236537,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接近前"
+    },
+    {
+      "id": "sofa_a-1-closed",
+      "case": "sofa_a",
+      "stage": 1,
+      "door": "closed",
+      "file": "../media/1689b6a3f28574fa0206.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 30,
+          "y": 470,
+          "w": 317,
+          "h": 450,
+          "group": "男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.32281205164992827,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 495,
+          "y": 390,
+          "w": 276,
+          "h": 410,
+          "group": "ヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.2794819359236537,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "距離を縮めた配置案・移動ポーズではない"
+    },
+    {
+      "id": "sofa_a-1-open",
+      "case": "sofa_a",
+      "stage": 1,
+      "door": "open",
+      "file": "../media/21d0ac885e04952800b6.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 30,
+          "y": 470,
+          "w": 317,
+          "h": 450,
+          "group": "男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.32281205164992827,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 495,
+          "y": 390,
+          "w": 276,
+          "h": 410,
+          "group": "ヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.2794819359236537,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "距離を縮めた配置案・移動ポーズではない"
+    },
+    {
+      "id": "sofa_a-2-closed",
+      "case": "sofa_a",
+      "stage": 2,
+      "door": "closed",
+      "file": "../media/1d806359de2f29eec85e.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/5b1ea8bc45bf8a704f04.png",
+          "crop": [
+            11,
+            11,
+            1028,
+            1451
+          ],
+          "x": 575,
+          "y": 158,
+          "w": 441,
+          "h": 625,
+          "group": "絨毯ヒロインとソファA",
+          "people": [
+            "A",
+            "heroine"
+          ],
+          "scale": 0.4340277777777778,
+          "anchor": [
+            [
+              760,
+              810
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 30,
+          "y": 470,
+          "w": 317,
+          "h": 450,
+          "group": "男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.32281205164992827,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接触中・ペア素材へ切替"
+    },
+    {
+      "id": "sofa_a-2-open",
+      "case": "sofa_a",
+      "stage": 2,
+      "door": "open",
+      "file": "../media/c47acca307ce9f5b6b3d.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/5b1ea8bc45bf8a704f04.png",
+          "crop": [
+            11,
+            11,
+            1028,
+            1451
+          ],
+          "x": 575,
+          "y": 158,
+          "w": 441,
+          "h": 625,
+          "group": "絨毯ヒロインとソファA",
+          "people": [
+            "A",
+            "heroine"
+          ],
+          "scale": 0.4340277777777778,
+          "anchor": [
+            [
+              760,
+              810
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 30,
+          "y": 470,
+          "w": 317,
+          "h": 450,
+          "group": "男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.32281205164992827,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接触中・ペア素材へ切替"
+    },
+    {
+      "id": "carpet_b-0-closed",
+      "case": "carpet_b",
+      "stage": 0,
+      "door": "closed",
+      "file": "../media/94622311763e09c40163.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 60,
+          "y": 430,
+          "w": 338,
+          "h": 480,
+          "group": "近づく男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.34433285509325684,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 875,
+          "y": 480,
+          "w": 283,
+          "h": 420,
+          "group": "絨毯のヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.28629856850715746,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接近前"
+    },
+    {
+      "id": "carpet_b-0-open",
+      "case": "carpet_b",
+      "stage": 0,
+      "door": "open",
+      "file": "../media/85806503d4561084b7ae.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 60,
+          "y": 430,
+          "w": 338,
+          "h": 480,
+          "group": "近づく男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.34433285509325684,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 875,
+          "y": 480,
+          "w": 283,
+          "h": 420,
+          "group": "絨毯のヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.28629856850715746,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接近前"
+    },
+    {
+      "id": "carpet_b-1-closed",
+      "case": "carpet_b",
+      "stage": 1,
+      "door": "closed",
+      "file": "../media/673da0520c40069f681e.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 390,
+          "y": 430,
+          "w": 338,
+          "h": 480,
+          "group": "近づく男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.34433285509325684,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 875,
+          "y": 480,
+          "w": 283,
+          "h": 420,
+          "group": "絨毯のヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.28629856850715746,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "距離を縮めた配置案・移動ポーズではない"
+    },
+    {
+      "id": "carpet_b-1-open",
+      "case": "carpet_b",
+      "stage": 1,
+      "door": "open",
+      "file": "../media/09474e8bf4b0e8277841.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            50,
+            7,
+            1032,
+            1401
+          ],
+          "x": 390,
+          "y": 430,
+          "w": 338,
+          "h": 480,
+          "group": "近づく男子B",
+          "people": [
+            "B"
+          ],
+          "scale": 0.34433285509325684,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        },
+        {
+          "source": "../media/6a3d928c94b6ffcc61e7.png",
+          "crop": [
+            38,
+            26,
+            1027,
+            1493
+          ],
+          "x": 875,
+          "y": 480,
+          "w": 283,
+          "h": 420,
+          "group": "絨毯のヒロイン",
+          "people": [
+            "heroine"
+          ],
+          "scale": 0.28629856850715746,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "距離を縮めた配置案・移動ポーズではない"
+    },
+    {
+      "id": "carpet_b-2-closed",
+      "case": "carpet_b",
+      "stage": 2,
+      "door": "closed",
+      "file": "../media/fd2993876b3c88916734.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "../media/aab0e113ac687f026451.png",
+          "crop": [
+            23,
+            16,
+            1290,
+            1184
+          ],
+          "x": 510,
+          "y": 420,
+          "w": 532,
+          "h": 490,
+          "group": "絨毯ヒロインと男子B",
+          "people": [
+            "B",
+            "heroine"
+          ],
+          "scale": 0.4195205479452055,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接触中・ペア素材へ切替"
+    },
+    {
+      "id": "carpet_b-2-open",
+      "case": "carpet_b",
+      "stage": 2,
+      "door": "open",
+      "file": "../media/d475a2206eb90e43a0be.png",
+      "background": "制作参照（共有版非同梱）",
+      "layers": [
+        {
+          "source": "../media/7cf49ef42a5d084203dd.png",
+          "crop": [
+            210,
+            10,
+            874,
+            1487
+          ],
+          "x": 769,
+          "y": 139,
+          "w": 281,
+          "h": 625,
+          "group": "男子A",
+          "people": [
+            "A"
+          ],
+          "scale": 0.4231550440081246,
+          "anchor": [
+            [
+              520,
+              875
+            ],
+            [
+              900,
+              505
+            ]
+          ]
+        },
+        {
+          "source": "../media/aab0e113ac687f026451.png",
+          "crop": [
+            23,
+            16,
+            1290,
+            1184
+          ],
+          "x": 510,
+          "y": 420,
+          "w": 532,
+          "h": 490,
+          "group": "絨毯ヒロインと男子B",
+          "people": [
+            "B",
+            "heroine"
+          ],
+          "scale": 0.4195205479452055,
+          "anchor": null
+        },
+        {
+          "source": "制作参照（共有版非同梱）",
+          "crop": [
+            24,
+            87,
+            1005,
+            1460
+          ],
+          "x": 1310,
+          "y": 470,
+          "w": 322,
+          "h": 450,
+          "group": "男子C",
+          "people": [
+            "C"
+          ],
+          "scale": 0.3277494537509104,
+          "anchor": null
+        }
+      ],
+      "male_count": 3,
+      "female_count": 1,
+      "stage_note": "接触中・ペア素材へ切替"
+    }
+  ],
+  "contact_modes": [
+    {
+      "id": "floor_to_sofa",
+      "participants": [
+        "heroine",
+        "A"
+      ],
+      "support": {
+        "heroine": "floor",
+        "A": "sofa"
+      },
+      "pair_asset": "../media/5b1ea8bc45bf8a704f04.png",
+      "single_assets": {
+        "heroine": "../media/6a3d928c94b6ffcc61e7.png",
+        "A": "../media/7cf49ef42a5d084203dd.png"
+      },
+      "attention_target": "A face, upward",
+      "contact_target": "A lowered hand",
+      "height_difference_required": true
+    },
+    {
+      "id": "floor_to_floor",
+      "participants": [
+        "heroine",
+        "B"
+      ],
+      "support": {
+        "heroine": "floor",
+        "B": "floor"
+      },
+      "pair_asset": "../media/aab0e113ac687f026451.png",
+      "single_assets": {
+        "heroine": "../media/6a3d928c94b6ffcc61e7.png",
+        "B": "制作参照（共有版非同梱）"
+      },
+      "attention_target": "joined hands, lowered",
+      "contact_target": "B shoulder and hand",
+      "height_difference_required": false
+    }
+  ],
+  "state_flow": [
+    "separate_floor_and_seated_men",
+    "reduce_distance_with_individual_assets",
+    "set_down_held_drink_before_contact",
+    "snapshot_two_participants",
+    "hide_only_two_individual_assets",
+    "show_pair_in_common_parent",
+    "restore_snapshot_on_release"
+  ],
+  "keep_visible": {
+    "floor_to_sofa": [
+      "B",
+      "C"
+    ],
+    "floor_to_floor": [
+      "A",
+      "C"
+    ]
+  },
+  "not_implemented": [
+    "walking or crawling approach motion",
+    "arbitrary partner substitution inside pair bitmap",
+    "automatic face fitting",
+    "physical seat contact detection",
+    "game integration"
+  ],
+  "existing_footwear_backlog": "Older indoor candidate files may still contain shoes; they remain preserved and are not automatically approved under this new rule."
+}

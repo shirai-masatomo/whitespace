@@ -1,0 +1,313 @@
+{
+  "R": "［作業フォルダー］",
+  "P": "［作業フォルダー］/projects/local-ai-image-lab",
+  "W": "［作業フォルダー］/output/heroine-texture-lettering-20261022_09",
+  "F": "［作業フォルダー］/projects/local-ai-image-lab/assets/text_effect",
+  "jobs": [
+    {
+      "id": "01_muwaa",
+      "label": "むわぁ…",
+      "kind": "text",
+      "use": "蒸れた空気がこもる",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-37ec4f24-eb48-4df5-b8a4-35560f5938b4.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"むわぁ…\". Its ordinary all-ages usage is: 蒸れた空気がこもる. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: slender loose flowing black ink with a fine white outline, close compact vertical flow, drawn-out descending final syllable and ellipsis. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "02_gyuu",
+      "label": "ぎゅう♡",
+      "kind": "text",
+      "use": "やさしくハグする",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぎゅう♡\". Its ordinary all-ages usage is: やさしくハグする. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: warm coral-pink, letters compressed close together with soft slightly squashed round strokes; small hand-drawn hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "03_munyu",
+      "label": "むにゅ♡",
+      "kind": "text",
+      "use": "柔らかいクッションを軽く押す",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"むにゅ♡\". Its ordinary all-ages usage is: 柔らかいクッションを軽く押す. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: pale coral-pink, rounded pliable hand-drawn strokes that gently bulge and squash, readable kana, small hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "04_pofu",
+      "label": "ぽふっ♡",
+      "kind": "text",
+      "use": "枕に軽く触れる",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぽふっ♡\". Its ordinary all-ages usage is: 枕に軽く触れる. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: light peach-pink, soft rounded airy strokes, light weight rather than a thick sticker, correct round handakuten on ぽ, small hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "05_fuwa",
+      "label": "ふわっ♡",
+      "kind": "text",
+      "use": "柔らかい毛布の肌触り",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ふわっ♡\". Its ordinary all-ages usage is: 柔らかい毛布の肌触り. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: pale lavender, fine feather-light sweeping calligraphic lines, airy spacing, smaller final っ and a small hollow heart at end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "06_grape",
+      "label": "ぶるんぶるん",
+      "kind": "text",
+      "use": "ぶどうの房が弾む",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぶるんぶるん\". Its ordinary all-ages usage is: ぶどうの房が弾む. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: muted grape-purple, softly rounded elastic pen strokes, subtle squash-and-stretch shape, natural hand lettering, correct dakuten on both ぶ, no heart. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "07_drips",
+      "label": "ぴちゃぴちゃ",
+      "kind": "text",
+      "use": "水滴が水面に落ちる",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぴちゃぴちゃ\". Its ordinary all-ages usage is: 水滴が水面に落ちる. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: restrained pale sky-blue ink with fine white edge, light thin fluid strokes, tiny lively offsets suggesting splashes, correct round handakuten on both ぴ, small ゃ both times, no heart or extra droplet symbols. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "08_shoulder",
+      "label": "もみもみ♡",
+      "kind": "text",
+      "use": "肩をやさしくマッサージする",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"もみもみ♡\". Its ordinary all-ages usage is: 肩をやさしくマッサージする. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: warm coral-pink, softly compressed round pen lettering and alternating character sizes, a small hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only."
+    },
+    {
+      "id": "09_sigh",
+      "label": "はぁ…",
+      "kind": "text",
+      "use": "安堵、または運動後に息を整える",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference role: loose informal Japanese pen lettering technique only. Create one original typography-only overlay, exact text \"はぁ…\". An ordinary all-ages relieved sigh, or catching one’s breath after exercise. Very slender airy hand-drawn coral-pink pen lines with fine pale edging, a gently descending vertical/diagonal flow: a larger は, a distinctly small ぁ, then three small trailing dots. A light floating shape, no thick sticker letters, no other words, no hearts, no people or actions, no smoke. Flat matte ink on genuinely transparent background with generous margins. No neon glow, no large halo, no backdrop, no paper, no 3D."
+    },
+    {
+      "id": "10_brush",
+      "label": "じゅぽじゅぽ",
+      "kind": "text",
+      "use": "歯磨きの音として指定された文字素材",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese handwritten sound-effect lettering asset. Exact text \"じゅぽじゅぽ\". Slender blue-gray ink, fine white keyline, natural loose descending diagonal lettering with pressure variations. Correct dakuten on じ and round handakuten on both ぽ, small ゅ. Typography only, no people, objects or actions, no other text or symbols. Flat ink, genuinely transparent background, generous margins. No glow, 3D or backdrop."
+    },
+    {
+      "id": "11_food",
+      "label": "しこっ しこっ",
+      "kind": "text",
+      "use": "刺身の歯ごたえとして指定された文字素材",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese handwritten texture lettering asset. Exact text \"しこっ しこっ\". Warm brown-black thin pen strokes with fine white keyline, two separated compact groups along a gently descending diagonal. Small っ at the end of each group. Crisp lively pressure variations suggesting firm food texture. Typography only, no people, objects or actions, no extra text or hearts. Flat ink, genuinely transparent background, generous margins. No glow or 3D."
+    },
+    {
+      "id": "12_outline_heart",
+      "label": "手描きの輪郭ハート",
+      "kind": "effect",
+      "use": "独立した小さな好意の記号",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-7c4ba409-fdaa-4050-9914-5a7fb54a7196.png",
+      "prompt": "Use case: illustration-story. Reference role: the small outlined heart at the bottom ONLY. Create ONE standalone similar original cute hand-drawn outlined heart, thin coral-pink pen line with a very fine white keyline. Slightly asymmetric, gently tilted, smooth natural uneven pressure, open transparent center. No text, no photograph, no people, no background or extra symbols. Genuinely transparent background and generous margins. No filled heart, no glow or 3D."
+    },
+    {
+      "id": "13_grape_pink_quiver",
+      "label": "ぶるんぶるん・ピンクと振動線",
+      "kind": "text",
+      "use": "ぶどうの房の弾力。色変更と周囲の小刻みな振動",
+      "references": [
+        "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-12d360de-4807-430f-998a-19e99ec8c8bf.png",
+        "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-1043b98b-ef07-4bb9-a044-2b4eeb4261cc.png"
+      ],
+      "prompt": "Use case: style-transfer. Image 1 is the edit target, Japanese lettering \"ぶるんぶるん\". Image 2 is ONLY the coral-pink ink color reference from \"もみもみ♡\". Recolor the exact lettering in image 1 to match the warm coral pink in image 2, preserving its readable kana, stroke shapes and descending diagonal layout. Add a few short delicate irregular quiver pen lines on both sides of the lettering, matching coral pink, separated from the letters. Express tiny quick elastic vibration, no earthquake or big impact. Preserve genuinely transparent background, generous margins. Typography only, no heart or extra words, no people or objects. No glow or 3D."
+    },
+    {
+      "id": "14_startle",
+      "label": "びくっ びくっ",
+      "kind": "text",
+      "use": "怖いときに短く身をすくめる反応",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-378668d3-d0ef-443e-b875-c5ca79214d3e.png",
+      "prompt": "Use case: illustration-story. Reference role: rough lively small sound-effect lettering and brown ink only. Create one original standalone Japanese sound-effect typography overlay. Exact text \"びくっ びくっ\", two short separated groups descending diagonally. A frightened startled reaction, with sharp nervous pen strokes that hop upward, warm dark brown ink and fine white keyline. Correct dakuten on び, small final っ in each group. Add two tiny irregular quiver strokes around each group. No hearts, no people, no objects, no scene, no extra words. Flat drawn ink on genuinely transparent background with generous margins, no glow or 3D."
+    },
+    {
+      "id": "15_tapon",
+      "label": "たぽんっ♡",
+      "kind": "text",
+      "use": "容器内の液体が揺れる音",
+      "prompt": "Use case: illustration-story. Create ONE standalone original Japanese handwritten sound-effect asset, exact text \"たぽんっ♡\". Loose rounded bouncy pen lettering, pink-magenta ink with a fine pale pink and white keyline, gentle horizontal rising flow, small hollow hand-drawn heart suffix. Correct round handakuten on ぽ, small っ. Typography only. Genuinely transparent background, generous margins. No people, body parts, objects, backdrop, glow or 3D."
+    },
+    {
+      "id": "16_patan",
+      "label": "ぱたんっ",
+      "kind": "text",
+      "use": "軽い物をひっくり返して倒す音",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese comic sound-effect lettering asset. Exact text \"ぱたんっ\". Lively slightly angular thin black-brown pen strokes with fine white keyline, strong first character and smaller final っ, dynamic descending diagonal. Correct round handakuten on ぱ. A light object flipping over then landing flat. Typography only, no object illustration, no people, no extra text or hearts. Genuinely transparent background, generous margins, flat ink, no glow or 3D."
+    },
+    {
+      "id": "17_basha",
+      "label": "ばしゃっ",
+      "kind": "text",
+      "use": "容器を倒して水がこぼれる音",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese comic sound-effect lettering asset. Exact text \"ばしゃっ\". Thin sky-blue lively splashing pen strokes with fine white keyline, loose descending diagonal, correct dakuten on ば, small ゃ and っ. Typography only, no droplets or object illustrations, no people, no extra text or hearts. Genuinely transparent background with generous margins, flat ink, no glow or 3D."
+    }
+  ],
+  "assets": [
+    {
+      "id": "01_muwaa",
+      "label": "むわぁ…",
+      "kind": "text",
+      "use": "蒸れた空気がこもる",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-37ec4f24-eb48-4df5-b8a4-35560f5938b4.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"むわぁ…\". Its ordinary all-ages usage is: 蒸れた空気がこもる. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: slender loose flowing black ink with a fine white outline, close compact vertical flow, drawn-out descending final syllable and ellipsis. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_gyuu",
+      "label": "ぎゅう♡",
+      "kind": "text",
+      "use": "やさしくハグする",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぎゅう♡\". Its ordinary all-ages usage is: やさしくハグする. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: warm coral-pink, letters compressed close together with soft slightly squashed round strokes; small hand-drawn hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "03_munyu",
+      "label": "むにゅ♡",
+      "kind": "text",
+      "use": "柔らかいクッションを軽く押す",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"むにゅ♡\". Its ordinary all-ages usage is: 柔らかいクッションを軽く押す. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: pale coral-pink, rounded pliable hand-drawn strokes that gently bulge and squash, readable kana, small hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "04_pofu",
+      "label": "ぽふっ♡",
+      "kind": "text",
+      "use": "枕に軽く触れる",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぽふっ♡\". Its ordinary all-ages usage is: 枕に軽く触れる. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: light peach-pink, soft rounded airy strokes, light weight rather than a thick sticker, correct round handakuten on ぽ, small hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "05_fuwa",
+      "label": "ふわっ♡",
+      "kind": "text",
+      "use": "柔らかい毛布の肌触り",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ふわっ♡\". Its ordinary all-ages usage is: 柔らかい毛布の肌触り. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: pale lavender, fine feather-light sweeping calligraphic lines, airy spacing, smaller final っ and a small hollow heart at end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "06_grape",
+      "label": "ぶるんぶるん",
+      "kind": "text",
+      "use": "ぶどうの房が弾む",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぶるんぶるん\". Its ordinary all-ages usage is: ぶどうの房が弾む. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: muted grape-purple, softly rounded elastic pen strokes, subtle squash-and-stretch shape, natural hand lettering, correct dakuten on both ぶ, no heart. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "07_drips",
+      "label": "ぴちゃぴちゃ",
+      "kind": "text",
+      "use": "水滴が水面に落ちる",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"ぴちゃぴちゃ\". Its ordinary all-ages usage is: 水滴が水面に落ちる. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: restrained pale sky-blue ink with fine white edge, light thin fluid strokes, tiny lively offsets suggesting splashes, correct round handakuten on both ぴ, small ゃ both times, no heart or extra droplet symbols. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "08_shoulder",
+      "label": "もみもみ♡",
+      "kind": "text",
+      "use": "肩をやさしくマッサージする",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference image role: loose hand-drawn Japanese lettering technique and visual flow ONLY; not a tracing of a sample and no background content from the reference. Create ONE original standalone typography overlay. Exact text: \"もみもみ♡\". Its ordinary all-ages usage is: 肩をやさしくマッサージする. No people, no bodies, no actions depicted. Make the lettering itself express the tactile/mood quality through stroke shape: warm coral-pink, softly compressed round pen lettering and alternating character sizes, a small hollow heart at the end. Legible casual handwritten kana, loose vertical or gently diagonal flow with natural pressure variations and tapering ends. Keep small kana small. Any requested ♡ must be a small thin hollow heart as a suffix. Flat drawn ink on TRUE TRANSPARENT background, generous margins. No glossy block type, no 3D, no neon glow or large halo, no paper, no panel, no illustration objects, no extra words. One phrase only.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "09_sigh",
+      "label": "はぁ…",
+      "kind": "text",
+      "use": "安堵、または運動後に息を整える",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-013e7f5e-a24a-4359-be9e-e50fde95d8b7.png",
+      "prompt": "Use case: illustration-story. Reference role: loose informal Japanese pen lettering technique only. Create one original typography-only overlay, exact text \"はぁ…\". An ordinary all-ages relieved sigh, or catching one’s breath after exercise. Very slender airy hand-drawn coral-pink pen lines with fine pale edging, a gently descending vertical/diagonal flow: a larger は, a distinctly small ぁ, then three small trailing dots. A light floating shape, no thick sticker letters, no other words, no hearts, no people or actions, no smoke. Flat matte ink on genuinely transparent background with generous margins. No neon glow, no large halo, no backdrop, no paper, no 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "10_brush",
+      "label": "じゅぽじゅぽ",
+      "kind": "text",
+      "use": "歯磨きの音として指定された文字素材",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese handwritten sound-effect lettering asset. Exact text \"じゅぽじゅぽ\". Slender blue-gray ink, fine white keyline, natural loose descending diagonal lettering with pressure variations. Correct dakuten on じ and round handakuten on both ぽ, small ゅ. Typography only, no people, objects or actions, no other text or symbols. Flat ink, genuinely transparent background, generous margins. No glow, 3D or backdrop.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "11_food",
+      "label": "しこっ しこっ",
+      "kind": "text",
+      "use": "刺身の歯ごたえとして指定された文字素材",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese handwritten texture lettering asset. Exact text \"しこっ しこっ\". Warm brown-black thin pen strokes with fine white keyline, two separated compact groups along a gently descending diagonal. Small っ at the end of each group. Crisp lively pressure variations suggesting firm food texture. Typography only, no people, objects or actions, no extra text or hearts. Flat ink, genuinely transparent background, generous margins. No glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "12_outline_heart",
+      "label": "手描きの輪郭ハート",
+      "kind": "effect",
+      "use": "独立した小さな好意の記号",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-7c4ba409-fdaa-4050-9914-5a7fb54a7196.png",
+      "prompt": "Use case: illustration-story. Reference role: the small outlined heart at the bottom ONLY. Create ONE standalone similar original cute hand-drawn outlined heart, thin coral-pink pen line with a very fine white keyline. Slightly asymmetric, gently tilted, smooth natural uneven pressure, open transparent center. No text, no photograph, no people, no background or extra symbols. Genuinely transparent background and generous margins. No filled heart, no glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "13_grape_pink_quiver",
+      "label": "ぶるんぶるん・ピンクと振動線",
+      "kind": "text",
+      "use": "ぶどうの房の弾力。色変更と周囲の小刻みな振動",
+      "references": [
+        "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-12d360de-4807-430f-998a-19e99ec8c8bf.png",
+        "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-1043b98b-ef07-4bb9-a044-2b4eeb4261cc.png"
+      ],
+      "prompt": "Use case: style-transfer. Image 1 is the edit target, Japanese lettering \"ぶるんぶるん\". Image 2 is ONLY the coral-pink ink color reference from \"もみもみ♡\". Recolor the exact lettering in image 1 to match the warm coral pink in image 2, preserving its readable kana, stroke shapes and descending diagonal layout. Add a few short delicate irregular quiver pen lines on both sides of the lettering, matching coral pink, separated from the letters. Express tiny quick elastic vibration, no earthquake or big impact. Preserve genuinely transparent background, generous margins. Typography only, no heart or extra words, no people or objects. No glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "14_startle",
+      "label": "びくっ びくっ",
+      "kind": "text",
+      "use": "怖いときに短く身をすくめる反応",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-378668d3-d0ef-443e-b875-c5ca79214d3e.png",
+      "prompt": "Use case: illustration-story. Reference role: rough lively small sound-effect lettering and brown ink only. Create one original standalone Japanese sound-effect typography overlay. Exact text \"びくっ びくっ\", two short separated groups descending diagonally. A frightened startled reaction, with sharp nervous pen strokes that hop upward, warm dark brown ink and fine white keyline. Correct dakuten on び, small final っ in each group. Add two tiny irregular quiver strokes around each group. No hearts, no people, no objects, no scene, no extra words. Flat drawn ink on genuinely transparent background with generous margins, no glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "15_tapon",
+      "label": "たぽんっ♡",
+      "kind": "text",
+      "use": "容器内の液体が揺れる音",
+      "prompt": "Use case: illustration-story. Create ONE standalone original Japanese handwritten sound-effect asset, exact text \"たぽんっ♡\". Loose rounded bouncy pen lettering, pink-magenta ink with a fine pale pink and white keyline, gentle horizontal rising flow, small hollow hand-drawn heart suffix. Correct round handakuten on ぽ, small っ. Typography only. Genuinely transparent background, generous margins. No people, body parts, objects, backdrop, glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "16_patan",
+      "label": "ぱたんっ",
+      "kind": "text",
+      "use": "軽い物をひっくり返して倒す音",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese comic sound-effect lettering asset. Exact text \"ぱたんっ\". Lively slightly angular thin black-brown pen strokes with fine white keyline, strong first character and smaller final っ, dynamic descending diagonal. Correct round handakuten on ぱ. A light object flipping over then landing flat. Typography only, no object illustration, no people, no extra text or hearts. Genuinely transparent background, generous margins, flat ink, no glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "17_basha",
+      "label": "ばしゃっ",
+      "kind": "text",
+      "use": "容器を倒して水がこぼれる音",
+      "prompt": "Use case: illustration-story. Create one standalone Japanese comic sound-effect lettering asset. Exact text \"ばしゃっ\". Thin sky-blue lively splashing pen strokes with fine white keyline, loose descending diagonal, correct dakuten on ば, small ゃ and っ. Typography only, no droplets or object illustrations, no people, no extra text or hearts. Genuinely transparent background with generous margins, flat ink, no glow or 3D.",
+      "source": "生成元（PC内）"
+    }
+  ],
+  "failures": [],
+  "not_attempted": [
+    {
+      "item": "ぶるん／ばるん",
+      "status": "sexual_use_not_attempted",
+      "reason": "性的な部位の揺れを強調する今回の用途は未着手。語自体の一般的な使用可否ではない。"
+    },
+    {
+      "item": "ゆさゆさ",
+      "status": "sexual_use_not_attempted",
+      "reason": "性的な部位の重さや揺れを強調する用途は未着手。"
+    },
+    {
+      "item": "むにゅむにゅ／もみっ",
+      "status": "sexual_use_not_attempted",
+      "reason": "性的な揉む動作を強調する用途は未着手。クッションの触感としてのむにゅ♡は別用途で制作。"
+    }
+  ]
+}

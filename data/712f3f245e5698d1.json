@@ -1,0 +1,1406 @@
+{
+  "phase": "train",
+  "status": "completed",
+  "own_process_stopped": true,
+  "started_at": "2026-10-22T09:19:42+0900",
+  "isolation": "Ordinary Windows host, user-approved; not VM isolation",
+  "samples": [
+    {
+      "elapsed_seconds": 0.1,
+      "whole_device_memory_util_temperature": "1463, 3, 43",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 10.1,
+      "whole_device_memory_util_temperature": "1396, 3, 42",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 20.2,
+      "whole_device_memory_util_temperature": "1501, 2, 43",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 30.3,
+      "whole_device_memory_util_temperature": "8681, 84, 56",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 40.4,
+      "whole_device_memory_util_temperature": "8681, 37, 56",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 50.4,
+      "whole_device_memory_util_temperature": "8664, 61, 58",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 60.5,
+      "whole_device_memory_util_temperature": "8664, 52, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 70.6,
+      "whole_device_memory_util_temperature": "8664, 60, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 80.7,
+      "whole_device_memory_util_temperature": "8653, 32, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 90.7,
+      "whole_device_memory_util_temperature": "8653, 48, 66",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 100.8,
+      "whole_device_memory_util_temperature": "8655, 53, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 110.8,
+      "whole_device_memory_util_temperature": "8655, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 120.9,
+      "whole_device_memory_util_temperature": "8654, 42, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 131.0,
+      "whole_device_memory_util_temperature": "8638, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 141.1,
+      "whole_device_memory_util_temperature": "8638, 36, 59",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 151.1,
+      "whole_device_memory_util_temperature": "8639, 57, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 161.2,
+      "whole_device_memory_util_temperature": "8639, 50, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 171.3,
+      "whole_device_memory_util_temperature": "8639, 37, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 181.3,
+      "whole_device_memory_util_temperature": "8681, 48, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 191.4,
+      "whole_device_memory_util_temperature": "8717, 37, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 201.5,
+      "whole_device_memory_util_temperature": "8742, 40, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 211.6,
+      "whole_device_memory_util_temperature": "8732, 66, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.2,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 221.6,
+      "whole_device_memory_util_temperature": "8800, 50, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 231.7,
+      "whole_device_memory_util_temperature": "8791, 42, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 241.8,
+      "whole_device_memory_util_temperature": "8763, 25, 57",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 251.8,
+      "whole_device_memory_util_temperature": "8760, 33, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 261.9,
+      "whole_device_memory_util_temperature": "8742, 27, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 272.0,
+      "whole_device_memory_util_temperature": "8714, 34, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 282.1,
+      "whole_device_memory_util_temperature": "8728, 35, 59",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 292.2,
+      "whole_device_memory_util_temperature": "8831, 40, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 3.9,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 302.2,
+      "whole_device_memory_util_temperature": "8838, 59, 66",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 312.3,
+      "whole_device_memory_util_temperature": "8769, 42, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 322.4,
+      "whole_device_memory_util_temperature": "8785, 52, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 332.4,
+      "whole_device_memory_util_temperature": "8759, 53, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 342.5,
+      "whole_device_memory_util_temperature": "8785, 41, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 352.5,
+      "whole_device_memory_util_temperature": "8763, 51, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 362.6,
+      "whole_device_memory_util_temperature": "8762, 43, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 372.7,
+      "whole_device_memory_util_temperature": "8768, 38, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 382.8,
+      "whole_device_memory_util_temperature": "8767, 40, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 392.8,
+      "whole_device_memory_util_temperature": "8768, 42, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 402.9,
+      "whole_device_memory_util_temperature": "8769, 46, 59",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 413.0,
+      "whole_device_memory_util_temperature": "8769, 43, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 423.1,
+      "whole_device_memory_util_temperature": "8769, 50, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 433.1,
+      "whole_device_memory_util_temperature": "8769, 76, 70",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 443.2,
+      "whole_device_memory_util_temperature": "8772, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 453.3,
+      "whole_device_memory_util_temperature": "8800, 44, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 463.3,
+      "whole_device_memory_util_temperature": "8790, 50, 66",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 473.4,
+      "whole_device_memory_util_temperature": "8771, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 483.5,
+      "whole_device_memory_util_temperature": "8840, 37, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 493.5,
+      "whole_device_memory_util_temperature": "8817, 49, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 503.6,
+      "whole_device_memory_util_temperature": "8802, 42, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 513.7,
+      "whole_device_memory_util_temperature": "8758, 78, 69",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 523.7,
+      "whole_device_memory_util_temperature": "8800, 46, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 533.8,
+      "whole_device_memory_util_temperature": "8836, 43, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 543.9,
+      "whole_device_memory_util_temperature": "8874, 33, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 554.0,
+      "whole_device_memory_util_temperature": "8809, 91, 69",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 564.0,
+      "whole_device_memory_util_temperature": "8780, 37, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 574.1,
+      "whole_device_memory_util_temperature": "8845, 54, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 584.2,
+      "whole_device_memory_util_temperature": "8790, 48, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 594.2,
+      "whole_device_memory_util_temperature": "8842, 42, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 604.3,
+      "whole_device_memory_util_temperature": "8787, 51, 66",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 614.4,
+      "whole_device_memory_util_temperature": "8776, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 624.4,
+      "whole_device_memory_util_temperature": "8789, 42, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 634.5,
+      "whole_device_memory_util_temperature": "8826, 60, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 644.6,
+      "whole_device_memory_util_temperature": "8752, 33, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 654.7,
+      "whole_device_memory_util_temperature": "8758, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 664.7,
+      "whole_device_memory_util_temperature": "8824, 49, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 674.8,
+      "whole_device_memory_util_temperature": "8759, 51, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 684.9,
+      "whole_device_memory_util_temperature": "8772, 98, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 694.9,
+      "whole_device_memory_util_temperature": "8772, 54, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 705.0,
+      "whole_device_memory_util_temperature": "8746, 47, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 715.1,
+      "whole_device_memory_util_temperature": "8728, 51, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 725.1,
+      "whole_device_memory_util_temperature": "8727, 60, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 735.2,
+      "whole_device_memory_util_temperature": "8727, 33, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 745.3,
+      "whole_device_memory_util_temperature": "8727, 48, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 755.3,
+      "whole_device_memory_util_temperature": "8727, 53, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 765.4,
+      "whole_device_memory_util_temperature": "8731, 49, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 775.5,
+      "whole_device_memory_util_temperature": "8727, 44, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 785.5,
+      "whole_device_memory_util_temperature": "8735, 45, 58",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 795.6,
+      "whole_device_memory_util_temperature": "8735, 46, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 805.7,
+      "whole_device_memory_util_temperature": "8731, 30, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 815.8,
+      "whole_device_memory_util_temperature": "8731, 51, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 825.8,
+      "whole_device_memory_util_temperature": "8731, 34, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 835.9,
+      "whole_device_memory_util_temperature": "8757, 45, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 846.0,
+      "whole_device_memory_util_temperature": "8736, 63, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 856.0,
+      "whole_device_memory_util_temperature": "8758, 46, 66",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 866.1,
+      "whole_device_memory_util_temperature": "8730, 83, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 876.2,
+      "whole_device_memory_util_temperature": "8732, 49, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 886.3,
+      "whole_device_memory_util_temperature": "8730, 98, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 896.3,
+      "whole_device_memory_util_temperature": "8738, 97, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 906.4,
+      "whole_device_memory_util_temperature": "8757, 34, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 916.5,
+      "whole_device_memory_util_temperature": "8725, 48, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 926.5,
+      "whole_device_memory_util_temperature": "8753, 43, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 936.6,
+      "whole_device_memory_util_temperature": "8753, 51, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 946.7,
+      "whole_device_memory_util_temperature": "8753, 45, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 956.7,
+      "whole_device_memory_util_temperature": "8763, 21, 59",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 966.8,
+      "whole_device_memory_util_temperature": "8792, 21, 59",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 976.9,
+      "whole_device_memory_util_temperature": "8878, 50, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 987.0,
+      "whole_device_memory_util_temperature": "8864, 36, 58",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 997.0,
+      "whole_device_memory_util_temperature": "8859, 48, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1007.1,
+      "whole_device_memory_util_temperature": "8861, 98, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1017.2,
+      "whole_device_memory_util_temperature": "8859, 39, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1027.2,
+      "whole_device_memory_util_temperature": "8858, 41, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1037.3,
+      "whole_device_memory_util_temperature": "8860, 48, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1047.4,
+      "whole_device_memory_util_temperature": "8858, 52, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1057.5,
+      "whole_device_memory_util_temperature": "8858, 39, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1067.5,
+      "whole_device_memory_util_temperature": "8858, 48, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1077.6,
+      "whole_device_memory_util_temperature": "8858, 24, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1087.7,
+      "whole_device_memory_util_temperature": "8857, 62, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1097.7,
+      "whole_device_memory_util_temperature": "8633, 36, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1107.8,
+      "whole_device_memory_util_temperature": "8569, 52, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1117.9,
+      "whole_device_memory_util_temperature": "8588, 45, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1128.0,
+      "whole_device_memory_util_temperature": "8567, 32, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1138.0,
+      "whole_device_memory_util_temperature": "8534, 36, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1148.1,
+      "whole_device_memory_util_temperature": "8589, 48, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1158.2,
+      "whole_device_memory_util_temperature": "8605, 46, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1168.3,
+      "whole_device_memory_util_temperature": "8709, 60, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1178.3,
+      "whole_device_memory_util_temperature": "8768, 51, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1188.4,
+      "whole_device_memory_util_temperature": "8665, 97, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1198.5,
+      "whole_device_memory_util_temperature": "8655, 36, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1208.6,
+      "whole_device_memory_util_temperature": "8683, 87, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1218.7,
+      "whole_device_memory_util_temperature": "8793, 40, 58",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1228.7,
+      "whole_device_memory_util_temperature": "8660, 9, 60",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1238.8,
+      "whole_device_memory_util_temperature": "8636, 96, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1248.9,
+      "whole_device_memory_util_temperature": "8530, 32, 59",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1259.0,
+      "whole_device_memory_util_temperature": "8525, 46, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1269.1,
+      "whole_device_memory_util_temperature": "8442, 49, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1279.2,
+      "whole_device_memory_util_temperature": "8469, 35, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1289.2,
+      "whole_device_memory_util_temperature": "8469, 48, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1299.3,
+      "whole_device_memory_util_temperature": "8474, 51, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1309.4,
+      "whole_device_memory_util_temperature": "8510, 57, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1319.4,
+      "whole_device_memory_util_temperature": "8470, 41, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1329.5,
+      "whole_device_memory_util_temperature": "8472, 36, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1339.6,
+      "whole_device_memory_util_temperature": "8478, 44, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1349.7,
+      "whole_device_memory_util_temperature": "8489, 16, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1359.7,
+      "whole_device_memory_util_temperature": "8484, 97, 67",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1369.8,
+      "whole_device_memory_util_temperature": "8481, 39, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1379.9,
+      "whole_device_memory_util_temperature": "8477, 46, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1390.0,
+      "whole_device_memory_util_temperature": "8478, 37, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1400.0,
+      "whole_device_memory_util_temperature": "8502, 48, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1410.1,
+      "whole_device_memory_util_temperature": "8766, 48, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1420.2,
+      "whole_device_memory_util_temperature": "8647, 74, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1430.3,
+      "whole_device_memory_util_temperature": "8573, 43, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1440.3,
+      "whole_device_memory_util_temperature": "8568, 43, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1450.4,
+      "whole_device_memory_util_temperature": "8603, 41, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1460.5,
+      "whole_device_memory_util_temperature": "8576, 45, 64",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1470.5,
+      "whole_device_memory_util_temperature": "8557, 39, 62",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1480.6,
+      "whole_device_memory_util_temperature": "8542, 48, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1490.7,
+      "whole_device_memory_util_temperature": "8487, 54, 68",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1500.8,
+      "whole_device_memory_util_temperature": "8480, 36, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1510.8,
+      "whole_device_memory_util_temperature": "8454, 14, 61",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1520.9,
+      "whole_device_memory_util_temperature": "8517, 24, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1531.0,
+      "whole_device_memory_util_temperature": "8522, 51, 63",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    },
+    {
+      "elapsed_seconds": 1541.1,
+      "whole_device_memory_util_temperature": "8501, 42, 65",
+      "measurement": "Popen launcher only; actual training-child metrics are logged by training_entry.py",
+      "working_set_mib": 4.1,
+      "peak_working_set_mib": 4.2,
+      "private_commit_mib": 0.8,
+      "peak_pagefile_usage_mib": 0.8
+    }
+  ],
+  "pid": 35392,
+  "command": [
+    "［作業フォルダー］\\tools\\local-ai-foundation\\runtime\\lora-v1\\Scripts\\python.exe",
+    "-B",
+    "-s",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\training\\heroine_lora_v1_20261022\\training_entry.py",
+    "--config_file",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\training\\heroine_lora_v1_20261022\\configs\\train.executed.toml"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 1551.1
+}

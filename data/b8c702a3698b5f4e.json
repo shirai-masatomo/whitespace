@@ -1,0 +1,9 @@
+{
+  "trainer_acquisition_approved": true,
+  "host_gpu_training_approved": true,
+  "approval_quote": "取得・配置して進めてよい",
+  "approved_question": "既存ComfyUIを変更せず、学習ツールsd-scriptsと専用の依存ライブラリを作業フォルダー内へ新規取得・配置してよいですか？ 追加容量は15〜25GBの目安です。承認済みのGPU使用範囲で、短い試験後にLoRA v1の学習・検証を進めます。",
+  "date_jst": "2026-10-22",
+  "isolation": "Ordinary Windows host, user-approved scope; not VM isolation",
+  "scope": "Dedicated trainer venv and caches, existing Animagine model reused read-only, v1 trial/training and ComfyUI validation; no system/global/ComfyUI package changes, no cloud training or publication"
+}

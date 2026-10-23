@@ -1,0 +1,124 @@
+{
+  "current_native_tool_failures": [],
+  "items": [
+    {
+      "item": "ちゅぱちゅぱ",
+      "status": "content_not_attempted",
+      "reason": "今回の性的行為を表す用途では制作しない。ツール拒否ではない。"
+    },
+    {
+      "item": "ばちゅばちゅ",
+      "status": "content_not_attempted",
+      "reason": "同上"
+    },
+    {
+      "item": "しゅこしゅこ",
+      "status": "content_not_attempted",
+      "reason": "同上"
+    },
+    {
+      "item": "ぎしぎし",
+      "status": "sexual_use_not_attempted",
+      "reason": "性的な動きを示す用途は制作しない。一般の家具の軋みという別用途は今回未着手。"
+    },
+    {
+      "item": "首に腕を回す（接触06）",
+      "status": "tool_refused_input",
+      "reason": "過去の入力安全判定。出力0。request ccbb0f79-905f-4302-8315-a385525b54f7。"
+    },
+    {
+      "item": "首への甘噛み（接触06）",
+      "status": "tool_refused_input",
+      "reason": "過去の入力安全判定。出力0。request aa25250d-ee61-4ceb-aea7-f525561fb3b7。"
+    },
+    {
+      "item": "床でときめきながら他の二人を見る（仕草03）",
+      "status": "tool_refused_output",
+      "reason": "過去の出力安全判定。出力0。request d4a7d0a9-bf88-4b9a-806a-71dc19ae1d14。通常の座位案で代替。"
+    },
+    {
+      "item": "ぶるん／ばるん",
+      "status": "substituted",
+      "reason": "ぶるんぶるんは制作済み。色変更・振動線も追加。ばるんの別語版は未制作。"
+    },
+    {
+      "item": "ゆさゆさ",
+      "status": "substituted",
+      "reason": "ゆさゆさの反復形は未制作。追加済みの持ち込み素材から、ゆさっの太字・細字を一覧へ収録。表記の違いを残す。"
+    },
+    {
+      "item": "むにゅむにゅ／もみっ もみっ",
+      "status": "substituted",
+      "reason": "むにゅ♡と、指定された肩用のもみもみ♡を制作。反復形・もみっの厳密な別版は未制作。"
+    },
+    {
+      "item": "たぷん たぷん",
+      "status": "substituted",
+      "reason": "今回の参考字形に合わせた「たぽんっ♡」を制作。たぷんの反復形は未制作。"
+    },
+    {
+      "item": "びくん びくん",
+      "status": "substituted",
+      "reason": "怖い反応のびくっ びくっを制作。追加済みの持ち込み素材ビクンッも収録。びくん びくんの反復形そのものは未制作。"
+    },
+    {
+      "item": "むわぁの空気表現",
+      "status": "partial",
+      "reason": "薄い空気の膜と細字を制作。意図した蒸れ・生々しさは採用判断待ち。屈折・物理的な湿度表現は未実装。"
+    },
+    {
+      "item": "別角度への顔適合・任意ポーズ・視線の自動追従",
+      "status": "unimplemented",
+      "reason": "素材と対応条件の整理まで。自動変換機能は未実装。"
+    },
+    {
+      "item": "旧接触素材の視線すべての修正",
+      "status": "partial",
+      "reason": "抱きつきの相手方向と手つなぎの伏し目は07で候補化。02の視線の曖昧さ・09単独のカメラ向き等は全件修正していない。男性の目元が隠れるため、相互視線は未確認。"
+    },
+    {
+      "item": "ゲーム組込み・実機表示",
+      "status": "unverified",
+      "reason": "ゲーム本体はDot側。隔離VM/Sandboxを確認できていないため、ここでは起動せず静的確認のみ。"
+    },
+    {
+      "item": "びくっ（持ち込み素材側の既存記録）",
+      "status": "tool_refused_input",
+      "reason": "別制作記録に入力安全判定で出力0と記載。request 136515b7-e649-4705-915d-09bcbd6d0147。今回の怖い反応「びくっ びくっ」は、この記録を読む前の別試行で生成済み。"
+    },
+    {
+      "item": "すりっ（持ち込み素材側の既存記録）",
+      "status": "tool_refused_input",
+      "reason": "別制作記録に入力安全判定で出力0と記載。request 3ddf9822-cc9e-43ac-b08f-9af7177b042d。今回再試行していない。"
+    },
+    {
+      "item": "持ち込み側の初回失敗1件",
+      "status": "unknown_failure",
+      "reason": "台帳に詳細未保持と記載。安全判定による停止だったかは断定しない。"
+    },
+    {
+      "item": "既存の室内素材すべての靴なし差分",
+      "status": "partial",
+      "reason": "新しい絨毯用4素材は素足／靴下に対応。過去の室内素材には靴あり版が残り、全件修正は未完了。"
+    }
+  ],
+  "scope": "今回の指定語・機能の未制作/代替、および読んだ既存台帳で確認できた停止。全実験・全チャットの包括監査ではない。",
+  "native_batches": {
+    "08": {
+      "outputs": 16,
+      "tool_refusals": 0
+    },
+    "09": {
+      "outputs": 17,
+      "tool_refusals": 0
+    },
+    "10": {
+      "outputs": 2,
+      "tool_refusals": 0
+    },
+    "11": {
+      "outputs": 7,
+      "tool_refusals": 0
+    }
+  }
+}

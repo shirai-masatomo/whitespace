@@ -1,0 +1,442 @@
+{
+  "snapshot_files": {
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\01_シュッ.png": "445ced51527f21f2fa8c00da648674320b0e5c07e6dd2dfe3b7a864468bbfd74",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\02_パンッ.png": "d1b6056c1198117fca74b8837f3ac6bc2bc4731e92f3fee94eb36a01b1ce4af2",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\03_どびゅるるっ.png": "6ff8137d30179a8c5fd345d805a2a9e19df509b6557f2768a5ab90014b136c96",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\04_どぴゅっ.png": "0b98abd7158924c7bc4cf8ff66c8fb963f3d5b9d2ae8a12d1fa39a59537a6ce3",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\05_ビクンッ.png": "79e4538bb42705b93ae962ff915d72a63c019fc0e6875940f32488a096cb279d",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\06_ぐにいっ.png": "ad1d0e12d3d40d5382972670aeab8f8c70f4dae828860efc99b6f21653e3dad6",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\06_ぐにいっ_ピンク.png": "e35a8d56eeb1ac071864d0f1b269b5e6a74e667190cf1902a4d9b9dd86fc3766",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\07_むちゅっ.png": "71875d75eb4dfe0c400641d9a1360d5a8f8f34ef080e24f18184f561282ce0bf",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\08_むらぁ.png": "90fae2e58ff92951303213761f3a184cc6976595b8cc08e4d37ff712b666663c",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\09_ゆさっ_太字.png": "c2e6a1f5c465cb69e47c2c4da5d97b3efe0721d61d3130f5c004be5ef6b1450d",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\10_ゆさっ_細字.png": "a7987aa59d96822634317a979962c6e451edfb798f7a1ca8983cdc1a2b50fd59",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\11_ズボッ.png": "bc7e0141963f850331cc14e547e7ed174d22babcf38a827c3f660ec5fc5b6b5b",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\12_おっ.png": "568d2aae9d10a67f5a3a83e086be55c959fadf05c396551f257e98dbac681b25",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-008b4e06-2388-4e84-bc18-54228d9d6b43.png": "77a3672328a9370611ecb0384b1e57b1de57b787c790b1fb8526ca4260a56f4f",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-1bb3d65d-d114-470c-bbbf-e938b3a22ff2.png": "a3a22801ecc0cbfdb672518f3777d39ccd5a5e795e7e96b781ff5ad90a27ad56",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-1ca6d0f9-1037-404a-953c-c4beafa85f45.png": "1027e51c34b35cce349361c1a58bd1f68546bb15ba38b9a14748f8e512a7e33e",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-49823352-59cf-4596-b0ea-4868ccdb006b.png": "c5624dfff71060b12db7bfc6e04cb1d3571862c76d3e14895578c60dab2ccf1b",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-4be87ba8-2d7c-4fbb-88eb-353cd0d8597e.png": "95d17c5b99b39f6cdb3ebe63c9b08835941bb3d821a271b258fb577eb589f140",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-75f5faff-c374-4519-9190-05782e644236.png": "5cf792494a1918a6101606b4aca91ed26aad60e1c8ae52f2a7b17152a957e789",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-fc366ece-cab2-4d52-be35-47e9b889f05f.png": "bc270aa7897b84139e1f6dfd42dde6bc978e59310744b0687bb4e88d5be71051",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-1dde80b5-0f8b-4eeb-8ac1-eadfafe78ca0.png": "79e4538bb42705b93ae962ff915d72a63c019fc0e6875940f32488a096cb279d",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-1f2a00a9-2526-45ff-8606-1c7e608d73f2.png": "445ced51527f21f2fa8c00da648674320b0e5c07e6dd2dfe3b7a864468bbfd74",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-30ed1863-9e20-439f-9ddf-2a75469f9cd3.png": "71875d75eb4dfe0c400641d9a1360d5a8f8f34ef080e24f18184f561282ce0bf",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-5f2277e8-bae5-43d2-9e27-3a41488fa90e.png": "c2e6a1f5c465cb69e47c2c4da5d97b3efe0721d61d3130f5c004be5ef6b1450d",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-6526566a-e315-4a10-a5c6-b762073109fb.png": "6ff8137d30179a8c5fd345d805a2a9e19df509b6557f2768a5ab90014b136c96",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-6f5cf727-deda-4593-b127-c5fb9c8c683c.png": "bc7e0141963f850331cc14e547e7ed174d22babcf38a827c3f660ec5fc5b6b5b",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-75374be0-8e9e-48b8-b01c-a41e4466b1e6.png": "a7987aa59d96822634317a979962c6e451edfb798f7a1ca8983cdc1a2b50fd59",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-8f64d15c-c450-4c3f-af4e-943511430e8d.png": "568d2aae9d10a67f5a3a83e086be55c959fadf05c396551f257e98dbac681b25",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-90223336-6115-40c6-8c5e-3fd0829f743f.png": "0b98abd7158924c7bc4cf8ff66c8fb963f3d5b9d2ae8a12d1fa39a59537a6ce3",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-9ae57ae1-4161-4080-9f94-f298fb538a6d.png": "ad1d0e12d3d40d5382972670aeab8f8c70f4dae828860efc99b6f21653e3dad6",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-a9797085-18d5-4f23-a00c-0b3ad64f73e0.png": "d1b6056c1198117fca74b8837f3ac6bc2bc4731e92f3fee94eb36a01b1ce4af2",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-b55335cd-2af2-4f7c-b591-089517fc750d.png": "83dbd4f23e640d7e8a4bc330bf482058ee2a6a60fef6afa1d9840abbc40ddd8d",
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\exec-cb5e0602-7185-4dc6-b236-a16cee81f98e.png": "90fae2e58ff92951303213761f3a184cc6976595b8cc08e4d37ff712b666663c"
+  },
+  "unique_new_entries": [
+    {
+      "id": "supplied2_01",
+      "label": "シュッ",
+      "kind": "描き文字",
+      "file": "../media/445ced51527f21f2fa8c.png",
+      "url": "../media/445ced51527f21f2fa8c.png",
+      "thumb": "../media/eb8fac1f283c0056fa76.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "445ced51527f21f2fa8c00da648674320b0e5c07e6dd2dfe3b7a864468bbfd74",
+      "size": [
+        1015,
+        1549
+      ],
+      "alpha_crop": [
+        195,
+        170,
+        824,
+        1422
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_02",
+      "label": "パンッ",
+      "kind": "描き文字",
+      "file": "../media/d1b6056c1198117fca74.png",
+      "url": "../media/d1b6056c1198117fca74.png",
+      "thumb": "../media/a6682a166595e290c368.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "d1b6056c1198117fca74b8837f3ac6bc2bc4731e92f3fee94eb36a01b1ce4af2",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha_crop": [
+        194,
+        97,
+        829,
+        1379
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_03",
+      "label": "どびゅるるっ",
+      "kind": "描き文字",
+      "file": "../media/6ff8137d30179a8c5fd3.png",
+      "url": "../media/6ff8137d30179a8c5fd3.png",
+      "thumb": "../media/033d99578eafc6a1e3b7.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "6ff8137d30179a8c5fd345d805a2a9e19df509b6557f2768a5ab90014b136c96",
+      "size": [
+        931,
+        1690
+      ],
+      "alpha_crop": [
+        190,
+        38,
+        829,
+        1644
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_04",
+      "label": "どぴゅっ",
+      "kind": "描き文字",
+      "file": "../media/0b98abd7158924c7bc4c.png",
+      "url": "../media/0b98abd7158924c7bc4c.png",
+      "thumb": "../media/8d265961256086f9689e.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "0b98abd7158924c7bc4cf8ff66c8fb963f3d5b9d2ae8a12d1fa39a59537a6ce3",
+      "size": [
+        818,
+        1922
+      ],
+      "alpha_crop": [
+        173,
+        98,
+        697,
+        1820
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_05",
+      "label": "ビクンッ",
+      "kind": "描き文字",
+      "file": "../media/79e4538bb42705b93ae9.png",
+      "url": "../media/79e4538bb42705b93ae9.png",
+      "thumb": "../media/85c16fde8b3f46c2ade9.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "79e4538bb42705b93ae962ff915d72a63c019fc0e6875940f32488a096cb279d",
+      "size": [
+        1774,
+        887
+      ],
+      "alpha_crop": [
+        155,
+        78,
+        1515,
+        808
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_06",
+      "label": "ぐにいっ・先行白版",
+      "kind": "描き文字",
+      "file": "../media/ad1d0e12d3d40d538297.png",
+      "url": "../media/ad1d0e12d3d40d538297.png",
+      "thumb": "../media/9b4869f8118bc1224a7f.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "ad1d0e12d3d40d5382972670aeab8f8c70f4dae828860efc99b6f21653e3dad6",
+      "size": [
+        971,
+        1619
+      ],
+      "alpha_crop": [
+        301,
+        93,
+        698,
+        1540
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_07",
+      "label": "ぐにいっ・ピンク",
+      "kind": "描き文字",
+      "file": "../media/e35a8d56eeb1ac071864.png",
+      "url": "../media/e35a8d56eeb1ac071864.png",
+      "thumb": "../media/6aa2220779dd89d9f0cb.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "e35a8d56eeb1ac071864d0f1b269b5e6a74e667190cf1902a4d9b9dd86fc3766",
+      "size": [
+        971,
+        1619
+      ],
+      "alpha_crop": [
+        301,
+        93,
+        698,
+        1540
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\06-pink.json"
+    },
+    {
+      "id": "supplied2_08",
+      "label": "むちゅっ",
+      "kind": "描き文字",
+      "file": "../media/71875d75eb4dfe0c4006.png",
+      "url": "../media/71875d75eb4dfe0c4006.png",
+      "thumb": "../media/c742f417afc98bbe3c23.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "71875d75eb4dfe0c400641d9a1360d5a8f8f34ef080e24f18184f561282ce0bf",
+      "size": [
+        916,
+        1718
+      ],
+      "alpha_crop": [
+        269,
+        243,
+        668,
+        1580
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_09",
+      "label": "むらぁ",
+      "kind": "描き文字",
+      "file": "../media/90fae2e58ff929513032.png",
+      "url": "../media/90fae2e58ff929513032.png",
+      "thumb": "../media/5b8f33f105bb816f2f6a.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "90fae2e58ff92951303213761f3a184cc6976595b8cc08e4d37ff712b666663c",
+      "size": [
+        934,
+        1685
+      ],
+      "alpha_crop": [
+        182,
+        80,
+        769,
+        1610
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_10",
+      "label": "ゆさっ・太字",
+      "kind": "描き文字",
+      "file": "../media/c2e6a1f5c465cb69e47c.png",
+      "url": "../media/c2e6a1f5c465cb69e47c.png",
+      "thumb": "../media/82bc0fd9aaec60adcade.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "c2e6a1f5c465cb69e47c2c4da5d97b3efe0721d61d3130f5c004be5ef6b1450d",
+      "size": [
+        1247,
+        1261
+      ],
+      "alpha_crop": [
+        139,
+        81,
+        1157,
+        1131
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_11",
+      "label": "ゆさっ・細字",
+      "kind": "描き文字",
+      "file": "../media/a7987aa59d9682263431.png",
+      "url": "../media/a7987aa59d9682263431.png",
+      "thumb": "../media/4e26d8778fd6b96ef44f.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "a7987aa59d96822634317a979962c6e451edfb798f7a1ca8983cdc1a2b50fd59",
+      "size": [
+        1104,
+        1424
+      ],
+      "alpha_crop": [
+        384,
+        417,
+        762,
+        1024
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_12",
+      "label": "ズボッ",
+      "kind": "描き文字",
+      "file": "../media/bc7e0141963f850331cc.png",
+      "url": "../media/bc7e0141963f850331cc.png",
+      "thumb": "../media/fd70b5f8cb9eae0db47f.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "bc7e0141963f850331cc14e547e7ed174d22babcf38a827c3f660ec5fc5b6b5b",
+      "size": [
+        1223,
+        1286
+      ],
+      "alpha_crop": [
+        131,
+        41,
+        1076,
+        1232
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_13",
+      "label": "おっ",
+      "kind": "描き文字",
+      "file": "../media/568d2aae9d10a67f5a3a.png",
+      "url": "../media/568d2aae9d10a67f5a3a.png",
+      "thumb": "../media/0fbf1c9afd0c4fbe497f.jpg",
+      "pack": "持ち込み追加",
+      "note": "フォルダーへ追加済みの素材を読み取り再利用。今回の新規生成に数えず、元PNGを変更していない。",
+      "sha256": "568d2aae9d10a67f5a3a83e086be55c959fadf05c396551f257e98dbac681b25",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha_crop": [
+        78,
+        53,
+        931,
+        1339
+      ],
+      "base_selectable": false,
+      "provenance": "［作業フォルダー］\\projects\\local-ai-image-lab\\assets\\text_effect\\reference-set2-20261022\\lettering.json"
+    },
+    {
+      "id": "supplied2_14",
+      "label": "ぐにいっ・色変更の生成試行",
+      "kind": "描き文字",
+      "file": "../media/83dbd4f23e640d7e8a4b.png",
+      "url": "../media/83dbd4f23e640d7e8a4b.png",
+      "thumb": "../media/4805794cbeedfa1ac663.jpg",
+      "pack": "持ち込み比較試行",
+      "note": "色変更の生成試行。最終候補は元アルファを保つ06_ぐにいっ_ピンク.png。持ち込み台帳の区分を引き継ぎ、試し重ねには選ばない。",
+      "sha256": "83dbd4f23e640d7e8a4bc330bf482058ee2a6a60fef6afa1d9840abbc40ddd8d",
+      "size": [
+        971,
+        1619
+      ],
+      "alpha_crop": [
+        290,
+        92,
+        701,
+        1541
+      ],
+      "base_selectable": false,
+      "provenance": "原本ファイル。追加の出典は未照合。"
+    }
+  ],
+  "same_image_aliases": [
+    {
+      "file": "../media/77a3672328a9370611ec.png",
+      "sha256": "77a3672328a9370611ecb0384b1e57b1de57b787c790b1fb8526ca4260a56f4f"
+    },
+    {
+      "file": "../media/a3a22801ecc0cbfdb672.png",
+      "sha256": "a3a22801ecc0cbfdb672518f3777d39ccd5a5e795e7e96b781ff5ad90a27ad56"
+    },
+    {
+      "file": "../media/1027e51c34b35cce3493.png",
+      "sha256": "1027e51c34b35cce349361c1a58bd1f68546bb15ba38b9a14748f8e512a7e33e"
+    },
+    {
+      "file": "../media/c5624dfff71060b12db7.png",
+      "sha256": "c5624dfff71060b12db7bfc6e04cb1d3571862c76d3e14895578c60dab2ccf1b"
+    },
+    {
+      "file": "../media/95d17c5b99b39f6cdb3e.png",
+      "sha256": "95d17c5b99b39f6cdb3ebe63c9b08835941bb3d821a271b258fb577eb589f140"
+    },
+    {
+      "file": "../media/5cf792494a1918a61016.png",
+      "sha256": "5cf792494a1918a6101606b4aca91ed26aad60e1c8ae52f2a7b17152a957e789"
+    },
+    {
+      "file": "../media/bc270aa7897b84139e1f.png",
+      "sha256": "bc270aa7897b84139e1f6dfd42dde6bc978e59310744b0687bb4e88d5be71051"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "79e4538bb42705b93ae962ff915d72a63c019fc0e6875940f32488a096cb279d"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "445ced51527f21f2fa8c00da648674320b0e5c07e6dd2dfe3b7a864468bbfd74"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "71875d75eb4dfe0c400641d9a1360d5a8f8f34ef080e24f18184f561282ce0bf"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "c2e6a1f5c465cb69e47c2c4da5d97b3efe0721d61d3130f5c004be5ef6b1450d"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "6ff8137d30179a8c5fd345d805a2a9e19df509b6557f2768a5ab90014b136c96"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "bc7e0141963f850331cc14e547e7ed174d22babcf38a827c3f660ec5fc5b6b5b"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "a7987aa59d96822634317a979962c6e451edfb798f7a1ca8983cdc1a2b50fd59"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "568d2aae9d10a67f5a3a83e086be55c959fadf05c396551f257e98dbac681b25"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "0b98abd7158924c7bc4cf8ff66c8fb963f3d5b9d2ae8a12d1fa39a59537a6ce3"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "ad1d0e12d3d40d5382972670aeab8f8c70f4dae828860efc99b6f21653e3dad6"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "d1b6056c1198117fca74b8837f3ac6bc2bc4731e92f3fee94eb36a01b1ce4af2"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "90fae2e58ff92951303213761f3a184cc6976595b8cc08e4d37ff712b666663c"
+    }
+  ],
+  "active_text_choices": 42,
+  "catalog_entries": 143,
+  "files_changed": 0
+}

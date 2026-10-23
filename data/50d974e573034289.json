@@ -1,0 +1,50 @@
+{
+  "filename": "heroine_wshrn26_animagine40_v1.safetensors",
+  "selected_step": 800,
+  "source": "［作業フォルダー］\\projects\\local-ai-image-lab\\training\\heroine_lora_v1_20261022\\output\\heroine_wshrn26_animagine40_v1-step00000800.safetensors",
+  "sha256": "2f39815fd629b430cce9e910a800a272e8dc8d7559998c1cdaacd0bb2df68e9f",
+  "bytes": 85430940,
+  "identifier": "wshrn26",
+  "strength_model": 0.75,
+  "strength_clip": 0.0,
+  "model_family": "SDXL",
+  "tested_checkpoint": "animagine-xl-4.0-opt.safetensors",
+  "paths": [
+    "［作業フォルダー］\\projects\\local-ai-image-lab\\training\\heroine_lora_v1_20261022\\output\\selected\\heroine_wshrn26_animagine40_v1.safetensors",
+    "［作業フォルダー］\\tools\\local-ai-foundation\\runtime\\ComfyUI_windows_portable\\ComfyUI\\models\\loras\\heroine_wshrn26_animagine40_v1.safetensors"
+  ],
+  "local_installation_only": true,
+  "externally_published": false,
+  "review": {
+    "visual_review_completed": true,
+    "selected_step": 800,
+    "scope": "3 tasks x 1 seed x 3 checkpoints, same prompt/seed/LoRA strength 0.75; qualitative comparison to canonical N00 and baseline",
+    "selection_reason_ja": "400版より800版で前髪・顔立ちと体格、立位の傾向が教材に近づいた。800版と1200版の3課題の差は小さく、1200版を優先する明確な改善を確認できなかったため、初回候補には800版を採用。全般的な最適値を証明した選定ではない。",
+    "observations": [
+      "Baseline has different bangs, windblown/wavy hair, sharper stylized shading and body proportions. All trained candidates move toward the provided character examples.",
+      "Green sports jacket and red blouse are retained in all three checkpoints; the original blue cardigan is not forced onto these two clothing tests.",
+      "Default cardigan tends to close over the torso; necklace decoration differs. Clothing microdetails are not faithfully fixed.",
+      "Profile retains a more painterly/shiny red garment and stronger shading than the original reference.",
+      "800 and 1200 step versions are visually similar in this small screen. Selection is provisional until the second-seed/pose/expression matrix."
+    ],
+    "not_claimed": [
+      "perfect identity",
+      "optimal training steps",
+      "production acceptance rate",
+      "unchanged anatomy in arbitrary poses"
+    ],
+    "next": "6-task, 2-seed baseline vs selected comparison; no new training before reporting v1"
+  },
+  "final_matrix_completed": true,
+  "probe_images": 6,
+  "requires_trait_words": [
+    "blonde hair",
+    "long hair",
+    "blue eyes"
+  ],
+  "prototype_limitations": [
+    "unprompted hair color can drift",
+    "skirt length and color can drift",
+    "microdetails and rendering differ"
+  ]
+}

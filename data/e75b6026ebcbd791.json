@@ -1,0 +1,56 @@
+{
+  "source_sha256": "38f2cc52b29bff8dd2106d9f16dda52a6c80b349633781b033cc5ff023a42dbd",
+  "outputs": [
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "0869330006f3d10df32601900bd4e190b07623a2d1540c5f1b9f570b06d30bab",
+      "bytes": 509337,
+      "dimensions": [
+        832,
+        1216
+      ],
+      "decoded_frames": 5,
+      "loop_ms": 3770,
+      "method": "Two local ComfyUI eye poses, timed closed-eye holds. No claim of interpolated eyelid motion.",
+      "max_changed_pixels_outside_allowed_region_between_decoded_frames": 0,
+      "png_outside_region_equals_original": true,
+      "gif_palette": "256 colors shared, no dither; compare GIF frames to each other, not lossless PNG RGB"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "f867bd17fc789ea50de499cb3659fbcf554420e28d8f250bc7c616e9775f02a0",
+      "bytes": 1948510,
+      "dimensions": [
+        832,
+        1216
+      ],
+      "decoded_frames": 24,
+      "loop_ms": 3360,
+      "method": "Deterministic clothing warp, up to 3.2px. Not physical motion, full-body breathing or video-model output.",
+      "max_changed_pixels_outside_allowed_region_between_decoded_frames": 0,
+      "png_outside_region_equals_original": true,
+      "gif_palette": "256 colors shared, no dither; compare GIF frames to each other, not lossless PNG RGB"
+    },
+    {
+      "file": "制作参照（共有版非同梱）",
+      "sha256": "1a2ebee6c142e3f9212c38029529449f840df1ad0bf2c4af3e2094865d71d6e4",
+      "bytes": 450062,
+      "dimensions": [
+        832,
+        1216
+      ],
+      "decoded_frames": 13,
+      "loop_ms": 4100,
+      "method": "Shy small smile -> warm open smile; mouth-only inpaint endpoint with dissolve. No head or pose movement.",
+      "max_changed_pixels_outside_allowed_region_between_decoded_frames": 0,
+      "png_outside_region_equals_original": true,
+      "gif_palette": "256 colors shared, no dither; compare GIF frames to each other, not lossless PNG RGB"
+    }
+  ],
+  "blink_endpoint": "blink_078",
+  "rejected_blink_endpoint": "blink_095 (lashes/eye shape less natural)",
+  "new_comfy_generated_endpoints": 3,
+  "used_endpoints": 2,
+  "new_video_generation": false,
+  "original_and_static_region_preservation": "PNG outside edited mask is exact; GIF uses lossy palette but unchanged regions remain identical across animation frames."
+}

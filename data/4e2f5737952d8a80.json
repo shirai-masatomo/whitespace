@@ -1,0 +1,74 @@
+{
+  "native_outputs": 5,
+  "new_expression_candidates": 4,
+  "face_mask_outside_changed_pixels": 0,
+  "alpha_changed_pixels": 0,
+  "startle_animation": [
+    {
+      "format": "apng",
+      "file": "../media/84b6220bdddf00fee3b8.png",
+      "sha256": "84b6220bdddf00fee3b8be1ab7525e24d417af05ad3d6f0cb26aa015dbe4d309",
+      "encoded_frames": 56,
+      "expanded_frames": 56,
+      "duration_ms": 2800,
+      "transparent_endpoints": true
+    },
+    {
+      "format": "webp",
+      "file": "../media/67cb994062fdb16f0949.webp",
+      "sha256": "67cb994062fdb16f09497c9e28f75563e06ebef3739f22607d6062d4ad586835",
+      "encoded_frames": 56,
+      "expanded_frames": 56,
+      "duration_ms": 2800,
+      "transparent_endpoints": true
+    },
+    {
+      "format": "gif",
+      "file": "../media/408eb2a5dd46ce0f4a79.gif",
+      "sha256": "408eb2a5dd46ce0f4a7933d4e59e35dd1ad10ee01f499a38bc02eb087ab36841",
+      "encoded_frames": 56,
+      "expanded_frames": 56,
+      "duration_ms": 2800,
+      "transparent_endpoints": true
+    }
+  ],
+  "phase_delay_verified": true,
+  "gentle_quiver_hz": 1.1,
+  "game_gui": "not run; isolation unverified",
+  "catalog_files": 159,
+  "text_choices": 42,
+  "text_profiles": 42,
+  "expression_review_candidates": 30,
+  "protected_originals_unchanged": 147,
+  "native_sources_preserved": true,
+  "local_html_references": 379,
+  "missing_references": [],
+  "unique_html_ids": true,
+  "all_catalog_hashes_match": true,
+  "logic_checks": {
+    "passed": true,
+    "checks": 13,
+    "tests": [
+      "all 30 candidates rendered",
+      "new-only filter returns 4",
+      "combined factor filter returns one new red face",
+      "four comparison slots",
+      "decision persists with file hash",
+      "changed image does not inherit decision",
+      "import accepts matching hash and valid status only",
+      "invalid JSON reports error without resetting decisions",
+      "storage failure is visible",
+      "export function completes",
+      "authored startle uses poster while stopped",
+      "authored startle plays sequence without outer animation",
+      "heartbeat selects its pulse profile"
+    ],
+    "scope": "Node vm with minimal mock DOM; no real browser or GUI execution"
+  },
+  "new_expression_note": "04 downward gaze weak; explicitly marked for review, not reported as fully achieved",
+  "adoption_decisions": "initially unreviewed; human decisions stored/exported by review UI; tests use synthetic mock data only",
+  "host_changes": "requested new PNG/animations, metadata, preview pages and project docs only; no runtime or system settings changed",
+  "processes": "CPU build and Node checks exited; no server, game, SDK or GUI automation started",
+  "residuals": "［作業フォルダー］\\output\\heroine-expression-motion-20261022_13",
+  "game_browser_runtime": "not executed; no verified Windows Sandbox/VM"
+}

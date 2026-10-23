@@ -1,0 +1,13 @@
+{
+  "id": "N00",
+  "source": "制作参照（共有版非同梱）",
+  "source_name": "neutral.png",
+  "snapshot": "audit\\sources\\N00.png",
+  "sha256": "f8659488e8037b35309fd19c03fe8afa3f603baaf0fc38e5fdba2a8d7043cf17",
+  "size": [
+    1037,
+    1516
+  ],
+  "mode": "RGBA",
+  "group": "canonical_original"
+}

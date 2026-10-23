@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-10-20",
+  "method": "Static cross-check with live /object_info; no /prompt submission",
+  "image_generation_executed": false,
+  "ui_opening_checked": false,
+  "quality_verified": false,
+  "workflows": {
+    "00-mask-preview": {
+      "available_node_classes": true,
+      "required_inputs_links_options_ranges": true,
+      "nodes": 4,
+      "ui_links": 3
+    },
+    "20-clothing-inpaint": {
+      "available_node_classes": true,
+      "required_inputs_links_options_ranges": true,
+      "nodes": 9,
+      "ui_links": 15
+    },
+    "21-pose-reference": {
+      "available_node_classes": true,
+      "required_inputs_links_options_ranges": true,
+      "nodes": 14,
+      "ui_links": 17
+    },
+    "22-background-inpaint": {
+      "available_node_classes": true,
+      "required_inputs_links_options_ranges": true,
+      "nodes": 9,
+      "ui_links": 15
+    },
+    "23-local-repair": {
+      "available_node_classes": true,
+      "required_inputs_links_options_ranges": true,
+      "nodes": 10,
+      "ui_links": 16
+    },
+    "24-upscale-lanczos": {
+      "available_node_classes": true,
+      "required_inputs_links_options_ranges": true,
+      "nodes": 3,
+      "ui_links": 2
+    }
+  }
+}

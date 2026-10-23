@@ -1,0 +1,15 @@
+{
+  "native_requests": 7,
+  "native_outputs": 7,
+  "tool_failures": [],
+  "selected_indoor_assets": 4,
+  "scene_compositions": 12,
+  "every_scene_men": 3,
+  "every_scene_women": 1,
+  "preserved_old_asset_hashes": 144,
+  "native_final_copy_sha256_equal": true,
+  "native_alpha_preserved": true,
+  "game_sdk_browser_runtime": "not run; no verified VM/Sandbox",
+  "host_changes": "new asset files, CPU compositions, metadata and documents only; no system changes",
+  "old_shoe_versions": "preserved in output, not selected for these new scenes"
+}

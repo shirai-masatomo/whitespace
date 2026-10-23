@@ -1,0 +1,552 @@
+{
+  "observed_at_epoch": 1792630385.1617973,
+  "sources": [
+    {
+      "id": "B01",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "B02",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "B03",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "B04",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "B05",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "B06",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "B07",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A01",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A02",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A03",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A04",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A05",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A06",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A07",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A08",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A09",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A10",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A11",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A12",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A13",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A14",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A15",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A16",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A17",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A18",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A19",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "A20",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    },
+    {
+      "id": "N00",
+      "source_sha256_matches": true,
+      "snapshot_sha256_matches": true
+    }
+  ],
+  "protected_environment": {
+    "tools/local-ai-foundation/config/extra_model_paths.yaml": true,
+    "tools/local-ai-foundation/runtime/ComfyUI_windows_portable/ComfyUI/requirements.txt": true,
+    "tools/local-ai-foundation/runtime/ComfyUI_windows_portable/python_embeded/python313._pth": true
+  },
+  "images": [
+    {
+      "id": "default_42006_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "default_43000_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "new_outfit_42006_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "new_outfit_43000_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "profile_42006_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "profile_43000_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "chair_42006_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "chair_43000_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "expression_42006_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "expression_43000_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "hand_near_ear_42006_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "hand_near_ear_43000_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_400_default_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_400_new_outfit_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_400_profile_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_800_default_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_800_new_outfit_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_800_profile_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_1200_default_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_1200_new_outfit_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "screen_1200_profile_42006",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "default_42006_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "default_43000_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "new_outfit_42006_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "new_outfit_43000_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "profile_42006_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "profile_43000_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "chair_42006_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "chair_43000_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "expression_42006_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "expression_43000_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "hand_near_ear_42006_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "hand_near_ear_43000_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "probe_trigger_only_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "probe_trigger_only_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "probe_closed_eyes_prompt_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "probe_closed_eyes_prompt_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "probe_long_skirt_prompt_baseline",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    },
+    {
+      "id": "probe_long_skirt_prompt_v1_075",
+      "sha256_matches": true,
+      "size": [
+        832,
+        1216
+      ]
+    }
+  ],
+  "generated_images_by_phase": {
+    "baseline": 12,
+    "screen": 9,
+    "selected": 12,
+    "probes": 6
+  },
+  "new_generated_images": 39,
+  "model_copies": [
+    {
+      "path": "［作業フォルダー］\\projects\\local-ai-image-lab\\training\\heroine_lora_v1_20261022\\output\\selected\\heroine_wshrn26_animagine40_v1.safetensors",
+      "sha256_matches": true
+    },
+    {
+      "path": "［作業フォルダー］\\tools\\local-ai-foundation\\runtime\\ComfyUI_windows_portable\\ComfyUI\\models\\loras\\heroine_wshrn26_animagine40_v1.safetensors",
+      "sha256_matches": true
+    }
+  ],
+  "processes": [
+    {
+      "phase": "baseline",
+      "pid": 40184,
+      "state": "absent"
+    },
+    {
+      "phase": "screen",
+      "pid": 32080,
+      "state": "absent"
+    },
+    {
+      "phase": "selected",
+      "pid": 10052,
+      "state": "absent"
+    },
+    {
+      "phase": "probes",
+      "pid": 23028,
+      "state": "absent"
+    },
+    {
+      "phase": "trial",
+      "pid": 38024,
+      "state": "absent"
+    },
+    {
+      "phase": "train",
+      "pid": 35392,
+      "state": "absent"
+    },
+    {
+      "phase": "preflight",
+      "pid": 29260,
+      "state": "absent"
+    },
+    {
+      "phase": "actual-training-child",
+      "pid": 28844,
+      "state": "absent"
+    }
+  ],
+  "storage": [
+    {
+      "path": "［作業フォルダー］\\projects\\local-ai-image-lab\\training\\heroine_lora_v1_20261022",
+      "bytes": 812500774
+    },
+    {
+      "path": "［作業フォルダー］\\tools\\local-ai-foundation\\runtime\\lora-v1",
+      "bytes": 8047728927
+    },
+    {
+      "path": "［作業フォルダー］\\tools\\local-ai-foundation\\runtime\\lora-v1-cache",
+      "bytes": 3912009
+    },
+    {
+      "path": "［作業フォルダー］\\tools\\local-ai-foundation\\runtime\\lora-v1-temp",
+      "bytes": 0
+    }
+  ],
+  "additional_scoped_bytes": 8949572650,
+  "additional_scoped_gib": 8.33,
+  "additional_scoped_gb_decimal": 8.95,
+  "all_source_hashes_match": true,
+  "all_protected_environment_hashes_match": true,
+  "all_image_hashes_match": true,
+  "all_model_copies_match": true,
+  "owned_process_still_running": false,
+  "isolation": "User-approved ordinary Windows host; no VM tests performed",
+  "global_settings_changes": false,
+  "external_publication": false
+}

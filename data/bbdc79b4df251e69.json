@@ -1,0 +1,4127 @@
+{
+  "date": "2026-10-22",
+  "scope": "CPU static inspection only; no ComfyUI import/server/GPU/GUI/game/SDK",
+  "passed": true,
+  "checks_passed": 822,
+  "workflow_pairs": 4,
+  "new_generation_count": 0,
+  "protected_files_unchanged": 7,
+  "limitations": [
+    "UI loading not executed",
+    "runtime schema validation not executed",
+    "image quality not tested",
+    "HTML visually unverified"
+  ],
+  "checks": [
+    {
+      "check": "01-first-image unique ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image UI/API node set",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image reverse edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image standard node 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image connected inputs 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image output types 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image widgets 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image API mapping 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image sampler fixed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image relative general save",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image batch 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image model exists",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01-first-image links all used",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color unique ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color UI/API node set",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color reverse edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color standard node 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color connected inputs 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color output types 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color widgets 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color API mapping 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color sampler fixed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color relative general save",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color batch 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color model exists",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02-clothing-color links all used",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet unique ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet UI/API node set",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet reverse edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet standard node 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet connected inputs 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet output types 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet widgets 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet API mapping 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet sampler fixed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet relative general save",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet batch 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet model exists",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03-composition-carpet links all used",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora unique ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora UI/API node set",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 10",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 11",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 9",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora standard node 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora connected inputs 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora output types 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora widgets 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 10",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora edge 11",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora API mapping 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora reverse edge 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 4",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 5",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 6",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 7",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora acyclic 8",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora sampler fixed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora relative general save",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora batch 1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora model exists",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04-heroine-lora links all used",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "01 preserves source except titles/prefix",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02 only color plus title/prefix",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "02 exactly navy to red",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "03 landscape",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "04 LoRA values",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "installed selected LoRA hash",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved 09-animagine40-normal.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved 09-animagine40-normal.api.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved heroine-lora-v1.ui.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved run.py",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved Start-ComfyUI.cmd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved runtime.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "preserved extra_model_paths.yaml",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 資料の入口",
+      "pass": true,
+      "details": "../index.html"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 衣装・構図のプロンプト集",
+      "pass": true,
+      "details": "../guide/index.html#prompts"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 保存と区分",
+      "pass": true,
+      "details": "../guide/index.html#storage"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 環境保護規約",
+      "pass": true,
+      "details": "［作業フォルダー］\\docs\\DEVELOPMENT_ISOLATION.md"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 01-first-image.json",
+      "pass": true,
+      "details": "9e860c48e3da844c.json"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 01-first-image.json",
+      "pass": true,
+      "details": "9e860c48e3da844c.json"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 02-clothing-color.json",
+      "pass": true,
+      "details": "417e95204b4c3cf9.json"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 03-composition-carpet.json",
+      "pass": true,
+      "details": "6ba01a1dc8f682d3.json"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 04-heroine-lora.json",
+      "pass": true,
+      "details": "e919abc7fa549baf.json"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md LoRA制作記録",
+      "pass": true,
+      "details": "../notes/6f2300e1098e843c.html"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 記録の雛形",
+      "pass": true,
+      "details": "b47b39da2aecfdc9.json"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md プロンプト集",
+      "pass": true,
+      "details": "../guide/index.html#prompts"
+    },
+    {
+      "check": "local link COMFYUI_FIRST_STEPS.md 検証記録",
+      "pass": true,
+      "details": "../notes/0f54ebe72e0f4c70.html"
+    },
+    {
+      "check": "local link COMFYUI_PROMPT_COOKBOOK.md 操作ガイド",
+      "pass": true,
+      "details": "../guide/index.html#start"
+    },
+    {
+      "check": "local link COMFYUI_PROMPT_COOKBOOK.md 保存方法",
+      "pass": true,
+      "details": "../guide/index.html#storage"
+    },
+    {
+      "check": "local link COMFYUI_PROMPT_COOKBOOK.md 応用手順",
+      "pass": true,
+      "details": "../notes/306714e6041f9e32.html"
+    },
+    {
+      "check": "local link COMFYUI_PROMPT_COOKBOOK.md 過去の品質比較",
+      "pass": true,
+      "details": "../notes/6d9e782ceb1faaf3.html"
+    },
+    {
+      "check": "local link COMFYUI_STORAGE.md 操作ガイド",
+      "pass": true,
+      "details": "../guide/index.html#start"
+    },
+    {
+      "check": "local link COMFYUI_STORAGE.md プロンプト集",
+      "pass": true,
+      "details": "../guide/index.html#prompts"
+    },
+    {
+      "check": "local link COMFYUI_STORAGE.md 記録の雛形",
+      "pass": true,
+      "details": "b47b39da2aecfdc9.json"
+    },
+    {
+      "check": "local link comfyui-beginner-guide-20261022.md ひな形台帳",
+      "pass": true,
+      "details": "2620b1dd85a6b255.json"
+    },
+    {
+      "check": "local link comfyui-beginner-guide-20261022.md beginnerフォルダー",
+      "pass": true,
+      "details": "../notes/ca89b37955bc650b.html"
+    },
+    {
+      "check": "local link comfyui-beginner-guide-20261022.md 静的検査結果",
+      "pass": true,
+      "details": "bbdc79b4df251e69.json"
+    },
+    {
+      "check": "local link README.md 最初に操作ガイドを読む",
+      "pass": true,
+      "details": "../guide/index.html#start"
+    },
+    {
+      "check": "local link README.md 01-first-image.json",
+      "pass": true,
+      "details": "9e860c48e3da844c.json"
+    },
+    {
+      "check": "local link README.md 02-clothing-color.json",
+      "pass": true,
+      "details": "417e95204b4c3cf9.json"
+    },
+    {
+      "check": "local link README.md 03-composition-carpet.json",
+      "pass": true,
+      "details": "6ba01a1dc8f682d3.json"
+    },
+    {
+      "check": "local link README.md 04-heroine-lora.json",
+      "pass": true,
+      "details": "e919abc7fa549baf.json"
+    },
+    {
+      "check": "local link README.md ひな形台帳",
+      "pass": true,
+      "details": "2620b1dd85a6b255.json"
+    },
+    {
+      "check": "local link README.md 試行記録の雛形",
+      "pass": true,
+      "details": "b47b39da2aecfdc9.json"
+    },
+    {
+      "check": "local link README.md 保存区分",
+      "pass": true,
+      "details": "../guide/index.html#storage"
+    },
+    {
+      "check": "HTML nested title",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested style",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested head",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested header",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested nav",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested ul",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested strong",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested strong",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested strong",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested ol",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested ol",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested section",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested ol",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested section",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested pre",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested a",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested th",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested thead",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested td",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tr",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested tbody",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested table",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested div",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested h3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested code",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested li",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested ul",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested p",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested section",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested main",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested footer",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested body",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML nested html",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML closed",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML unique ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML no scripts",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #start",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #prompts",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #storage",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file README.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file README.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #prompts",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #storage",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../../../docs/DEVELOPMENT_ISOLATION.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workflows/beginner/01-first-image.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workflows/beginner/01-first-image.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workflows/beginner/02-clothing-color.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workflows/beginner/03-composition-carpet.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workflows/beginner/04-heroine-lora.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file HEROINE_LORA_WORKFLOW.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file beginner/run-record-template.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #prompts",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file experiments/comfyui-beginner-guide-20261022.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #start",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #storage",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workshop/README.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file ../workshop/QUALITY_COMPARISON.md",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #start",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML anchor #prompts",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML file beginner/run-record-template.json",
+      "pass": true,
+      "details": null
+    },
+    {
+      "check": "HTML no unresolved token",
+      "pass": true,
+      "details": null
+    }
+  ]
+}

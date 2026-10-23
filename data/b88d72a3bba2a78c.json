@@ -1,0 +1,37 @@
+{
+  "W": "［作業フォルダー］/output/heroine-heart-flow-revision-20261022_10",
+  "F": "［作業フォルダー］/projects/local-ai-image-lab/assets/text_effect",
+  "R": "［作業フォルダー］",
+  "P": "［作業フォルダー］/projects/local-ai-image-lab",
+  "assets": [
+    {
+      "id": "01_brush_pink_hearts",
+      "label": "じゅぽじゅぽ・ピンクとハート",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-0c673569-1e65-465f-9541-d9ecfb33e489.png",
+      "prompt": "Use case: style-transfer. Input image is the edit target: standalone Japanese handwritten lettering, exact text \"じゅぽじゅぽ\". Recolor only the blue-gray ink to warm coral pink like #FF637E, preserve the readable kana, pen texture, fine white keyline, relative sizes and descending diagonal arrangement. Add three small delicate hand-drawn hollow pink hearts spaced around the lettering in the empty margins. Keep the words legible; hearts should not overlap glyphs or resemble diacritics. Typography only. Genuinely transparent background, transparent heart interiors, generous margins. No other words, people, bodies, objects, backdrop, neon glow or 3D.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_food_pink_hearts",
+      "label": "しこっ しこっ・ピンクとハート",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-7547e6e3-f224-4185-be7f-3089ca40f3dc.png",
+      "prompt": "Use case: style-transfer. Input image is the edit target: standalone Japanese handwritten lettering, exact text \"しこっ しこっ\". Recolor only the brown-black ink to warm coral pink like #FF637E, preserve readable kana, pen texture, fine white keyline, two separate groups and descending diagonal composition. Add three small delicate hand-drawn hollow pink hearts around the groups in the empty margins. Do not overlap letters or attach hearts as diacritics. Typography only. Genuinely transparent background, transparent heart interiors, generous margins. No extra words, people, bodies, objects, backdrop, neon glow or 3D.",
+      "source": "生成元（PC内）"
+    }
+  ],
+  "failures": [],
+  "jobs": [
+    {
+      "id": "01_brush_pink_hearts",
+      "label": "じゅぽじゅぽ・ピンクとハート",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-0c673569-1e65-465f-9541-d9ecfb33e489.png",
+      "prompt": "Use case: style-transfer. Input image is the edit target: standalone Japanese handwritten lettering, exact text \"じゅぽじゅぽ\". Recolor only the blue-gray ink to warm coral pink like #FF637E, preserve the readable kana, pen texture, fine white keyline, relative sizes and descending diagonal arrangement. Add three small delicate hand-drawn hollow pink hearts spaced around the lettering in the empty margins. Keep the words legible; hearts should not overlap glyphs or resemble diacritics. Typography only. Genuinely transparent background, transparent heart interiors, generous margins. No other words, people, bodies, objects, backdrop, neon glow or 3D."
+    },
+    {
+      "id": "02_food_pink_hearts",
+      "label": "しこっ しこっ・ピンクとハート",
+      "reference": "［ユーザーフォルダー］/AppData/Local/Temp/codex-clipboard-7547e6e3-f224-4185-be7f-3089ca40f3dc.png",
+      "prompt": "Use case: style-transfer. Input image is the edit target: standalone Japanese handwritten lettering, exact text \"しこっ しこっ\". Recolor only the brown-black ink to warm coral pink like #FF637E, preserve readable kana, pen texture, fine white keyline, two separate groups and descending diagonal composition. Add three small delicate hand-drawn hollow pink hearts around the groups in the empty margins. Do not overlap letters or attach hearts as diacritics. Typography only. Genuinely transparent background, transparent heart interiors, generous margins. No extra words, people, bodies, objects, backdrop, neon glow or 3D."
+    }
+  ]
+}

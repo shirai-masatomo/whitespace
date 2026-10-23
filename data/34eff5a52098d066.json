@@ -1,0 +1,157 @@
+{
+  "R": "［作業フォルダー］",
+  "P": "［作業フォルダー］/projects/local-ai-image-lab",
+  "D": "［作業フォルダー］/projects/local-ai-image-lab/sample/ヒロイン/まとまり/宅飲み_正面ソファー_20261022",
+  "W": "［作業フォルダー］/output/heroine-carpet-contact-20261022_11",
+  "F": "［作業フォルダー］/projects/local-ai-image-lab/sample/ヒロイン/まとまり/宅飲み_正面ソファー_20261022/絨毯での接触_11",
+  "assets": [
+    {
+      "id": "01_heroine_floor",
+      "label": "絨毯で座るヒロイン・単独",
+      "kind": "single",
+      "refs": [
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE clean full-body anime character asset on genuinely transparent background, matching the reference linework and cel shading. Preserve the adult woman age24 identity: golden blonde long hair and bangs, blue eyes, blue cardigan, opaque white turtleneck, thin gold chain, long navy ankle-length skirt, dark low pumps. Adult proportions. Show complete heads, hands and legs, generous transparent margin. No furniture, carpet illustration, room, floor, text, hearts, props or extra people; only the requested characters. Clothes remain opaque and tidy. Reference image 1 is the woman identity and outfit reference. Draw this ONE woman sitting comfortably on an implied floor with her legs folded together to her screen-right side under the long skirt. Her weight rests on her hip on the floor, no chair pose and no kneeling upright. One hand lightly rests in her lap, the other braces on the floor beside her, with five natural fingers. Torso upright, face turned slightly SCREEN LEFT, open blue eyes looking toward a nearby conversation partner, gentle inviting smile and mild blush. Empty hands, no drink. Neutral resting pose suitable for a before-approach scene.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_floor_to_sofa_a",
+      "label": "絨毯のヒロイン＋ソファの男子A",
+      "kind": "pair",
+      "refs": [
+        "制作参照（共有版非同梱）",
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE clean full-body anime character asset on genuinely transparent background, matching the reference linework and cel shading. Preserve the adult woman age24 identity: golden blonde long hair and bangs, blue eyes, blue cardigan, opaque white turtleneck, thin gold chain, long navy ankle-length skirt, dark low pumps. Adult proportions. Show complete heads, hands and legs, generous transparent margin. No furniture, carpet illustration, room, floor, text, hearts, props or extra people; only the requested characters. Clothes remain opaque and tidy. Image1 is woman identity/outfit. Image2 is the adult man A head/clothing identity only, not a pose reference. TWO adults as ONE paired sprite. Man A: ash brown fringe hiding eyes, charcoal overshirt, gray T-shirt, dark jeans, gray-white sneakers. IMPORTANT different support heights: man on SCREEN RIGHT sits on an invisible sofa seat about 40cm ABOVE the floor; thighs approximately horizontal and feet planted on the floor. Woman on SCREEN LEFT sits on the FLOOR NEXT TO the outside of his left leg, legs folded to her own left under her long skirt, hips on the floor and her head visibly lower than his shoulder. She gently holds his lowered near hand with both hands near her own shoulder, softly looking UP RIGHT toward his face. He bends his head DOWN LEFT toward her with a faint warm smile; his far hand rests on his own far thigh. A sweet quiet hand-holding conversation. Woman is beside the outside of his leg, not between his knees. Exactly two arms and hands per person. Keep shoulders, elbows and hand ownership anatomically clear. No furniture drawn: leave genuinely transparent space under his seated hips for later sofa compositing. Both people share the same floor level for his soles and her seated hip.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "03_floor_cuddle_b",
+      "label": "絨毯で近づいた男子Bと寄り添う",
+      "kind": "pair",
+      "refs": [
+        "制作参照（共有版非同梱）",
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE clean full-body anime character asset on genuinely transparent background, matching the reference linework and cel shading. Preserve the adult woman age24 identity: golden blonde long hair and bangs, blue eyes, blue cardigan, opaque white turtleneck, thin gold chain, long navy ankle-length skirt, dark low pumps. Adult proportions. Show complete heads, hands and legs, generous transparent margin. No furniture, carpet illustration, room, floor, text, hearts, props or extra people; only the requested characters. Clothes remain opaque and tidy. Image1 is woman identity/outfit. Image2 is adult man B identity/clothing only, not pose, and must not transfer a drink. TWO adults as one paired sprite. Man B: dark brown fringe hiding his eyes with shadow, beige open overshirt over charcoal T-shirt, small silver pendant, dark jeans and gray socks. Both sit on the SAME FLOOR, no sofa or elevated seat. Man on SCREEN LEFT has moved close beside her and sits cross-legged, hips on the floor. Woman on SCREEN RIGHT has legs folded to her right side under her long skirt, hips on that same floor. She leans her head gently against his near shoulder and smiles softly, blue eyes lowered toward their hands. His near hand and her near hand meet in one gentle handhold between their laps, his far hand on his own knee, her far hand on her own lap. His head tilts slightly toward her. Affectionate side-by-side closeness, both relaxed and willing. Exactly two arms per person, visible correct wrist and finger connections. No drink, no furniture, no accessories beyond specified clothes and necklace.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "01_heroine_floor_indoor",
+      "base_id": "01_heroine_floor",
+      "label": "絨毯で座るヒロイン・単独・室内用",
+      "kind": "single",
+      "refs": [
+        "生成元（PC内）"
+      ],
+      "prompt": "Use case: precise-object-edit. The input is the edit target. Make a footwear-only correction for an indoor Japanese living room. Remove all outdoor shoes and pumps worn by the characters. The adult woman has ordinary relaxed bare feet, correctly connected to the ankles under her existing long navy skirt. If a man is present, he wears plain gray socks, no sneakers. Preserve the same characters, faces, expressions, gaze, hair, outfits above the ankles, hands, body poses, positions, proportions and layout. Do not move hands or redraw the composition. No discarded shoes or extra objects. Preserve genuinely transparent background, keep all heads and feet within frame with margin. The focus remains the whole-body everyday pose; feet are a small incidental detail. No labels, symbols or backdrop.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "02_floor_to_sofa_a_indoor",
+      "base_id": "02_floor_to_sofa_a",
+      "label": "絨毯のヒロイン＋ソファの男子A・室内用",
+      "kind": "pair",
+      "refs": [
+        "生成元（PC内）"
+      ],
+      "prompt": "Use case: precise-object-edit. The input is the edit target. Make a footwear-only correction for an indoor Japanese living room. Remove all outdoor shoes and pumps worn by the characters. The adult woman has ordinary relaxed bare feet, correctly connected to the ankles under her existing long navy skirt. If a man is present, he wears plain gray socks, no sneakers. Preserve the same characters, faces, expressions, gaze, hair, outfits above the ankles, hands, body poses, positions, proportions and layout. Do not move hands or redraw the composition. No discarded shoes or extra objects. Preserve genuinely transparent background, keep all heads and feet within frame with margin. The focus remains the whole-body everyday pose; feet are a small incidental detail. No labels, symbols or backdrop.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "03_floor_cuddle_b_indoor",
+      "base_id": "03_floor_cuddle_b",
+      "label": "絨毯で近づいた男子Bと寄り添う・室内用",
+      "kind": "pair",
+      "refs": [
+        "生成元（PC内）"
+      ],
+      "prompt": "Use case: precise-object-edit. The input is the edit target. Make a footwear-only correction for an indoor Japanese living room. Remove all outdoor shoes and pumps worn by the characters. The adult woman has ordinary relaxed bare feet, correctly connected to the ankles under her existing long navy skirt. If a man is present, he wears plain gray socks, no sneakers. Preserve the same characters, faces, expressions, gaze, hair, outfits above the ankles, hands, body poses, positions, proportions and layout. Do not move hands or redraw the composition. No discarded shoes or extra objects. Preserve genuinely transparent background, keep all heads and feet within frame with margin. The focus remains the whole-body everyday pose; feet are a small incidental detail. No labels, symbols or backdrop.",
+      "source": "生成元（PC内）"
+    },
+    {
+      "id": "04_male_a_indoor",
+      "label": "男子A・ソファ座り靴下版",
+      "kind": "male",
+      "refs": [
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: precise-object-edit. Input is the edit target: one adult anime man seated on an invisible sofa. Change only his gray-white sneakers into plain medium-gray socks suitable for an indoor living room, preserving natural foot shape and jean cuffs. Preserve his exact head, hair, face shadow, charcoal overshirt, gray T-shirt, jeans, hands, drink can, sitting pose, scale, proportions and transparent canvas layout. No shoes placed on the ground, no furniture or floor, no new objects, no extra text. Genuine transparent background. Keep full body in frame.",
+      "source": "生成元（PC内）"
+    }
+  ],
+  "failures": [],
+  "jobs": [
+    {
+      "id": "01_heroine_floor",
+      "label": "絨毯で座るヒロイン・単独",
+      "kind": "single",
+      "refs": [
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE clean full-body anime character asset on genuinely transparent background, matching the reference linework and cel shading. Preserve the adult woman age24 identity: golden blonde long hair and bangs, blue eyes, blue cardigan, opaque white turtleneck, thin gold chain, long navy ankle-length skirt, dark low pumps. Adult proportions. Show complete heads, hands and legs, generous transparent margin. No furniture, carpet illustration, room, floor, text, hearts, props or extra people; only the requested characters. Clothes remain opaque and tidy. Reference image 1 is the woman identity and outfit reference. Draw this ONE woman sitting comfortably on an implied floor with her legs folded together to her screen-right side under the long skirt. Her weight rests on her hip on the floor, no chair pose and no kneeling upright. One hand lightly rests in her lap, the other braces on the floor beside her, with five natural fingers. Torso upright, face turned slightly SCREEN LEFT, open blue eyes looking toward a nearby conversation partner, gentle inviting smile and mild blush. Empty hands, no drink. Neutral resting pose suitable for a before-approach scene."
+    },
+    {
+      "id": "02_floor_to_sofa_a",
+      "label": "絨毯のヒロイン＋ソファの男子A",
+      "kind": "pair",
+      "refs": [
+        "制作参照（共有版非同梱）",
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE clean full-body anime character asset on genuinely transparent background, matching the reference linework and cel shading. Preserve the adult woman age24 identity: golden blonde long hair and bangs, blue eyes, blue cardigan, opaque white turtleneck, thin gold chain, long navy ankle-length skirt, dark low pumps. Adult proportions. Show complete heads, hands and legs, generous transparent margin. No furniture, carpet illustration, room, floor, text, hearts, props or extra people; only the requested characters. Clothes remain opaque and tidy. Image1 is woman identity/outfit. Image2 is the adult man A head/clothing identity only, not a pose reference. TWO adults as ONE paired sprite. Man A: ash brown fringe hiding eyes, charcoal overshirt, gray T-shirt, dark jeans, gray-white sneakers. IMPORTANT different support heights: man on SCREEN RIGHT sits on an invisible sofa seat about 40cm ABOVE the floor; thighs approximately horizontal and feet planted on the floor. Woman on SCREEN LEFT sits on the FLOOR NEXT TO the outside of his left leg, legs folded to her own left under her long skirt, hips on the floor and her head visibly lower than his shoulder. She gently holds his lowered near hand with both hands near her own shoulder, softly looking UP RIGHT toward his face. He bends his head DOWN LEFT toward her with a faint warm smile; his far hand rests on his own far thigh. A sweet quiet hand-holding conversation. Woman is beside the outside of his leg, not between his knees. Exactly two arms and hands per person. Keep shoulders, elbows and hand ownership anatomically clear. No furniture drawn: leave genuinely transparent space under his seated hips for later sofa compositing. Both people share the same floor level for his soles and her seated hip."
+    },
+    {
+      "id": "03_floor_cuddle_b",
+      "label": "絨毯で近づいた男子Bと寄り添う",
+      "kind": "pair",
+      "refs": [
+        "制作参照（共有版非同梱）",
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE clean full-body anime character asset on genuinely transparent background, matching the reference linework and cel shading. Preserve the adult woman age24 identity: golden blonde long hair and bangs, blue eyes, blue cardigan, opaque white turtleneck, thin gold chain, long navy ankle-length skirt, dark low pumps. Adult proportions. Show complete heads, hands and legs, generous transparent margin. No furniture, carpet illustration, room, floor, text, hearts, props or extra people; only the requested characters. Clothes remain opaque and tidy. Image1 is woman identity/outfit. Image2 is adult man B identity/clothing only, not pose, and must not transfer a drink. TWO adults as one paired sprite. Man B: dark brown fringe hiding his eyes with shadow, beige open overshirt over charcoal T-shirt, small silver pendant, dark jeans and gray socks. Both sit on the SAME FLOOR, no sofa or elevated seat. Man on SCREEN LEFT has moved close beside her and sits cross-legged, hips on the floor. Woman on SCREEN RIGHT has legs folded to her right side under her long skirt, hips on that same floor. She leans her head gently against his near shoulder and smiles softly, blue eyes lowered toward their hands. His near hand and her near hand meet in one gentle handhold between their laps, his far hand on his own knee, her far hand on her own lap. His head tilts slightly toward her. Affectionate side-by-side closeness, both relaxed and willing. Exactly two arms per person, visible correct wrist and finger connections. No drink, no furniture, no accessories beyond specified clothes and necklace."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "01_heroine_floor_indoor",
+      "base_id": "01_heroine_floor",
+      "label": "絨毯で座るヒロイン・単独・室内用",
+      "kind": "single",
+      "refs": [
+        "生成元（PC内）"
+      ],
+      "prompt": "Use case: precise-object-edit. The input is the edit target. Make a footwear-only correction for an indoor Japanese living room. Remove all outdoor shoes and pumps worn by the characters. The adult woman has ordinary relaxed bare feet, correctly connected to the ankles under her existing long navy skirt. If a man is present, he wears plain gray socks, no sneakers. Preserve the same characters, faces, expressions, gaze, hair, outfits above the ankles, hands, body poses, positions, proportions and layout. Do not move hands or redraw the composition. No discarded shoes or extra objects. Preserve genuinely transparent background, keep all heads and feet within frame with margin. The focus remains the whole-body everyday pose; feet are a small incidental detail. No labels, symbols or backdrop."
+    },
+    {
+      "id": "02_floor_to_sofa_a_indoor",
+      "base_id": "02_floor_to_sofa_a",
+      "label": "絨毯のヒロイン＋ソファの男子A・室内用",
+      "kind": "pair",
+      "refs": [
+        "生成元（PC内）"
+      ],
+      "prompt": "Use case: precise-object-edit. The input is the edit target. Make a footwear-only correction for an indoor Japanese living room. Remove all outdoor shoes and pumps worn by the characters. The adult woman has ordinary relaxed bare feet, correctly connected to the ankles under her existing long navy skirt. If a man is present, he wears plain gray socks, no sneakers. Preserve the same characters, faces, expressions, gaze, hair, outfits above the ankles, hands, body poses, positions, proportions and layout. Do not move hands or redraw the composition. No discarded shoes or extra objects. Preserve genuinely transparent background, keep all heads and feet within frame with margin. The focus remains the whole-body everyday pose; feet are a small incidental detail. No labels, symbols or backdrop."
+    },
+    {
+      "id": "03_floor_cuddle_b_indoor",
+      "base_id": "03_floor_cuddle_b",
+      "label": "絨毯で近づいた男子Bと寄り添う・室内用",
+      "kind": "pair",
+      "refs": [
+        "生成元（PC内）"
+      ],
+      "prompt": "Use case: precise-object-edit. The input is the edit target. Make a footwear-only correction for an indoor Japanese living room. Remove all outdoor shoes and pumps worn by the characters. The adult woman has ordinary relaxed bare feet, correctly connected to the ankles under her existing long navy skirt. If a man is present, he wears plain gray socks, no sneakers. Preserve the same characters, faces, expressions, gaze, hair, outfits above the ankles, hands, body poses, positions, proportions and layout. Do not move hands or redraw the composition. No discarded shoes or extra objects. Preserve genuinely transparent background, keep all heads and feet within frame with margin. The focus remains the whole-body everyday pose; feet are a small incidental detail. No labels, symbols or backdrop."
+    },
+    {
+      "id": "04_male_a_indoor",
+      "label": "男子A・ソファ座り靴下版",
+      "kind": "male",
+      "refs": [
+        "制作参照（共有版非同梱）"
+      ],
+      "prompt": "Use case: precise-object-edit. Input is the edit target: one adult anime man seated on an invisible sofa. Change only his gray-white sneakers into plain medium-gray socks suitable for an indoor living room, preserving natural foot shape and jean cuffs. Preserve his exact head, hair, face shadow, charcoal overshirt, gray T-shirt, jeans, hands, drink can, sitting pose, scale, proportions and transparent canvas layout. No shoes placed on the ground, no furniture or floor, no new objects, no extra text. Genuine transparent background. Keep full body in frame."
+    }
+  ]
+}

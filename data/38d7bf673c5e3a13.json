@@ -1,0 +1,50 @@
+{
+  "native_requests": 16,
+  "native_outputs": 16,
+  "tool_failures": [],
+  "selected_text_variants": 8,
+  "selected_air": 1,
+  "selected_motion": 1,
+  "duck_pout_composite": {
+    "id": "15_duck_pout",
+    "label": "甘えるアヒル口",
+    "kind": "normal",
+    "file": "../media/06692fdcf2d8fb06f3be.png",
+    "overlay": "../media/ba0aca069f4d926fc3d7.png",
+    "compatible_base": "../media/0061783d6f3c1200a549.png",
+    "crop": [
+      300,
+      0,
+      900,
+      600
+    ],
+    "mask": "制作参照（共有版非同梱）",
+    "outside_mask_changed_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "note": "小さなアヒル口の候補。拗ね顔にも読める。左上の会話相手を見る意図。別角度へそのまま貼らない。"
+  },
+  "published_files": 15,
+  "animation_decode": [
+    {
+      "file": "../media/8aca86443554b7cfe6e9.png",
+      "frames": 48,
+      "transparent_first_frame": 257877
+    },
+    {
+      "file": "../media/88cebb3d756abdbdac3e.gif",
+      "frames": 48,
+      "transparent_first_frame": 258629
+    },
+    {
+      "file": "../media/5d43b80696cc62f69b48.webp",
+      "frames": 48,
+      "transparent_first_frame": 257877
+    }
+  ],
+  "apng_all_frames_rgba_equal": true,
+  "party_gif_fixed_region_changed_pixels": 0,
+  "protected_originals_unchanged": 11,
+  "previous_gaze_deliverables_unchanged": 6,
+  "game_sdk_browser_vm_tests": "not run",
+  "heat_limit": "薄い透過膜の試作。PNG自体に屈折・体温・湿度のシミュレーション機能はない。"
+}

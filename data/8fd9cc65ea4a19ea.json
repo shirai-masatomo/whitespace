@@ -1,0 +1,70 @@
+{
+  "animation_decode": [
+    {
+      "format": "apng",
+      "encoded_frames": 48,
+      "expanded_frames": 48,
+      "duration_ms": 3840.0,
+      "transparent_endpoints": true,
+      "sha256": "f38479399e4831806555e89218ac1e33ded23aa6e69b4057454264e43c4b8561"
+    },
+    {
+      "format": "webp",
+      "encoded_frames": 48,
+      "expanded_frames": 48,
+      "duration_ms": 3840,
+      "transparent_endpoints": true,
+      "sha256": "7d673d5cf0bf25b8da3da483a0204ca80a181d154a5a90efea6eeb9e60a25beb"
+    },
+    {
+      "format": "gif",
+      "encoded_frames": 48,
+      "expanded_frames": 48,
+      "duration_ms": 3840,
+      "transparent_endpoints": true,
+      "sha256": "e74e1a210ebddbefe7e7ae15d4b0c8f93b3b0058b7451099010e6216540e0ed5"
+    }
+  ],
+  "apng_full_rgba_equal": true,
+  "gif_alpha_equal": true,
+  "max_simultaneous_particles": 4,
+  "horizontal_drift_px": 0,
+  "birth_intervals_s": [
+    0.19,
+    0.52,
+    0.17,
+    0.59,
+    0.38,
+    0.18,
+    0.76,
+    0.42
+  ],
+  "travel_px_range": [
+    106.495,
+    140.563
+  ],
+  "old_path_travel_y_px": 380,
+  "fade_out_start_travel_px_range": [
+    60.7,
+    80.12
+  ],
+  "party_background_outside_heart_region_changed_pixels": 0,
+  "native_image_edits": 1,
+  "generated_animation_formats": 3,
+  "game_sdk_gui": "not run; isolation unverified",
+  "protected_files": 145,
+  "published": true,
+  "catalog_entries": 147,
+  "active_text_choices": 42,
+  "missing_html_references": [],
+  "html_local_references": 344,
+  "protected_files_unchanged": 145,
+  "original_backups_verified": true,
+  "final_files": {
+    "apng": "../media/f38479399e4831806555.png",
+    "webp": "../media/7d673d5cf0bf25b8da3d.webp",
+    "gif": "../media/e74e1a210ebddbefe7e7.gif"
+  },
+  "host_changes": "requested animation files, preview and metadata/documentation only; no system/runtime/game changes",
+  "residual_files": "［作業フォルダー］\\output\\heroine-heart-vertical-overflow-20261022_12"
+}

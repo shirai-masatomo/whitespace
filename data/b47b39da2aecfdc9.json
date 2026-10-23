@@ -1,0 +1,33 @@
+{
+  "run_id": "YYYYMMDD_topic_001",
+  "content_category": "general",
+  "purpose": "衣装または構図の試作",
+  "workflow_file": "変更後のUI JSONのパス",
+  "source_images": [],
+  "checkpoint": "animagine-xl-4.0-opt.safetensors",
+  "lora": null,
+  "positive": "実行した全文",
+  "negative": "実行した全文",
+  "seed": 42006,
+  "seed_mode": "fixed",
+  "width": 832,
+  "height": 1216,
+  "batch_size": 1,
+  "steps": 28,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "scheduler": "normal",
+  "denoise": 1,
+  "save_image_filename_prefix": "general/YYYYMMDD/topic/image",
+  "result_files": [],
+  "accepted_files": [],
+  "observations": {
+    "face": "",
+    "clothes": "",
+    "pose": "",
+    "hands_feet": "",
+    "background": ""
+  },
+  "changed_one_condition": "",
+  "next_change": ""
+}

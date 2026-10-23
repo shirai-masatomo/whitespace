@@ -1,0 +1,49 @@
+{
+  "status": "not_run",
+  "case": "clothing | expression | pose | background | repair",
+  "generator": "ComfyUI Animagine XL 4.0 Opt | built-in image editing",
+  "inputs": [
+    {
+      "path": "fill in accepted input image",
+      "sha256": "fill in"
+    }
+  ],
+  "mask": {
+    "path": "fill in edited RGBA or mask image",
+    "sha256": "fill in",
+    "white_means": "change"
+  },
+  "workflow": {
+    "ui": "fill in saved .json",
+    "api": "fill in if used",
+    "sha256": "fill in"
+  },
+  "prompt": "fill in actual full prompt",
+  "negative_prompt": "fill in actual prompt or not exposed",
+  "models": [
+    {
+      "name": "fill in",
+      "version": "fill in or not exposed",
+      "sha256": "fill in or not exposed"
+    }
+  ],
+  "settings": {
+    "seed": null,
+    "steps": null,
+    "cfg": null,
+    "denoise": null,
+    "sampler": null
+  },
+  "output": {
+    "path": "fill in",
+    "sha256": "fill in"
+  },
+  "review": {
+    "same_character": null,
+    "same_style": null,
+    "requested_change": null,
+    "hands_feet_clothing": null,
+    "accepted": false,
+    "notes": "fill in actual observations"
+  }
+}

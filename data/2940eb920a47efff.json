@@ -1,0 +1,875 @@
+{
+  "identifier": "wshrn26",
+  "train_frames": 22,
+  "holdout_frames": 2,
+  "excluded_source_files": 5,
+  "source_candidate_files": 27,
+  "logical_candidate_frames": 28,
+  "canonical_original_added": true,
+  "notes": [
+    "IDs are file audit IDs, not the user's 1-28 numbering.",
+    "B07 split at x=885/889; four divider pixels omitted.",
+    "No generated augmentation, flipping, recoloring or retouching. RGBA copied onto white for training.",
+    "dHash ranks duplicate candidates only; it is not an identity or anatomy score.",
+    "Holdouts are synthetic reference examples, not an independent statistical test of identity.",
+    "Visual review found modest differences in bangs, eye rendering and silhouette; v1 must be compared against N00, not declared identical from data audit."
+  ],
+  "records": [
+    {
+      "id": "N00",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "neutral.png",
+      "snapshot": "audit\\sources\\N00.png",
+      "sha256": "f8659488e8037b35309fd19c03fe8afa3f603baaf0fc38e5fdba2a8d7043cf17",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "group": "canonical_original",
+      "frame_id": "N00",
+      "decision": "train",
+      "reason": "canonical identity anchor (2 repeats)",
+      "crop_box": [
+        0,
+        0,
+        1037,
+        1516
+      ],
+      "prepared_path": "dataset\\anchor\\N00.png",
+      "prepared_sha256": "3c28ad83ce20f165497286c3b652b7cfff2aa3babb16c2eeb33c84a8fa050acb",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, three-quarter view, looking at viewer, gentle smile, hands clasped in front, blue cardigan, white turtleneck, gold necklace, navy blue ankle-length pleated skirt, black low heel pumps, white background",
+      "repetitions": 2
+    },
+    {
+      "id": "B01",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ChatGPT 画像 2026年10月22日 06_13_10.png",
+      "snapshot": "audit\\sources\\B01.png",
+      "sha256": "9739612442dc9aed15a54fa3a82863614e515eade90954cffc75bab8befdb0d7",
+      "bytes": 1883025,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "dhash": "32b2b0b8796460e0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B01",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\B01.png",
+      "prepared_sha256": "7816aa791030dc110d98accd880325f8814f53241cd05a064708a9a0ebaf18fd",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, sitting on a wooden chair, three-quarter view, looking at viewer, gentle smile, hands resting on lap, light blue short sleeve t-shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B02",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ChatGPT 画像 2026年10月22日 06_13_13.png",
+      "snapshot": "audit\\sources\\B02.png",
+      "sha256": "8bb0d27e91e1f27efcfce9ff4d3d5b0647c33260e41f782a5f7b1d2266cefc82",
+      "bytes": 2204337,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "dhash": "b2b079b2b2b2b064",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B02",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\B02.png",
+      "prepared_sha256": "c020d8ab1b674e8915afb4b6a6d76c16a5c21d49c9047810054c4391c9032c58",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, walking, three-quarter view, looking at viewer, gentle smile, arms at sides, light blue short sleeve t-shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B03",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ChatGPT 画像 2026年10月22日 06_13_20.png",
+      "snapshot": "audit\\sources\\B03.png",
+      "sha256": "1e03c975cb58397fbf08f963b4832edcaa3b5958ecbd90621024ca480e1de80e",
+      "bytes": 1615765,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "dhash": "3232b2b2b2b25272",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B03",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\B03.png",
+      "prepared_sha256": "b5de92958a2340374e06e0b58cde11a4e25ed073628af79691555ceadf0cf78c",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, side view, facing left, arms at sides, light blue short sleeve t-shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B04",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ChatGPT 画像 2026年10月22日 06_13_22.png",
+      "snapshot": "audit\\sources\\B04.png",
+      "sha256": "29afb393c55c1d818cef1b3134d2c7a494e1f86128ac92ecdfb724e7741305fa",
+      "bytes": 1926935,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "dhash": "b0b272b2b2b2b2b0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B04",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\B04.png",
+      "prepared_sha256": "d4a1e03d45bdf6723d4024558b7e7d5b1c231102f91900ad45980d342dc08e9e",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, rear three-quarter view, head turned right, arms at sides, light blue short sleeve t-shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B05",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ChatGPT 画像 2026年10月22日 06_13_43-1.png",
+      "snapshot": "audit\\sources\\B05.png",
+      "sha256": "effadac44bc8a72962a07428c4cc33163b9521df3f42a20ac32986bf00ffd461",
+      "bytes": 1603564,
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "32323132b2b2b230",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B05",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1122,
+        1402
+      ],
+      "prepared_path": "dataset\\character\\B05.png",
+      "prepared_sha256": "9562f76065deba0855313f50bdc80db857e9e566ba6d5a04668cf6c49de74038",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, front view, looking at viewer, gentle smile, arms at sides, light blue short sleeve t-shirt, black leggings, barefoot, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B06",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ChatGPT 画像 2026年10月22日 06_13_44-2.png",
+      "snapshot": "audit\\sources\\B06.png",
+      "sha256": "c449fbe8da1479ea14942a7e25f44e0355496c0808e45579bd9c36434a44334a",
+      "bytes": 1692962,
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "323139586871746c",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B06",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1122,
+        1402
+      ],
+      "prepared_path": "dataset\\character\\B06.png",
+      "prepared_sha256": "5682eae1226a836c36de9a1e96a13b34b2705c4c6b8cb63554ae72098cd097f5",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, cowboy shot, standing, three-quarter view, looking at viewer, gentle smile, hands clasped in front, blue cardigan, white turtleneck, gold necklace, navy blue pleated skirt, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B07",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪碧眼の女性ポートレート比較.png",
+      "snapshot": "audit\\sources\\B07.png",
+      "sha256": "2cb0d23fb14200f7fffc0b84e08e86b4ee4ceb6826dccab8a986679b6247f9f4",
+      "bytes": 1820462,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "cccccc8e8e8e2626",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B07L",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        885,
+        887
+      ],
+      "prepared_path": "dataset\\character\\B07L.png",
+      "prepared_sha256": "16d3a30c1358c7aab2bc75bf4fa80158e9b0897ba0334a99313dc1ae527cc34c",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, portrait, front view, looking at viewer, gentle smile, blue cardigan, white turtleneck, gold necklace, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "B07",
+      "group": "基準画像",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪碧眼の女性ポートレート比較.png",
+      "snapshot": "audit\\sources\\B07.png",
+      "sha256": "2cb0d23fb14200f7fffc0b84e08e86b4ee4ceb6826dccab8a986679b6247f9f4",
+      "bytes": 1820462,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "cccccc8e8e8e2626",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "B07R",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        889,
+        0,
+        1774,
+        887
+      ],
+      "prepared_path": "dataset\\character\\B07R.png",
+      "prepared_sha256": "c75cadd743937454a2528b722db0ba9560c596fd9b226dae185ff9d642085c23",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, portrait, side view, facing left, blue cardigan, white turtleneck, gold necklace, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A01",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "セージグリーンのドレスで座る女性-2.png",
+      "snapshot": "audit\\sources\\A01.png",
+      "sha256": "10eeea793b9d15560a516abcb3fea6685c4e4c5440c0060fe449f0e1def2e9f5",
+      "bytes": 1620379,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "3231b0b078f0f0c9",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A01",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A01.png",
+      "prepared_sha256": "ba4629e1eba8fc0244a51d2b92b5fe8989b7645719ba028a9ccc56f53f84c9d5",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, sitting on a wooden chair, three-quarter view, looking at viewer, gentle smile, hands resting on lap, sage green long dress, three-quarter sleeves, brown low heel pumps, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A02",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "ベージュブラウスの金髪女性-2.png",
+      "snapshot": "audit\\sources\\A02.png",
+      "sha256": "e93681a8cc2270ca990856c3196cb677658375165da07c9dcc0ff155a9bc182a",
+      "bytes": 1339035,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "b2b23970f2b0b2f2",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A02",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A02.png",
+      "prepared_sha256": "e5977b0577df44c29687231a3f12fca2db7f058277bf2a1c73628c6ea38dc6df",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, three-quarter view, looking at viewer, gentle smile, arms at sides, beige long sleeve blouse, blue jeans, brown loafers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A03",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "告白に頬を染める彼女-2.png",
+      "snapshot": "audit\\sources\\A03.png",
+      "sha256": "ceeff4c33a606ab5ac2e9d571503a29efb0d91d97b90e59bf0aa02116d671a50",
+      "bytes": 1874113,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "727168f4d4ccec6c",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A03",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A03.png",
+      "prepared_sha256": "68f9d4a26f1b23ce48d22940380ddeba58dae5af8e4cffec2f6c96afd63e06dd",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, upper body, head tilted, hands covering cheeks and mouth, blushing, embarrassed, lavender long sleeve shirt, dark trousers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A04",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "喜びに頬を染める彼女-1.png",
+      "snapshot": "audit\\sources\\A04.png",
+      "sha256": "a4c032e0a2b47a7dd2492ef54c10256d4c10e823702fbfd55a353ca097342e1c",
+      "bytes": 1906683,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "706968ccccccecf0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A04",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A04.png",
+      "prepared_sha256": "4255f5079e33afcb72acf72f01397b1f1b7807b70a1e7e9c7b4607420e51d11c",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, upper body, front view, closed eyes, happy, open mouth, blushing, hands clasped at chest, blue cardigan, white turtleneck, gold necklace, navy blue skirt, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A05",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "少し迷いを見せる金髪女性-2.png",
+      "snapshot": "audit\\sources\\A05.png",
+      "sha256": "14a35dc419234ed280dd30eb8f428337f2f2b1c672799a4c762e86d2721f5d11",
+      "bytes": 1761842,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "f06b69ccccccf0f0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A05",
+      "decision": "exclude",
+      "reason": "near-duplicate front upper-body composition; retain A14 plus distinct expressions instead"
+    },
+    {
+      "id": "A06",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "恥じらう金髪女性の微笑み-1 (1).png",
+      "snapshot": "audit\\sources\\A06.png",
+      "sha256": "8d3e46b2f6d4e2b01c1010d2d6eed2c497d226c3dbe8e4ea22a9d6b4075fc04d",
+      "bytes": 1862354,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "71e8e8eca48e1333",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A06",
+      "decision": "holdout",
+      "reason": "untrained expression reference: half-closed eyes and blush",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "validation\\holdout\\A06.png",
+      "prepared_sha256": "6a74641f0f794a6a59c9de7218cb126841aad63100302787d7a326b119f16f1d",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, portrait, looking at viewer, half-closed eyes, blushing, slight smile, blue cardigan, white turtleneck, gold necklace, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A07",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "歩きながら手を振る金髪女性-1.png",
+      "snapshot": "audit\\sources\\A07.png",
+      "sha256": "d8691b37d0b00875aef7c31e16b68301f24b0d59f14fd04d8ba5595ddbf5639e",
+      "bytes": 1731560,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "327079b1b2b2b232",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A07",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A07.png",
+      "prepared_sha256": "cef531de2e4f847cf4839e52a4af15b5b51eeed577917e71f4e0b1603be09a64",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, walking, looking at viewer, gentle smile, waving one hand, pink long sleeve shirt, blue jeans, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A08",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "温かな笑顔の恋人抱擁-1.png",
+      "snapshot": "audit\\sources\\A08.png",
+      "sha256": "3b64742eb3555310bd02a598943e2de895b53f0f54833606e6710f88b8373ddc",
+      "bytes": 2001292,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "c0c96434eca4baba",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A08",
+      "decision": "exclude",
+      "reason": "two people hugging; excluded from initial single-character training"
+    },
+    {
+      "id": "A09",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪の彼女と優しいキス.png",
+      "snapshot": "audit\\sources\\A09.png",
+      "sha256": "477b8b03b0b875ffb43029a542b0a971dfbe5833ec5716b715489ae26132c12d",
+      "bytes": 1955683,
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "8dbba4898bcfcfa6",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A09",
+      "decision": "exclude",
+      "reason": "two people kissing; excluded from initial single-character training"
+    },
+    {
+      "id": "A10",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪アニメ女性の全身後ろ姿-1.png",
+      "snapshot": "audit\\sources\\A10.png",
+      "sha256": "8a508299c112b9a8878e9522d4bdf0d32c855fad2ec0559a8d2caf1cb087aae5",
+      "bytes": 1578022,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "b2b2b232b2b2b2b2",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A10",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A10.png",
+      "prepared_sha256": "ea618b3b91ec0b3bf6a8c3a3363f499028c0cc11f50f7c8b7f077b86cf93c39b",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, from behind, arms at sides, light blue short sleeve t-shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A11",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪女性の正面立ち.png",
+      "snapshot": "audit\\sources\\A11.png",
+      "sha256": "96ab416b2d86f9df992608d901e07fcd892388f2c21ab8ade4f8cfdb0d3a86d9",
+      "bytes": 1258591,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "b2b27032b2b2a869",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A11",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A11.png",
+      "prepared_sha256": "fc71ab93fded2dbe11bf817ff8d96e08270361187eb17ef87af0b161ce2d0afc",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, front view, looking at viewer, gentle smile, arms at sides, teal short sleeve t-shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A12",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪女性の穏やかな全身ポートレート.png",
+      "snapshot": "audit\\sources\\A12.png",
+      "sha256": "a631d82ba32c8551e65cf9045ded21231d1b20eb15185eb716e99507dacf4029",
+      "bytes": 1604769,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "b2b23972727979b0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A12",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A12.png",
+      "prepared_sha256": "f9c0bd965195c424dd9337dc91b11ee4cce87fa6c9a91906344fd3841b9e20e8",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, front view, looking at viewer, gentle smile, hands clasped in front, cream long sleeve sweater, dusty rose ankle-length skirt, beige flats, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A13",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪美女の甘いキス寸前.png",
+      "snapshot": "audit\\sources\\A13.png",
+      "sha256": "5d2dd6361116734aeeaa44f303990f5dbcad5649404158d90d471a7e540d92a7",
+      "bytes": 1974824,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "c6f9b1c4cdc74343",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A13",
+      "decision": "exclude",
+      "reason": "second person visible; excluded from initial single-character training"
+    },
+    {
+      "id": "A14",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "金髪青眼の穏やかな正面立ち-1.png",
+      "snapshot": "audit\\sources\\A14.png",
+      "sha256": "c002d6231e5f25a7a4d3e0f0f92ef7b1e962ea88f2eb92134898eea8770494bd",
+      "bytes": 1793869,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "326369ccccccf0f0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A14",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A14.png",
+      "prepared_sha256": "a0bdcf090097d0624166a52f8700ed79d97ba6af0336422bc4e16ddb09fa9f6e",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, upper body, standing, front view, looking at viewer, gentle smile, arms at sides, blue cardigan, white turtleneck, gold necklace, navy blue skirt, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A15",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "青いカーディガンの振り返る金髪女性-2.png",
+      "snapshot": "audit\\sources\\A15.png",
+      "sha256": "c1b0bfed12e0bfb7076b90a012c7f07865ef99761d88921b066e6e33c2f33ff8",
+      "bytes": 1828575,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "317179f8f8f8fce4",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A15",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A15.png",
+      "prepared_sha256": "e9e716d3b1b214c555f21510fce8620f4c57e4df6654f9d002b3adcded65951f",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, cowboy shot, rear three-quarter view, looking back at viewer, gentle smile, blue cardigan, navy blue skirt, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A16",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "青いカーディガンの金髪アニメ女性-1.png",
+      "snapshot": "audit\\sources\\A16.png",
+      "sha256": "3a2086fc63641f94385e249e39e6d69eb088e4946a7a082e618c35d9082e59e7",
+      "bytes": 1597134,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "b22a6971327171b0",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A16",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A16.png",
+      "prepared_sha256": "7a6713823dcd204bbca6dddd472af3530148ad9f963bceb5027d52c5a2253db7",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, front view, looking at viewer, gentle smile, arms at sides, blue cardigan, white turtleneck, gold necklace, navy blue ankle-length pleated skirt, black low heel pumps, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A17",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "青いカーディガンの金髪女性、微かな驚き-2.png",
+      "snapshot": "audit\\sources\\A17.png",
+      "sha256": "16aa85ca890cf7a8b0f7ac33f478525bdc498bb644bff8054148057037977883",
+      "bytes": 1802329,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "71f8e8ccec8e1f33",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A17",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A17.png",
+      "prepared_sha256": "92b11062719cec8925c4b2e1bff14bbbee63f794725f9d44058b92aadb12620e",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, portrait, front view, looking at viewer, slightly open mouth, mildly surprised, blue cardigan, white turtleneck, gold necklace, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A18",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "頬を染めた、恋する驚き-2 (1).png",
+      "snapshot": "audit\\sources\\A18.png",
+      "sha256": "e0b76dff449cfb95fc1452601d8d715bf0c8754fdb7beaaa1cf5feef9d0b2d4c",
+      "bytes": 1763696,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "726969e8c4cccc6c",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A18",
+      "decision": "train",
+      "reason": "selected after visual review; variable clothing/pose/expression captioned",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "dataset\\character\\A18.png",
+      "prepared_sha256": "d6440250593f5fb3b89535f7b9ea17aa321ea3d8a72e03a93ca162971c4f5b57",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, upper body, looking at viewer, head tilted, blushing, open mouth, hand on chest, peach long sleeve shirt, dark trousers, white background",
+      "repetitions": 1
+    },
+    {
+      "id": "A19",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "驚きと照れの優しい抱擁-2.png",
+      "snapshot": "audit\\sources\\A19.png",
+      "sha256": "303351c282a740e6147972a876d680929921c00f9b964ef6cc4de23739a3df73",
+      "bytes": 1943329,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "e1a9849c94848c98",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A19",
+      "decision": "exclude",
+      "reason": "two people hugging; excluded from initial single-character training"
+    },
+    {
+      "id": "A20",
+      "group": "追加",
+      "source": "制作参照（共有版非同梱）",
+      "source_name": "髪を耳にかける金髪の女性-1.png",
+      "snapshot": "audit\\sources\\A20.png",
+      "sha256": "16cbd0d77d38f6ea10e33993ea71684ac819632e324eaa77dba1fc6fea9a9efa",
+      "bytes": 1626738,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "dhash": "b2b03972b2b2b031",
+      "user_number": "unmapped; filenames contain no numbered 1-28 mapping",
+      "selection": "pending visual and primary-original review",
+      "frame_id": "A20",
+      "decision": "holdout",
+      "reason": "untrained full-body gesture reference: hand near ear and lavender outfit",
+      "crop_box": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "prepared_path": "validation\\holdout\\A20.png",
+      "prepared_sha256": "8901fafea0ea5dc85c69c13df8149ba59043891697e38e142f26ff838eb0504c",
+      "caption": "wshrn26, 1girl, adult woman, solo, anime illustration, full body, standing, looking at viewer, gentle smile, one hand tucking hair behind ear, lavender long sleeve shirt, black trousers, white sneakers, white background",
+      "repetitions": 1
+    }
+  ]
+}

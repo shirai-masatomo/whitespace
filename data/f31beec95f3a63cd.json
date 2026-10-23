@@ -1,0 +1,107 @@
+{
+  "python": "3.10.6 (tags/v3.10.6:9c7b4bd, Aug  1 2022, 21:53:49) [MSC v.1932 64 bit (AMD64)]",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+  "bf16_supported": true,
+  "transformers": "5.17.0",
+  "diffusers": "0.40.0",
+  "accelerate": "1.15.0",
+  "training_arg_keys_checked": 33,
+  "dataset_blueprint_valid": true,
+  "caption_token_lengths": {
+    "N00": [
+      67,
+      67
+    ],
+    "A01": [
+      60,
+      60
+    ],
+    "A02": [
+      52,
+      52
+    ],
+    "A03": [
+      45,
+      45
+    ],
+    "A04": [
+      57,
+      57
+    ],
+    "A07": [
+      46,
+      46
+    ],
+    "A10": [
+      45,
+      45
+    ],
+    "A11": [
+      51,
+      51
+    ],
+    "A12": [
+      55,
+      55
+    ],
+    "A14": [
+      53,
+      53
+    ],
+    "A15": [
+      43,
+      43
+    ],
+    "A16": [
+      63,
+      63
+    ],
+    "A17": [
+      46,
+      46
+    ],
+    "A18": [
+      48,
+      48
+    ],
+    "B01": [
+      59,
+      59
+    ],
+    "B02": [
+      54,
+      54
+    ],
+    "B03": [
+      48,
+      48
+    ],
+    "B04": [
+      52,
+      52
+    ],
+    "B05": [
+      51,
+      51
+    ],
+    "B06": [
+      59,
+      59
+    ],
+    "B07L": [
+      42,
+      42
+    ],
+    "B07R": [
+      38,
+      38
+    ]
+  },
+  "max_caption_tokens": 67,
+  "tokenizers_cached": true,
+  "training_started": false,
+  "online_tokenizer_prefetch": true,
+  "model_sha256": "computed separately before model load"
+}

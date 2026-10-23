@@ -1,0 +1,51 @@
+{
+  "particles_before": 10,
+  "particles_after": 5,
+  "size_multiplier": 1.6,
+  "first_and_last_fade": true,
+  "native_text_edits": 2,
+  "tool_failures": [],
+  "animation_decode": [
+    {
+      "format": "apng",
+      "file": "../media/f38479399e4831806555.png",
+      "sha256": "fd6fa651aa4adf5cf92da2eb8818f73db5447959a739b9b1e29126b13a90f4d8",
+      "encoded_frames": 48,
+      "expanded_source_frames": 48,
+      "total_ms": 3840.0,
+      "first_and_last_fully_transparent": true
+    },
+    {
+      "format": "webp",
+      "file": "../media/7d673d5cf0bf25b8da3d.webp",
+      "sha256": "17a72cdd6c785d99ae0af1d4e20d023f731a497ed29067e62fc4a1a27704da30",
+      "encoded_frames": 48,
+      "expanded_source_frames": 48,
+      "total_ms": 3840,
+      "first_and_last_fully_transparent": true
+    },
+    {
+      "format": "gif",
+      "file": "../media/e74e1a210ebddbefe7e7.gif",
+      "sha256": "9631885eabee0de3874ee3a314aa38e4563ed906f651d17e22fe1c90b6b08ed0",
+      "encoded_frames": 48,
+      "expanded_source_frames": 48,
+      "total_ms": 3840,
+      "first_and_last_fully_transparent": true
+    }
+  ],
+  "apng_all_frames_rgba_equal": true,
+  "gif_binary_alpha_matches_ordered_fade": true,
+  "party_background_outside_heart_region_changed_pixels": 0,
+  "supplied_originals_unchanged": 7,
+  "protected_originals_unchanged": 11,
+  "current_catalog_files": 143,
+  "active_text_choices": 42,
+  "missing_html_references": [],
+  "host_changes": "three requested central animation files updated; text candidates, previews and metadata added; no system changes",
+  "preserved_old_animation_versions": "［作業フォルダー］\\output\\heroine-heart-flow-revision-20261022_10\\original",
+  "game_and_browser_runtime": "not run; no verified VM/Sandbox",
+  "additional_supplied_unique_files": 14,
+  "additional_supplied_snapshot_files_unchanged": 33,
+  "final_checks": "［作業フォルダー］\\output\\heroine-heart-flow-revision-20261022_10\\final-checks.json"
+}

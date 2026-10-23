@@ -1,0 +1,37 @@
+[
+  {
+    "id": "startle-pink",
+    "file": "生成元（PC内）",
+    "prompt": "Edit this Japanese hand-drawn onomatopoeia asset only. Exactly TWO repeated phrases, both reading 「びくっ」, arranged diagonally: first phrase upper-left, second phrase lower-right, just like the reference. Change brown ink to saturated rose PINK (#ED4F91 approximate), keep the expressive brush strokes and clean narrow white outline. Keep small local vibration zigzag marks pink too. Preserve the reference typography and reading; do not change to katakana. Separate the two entire phrases by a clean transparent horizontal gap of at least 70 pixels so they can be animated independently, first completely above the horizontal middle, second completely below it. No overlap between the two phrases. No hearts, no stars, no background, no extra text. Genuine transparent background. This conveys a mild startled reaction.",
+    "tool": "built-in image_gen",
+    "transparent_background": true
+  },
+  {
+    "id": "01_calm",
+    "file": "生成元（PC内）",
+    "prompt": "Identity-preserving FACE-ONLY edit of the supplied crop of an original ADULT woman age24, wearing a fully covering blue cardigan and white high-neck top. Preserve EXACT framing, head angle and size, blonde hair and bangs, blue iris color, face silhouette, ears, neck, clothes, gold necklace, hands, body and pose. Change only irises/gaze, eyebrows, lips and cheek redness as follows: BOTH blue irises look directly toward the viewer, keep head angle unchanged. Eyebrows are relaxed nearly level with a gentle natural curve. Closed lips form a very small calm smile. NO blush at all: natural fair cheek skin, no pink hatching, no pink patches. Keep original clean anime style. This is a regular nonsexual facial-expression library for conversation scenes. No external symbols, no floating hearts, no text, no extra characters. One edited square crop, no grid. All existing transparent regions remain transparent.",
+    "tool": "built-in image_gen",
+    "transparent_background": true
+  },
+  {
+    "id": "02_shy_light",
+    "file": "生成元（PC内）",
+    "prompt": "Identity-preserving FACE-ONLY edit of the supplied crop of an original ADULT woman age24, wearing a fully covering blue cardigan and white high-neck top. Preserve EXACT framing, head angle and size, blonde hair and bangs, blue iris color, face silhouette, ears, neck, clothes, gold necklace, hands, body and pose. Change only irises/gaze, eyebrows, lips and cheek redness as follows: BOTH blue irises look toward screen-left (her right), keep head angle unchanged. Eyebrows curve softly with inner ends gently raised. Closed lips form a small shy asymmetrical smile. A VERY LIGHT localized pink blush across cheeks (level1 of3), faint and subtle, not a red face. Keep original clean anime style. This is a regular nonsexual facial-expression library for conversation scenes. No external symbols, no floating hearts, no text, no extra characters. One edited square crop, no grid. All existing transparent regions remain transparent.",
+    "tool": "built-in image_gen",
+    "transparent_background": true
+  },
+  {
+    "id": "03_shy_red",
+    "file": "生成元（PC内）",
+    "prompt": "Identity-preserving FACE-ONLY edit of the supplied crop of an original ADULT woman age24, wearing a fully covering blue cardigan and white high-neck top. Preserve EXACT framing, head angle and size, blonde hair and bangs, blue iris color, face silhouette, ears, neck, clothes, gold necklace, hands, body and pose. Change only irises/gaze, eyebrows, lips and cheek redness as follows: BOTH blue irises look toward screen-left (her right), keep head angle unchanged. Eyebrows curve softly with inner ends gently raised. Closed lips form a small shy asymmetrical smile. STRONG localized warm rose blush over both cheeks and bridge of nose (level3 of3), visible even at thumbnail scale, but preserve ordinary skin tone elsewhere. This should differ from a faint blush. Keep original clean anime style. This is a regular nonsexual facial-expression library for conversation scenes. No external symbols, no floating hearts, no text, no extra characters. One edited square crop, no grid. All existing transparent regions remain transparent.",
+    "tool": "built-in image_gen",
+    "transparent_background": true
+  },
+  {
+    "id": "04_down_pout",
+    "file": "生成元（PC内）",
+    "prompt": "Identity-preserving FACE-ONLY edit of the supplied crop of an original ADULT woman age24, wearing a fully covering blue cardigan and white high-neck top. Preserve EXACT framing, head angle and size, blonde hair and bangs, blue iris color, face silhouette, ears, neck, clothes, gold necklace, hands, body and pose. Change only irises/gaze, eyebrows, lips and cheek redness as follows: BOTH blue irises look down toward screen-bottom, clearly below their neutral positions. Keep head angle unchanged. Eyebrows curve softly with inner ends gently raised. Lips form a tiny CLOSED protruding duck-mouth pout, a cute mild sulky expression; no open mouth, no tongue. MEDIUM localized pink blush on both cheeks (level2 of3). Keep original clean anime style. This is a regular nonsexual facial-expression library for conversation scenes. No external symbols, no floating hearts, no text, no extra characters. One edited square crop, no grid. All existing transparent regions remain transparent.",
+    "tool": "built-in image_gen",
+    "transparent_background": true
+  }
+]
