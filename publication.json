@@ -65,5 +65,14 @@
     "superseded_index_files_deleted": 6,
     "product_manager": "local only",
     "historical_counts": "previous hub fields are historical snapshots"
+  },
+  "development_review_24": {
+    "included": 276,
+    "excluded": 12,
+    "local_items": 288,
+    "newly_adopted": 0,
+    "production_images_uploaded": 0,
+    "review_storage": "local browser drafts and explicit JSON apply",
+    "new_image_uploads": 0
   }
 }

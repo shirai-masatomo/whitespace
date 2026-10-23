@@ -1,10 +1,10 @@
 # WhiteSpace — シーン検討と制作資料
 
-**[場所を選んでシーンを見る](development/README.md)**。自宅・寝室、リビング、浴室、図書館など、既存の参考画像を場所別に縦に確認できます。
+**[develop：素材の確認・採否の入口](development/README.md)**。自宅・寝室、リビング、浴室、図書館など、既存の参考画像を場所別に縦に確認できます。
 
 | 用途 | 入口 |
 | --- | --- |
-| シーン検討（develop） | [場所別一覧：53参考画像](development/README.md) ／ [操作用HTML](development/index.html) |
+| 素材の確認・採否（develop） | [シーン・人物・背景・文字／エフェクト](development/README.md) ／ [操作用HTML](development/index.html) |
 | 製品用の保存・管理 | [共通ルール](reports/SCENE_MANAGEMENT.md)。PC側 `management/scenes/index.html` で配置済みCGと採用人物・場所を確認 |
 | 表情・素材・効果の比較 | [制作履歴・素材目次](reports/ALL_SCENES.md) ／ [表情比較HTML](expressions/index.html) ／ [素材組み合わせHTML](materials/index.html) |
 | GIF・文字の動き | [GIF一覧](reports/GIF_INDEX.md) ／ [どきどき](reports/DOKIDOKI.md) |
