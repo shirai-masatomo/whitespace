@@ -1,0 +1,431 @@
+[
+  {
+    "id": "01_home_bed_day",
+    "label": "昼・枕にもたれて照れながら会話",
+    "location": "heroine-home",
+    "text": "08_10_dokidoki",
+    "rect": [
+      0.53,
+      0.67,
+      0.12
+    ],
+    "heart": [
+      0.87,
+      0.16,
+      0.085
+    ],
+    "face": "相手へ視線／薄い赤み／柔らかな眉／閉じた笑み",
+    "note": "枕にもたれる姿勢。完全な横臥版は12に別途用意。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/01_home_bed_day-base.png",
+    "base_sha256": "67429035a6cd9f7bc78ccbc5d05af95a4c9144af2d5124d707113eb375699ef0",
+    "outputs": {
+      "png": "../reference-scenes/01_home_bed_day.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "01_home_bed_day",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "2ad5eb377098ced7e2072c57414d8299a8676b18f4f062347f9e1ce4803e8d4d"
+    }
+  },
+  {
+    "id": "02_home_bed_night",
+    "label": "夜・肩へ寄りかかりうとうと",
+    "location": "heroine-home",
+    "text": "09_09_sigh",
+    "rect": [
+      0.81,
+      0.39,
+      0.085
+    ],
+    "face": "閉じた目／弱い赤み／脱力した眉／閉じ口",
+    "note": "静かな休息。足元は布団内で画角外。靴なしを指定。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/02_home_bed_night-base.png",
+    "base_sha256": "315adf1dff0c5f060620cc210fb7cc262e747f00f6b348f509b5aa57b96a8953",
+    "outputs": {
+      "png": "../reference-scenes/02_home_bed_night.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "02_home_bed_night",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "d2c1f1b34184fdad3e1bf64d470fc369227b65b0fb3852bd24dcc266ea550f47"
+    }
+  },
+  {
+    "id": "03_home_shoulders",
+    "label": "リビング・肩をもみもみ",
+    "location": "heroine-home",
+    "text": "09_08_shoulder",
+    "rect": [
+      0.34,
+      0.24,
+      0.14
+    ],
+    "face": "肩へ視線／控えめな赤み／集中した眉／小さな笑み",
+    "animate": true,
+    "note": "手は衣服の上から左右の肩へ。肩もみ用文字を組み合わせる。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/03_home_shoulders-base.png",
+    "base_sha256": "96b56a7d9622e27e3ab46cfa2a11204201286188465358a2eb3a4dbac7c025c1",
+    "outputs": {
+      "png": "../reference-scenes/03_home_shoulders.png",
+      "gif": "../reference-scenes/03_home_shoulders.gif",
+      "webp": "../reference-scenes/03_home_shoulders.webp"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "03_home_shoulders",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "cceef1ea9b476e8b4af11925c2dc82d683465932b0078f8c43a066fec9b3e694",
+      "gif": "814060a08c642424ef80116db1f4807c9c3440622e18b87e3d0de1526361d34b",
+      "webp": "6b6eaf52a619a7c022d7cea6ccf25cc5ce9a6f487f6605dd99d415920b61f5c8"
+    }
+  },
+  {
+    "id": "04_home_balcony",
+    "label": "自宅ベランダ・一緒に夜景を見る",
+    "location": "heroine-home",
+    "text": "08_11_kyun",
+    "rect": [
+      0.65,
+      0.3,
+      0.09
+    ],
+    "heart": [
+      0.25,
+      0.25,
+      0.08
+    ],
+    "face": "相手へ視線／薄い赤み／柔らかな眉／閉じた笑み",
+    "note": "寝室とつながる自宅ベランダ。二人とも靴下。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/04_home_balcony-base.png",
+    "base_sha256": "cbdeb4081f821e456ca6c66e6ed7d4f139f09050efc152af1d4394fb2c80287a",
+    "outputs": {
+      "png": "../reference-scenes/04_home_balcony.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "04_home_balcony",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "5ed6dde816ba7083a1888d007762779b6f7cdc10217f95cf9bbc6a432ebe145c"
+    }
+  },
+  {
+    "id": "05_home_carpet",
+    "label": "絨毯・隣に座って寄り添う",
+    "location": "heroine-home",
+    "reuse": "carpet_b-2-closed",
+    "text": "09_02_gyuu",
+    "rect": [
+      0.56,
+      0.58,
+      0.12
+    ],
+    "heart": [
+      0.58,
+      0.26,
+      0.08
+    ],
+    "face": "相手側へ顔を傾ける／薄い赤み／穏やかな眉／笑み",
+    "animate": true,
+    "note": "既存の床同士のペアと同席男子を再利用。男子3人とヒロイン1人。",
+    "source_kind": "reused_scene",
+    "source": "../media/fd2993876b3c88916734.png",
+    "base": "../media/fd2993876b3c88916734.png",
+    "base_sha256": "fd2993876b3c88916734d2e03971235b3f4e93982a365abf19a9e11405acd1c5",
+    "outputs": {
+      "png": "../reference-scenes/05_home_carpet.png",
+      "gif": "../reference-scenes/05_home_carpet.gif",
+      "webp": "../reference-scenes/05_home_carpet.webp"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "source_scene": "carpet_b-2-closed"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "2b5bdf0b3f26cede428a0c92b9ae1fc891c4fb0d803df1ac6515483df48d9314",
+      "gif": "439fd9d8e70d5f91ae0680ad4c3299660635e5a39404707b74c377eb11b4a8df",
+      "webp": "26e3cc6d79e4c340fd27e5fbc4884349aea86f5f29e9e48cabfc1a68ebfca2be"
+    }
+  },
+  {
+    "id": "06_home_sofa",
+    "label": "絨毯からソファの男子へ甘える",
+    "location": "heroine-home",
+    "reuse": "sofa_a-2-closed",
+    "text": "08_12_moji",
+    "rect": [
+      0.66,
+      0.36,
+      0.09
+    ],
+    "heart": [
+      0.6,
+      0.14,
+      0.075
+    ],
+    "face": "ソファ側の相手へ視線／照れ／柔らかな眉／小さな笑み",
+    "note": "支持面が違う接触。静止場面であり、歩いて近づく人物動画ではない。",
+    "source_kind": "reused_scene",
+    "source": "../media/1d806359de2f29eec85e.png",
+    "base": "../media/1d806359de2f29eec85e.png",
+    "base_sha256": "1d806359de2f29eec85e71f805bb06e03b54e4235f68f6b2e501a8c39f571e9e",
+    "outputs": {
+      "png": "../reference-scenes/06_home_sofa.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "source_scene": "sofa_a-2-closed"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "5deeb32ae5cd7e9dfe79dd106ee8e4ae58198006ac5cf5e26eacfaadcf27e426"
+    }
+  },
+  {
+    "id": "07_home_startle",
+    "label": "リビング・ノックに小さくびくっ",
+    "location": "heroine-home",
+    "startle": [
+      0.31,
+      0.23,
+      0.12
+    ],
+    "face": "ドア側へ視線／強い赤みなし／上げ眉／小さな開き口",
+    "animate": true,
+    "note": "男性3人の同席を維持した顔編集。ピンクの2語の時間差フェード。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/07_home_startle-base.png",
+    "base_sha256": "6e9cf9e478c30c8f70abfba085c69c4070b598b8231d57faec2ec90dc7eea46f",
+    "outputs": {
+      "png": "../reference-scenes/07_home_startle.png",
+      "gif": "../reference-scenes/07_home_startle.gif",
+      "webp": "../reference-scenes/07_home_startle.webp"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "07_home_startle",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "e9bd8ed9d81918fb4c06b7022a5aa43701cd61e82c640632caae15f41c54bd2f",
+      "gif": "6b94d170bb39fe6bb042ba5a53f5a20b763622775b77d16027c3313b158c396b",
+      "webp": "539a0c7f0d0842b857a12f91ce0d7f2c045038f456f5c5990ed4d74bc279b5e6"
+    }
+  },
+  {
+    "id": "12_home_flat_sleep",
+    "label": "横になって添い寝・小さく笑い合う",
+    "location": "heroine-home",
+    "text": "08_10_dokidoki",
+    "rect": [
+      0.65,
+      0.7,
+      0.12
+    ],
+    "heart": [
+      0.87,
+      0.25,
+      0.07
+    ],
+    "face": "相手へ視線／薄い赤み／穏やかな眉／閉じた笑み",
+    "animate": true,
+    "note": "横臥が分かる俯瞰案。男子の目元を髪で隠す修正済み候補。ベッド幅は背景から付随変化。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/12_home_flat_sleep-base.png",
+    "base_sha256": "24bdfccd1d7b8939d9cff264d36097afc6127c0a01eda00b0f671467ac8f6d6a",
+    "outputs": {
+      "png": "../reference-scenes/12_home_flat_sleep.png",
+      "gif": "../reference-scenes/12_home_flat_sleep.gif",
+      "webp": "../reference-scenes/12_home_flat_sleep.webp"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "12_home_flat_sleep_corrected",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "30951816a7ac1fe19627781f1243766268e6f5218e903ff2accfc0b05c96cc34",
+      "gif": "4e234e51e5022e252d37017e1c3f8dd02f64c118b2836b09e34e3b15c9e55e8d",
+      "webp": "9978651165e4c48b20025d5b9a615dcb15a21d3c996bef7049cc3538f21c0519"
+    }
+  },
+  {
+    "id": "08_library",
+    "label": "夜の図書館・本を挟んで相談",
+    "location": "library",
+    "text": "08_13_sowa",
+    "rect": [
+      0.72,
+      0.39,
+      0.09
+    ],
+    "face": "本へ伏せた視線／強い赤みなし／集中した眉／閉じ口",
+    "note": "同じ本を近くで見る落ち着かない気持ちを小さい文字で添える。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/08_library-base.png",
+    "base_sha256": "b869e07244fab7c92b9b219e877d7c1ea0c3128c6fb686a9166ec4b5ca46c844",
+    "outputs": {
+      "png": "../reference-scenes/08_library.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "08_library",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "4dee5edefd2adcd589a3888e11a7f06b58298ab821bd4caca3ffd8ae4cfafe63"
+    }
+  },
+  {
+    "id": "09_izakaya",
+    "label": "居酒屋・乾杯してほっとする",
+    "location": "izakaya-private-room",
+    "reuse_file": "制作参照（共有版非同梱）",
+    "text": "09_09_sigh",
+    "rect": [
+      0.78,
+      0.24,
+      0.085
+    ],
+    "heart": [
+      0.78,
+      0.45,
+      0.055
+    ],
+    "face": "相手（カメラ側）へ視線／薄い赤み／穏やかな眉／閉じた笑み",
+    "note": "既存の机上CGを再利用。主人公は画面外で、足元も画角外。",
+    "source_kind": "reused_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/09_izakaya-base.png",
+    "base_sha256": "fc621e3aad899959201f80fb764de9a275903cc85baba81678e9f1b42f1e2b6d",
+    "outputs": {
+      "png": "../reference-scenes/09_izakaya.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {},
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "14f506228bacbb38a4bb7e20e0774c8496e4ed75107504cafcb5a1930114e7ec"
+    }
+  },
+  {
+    "id": "10_hotel",
+    "label": "ホテル前・待ち合わせで少し照れる",
+    "location": "hotel",
+    "text": "08_10_dokidoki",
+    "rect": [
+      0.67,
+      0.33,
+      0.085
+    ],
+    "heart": [
+      0.38,
+      0.3,
+      0.07
+    ],
+    "face": "相手へ視線／薄い赤み／柔らかな眉／閉じた笑み",
+    "note": "屋外の待ち合わせ。室内ではないため通常の靴。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/10_hotel-base.png",
+    "base_sha256": "bb6679437afd27e811317dcdad25b30b8a2b62975941a0f8bce6c194dc736730",
+    "outputs": {
+      "png": "../reference-scenes/10_hotel.png"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "10_hotel",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "25b72b4f32881213a4fe994c01a4b086ce80fffa69e1c9c7bc385a15839c8a4d"
+    }
+  },
+  {
+    "id": "11_beach",
+    "label": "海辺・散歩しながら嬉しそうに会話",
+    "location": "beach",
+    "text": "09_07_drips",
+    "rect": [
+      0.6,
+      0.79,
+      0.14
+    ],
+    "face": "相手へ視線／薄い赤み／明るい眉／開いた笑顔",
+    "animate": true,
+    "note": "二人とも砂浜で素足。水際の足音としてぴちゃぴちゃを添える。",
+    "source_kind": "native_scene",
+    "source": "制作参照（共有版非同梱）",
+    "base": "../reference-scenes/11_beach-base.png",
+    "base_sha256": "f6419c18c3b02b341577f911a1e086d48dfbc4156cebe8ec3c8e43aa4b38b184",
+    "outputs": {
+      "png": "../reference-scenes/11_beach.png",
+      "gif": "../reference-scenes/11_beach.gif",
+      "webp": "../reference-scenes/11_beach.webp"
+    },
+    "preview": "制作参照（共有版非同梱）",
+    "candidate_status": "candidate",
+    "source_info": {
+      "native_job": "11_beach",
+      "prompt_record": "［作業フォルダー］\\output\\scene-reference-review-20261023_14\\native-all.json"
+    },
+    "separation": "人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。",
+    "motion_note": "人物は静止。動画で動くのは文字・エフェクトのみ。",
+    "output_hashes": {
+      "png": "21679a5e8b9bc0cbdceea9743c68d9e42ac4d89905ec686023ee994817ce5280",
+      "gif": "2676ae6040b21be62b9e143b461931b1bcfe3b512f81908424bb728098af78d4",
+      "webp": "48561de86a379557b27af665c493c1734dfd8b042aed0700c45374b742924e51"
+    }
+  }
+]

@@ -1,21 +1,28 @@
 {
   "date": "2026-10-23",
-  "catalog_files": 159,
+  "catalog_files": 186,
   "expression_candidates": 30,
-  "text_choices": 42,
+  "text_choices": 46,
   "entry_pages": [
     "materials/index.html",
     "expressions/index.html",
     "guide/index.html",
-    "scenes/index.html"
+    "scenes/index.html",
+    "reference-scenes/index.html"
   ],
-  "files": 505,
-  "media_files": 435,
-  "media_bytes": 250158838,
+  "files": 582,
+  "media_files": 500,
+  "media_bytes": 323134477,
   "absolute_local_paths_removed_from_text": true,
   "original_images_binary_preserved": true,
   "runtime_models_not_included": true,
   "browser_runtime_tested": false,
   "decisions_sync": "manual JSON export/import",
-  "mock_dom_checks_passed": 13
+  "mock_dom_checks_passed": 13,
+  "reference_scene_count": 12,
+  "home_scene_count": 8,
+  "reference_scene_gifs": 5,
+  "total_published_gifs": 9,
+  "historical_refusal_attempts_in_reviewed_records": 19,
+  "pages_status": "not_enabled_pending_explicit_approval"
 }
