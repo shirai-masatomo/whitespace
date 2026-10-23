@@ -36,5 +36,3 @@ PC側は288項目（文字・エフェクト66、シーン53、人物92、場所
 | [図書館](library/README.md) | 1 |
 | [屋外](outdoors/README.md) | 2 |
 | [その他・場所確認待ち](unclassified/README.md) | 5 |
-
-
