@@ -1,14 +1,22 @@
 # WhiteSpace — 画像制作の参考資料
 
+<!-- dokidoki15 -->
+## 最新：どきどきをピンク・小さめ・震える連続表示へ
+
+**[変更内容と3場面のGIFを見る](reports/DOKIDOKI.md)**。消える前に次の文字が生まれるよう、0.64秒重ねています。
+
+![添い寝の修正版](reference-scenes/12_home_flat_sleep-v15.gif)
+<!-- /dokidoki15 -->
+
 <!-- reference-update-14 -->
 ## 今回追加した資料（2026-10-23）
 
-- **[参考シーン12場面を見る](reference-scenes/README.md)**：自宅8、添い寝・肩もみ・絨毯・ソファなど。PNG12、GIF5、WebP5。
+- **[参考シーン12場面を見る](reference-scenes/README.md)**：自宅8、添い寝・肩もみ・絨毯・ソファなど。PNG12、GIF7、WebP7。
 - **[過去の指示32項目の対応状況](reports/REQUEST_AUDIT.md)**：完了・部分対応・未完了を確認。
 - **[拒否・未生成のまとめ](reports/REFUSALS.md)**：今回0、素材台帳と関連実験で確認できた過去19試行、詳細不明1件。未試行は別。
 - **[掲載GIFの全一覧](reports/GIF_INDEX.md)**：単体の最新版、今回の合成場面、旧比較を区別。
 
-![参考シーン12場面](reference-scenes/contact-sheet.jpg)
+![参考シーン12場面](reference-scenes/contact-sheet-v15.jpg)
 
 人物・表情は静止し、文字・効果のみを動かした場面です。新規画像出力10件からCG9場面を選び、既存3場面と組み合わせています。HTMLを操作するにはブランチ一式を取得して `index.html` を開いてください。GitHub Pagesの有効化は承認待ちのままです。
 <!-- /reference-update-14 -->
@@ -20,7 +28,7 @@
 
 GitHub Pagesを使うWeb版も用意済みですが、一般公開URLへの配信は確認待ちです。HTMLの操作画面はGitHubのファイル表示では実行されません。
 
-- 素材一覧：186ファイル、描き文字46選択肢
+- 素材一覧：199ファイル、描き文字46選択肢
 - 表情：既存26＋新規4の30候補。視線・赤み・眉・口で分類
 - Web版：素材の試し重ね、表情4件比較、採否のJSON書き出し・取り込み
 - ComfyUI：下記の初回手順と、読み込み用ワークフローを収録

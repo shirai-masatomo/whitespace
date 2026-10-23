@@ -1,6 +1,6 @@
 # GitHubへ掲載したGIF一覧
 
-更新：2026-10-23。掲載GIFは9ファイル。[資料の入口](../README.md) ／ [参考シーン](../reference-scenes/README.md) ／ [対応状況](REQUEST_AUDIT.md)
+更新：2026-10-23。掲載GIFは13ファイル。[資料の入口](../README.md) ／ [参考シーン](../reference-scenes/README.md) ／ [対応状況](REQUEST_AUDIT.md)
 
 単体の最新版と、合成場面・旧比較を区別しています。GIFは反復再生です。単体GIFの二値透過では半透明をディザで近似し、滑らかな半透明にはAPNG／WebPを使います。合成場面GIFは人物と背景が静止し、文字・効果だけが動きます。
 
@@ -52,8 +52,38 @@
 
 ![GIFプレビュー](../reference-scenes/11_beach.gif)
 
-## 横になって添い寝・小さく笑い合う
+## 横になって添い寝・小さく笑い合う（紫文字の旧版）
 
-今回追加・合成場面。 [GIFを開く](../reference-scenes/12_home_flat_sleep.gif) ／ [WEBP](../reference-scenes/12_home_flat_sleep.webp)
+旧比較・履歴。 [GIFを開く](../reference-scenes/12_home_flat_sleep.gif) ／ [WEBP](../reference-scenes/12_home_flat_sleep.webp)
 
 ![GIFプレビュー](../reference-scenes/12_home_flat_sleep.gif)
+
+<!-- dokidoki15 -->
+## どきどき改訂15の追加GIF
+
+[変更内容と独立素材](DOKIDOKI.md)。以下4点が今回の追加です。
+
+### どきどき・ピンク／小さめ／震え／重なる連続表示
+
+[GIF](../media/dokidoki-overlap-v15.gif)
+
+![GIFプレビュー](../media/dokidoki-overlap-v15.gif)
+
+### 昼・枕にもたれて照れながら会話・ピンクのどきどき
+
+[GIF](../reference-scenes/01_home_bed_day-v15.gif)
+
+![GIFプレビュー](../reference-scenes/01_home_bed_day-v15.gif)
+
+### 横になって添い寝・小さく笑い合う・ピンクのどきどき
+
+[GIF](../reference-scenes/12_home_flat_sleep-v15.gif)
+
+![GIFプレビュー](../reference-scenes/12_home_flat_sleep-v15.gif)
+
+### ホテル前・待ち合わせで少し照れる・ピンクのどきどき
+
+[GIF](../reference-scenes/10_hotel-v15.gif)
+
+![GIFプレビュー](../reference-scenes/10_hotel-v15.gif)
+<!-- /dokidoki15 -->

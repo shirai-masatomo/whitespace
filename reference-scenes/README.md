@@ -4,19 +4,21 @@
 
 [資料の入口](../README.md) ／ [対応状況32項目](../reports/REQUEST_AUDIT.md) ／ [拒否・未生成](../reports/REFUSALS.md) ／ [GIF一覧](../reports/GIF_INDEX.md)
 
-![12場面の一覧](contact-sheet.jpg)
+![12場面の一覧](contact-sheet-v15.jpg)
 
-5場面にGIF／WebPを収録。人物・表情は静止し、描き文字とエフェクトが動きます。すべて制作候補で、最終採用やゲーム表示の検収は未完了です。新規室内では靴なしを指定。布団内の足元は画角外です。原背景からベッド幅・画角などが付随変化しており、厳密に背景を固定した差分ではありません。
+7場面にGIF／WebPを収録。人物・表情は静止し、描き文字とエフェクトが動きます。すべて制作候補で、最終採用やゲーム表示の検収は未完了です。新規室内では靴なしを指定。布団内の足元は画角外です。原背景からベッド幅・画角などが付随変化しており、厳密に背景を固定した差分ではありません。
 
 ## 昼・枕にもたれて照れながら会話
 
-![場面候補](01_home_bed_day.png)
+![場面候補](01_home_bed_day-v15.png)
 
 相手へ視線／薄い赤み／柔らかな眉／閉じた笑み。枕にもたれる姿勢。完全な横臥版は12に別途用意。
 
 人物CG：新規生成。人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。
 
-[PNG](01_home_bed_day.png) ／ [文字・効果を重ねる前](../reference-scenes/01_home_bed_day-base.png)
+[PNG](01_home_bed_day-v15.png) ／ [GIF](01_home_bed_day-v15.gif) ／ [WebP](01_home_bed_day-v15.webp)
+
+![ピンクのどきどき](01_home_bed_day-v15.gif) ／ [文字・効果を重ねる前](../reference-scenes/01_home_bed_day-base.png)
 
 ## 夜・肩へ寄りかかりうとうと
 
@@ -86,15 +88,15 @@
 
 ## 横になって添い寝・小さく笑い合う
 
-![場面候補](12_home_flat_sleep.png)
+![場面候補](12_home_flat_sleep-v15.png)
 
 相手へ視線／薄い赤み／穏やかな眉／閉じた笑み。横臥が分かる俯瞰案。男子の目元を髪で隠す修正済み候補。ベッド幅は背景から付随変化。
 
 人物CG：新規生成。人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。
 
-[PNG](12_home_flat_sleep.png) ／ [文字・効果を重ねる前](../reference-scenes/12_home_flat_sleep-base.png) ／ [GIF](12_home_flat_sleep.gif) ／ [WebP](12_home_flat_sleep.webp)
+[PNG](12_home_flat_sleep-v15.png) ／ [文字・効果を重ねる前](../reference-scenes/12_home_flat_sleep-base.png) ／ [GIF](12_home_flat_sleep-v15.gif) ／ [WebP](12_home_flat_sleep-v15.webp)
 
-![文字と効果の動き](12_home_flat_sleep.gif)
+![文字と効果の動き](12_home_flat_sleep-v15.gif)
 
 ## 夜の図書館・本を挟んで相談
 
@@ -118,13 +120,15 @@
 
 ## ホテル前・待ち合わせで少し照れる
 
-![場面候補](10_hotel.png)
+![場面候補](10_hotel-v15.png)
 
 相手へ視線／薄い赤み／柔らかな眉／閉じた笑み。屋外の待ち合わせ。室内ではないため通常の靴。
 
 人物CG：新規生成。人物・表情はベースCGに統合。描き文字とハート等は別素材を数値合成。
 
-[PNG](10_hotel.png) ／ [文字・効果を重ねる前](../reference-scenes/10_hotel-base.png)
+[PNG](10_hotel-v15.png) ／ [GIF](10_hotel-v15.gif) ／ [WebP](10_hotel-v15.webp)
+
+![ピンクのどきどき](10_hotel-v15.gif) ／ [文字・効果を重ねる前](../reference-scenes/10_hotel-base.png)
 
 ## 海辺・散歩しながら嬉しそうに会話
 

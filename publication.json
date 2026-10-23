@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "catalog_files": 186,
+  "catalog_files": 199,
   "expression_candidates": 30,
   "text_choices": 46,
   "entry_pages": [
@@ -8,21 +8,27 @@
     "expressions/index.html",
     "guide/index.html",
     "scenes/index.html",
-    "reference-scenes/index.html"
+    "reference-scenes/index.html",
+    "dokidoki/index.html"
   ],
-  "files": 582,
-  "media_files": 500,
-  "media_bytes": 323134477,
+  "files": 616,
+  "media_files": 527,
+  "media_bytes": 368625686,
   "absolute_local_paths_removed_from_text": true,
   "original_images_binary_preserved": true,
   "runtime_models_not_included": true,
   "browser_runtime_tested": false,
   "decisions_sync": "manual JSON export/import",
-  "mock_dom_checks_passed": 13,
+  "mock_dom_checks_passed": 17,
   "reference_scene_count": 12,
   "home_scene_count": 8,
-  "reference_scene_gifs": 5,
-  "total_published_gifs": 9,
+  "reference_scene_gifs": 7,
+  "total_published_gifs": 13,
   "historical_refusal_attempts_in_reviewed_records": 19,
-  "pages_status": "not_enabled_pending_explicit_approval"
+  "pages_status": "not_enabled_pending_explicit_approval",
+  "latest_dokidoki_revision": "15_pink_quiver_overlap",
+  "current_scene_animation_count": 7,
+  "dokidoki_continuous_no_blank_frames": true,
+  "dokidoki_scene_size_ratio": 0.78,
+  "dokidoki_overlap_ms": 640
 }
