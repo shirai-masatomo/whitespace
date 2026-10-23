@@ -41,5 +41,11 @@
     "attempts": 7,
     "generated": 3,
     "refused": 4
+  },
+  "sharing_policy": {
+    "decided_on": "2026-10-23",
+    "user_choice": "GitHubへの保存だけにする",
+    "github_pages": "do not enable or publish",
+    "repository_storage": "continue"
   }
 }
