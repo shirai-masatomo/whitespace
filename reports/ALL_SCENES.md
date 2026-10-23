@@ -1,4 +1,6 @@
-# これまでのシーン・素材集の総目次
+# 制作履歴・素材集の総目次
+
+**現行のシーン検討は[場所別一覧](../development/README.md)へ。** 旧ソファー01・02の一覧を削除し、改訂03に統合しました。以下には固有の比較・表情・効果・制作履歴を残しています。件数は初回集約時の履歴です。
 
 [総合入口](../README.md) ／ [手順書・制作記録](DOCUMENTS.md) ／ [拒否記録](REFUSALS.md) ／ [収録範囲](COVERAGE.md)
 
@@ -17,8 +19,6 @@
 | ヒロイン・表情追加と顔大アップ | [画像・比較](../collections/07-heroine-expressions-faceup-20261023_17/README.md) | [HTML](../faceups/index.html) | 19 |
 | 視線と感情の向き | [画像・比較](../collections/08-heroine-gaze-direction-20261022_07/README.md) | [HTML](../archives/08-heroine-gaze-direction-20261022_07/index.html) | 9 |
 | 感情SD10種とハート・震えエフェクト | [画像・比較](../collections/09-heroine-sd-emotions-effects-20261022_05/README.md) | [HTML](../archives/09-heroine-sd-emotions-effects-20261022_05/index.html) | 56 |
-| 正面ソファー宅飲み｜AとB | [画像・比較](../collections/10-heroine-sofa-party-20261022_01/README.md) | [HTML](../archives/10-heroine-sofa-party-20261022_01/index.html) | 27 |
-| 正面ソファー宅飲み｜人物別・引き戸・表情 | [画像・比較](../collections/11-heroine-sofa-party-20261022_02/README.md) | [HTML](../archives/11-heroine-sofa-party-20261022_02/index.html) | 36 |
 | 宅飲み改訂03｜仕草・同席者・体格と座位 | [画像・比較](../collections/12-heroine-sofa-party-20261022_03/README.md) | [HTML](../archives/12-heroine-sofa-party-20261022_03/index.html) | 99 |
 | ヒロイン素材と組み合わせ一覧 | [画像・比較](../collections/13-heroine-text-effects-20261022_08/README.md) | [HTML](../materials/index.html) | 499 |
 | 未制作・代替・安全判定一覧 | [画像・比較](../collections/14-heroine-texture-lettering-20261022_09/README.md) | [HTML](../archives/14-heroine-texture-lettering-20261022_09/index.html) | 0 |

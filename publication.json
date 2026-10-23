@@ -28,7 +28,7 @@
   "reference_scene_gifs": 7,
   "total_published_gifs": 13,
   "historical_refusal_attempts_in_reviewed_records": 19,
-  "pages_status": "not_enabled_pending_explicit_approval",
+  "pages_status": "disabled_user_chose_github_storage_only",
   "latest_dokidoki_revision": "15_pink_quiver_overlap",
   "current_scene_animation_count": 7,
   "dokidoki_continuous_no_blank_frames": true,
@@ -57,5 +57,13 @@
     "manuals": 98,
     "scope": "current deliverable galleries plus delivered characters, text effects, location images and selected completed sample folders; not all experiments/inputs on PC",
     "local_html_readers": 222
+  },
+  "scene_management_23": {
+    "development_scene_images": 53,
+    "location_groups": 12,
+    "production_cgs_uploaded": 0,
+    "superseded_index_files_deleted": 6,
+    "product_manager": "local only",
+    "historical_counts": "previous hub fields are historical snapshots"
   }
 }

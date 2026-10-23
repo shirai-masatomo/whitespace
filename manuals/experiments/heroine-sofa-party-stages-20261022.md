@@ -28,7 +28,7 @@
 [納品PNGフォルダー](../../reports/COVERAGE.md#同梱しないもの)
 には人物・モブ・酒小物・場面のPNG13点のみ。作業記録、マスク、スクリプト、比較用画像と確認HTMLはリポジトリ直下outputへ分離。
 
-[確認一覧](../../archives/10-heroine-sofa-party-20261022_01/index.html)、
+[確認一覧](../../archives/12-heroine-sofa-party-20261022_03/index.html)、
 [全生成プロンプト・参照・生成元](../../reports/COVERAGE.md#同梱しないもの)、
 [照合結果](../../reports/COVERAGE.md#同梱しないもの)。
 
